@@ -50,6 +50,9 @@ public class Input_Joy : Input_Base
     {
         if (Input.GetButtonDown(INPUT_ACTION))
             controller.Action(inputVector);
+
+        if (Input.GetButtonUp(INPUT_ACTION))
+            controller.ReleaseAction();
     }
 
     private void CheckLob()

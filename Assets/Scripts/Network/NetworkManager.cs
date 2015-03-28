@@ -121,12 +121,20 @@ public class NetworkManager : Singleton<NetworkManager>
         GameObject player = PhotonNetwork.Instantiate(_prefabID, spawnPosition, Quaternion.identity, 0) as GameObject;
         player.GetComponent<Controller_Player>().Team = _team;
         player.GetComponent<Input_Joy>().enabled = true;
+
+        SpawnChargeBar(player, _team);
     }
 
     private void SpawnDisc()
     {
         Vector3 spawnPosition = GameObject.FindGameObjectWithTag(Disc_Spawn_Tag).transform.position;
         PhotonNetwork.Instantiate(Disc_Prefab_ID, spawnPosition, Quaternion.identity, 0);
+    }
+
+    private void SpawnChargeBar(GameObject _player, Team _team)
+    {
+        GameObject chargeBar = PhotonNetwork.Instantiate("Charge Bar", Vector3.zero, Quaternion.identity, 0);
+        chargeBar.GetComponent<ChargeBar>().SetPlayer(_player);
     }
 
     private void SpawnMisc()
