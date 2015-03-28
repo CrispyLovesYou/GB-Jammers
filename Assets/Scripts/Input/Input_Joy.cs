@@ -52,7 +52,7 @@ public class Input_Joy : Input_Base
             controller.Action(inputVector);
 
         if (Input.GetButtonUp(INPUT_ACTION))
-            controller.ReleaseAction();
+            controller.ReleaseAction(inputVector);
     }
 
     private void CheckLob()
