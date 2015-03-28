@@ -5,7 +5,7 @@ public class Input_Base : MonoBehaviour
 {
     #region Fields
 
-    protected Controller_Base controller;
+    protected Controller_Player controller;
     protected Vector2 inputVector = Vector2.zero;
 
     #endregion
