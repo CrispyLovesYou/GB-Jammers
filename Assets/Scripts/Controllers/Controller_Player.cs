@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Controller_Player : Controller_Base
+public class Controller_Player : MonoBehaviour
 {
     #region Constants
 
@@ -27,6 +27,8 @@ public class Controller_Player : Controller_Base
     public float ThrowPower = 20.0f;
     public float ThrowRecovery = 0.0f;
     public float ThrowAutoPowerThreshhold = 0.2f;
+    public float ThrowKnockback = 3.0f;
+    public float Stability = 2.5f;
     public float LobDuration = 0.5f;
 
     [SerializeField]
@@ -42,15 +44,25 @@ public class Controller_Player : Controller_Base
     private bool isRecovering { get { return (isDashRecovering || isThrowRecovering); } }
     public bool IsRecovering { get { return isRecovering; } }
 
+    private Transform cTransform;
+    private Rigidbody2D cRigidbody2D;
+    private PhotonView cPhotonView;
     private GameObject courtArea;
+
+    private bool isThrowing = false;
+    private int throwCharge = 0;
+    private float maxChargeDuration = 0.5f;
+    private Vector2 throwDirection = Vector2.zero;
 
     #endregion
 
     #region Unity Callbacks
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        cTransform = GetComponent<Transform>();
+        cRigidbody2D = GetComponent<Rigidbody2D>();
+        cPhotonView = GetComponent<PhotonView>();
         courtArea = GameObject.FindGameObjectWithTag(COURT_AREA_TAG);
     }
 
@@ -67,7 +79,12 @@ public class Controller_Player : Controller_Base
 
     #region Methods
 
-    public override void Move(Vector2 _inputVector)
+    public void Stop()
+    {
+        cRigidbody2D.velocity = Vector2.zero;
+    }
+
+    public void Move(Vector2 _inputVector)
     {
         if (isDashing || isRecovering || hasDisc)
             return;
@@ -85,37 +102,8 @@ public class Controller_Player : Controller_Base
 
         cRigidbody2D.velocity = _inputVector * MoveSpeed;
     }
-    
-    private void Catch()
-    {
-        hasDisc = true;
-        Stop();
 
-        isDashing = false;
-        StopCoroutine(DASH_COROUTINE);
-        isDashRecovering = false;
-        StopCoroutine(DASH_RECOVERY_COROUTINE);
-        isThrowRecovering = false;
-        StopCoroutine(THROW_RECOVERY_COROUTINE);
-
-        float offsetX = 0;
-        float buffer = 0.1f;
-
-        switch (Team)
-        {
-            case Team.LEFT:
-                offsetX = Disc.Instance.transform.localScale.x + buffer;
-                break;
-
-            case Team.RIGHT:
-                offsetX = -Disc.Instance.transform.localScale.x - buffer;
-                break;
-        }
-
-        Disc.Instance.Catch(cTransform.position, offsetX);
-    }
-
-    public override void Action(Vector2 _inputVector)
+    public void Action(Vector2 _inputVector)
     {
         if (isDashing || isRecovering)
             return;
@@ -126,7 +114,12 @@ public class Controller_Player : Controller_Base
             Dash(_inputVector.normalized);
     }
 
-    public override void Lob(Vector2 _inputVector)
+    public void ReleaseAction()
+    {
+        isThrowing = false;
+    }
+
+    public void Lob(Vector2 _inputVector)
     {
         if (!hasDisc)
             return;
@@ -179,6 +172,35 @@ public class Controller_Player : Controller_Base
         StartCoroutine(THROW_RECOVERY_COROUTINE);
     }
 
+    private void Catch()
+    {
+        hasDisc = true;
+        Stop();
+
+        isDashing = false;
+        StopCoroutine(DASH_COROUTINE);
+        isDashRecovering = false;
+        StopCoroutine(DASH_RECOVERY_COROUTINE);
+        isThrowRecovering = false;
+        StopCoroutine(THROW_RECOVERY_COROUTINE);
+
+        float offsetX = 0;
+        float buffer = 0.1f;
+
+        switch (Team)
+        {
+            case Team.LEFT:
+                offsetX = Disc.Instance.transform.localScale.x + buffer;
+                break;
+
+            case Team.RIGHT:
+                offsetX = -Disc.Instance.transform.localScale.x - buffer;
+                break;
+        }
+
+        Disc.Instance.Catch(cTransform.position, offsetX);
+    }
+
     private void Throw(Vector2 _inputVector)
     {
         Vector2 throwVector = _inputVector * ThrowPower;
@@ -218,6 +240,24 @@ public class Controller_Player : Controller_Base
     #endregion
 
     #region Coroutines
+
+    private IEnumerator StartThrow()
+    {
+        isThrowing = true;
+        throwCharge = 0;
+
+        for (int i = 1; i <= 100; i++)
+        {
+            throwCharge = i;
+            yield return new WaitForSeconds(maxChargeDuration / 200);
+        }
+
+        for (int i = 100; i >= 0; i--)
+        {
+            throwCharge = i;
+            yield return new WaitForSeconds(maxChargeDuration / 200);
+        }
+    }
 
     private IEnumerator HandleDashTimer()
     {

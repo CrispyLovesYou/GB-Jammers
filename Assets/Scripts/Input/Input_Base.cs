@@ -14,7 +14,7 @@ public class Input_Base : MonoBehaviour
 
     protected virtual void Awake()
     {
-        controller = gameObject.GetSafeComponent<Controller_Base>();
+        controller = gameObject.GetSafeComponent<Controller_Player>();
     }
 
     #endregion
