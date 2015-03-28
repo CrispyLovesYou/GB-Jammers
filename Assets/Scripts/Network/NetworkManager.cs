@@ -12,13 +12,12 @@ public class NetworkManager : Singleton<NetworkManager>
 
     #region Fields
 
-    public string Player_Left_ID = "Player_Left";
-    public string Player_Right_ID = "Player_Right";
-    public string Disc_ID = "Disc";
+    public string Player_Prefab_ID = "Player";
+    public string Disc_Prefab_ID = "Disc";
+    public string Crosshair_Prefab_ID = "Crosshair";
     public string Player_Left_Spawn_Tag = "Team_Left_Spawn";
     public string Player_Right_Spawn_Tag = "Team_Right_Spawn";
     public string Disc_Spawn_Tag = "Disc_Spawn";
-    public string Crosshair_ID = "Crosshair";
 
     #endregion
 
@@ -78,19 +77,13 @@ public class NetworkManager : Singleton<NetworkManager>
 
     private void OnJoinedRoom()
     {
-        string prefabID = Player_Left_ID;
+        string prefabID = Player_Prefab_ID;
         Team joinTeam = Team.UNASSIGNED;
 
         if (PhotonNetwork.room.playerCount == 1)
-        {
-            prefabID = Player_Left_ID;
             joinTeam = Team.LEFT;
-        }
         else if (PhotonNetwork.room.playerCount == 2)
-        {
-            prefabID = Player_Right_ID;
             joinTeam = Team.RIGHT;
-        }
 
         SpawnPlayer(prefabID, joinTeam);
     }
@@ -133,12 +126,12 @@ public class NetworkManager : Singleton<NetworkManager>
     private void SpawnDisc()
     {
         Vector3 spawnPosition = GameObject.FindGameObjectWithTag(Disc_Spawn_Tag).transform.position;
-        PhotonNetwork.Instantiate(Disc_ID, spawnPosition, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(Disc_Prefab_ID, spawnPosition, Quaternion.identity, 0);
     }
 
     private void SpawnMisc()
     {
-        PhotonNetwork.Instantiate(Crosshair_ID, Vector3.zero, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(Crosshair_Prefab_ID, Vector3.zero, Quaternion.identity, 0);
     }
 
     #endregion

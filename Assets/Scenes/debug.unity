@@ -603,13 +603,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4ba3b90cebf884f83c1b9e6bd00762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player_Left_ID: Player_Left
-  Player_Right_ID: Player_Right
-  Disc_ID: Disc
+  Player_Prefab_ID: Player
+  Disc_Prefab_ID: Disc
+  Crosshair_Prefab_ID: Crosshair
   Player_Left_Spawn_Tag: Team_Left_Spawn
   Player_Right_Spawn_Tag: Team_Right_Spawn
   Disc_Spawn_Tag: Disc_Spawn
-  Crosshair_ID: Crosshair
 --- !u!4 &1780726928
 Transform:
   m_ObjectHideFlags: 0
