@@ -26,7 +26,6 @@ public class Controller_Player : MonoBehaviour
     public float DashRecovery = 0.0f;
     public float ThrowPower = 20.0f;
     public float ThrowRecovery = 0.0f;
-    public float ThrowAutoPowerThreshhold = 0.2f;
     public float ThrowKnockback = 3.0f;
     public float Stability = 2.5f;
     public float LobDuration = 0.5f;
@@ -49,10 +48,13 @@ public class Controller_Player : MonoBehaviour
     private PhotonView cPhotonView;
     private GameObject courtArea;
 
+    private float throwCharge = 0;
+    public float ThrowCharge { get { return throwCharge; } }
+
     private bool isThrowing = false;
-    private int throwCharge = 0;
     private float maxChargeDuration = 0.5f;
     private Vector2 throwDirection = Vector2.zero;
+    private float throwDirectionThreshhold = 0.7f;
 
     #endregion
 
@@ -68,7 +70,7 @@ public class Controller_Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
     {
-        if (hasDisc || Disc.Instance == null)
+        if (!cPhotonView.isMine || hasDisc || Disc.Instance == null)
             return;
 
         if (_collider2D.gameObject == Disc.Instance.gameObject)
@@ -109,14 +111,22 @@ public class Controller_Player : MonoBehaviour
             return;
 
         if (hasDisc)
-            Throw(_inputVector);
+        {
+            throwDirection = _inputVector;
+            StartCoroutine("StartThrow");
+        }
         else
             Dash(_inputVector.normalized);
     }
 
-    public void ReleaseAction()
+    public void ReleaseAction(Vector2 _inputVector)
     {
-        isThrowing = false;
+        if (!isThrowing)
+            return;
+
+        throwDirection = _inputVector;
+        StopCoroutine("StartThrow");
+        Throw();
     }
 
     public void Lob(Vector2 _inputVector)
@@ -201,30 +211,30 @@ public class Controller_Player : MonoBehaviour
         Disc.Instance.Catch(cTransform.position, offsetX);
     }
 
-    private void Throw(Vector2 _inputVector)
+    private void Throw()
     {
-        Vector2 throwVector = _inputVector * ThrowPower;
+        if (throwDirection.x < Mathf.Abs(throwDirectionThreshhold))
+            switch (Team)
+            {
+                case Team.LEFT: throwDirection.x = throwDirectionThreshhold; break;
+                case Team.RIGHT: throwDirection.x = -throwDirectionThreshhold; break;
+            }
+
+        // When throwCharge = 0, throwVector.x = ThrowPower / 2; throwCharge = 100, throwVector.x = ThrowPower
+        Vector2 throwVector = throwDirection * ((((ThrowPower / 2) * throwCharge) / 100) + (ThrowPower / 2));
 
         switch (Team)
         {
-            case Team.LEFT:
-                if (Mathf.Abs(_inputVector.x) < ThrowAutoPowerThreshhold)  // If the horizontal input of the aim wasn't high enough, throw a max power shot
-                    throwVector.x = ThrowPower;
-
-                if (_inputVector.x < 0)  // If the directionVector is in the opposite direction, do a half-power throw
-                    throwVector.x = ThrowPower / 2;
-                break;
-
-            case Team.RIGHT:
-                if (Mathf.Abs(_inputVector.x) < ThrowAutoPowerThreshhold)
-                    throwVector.x = -ThrowPower;
-
-                if (_inputVector.x > 0)
-                    throwVector.x = -(ThrowPower / 2);
-                break;
+            case Team.LEFT: throwVector.x = Mathf.Abs(throwVector.x); break;
+            case Team.RIGHT: throwVector.x = -Mathf.Abs(throwVector.x); break;
         }
 
+        if (throwCharge == 0)
+            throwVector.y = 0;
+
         hasDisc = false;
+        isThrowing = false;
+        throwCharge = 0;
         Disc.Instance.Throw((Vector3)throwVector);
         isThrowRecovering = true;
         StartCoroutine(THROW_RECOVERY_COROUTINE);
@@ -246,17 +256,21 @@ public class Controller_Player : MonoBehaviour
         isThrowing = true;
         throwCharge = 0;
 
-        for (int i = 1; i <= 100; i++)
+        int increment = 5;
+
+        for (int i = 1; i <= 100; i += increment)  // Charge raising up to 100
         {
             throwCharge = i;
-            yield return new WaitForSeconds(maxChargeDuration / 200);
+            yield return new WaitForSeconds(maxChargeDuration / (100 / increment));
         }
 
-        for (int i = 100; i >= 0; i--)
+        for (int i = 100; i >= 0; i -= increment)  // Charge decaying down to 0
         {
             throwCharge = i;
-            yield return new WaitForSeconds(maxChargeDuration / 200);
+            yield return new WaitForSeconds(maxChargeDuration / (100 / increment));
         }
+
+        Throw();
     }
 
     private IEnumerator HandleDashTimer()
