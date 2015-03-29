@@ -82,7 +82,7 @@ public class Controller_Player : MonoBehaviour
     public float DashDuration = 0.15f;
     public float DashRecovery = 0.0f;
     public float ThrowPower = 20.0f;
-    public float ThrowRecovery = 0.0f;
+    public float ThrowRecovery = 0.3f;
     public float ThrowKnockback = 3.0f;
     public float Stability = 2.5f;
     public float LobDuration = 0.5f;
@@ -375,6 +375,9 @@ public class Controller_Player : MonoBehaviour
     [RPC]
     private void RPC_SetCharacterData(int _id)
     {
+        if (Globals.CharacterDict.Count == 0)
+            return;
+
         Character ch = Globals.CharacterDict[(CharacterID)_id];
 
         Name = ch.Name;

@@ -16,7 +16,7 @@ Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\U
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.076 seconds
+- Completed reload, in  0.063 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1680x1050 60Hz; virtual: 1680x1050 at 0,0
@@ -25,8 +25,8 @@ Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\S
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.dll (this message is harmless)
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Xml.dll (this message is harmless)
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 5.855079 ms
+UnloadTime: 5.353548 ms
 
 Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 247.
-Total: 0.334450 ms (FindLiveObjects: 0.036740 ms CreateObjectMapping: 0.032657 ms MarkObjects: 0.257180 ms  DeleteObjects: 0.006414 ms)
+Total: 0.314331 ms (FindLiveObjects: 0.035865 ms CreateObjectMapping: 0.037614 ms MarkObjects: 0.232978 ms  DeleteObjects: 0.006706 ms)
 
