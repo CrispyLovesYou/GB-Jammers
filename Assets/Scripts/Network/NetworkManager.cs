@@ -8,6 +8,11 @@ public class NetworkManager : Singleton<NetworkManager>
     private const string GAME_VERSION = "0.1";
     private const int MAX_CONNECTED_PLAYERS = 2;
 
+    private const string PREFAB_ID_TRACKSUIT = "char_dr-tracksuit";
+    private const string PREFAB_ID_VBOMB = "char_v-bomb";
+    private const string PREFAB_ID_DDR = "char_dirty-dan-ryckert";
+    private const string PREFAB_ID_MGS = "char_metal-gear-scanlon";
+
     #endregion
 
     #region Fields
@@ -77,15 +82,23 @@ public class NetworkManager : Singleton<NetworkManager>
 
     private void OnJoinedRoom()
     {
-        string prefabID = Player_Prefab_ID;
+        int playerID = 0;
         Team joinTeam = Team.UNASSIGNED;
 
         if (PhotonNetwork.room.playerCount == 1)
+        {
+            playerID = 0;
             joinTeam = Team.LEFT;
+        }
         else if (PhotonNetwork.room.playerCount == 2)
+        {
             joinTeam = Team.RIGHT;
 
-        SpawnPlayer(prefabID, joinTeam);
+            if (PhotonNetwork.offlineMode)
+                playerID = 1;
+        }
+
+        SpawnPlayer(playerID, joinTeam);
     }
 
     #endregion
@@ -103,8 +116,18 @@ public class NetworkManager : Singleton<NetworkManager>
         PhotonNetwork.JoinRoom(_roomInfo.name);
     }
 
-    private void SpawnPlayer(string _prefabID, Team _team)
+    private void SpawnPlayer(int _playerID, Team _team)
     {
+        string prefabID = "";
+
+        switch (Globals.SelectedCharacters[_playerID])
+        {
+            case CharacterID.DR_TRACKSUIT: prefabID = PREFAB_ID_TRACKSUIT; break;
+            case CharacterID.V_BOMB: prefabID = PREFAB_ID_VBOMB; break;
+            case CharacterID.DIRTY_DAN_RYCKERT: prefabID = PREFAB_ID_DDR; break;
+            case CharacterID.METAL_GEAR_SCANLON: prefabID = PREFAB_ID_MGS; break;
+        }
+
         Vector3 spawnPosition = Vector3.zero;
 
         switch (_team)
@@ -118,7 +141,8 @@ public class NetworkManager : Singleton<NetworkManager>
                 break;
         }
 
-        GameObject player = PhotonNetwork.Instantiate(_prefabID, spawnPosition, Quaternion.identity, 0) as GameObject;
+        GameObject player = PhotonNetwork.Instantiate(prefabID, spawnPosition, Quaternion.identity, 0) as GameObject;
+        player.GetComponent<Controller_Player>().SetCharacterData(Globals.SelectedCharacters[_playerID]);
         player.GetComponent<Controller_Player>().Team = _team;
         player.GetComponent<Input_Joy>().enabled = true;
 

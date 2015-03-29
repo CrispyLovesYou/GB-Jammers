@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character>
+  <Name>Metal Gear Scanlon</Name>
+  <RealName>Drew Scanlon</RealName>
+  <ThrowPower>20</ThrowPower>
+  <ThrowKnockback>2.5</ThrowKnockback>
+  <Stability>2</Stability>
+  <MoveSpeed>5</MoveSpeed>
+  <DashSpeed>20</DashSpeed>
+  <DashDuration>0.1</DashDuration>
+  <LobDuration>0.4</LobDuration>
+  <AbilityPassive>ability_passive_mgs</AbilityPassive>
+  <AbilityEX>ability_ex_mgs</AbilityEX>
+  <AbilitySuper>ability_super_mgs</AbilitySuper>
+</Character>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character>
+  <Name>Dirty Dan Ryckert</Name>
+  <RealName>Dan Ryckert</RealName>
+  <ThrowPower>22</ThrowPower>
+  <ThrowKnockback>2.5</ThrowKnockback>
+  <Stability>2.5</Stability>
+  <MoveSpeed>4</MoveSpeed>
+  <DashSpeed>15</DashSpeed>
+  <DashDuration>0.15</DashDuration>
+  <LobDuration>0.5</LobDuration>
+  <AbilityPassive>ability_passive_ddr</AbilityPassive>
+  <AbilityEX>ability_ex_ddr</AbilityEX>
+  <AbilitySuper>ability_super_ddr</AbilitySuper>
+</Character>

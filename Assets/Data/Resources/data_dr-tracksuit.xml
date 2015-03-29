@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character>
+  <Name>Dr. Tracksuit</Name>
+  <RealName>Jeff Gerstmann</RealName>
+  <ThrowPower>25</ThrowPower>
+  <ThrowKnockback>3</ThrowKnockback>
+  <Stability>3</Stability>
+  <MoveSpeed>3</MoveSpeed>
+  <DashSpeed>8</DashSpeed>
+  <DashDuration>0.3</DashDuration>
+  <LobDuration>0.8</LobDuration>
+  <AbilityPassive>ability_passive_tracksuit</AbilityPassive>
+  <AbilityEX>ability_ex_tracksuit</AbilityEX>
+  <AbilitySuper>ability_super_tracksuit</AbilitySuper>
+</Character>

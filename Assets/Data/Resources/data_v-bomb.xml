@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Character>
+  <Name>V-Bomb</Name>
+  <RealName>Vinny Caravella</RealName>
+  <ThrowPower>30</ThrowPower>
+  <ThrowKnockback>4</ThrowKnockback>
+  <Stability>3</Stability>
+  <MoveSpeed>3</MoveSpeed>
+  <DashSpeed>6</DashSpeed>
+  <DashDuration>0.4</DashDuration>
+  <LobDuration>1.0</LobDuration>
+  <AbilityPassive>ability_passive_vbomb</AbilityPassive>
+  <AbilityEX>ability_ex_vbomb</AbilityEX>
+  <AbilitySuper>ability_super_vbomb</AbilitySuper>
+</Character>

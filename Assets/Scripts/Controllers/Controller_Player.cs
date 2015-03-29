@@ -75,12 +75,8 @@ public class Controller_Player : MonoBehaviour
 
     #region Fields
 
-    private Character character;
-    public Character Character { get { return character; } }
-
-    public Team Team = Team.UNASSIGNED;
-    public Direction CurrentDirection = Direction.DOWN;
-
+    public string Name = "";
+    public string RealName = "";
     public float MoveSpeed = 4.0f;
     public float DashSpeed = 15.0f;
     public float DashDuration = 0.15f;
@@ -90,6 +86,9 @@ public class Controller_Player : MonoBehaviour
     public float ThrowKnockback = 3.0f;
     public float Stability = 2.5f;
     public float LobDuration = 0.5f;
+
+    public Team Team = Team.UNASSIGNED;
+    public Direction CurrentDirection = Direction.DOWN;
 
     [SerializeField]
     private bool hasDisc = false;
@@ -141,6 +140,11 @@ public class Controller_Player : MonoBehaviour
     #endregion
 
     #region Methods
+
+    public void SetCharacterData(CharacterID _id)
+    {
+        cPhotonView.RPC("RPC_SetCharacterData", PhotonTargets.AllBufferedViaServer, (int)_id);
+    }
 
     public void Stop()
     {
@@ -366,21 +370,22 @@ public class Controller_Player : MonoBehaviour
 
     #endregion
 
-    #region Setters
-
-    public void SetCharacter(Character _character)
-    {
-        cPhotonView.RPC("RPC_SetCharacter", PhotonTargets.AllBufferedViaServer, _character.Serialize());
-    }
-
-    #endregion
-
     #region Callbacks
 
     [RPC]
-    private void RPC_SetCharacter(string _characterXmlData)
+    private void RPC_SetCharacterData(int _id)
     {
-        character = Character.Deserialize(_characterXmlData);
+        Character ch = Globals.CharacterDict[(CharacterID)_id];
+
+        Name = ch.Name;
+        RealName = ch.RealName;
+        MoveSpeed = ch.MoveSpeed;
+        DashSpeed = ch.DashSpeed;
+        DashDuration = ch.DashDuration;
+        ThrowPower = ch.ThrowPower;
+        ThrowKnockback = ch.ThrowKnockback;
+        Stability = ch.Stability;
+        LobDuration = ch.LobDuration;
     }
 
     #endregion

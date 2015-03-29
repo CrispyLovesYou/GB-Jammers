@@ -19,11 +19,11 @@ public struct Character
     public float DashSpeed;
     public float DashDuration;
 
+    public float LobDuration;
+
     public string AbilityPassive;
     public string AbilityEX;
     public string AbilitySuper;
-
-    public string SpriteRoot;
 
     #endregion
 

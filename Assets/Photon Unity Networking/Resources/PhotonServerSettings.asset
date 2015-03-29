@@ -42,4 +42,5 @@ MonoBehaviour:
   - RPC_CompleteLob
   - RPC_Move
   - RPC_SetVelocity
+  - RPC_SetCharacterData
   DisableAutoOpenWizard: 0
