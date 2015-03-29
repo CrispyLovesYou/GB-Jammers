@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Linq;
 
 public class Controller_Player : MonoBehaviour
 {
@@ -9,6 +11,65 @@ public class Controller_Player : MonoBehaviour
     private const string DASH_RECOVERY_COROUTINE = "HandleDashRecoveryTimer";
     private const string THROW_RECOVERY_COROUTINE = "HandleThrowRecoveryTimer";
     private const string COURT_AREA_TAG = "Court_Area";
+
+    #endregion
+
+    #region Events
+
+    private static EventHandler<EventArgs> onCatch;
+    public static event EventHandler<EventArgs> OnCatch
+    {
+        add
+        {
+            if (onCatch == null || !onCatch.GetInvocationList().Contains(value))
+                onCatch += value;
+        }
+        remove { onCatch -= value; }
+    }
+
+    private static EventHandler<EventArgs> onThrow;
+    public static event EventHandler<EventArgs> OnThrow
+    {
+        add
+        {
+            if (onThrow == null || !onThrow.GetInvocationList().Contains(value))
+                onThrow += value;
+        }
+        remove { onThrow -= value; }
+    }
+
+    private static EventHandler<EventArgs> onGoodThrow;
+    public static event EventHandler<EventArgs> OnGoodThrow
+    {
+        add
+        {
+            if (onGoodThrow == null || !onGoodThrow.GetInvocationList().Contains(value))
+                onGoodThrow += value;
+        }
+        remove { onGoodThrow -= value; }
+    }
+
+    private static EventHandler<EventArgs> onPerfectThrow;
+    public static event EventHandler<EventArgs> OnPerfectThrow
+    {
+        add
+        {
+            if (onPerfectThrow == null || !onPerfectThrow.GetInvocationList().Contains(value))
+                onPerfectThrow += value;
+        }
+        remove { onPerfectThrow -= value; }
+    }
+
+    private static EventHandler<EventArgs> onLob;
+    public static event EventHandler<EventArgs> OnLob
+    {
+        add
+        {
+            if (onLob == null || !onLob.GetInvocationList().Contains(value))
+                onLob += value;
+        }
+        remove { onLob -= value; }
+    }
 
     #endregion
 
@@ -180,6 +241,8 @@ public class Controller_Player : MonoBehaviour
         Disc.Instance.Lob(targetPosition, LobDuration);
         isThrowRecovering = true;
         StartCoroutine(THROW_RECOVERY_COROUTINE);
+
+        onLob(this, EventArgs.Empty);
     }
 
     private void Catch()
@@ -209,6 +272,8 @@ public class Controller_Player : MonoBehaviour
         }
 
         Disc.Instance.Catch(cTransform.position, offsetX);
+
+        onCatch(this, EventArgs.Empty);
     }
 
     private void Throw()
@@ -238,6 +303,8 @@ public class Controller_Player : MonoBehaviour
         Disc.Instance.Throw((Vector3)throwVector);
         isThrowRecovering = true;
         StartCoroutine(THROW_RECOVERY_COROUTINE);
+
+        onThrow(this, EventArgs.Empty);
     }
 
     private void Dash(Vector2 _directionVector)
