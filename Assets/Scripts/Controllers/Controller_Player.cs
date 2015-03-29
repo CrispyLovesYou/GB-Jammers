@@ -242,7 +242,8 @@ public class Controller_Player : MonoBehaviour
         isThrowRecovering = true;
         StartCoroutine(THROW_RECOVERY_COROUTINE);
 
-        onLob(this, EventArgs.Empty);
+        if (onLob != null)
+            onLob(this, EventArgs.Empty);
     }
 
     private void Catch()
@@ -273,7 +274,8 @@ public class Controller_Player : MonoBehaviour
 
         Disc.Instance.Catch(cTransform.position, offsetX);
 
-        onCatch(this, EventArgs.Empty);
+        if (onCatch != null)
+            onCatch(this, EventArgs.Empty);
     }
 
     private void Throw()
@@ -304,7 +306,8 @@ public class Controller_Player : MonoBehaviour
         isThrowRecovering = true;
         StartCoroutine(THROW_RECOVERY_COROUTINE);
 
-        onThrow(this, EventArgs.Empty);
+        if (onThrow != null)
+            onThrow(this, EventArgs.Empty);
     }
 
     private void Dash(Vector2 _directionVector)
