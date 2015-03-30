@@ -43,4 +43,7 @@ MonoBehaviour:
   - RPC_Move
   - RPC_SetVelocity
   - RPC_SetCharacterData
+  - RPC_SetGlobalNetworkInfo
+  - RPC_ToggleReady
+  - RPC_SetPlayerProperties
   DisableAutoOpenWizard: 0

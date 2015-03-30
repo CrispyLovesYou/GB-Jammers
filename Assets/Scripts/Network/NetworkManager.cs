@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Managers/Game/Network Manager")]
 public class NetworkManager : Singleton<NetworkManager>
 {
     #region Constants
