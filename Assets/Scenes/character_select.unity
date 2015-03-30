@@ -318,6 +318,7 @@ RectTransform:
   - {fileID: 722374199}
   - {fileID: 1615446725}
   - {fileID: 2068606586}
+  - {fileID: 1755590492}
   - {fileID: 1049838839}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -456,7 +457,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 854684965}
-        m_MethodName: SetCharacter_P1
+        m_MethodName: OnClick_SelectCharacter
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -555,7 +556,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continue
+  m_Text: Lock In
 --- !u!222 &846932232
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -571,6 +572,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 854684966}
   - 114: {fileID: 854684965}
+  - 114: {fileID: 854684967}
   m_Layer: 0
   m_Name: Character Select Manager
   m_TagString: Untagged
@@ -589,6 +591,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351512d3e007e8e49b96de4428cef915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainCanvas: {fileID: 661491776}
+  P1CharacterText: {fileID: 2068606587}
+  P2CharacterText: {fileID: 1755590493}
 --- !u!4 &854684966
 Transform:
   m_ObjectHideFlags: 0
@@ -601,6 +606,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &854684967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 854684964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 1
+  instantiationId: 1
+  isRuntimeInstantiated: 0
 --- !u!1 &931212296
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +707,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 854684965}
-        m_MethodName: SetCharacter_P1
+        m_MethodName: OnClick_SelectCharacter
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -802,7 +832,7 @@ GameObject:
   - 114: {fileID: 1049838841}
   - 114: {fileID: 1049838840}
   m_Layer: 5
-  m_Name: Continue
+  m_Name: Lock In
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -820,7 +850,7 @@ RectTransform:
   m_Children:
   - {fileID: 846932230}
   m_Father: {fileID: 661491773}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 430, y: -100}
@@ -866,8 +896,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 854684965}
-        m_MethodName: LoadScene
-        m_Mode: 5
+        m_MethodName: OnClick_LockCharacter
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
@@ -1066,7 +1096,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 854684965}
-        m_MethodName: SetCharacter_P1
+        m_MethodName: OnClick_SelectCharacter
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1172,6 +1202,72 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1755413488}
+--- !u!1 &1755590491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1755590492}
+  - 222: {fileID: 1755590494}
+  - 114: {fileID: 1755590493}
+  m_Layer: 5
+  m_Name: P2CharacterSelected
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1755590492
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755590491}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 661491773}
+  m_RootOrder: 5
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 150, y: -62}
+  m_SizeDelta: {x: 200, y: 30}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &1755590493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755590491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 16
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_RichText: 0
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Dr. Tracksuit
+--- !u!222 &1755590494
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755590491}
 --- !u!1 &2047382884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,7 +1344,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 854684965}
-        m_MethodName: SetCharacter_P1
+        m_MethodName: OnClick_SelectCharacter
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1298,9 +1394,8 @@ GameObject:
   - 224: {fileID: 2068606586}
   - 222: {fileID: 2068606588}
   - 114: {fileID: 2068606587}
-  - 114: {fileID: 2068606589}
   m_Layer: 5
-  m_Name: Current Selection
+  m_Name: P1CharacterSelected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1320,7 +1415,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -62}
+  m_AnchoredPosition: {x: -150, y: -62}
   m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2068606587
@@ -1355,14 +1450,3 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2068606585}
---- !u!114 &2068606589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2068606585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0806ff985d844204795e409818a2bf9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

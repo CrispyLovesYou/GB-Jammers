@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Input/Keyboard")]
 public class Input_KM : Input_Base
 {
     #region Constants

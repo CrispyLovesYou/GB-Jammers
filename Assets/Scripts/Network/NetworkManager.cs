@@ -6,9 +6,6 @@ public class NetworkManager : Singleton<NetworkManager>
 {
     #region Constants
 
-    private const string GAME_VERSION = "0.1";
-    private const int MAX_CONNECTED_PLAYERS = 2;
-
     private const string PREFAB_ID_TRACKSUIT = "char_dr-tracksuit";
     private const string PREFAB_ID_VBOMB = "char_v-bomb";
     private const string PREFAB_ID_DDR = "char_dirty-dan-ryckert";
@@ -29,99 +26,35 @@ public class NetworkManager : Singleton<NetworkManager>
 
     #region Unity Callbacks
 
-    private void OnGUI()
+    private void Start()
     {
-        float buttonWidth = 200;
-        float buttonHeight = 60;
-        float buttonSpacing = 20;
-
-        if (!PhotonNetwork.connected)
+        if (PhotonNetwork.isMasterClient)
         {
-            if (!PhotonNetwork.connecting)
-            {
-                if (GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), "Connect to Server"))
-                    PhotonNetwork.ConnectUsingSettings(GAME_VERSION);
-
-                if (GUI.Button(new Rect(buttonWidth + buttonSpacing, 0, buttonWidth, buttonHeight), "Offline Mode"))
-                {
-                    PhotonNetwork.offlineMode = true;
-                    PhotonNetwork.CreateRoom(null);
-                }
-            }
-            else
-                GUI.Label(new Rect(0, 0, buttonWidth, buttonHeight), "Connecting...");
-        }
-        else
-        {
-            if (PhotonNetwork.insideLobby)
-            {
-                if (GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), "Create Room"))
-                    CreateRoom();
-
-                RoomInfo[] roomInfoList = PhotonNetwork.GetRoomList();
-
-                for (int i = 0; i < roomInfoList.Length; i++)
-                {
-                    RoomInfo roomInfo = roomInfoList[i];
-
-                    if (GUI.Button(new Rect((buttonWidth + buttonSpacing) * (i + 1), 0, buttonWidth, buttonHeight), "Join: " + roomInfo.name))
-                        JoinRoom(roomInfo);
-                }
-            }
-        }
-    }
-    
-    #endregion
-
-    #region Network Callbacks
-
-    private void OnCreatedRoom()
-    {
-        SpawnDisc();
-        SpawnMisc();
-    }
-
-    private void OnJoinedRoom()
-    {
-        int playerID = 0;
-        Team joinTeam = Team.UNASSIGNED;
-
-        if (PhotonNetwork.room.playerCount == 1)
-        {
-            playerID = 0;
-            joinTeam = Team.LEFT;
-        }
-        else if (PhotonNetwork.room.playerCount == 2)
-        {
-            joinTeam = Team.RIGHT;
-
-            if (PhotonNetwork.offlineMode)
-                playerID = 1;
+            SpawnDisc();
+            SpawnMisc();
         }
 
-        SpawnPlayer(playerID, joinTeam);
+        SpawnLocalPlayer();
     }
 
     #endregion
 
     #region Methods
 
-    private void CreateRoom()
+    private void SpawnLocalPlayer()
     {
-        RoomOptions roomOptions = new RoomOptions() { maxPlayers = MAX_CONNECTED_PLAYERS };
-        PhotonNetwork.CreateRoom(null, roomOptions, TypedLobby.Default);
-    }
+        int index = PhotonNetwork.player.ID - 1;
+        Team team = Team.UNASSIGNED;
+        
+        switch (PhotonNetwork.player.ID)
+        {
+            case 1: team = Team.LEFT; PhotonNetwork.player.SetTeam(PunTeams.Team.blue); break;
+            case 2: team = Team.RIGHT; PhotonNetwork.player.SetTeam(PunTeams.Team.red); break;
+        }
 
-    private void JoinRoom(RoomInfo _roomInfo)
-    {
-        PhotonNetwork.JoinRoom(_roomInfo.name);
-    }
-
-    private void SpawnPlayer(int _playerID, Team _team)
-    {
         string prefabID = "";
 
-        switch (Globals.SelectedCharacters[_playerID])
+        switch (Globals.SelectedCharacters[index])
         {
             case CharacterID.DR_TRACKSUIT: prefabID = PREFAB_ID_TRACKSUIT; break;
             case CharacterID.V_BOMB: prefabID = PREFAB_ID_VBOMB; break;
@@ -131,7 +64,7 @@ public class NetworkManager : Singleton<NetworkManager>
 
         Vector3 spawnPosition = Vector3.zero;
 
-        switch (_team)
+        switch (team)
         {
             case Team.LEFT:
                 spawnPosition = GameObject.FindGameObjectWithTag(Player_Left_Spawn_Tag).transform.position;
@@ -143,11 +76,11 @@ public class NetworkManager : Singleton<NetworkManager>
         }
 
         GameObject player = PhotonNetwork.Instantiate(prefabID, spawnPosition, Quaternion.identity, 0) as GameObject;
-        player.GetComponent<Controller_Player>().SetCharacterData(Globals.SelectedCharacters[_playerID]);
-        player.GetComponent<Controller_Player>().Team = _team;
+        player.GetComponent<Controller_Player>().SetCharacterData(Globals.SelectedCharacters[index]);
+        player.GetComponent<Controller_Player>().Team = team;
         player.GetComponent<Input_Joy>().enabled = true;
 
-        SpawnChargeBar(player, _team);
+        SpawnChargeBar(player, team);
     }
 
     private void SpawnDisc()

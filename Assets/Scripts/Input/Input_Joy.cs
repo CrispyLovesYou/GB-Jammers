@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Input/Joystick 1")]
 public class Input_Joy : Input_Base
 {
     #region Constants

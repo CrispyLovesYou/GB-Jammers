@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Game/Disc")]
 public class Disc : Singleton<Disc>
 {
     #region Constants

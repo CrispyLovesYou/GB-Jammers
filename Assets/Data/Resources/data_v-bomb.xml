@@ -2,14 +2,17 @@
 <Character>
   <Name>V-Bomb</Name>
   <RealName>Vinny Caravella</RealName>
-  <ThrowPower>30</ThrowPower>
+  <ThrowPower>18</ThrowPower>
   <ThrowKnockback>4</ThrowKnockback>
   <Stability>3</Stability>
-  <MoveSpeed>3</MoveSpeed>
-  <DashSpeed>6</DashSpeed>
+  <MoveSpeed>1.75</MoveSpeed>
+  <DashSpeed>5</DashSpeed>
   <DashDuration>0.4</DashDuration>
-  <LobDuration>1.0</LobDuration>
+  <LobDuration>1.8</LobDuration>
   <AbilityPassive>ability_passive_vbomb</AbilityPassive>
+  <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
   <AbilityEX>ability_ex_vbomb</AbilityEX>
+  <AbilityEXDesc>[EX description]</AbilityEXDesc>
   <AbilitySuper>ability_super_vbomb</AbilitySuper>
+  <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
 </Character>

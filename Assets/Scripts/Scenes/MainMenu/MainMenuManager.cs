@@ -11,6 +11,9 @@ public class MainMenuManager : Singleton<MainMenuManager>
     #endregion
 
     #region Fields
+
+    public int DEBUG_CharacterID = 0;
+
     #endregion
 
     #region Unity Callbacks
@@ -18,7 +21,10 @@ public class MainMenuManager : Singleton<MainMenuManager>
     protected override void Awake()
     {
         base.Awake();
-        LoadCharacterData();
+        Globals.GameMode = GameModes.MAIN_MENU;
+
+        if (Globals.CharacterDict.Count == 0)  // in case the splash screen didn't load Character Data (i.e. debugging in Editor)
+            SplashScreenManager.LoadCharacterData();
     }
 
     #endregion
@@ -27,43 +33,35 @@ public class MainMenuManager : Singleton<MainMenuManager>
 
     public void StartLocalMultiplayer()
     {
-
+        Globals.GameMode = GameModes.LOCAL_MULTIPLAYER;
     }
 
     public void StartOnlineMultiplayer()
     {
-
-    }
-
-    private void LoadCharacterData()
-    {
-        TextAsset ta;
-
-        ta = Resources.Load("data_dr-tracksuit") as TextAsset;
-        Globals.CharacterDict.Add(CharacterID.DR_TRACKSUIT, Character.Deserialize(ta.text));
-
-        ta = Resources.Load("data_v-bomb") as TextAsset;
-        Globals.CharacterDict.Add(CharacterID.V_BOMB, Character.Deserialize(ta.text));
-
-        ta = Resources.Load("data_dirty-dan-ryckert") as TextAsset;
-        Globals.CharacterDict.Add(CharacterID.DIRTY_DAN_RYCKERT, Character.Deserialize(ta.text));
-
-        ta = Resources.Load("data_metal-gear-scanlon") as TextAsset;
-        Globals.CharacterDict.Add(CharacterID.METAL_GEAR_SCANLON, Character.Deserialize(ta.text));
+        Globals.GameMode = GameModes.ONLINE_MULTIPLAYER;
+        Application.LoadLevel(NETWORK_LOBBY_ID);
     }
 
     #endregion
 
     #region UI Callbacks
 
+    public void OnClick_Debug()
+    {
+        PhotonNetwork.offlineMode = true;
+        PhotonNetwork.CreateRoom(null);
+        Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID;
+        PhotonNetwork.LoadLevel("map_beach");
+    }
+
     public void OnClick_VSMode()
     {
-
+        StartLocalMultiplayer();
     }
 
     public void OnClick_Online()
     {
-        Application.LoadLevel(NETWORK_LOBBY_ID);
+        StartOnlineMultiplayer();
     }
 
     #endregion

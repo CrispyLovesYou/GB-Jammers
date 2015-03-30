@@ -2,14 +2,17 @@
 <Character>
   <Name>Metal Gear Scanlon</Name>
   <RealName>Drew Scanlon</RealName>
-  <ThrowPower>20</ThrowPower>
+  <ThrowPower>11</ThrowPower>
   <ThrowKnockback>2.5</ThrowKnockback>
   <Stability>2</Stability>
-  <MoveSpeed>5</MoveSpeed>
-  <DashSpeed>20</DashSpeed>
-  <DashDuration>0.1</DashDuration>
-  <LobDuration>0.4</LobDuration>
+  <MoveSpeed>3.5</MoveSpeed>
+  <DashSpeed>15</DashSpeed>
+  <DashDuration>0.12</DashDuration>
+  <LobDuration>0.6</LobDuration>
   <AbilityPassive>ability_passive_mgs</AbilityPassive>
+  <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
   <AbilityEX>ability_ex_mgs</AbilityEX>
+  <AbilityEXDesc>[EX description]</AbilityEXDesc>
   <AbilitySuper>ability_super_mgs</AbilitySuper>
+  <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
 </Character>

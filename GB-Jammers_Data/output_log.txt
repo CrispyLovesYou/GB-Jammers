@@ -16,25 +16,17 @@ Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\U
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.078 seconds
+- Completed reload, in  0.068 seconds
 <RI> Initializing input.
 <RI> Input initialized.
-desktop: 1680x1050 60Hz; virtual: 1680x1050 at 0,0
+desktop: 1680x1050 60Hz; virtual: 3120x1050 at 0,0
 <RI> Initialized touch support.
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.dll (this message is harmless)
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Xml.dll (this message is harmless)
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.568594 ms
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.472374 ms
 
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 371.
-Total: 0.535938 ms (FindLiveObjects: 0.041697 ms CreateObjectMapping: 0.046362 ms MarkObjects: 0.440005 ms  DeleteObjects: 0.006123 ms)
-
-UnloadTime: 3.713659 ms
-ArgumentException: An element with the same key already exists in the dictionary.
-  at System.Collections.Generic.Dictionary`2[CharacterID,Character].Add (CharacterID key, Character value) [0x00000] in <filename unknown>:0 
-  at MainMenuManager.LoadCharacterData () [0x00000] in <filename unknown>:0 
-  at MainMenuManager.Awake () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 246.
+Total: 0.373525 ms (FindLiveObjects: 0.025951 ms CreateObjectMapping: 0.027409 ms MarkObjects: 0.312583 ms  DeleteObjects: 0.006123 ms)
 

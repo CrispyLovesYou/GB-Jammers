@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Input_Base : MonoBehaviour
+public abstract class Input_Base : MonoBehaviour
 {
     #region Fields
 

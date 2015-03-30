@@ -2,14 +2,17 @@
 <Character>
   <Name>Dr. Tracksuit</Name>
   <RealName>Jeff Gerstmann</RealName>
-  <ThrowPower>25</ThrowPower>
+  <ThrowPower>15</ThrowPower>
   <ThrowKnockback>3</ThrowKnockback>
   <Stability>3</Stability>
-  <MoveSpeed>3</MoveSpeed>
-  <DashSpeed>8</DashSpeed>
-  <DashDuration>0.3</DashDuration>
-  <LobDuration>0.8</LobDuration>
+  <MoveSpeed>2</MoveSpeed>
+  <DashSpeed>6</DashSpeed>
+  <DashDuration>0.25</DashDuration>
+  <LobDuration>1.5</LobDuration>
   <AbilityPassive>ability_passive_tracksuit</AbilityPassive>
+  <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
   <AbilityEX>ability_ex_tracksuit</AbilityEX>
+  <AbilityEXDesc>[EX description]</AbilityEXDesc>
   <AbilitySuper>ability_super_tracksuit</AbilitySuper>
+  <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
 </Character>

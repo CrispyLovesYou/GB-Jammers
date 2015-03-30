@@ -2,14 +2,17 @@
 <Character>
   <Name>Dirty Dan Ryckert</Name>
   <RealName>Dan Ryckert</RealName>
-  <ThrowPower>22</ThrowPower>
+  <ThrowPower>10</ThrowPower>
   <ThrowKnockback>2.5</ThrowKnockback>
   <Stability>2.5</Stability>
-  <MoveSpeed>4</MoveSpeed>
-  <DashSpeed>15</DashSpeed>
+  <MoveSpeed>3</MoveSpeed>
+  <DashSpeed>12</DashSpeed>
   <DashDuration>0.15</DashDuration>
-  <LobDuration>0.5</LobDuration>
+  <LobDuration>0.6</LobDuration>
   <AbilityPassive>ability_passive_ddr</AbilityPassive>
+  <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
   <AbilityEX>ability_ex_ddr</AbilityEX>
+  <AbilityEXDesc>[EX description]</AbilityEXDesc>
   <AbilitySuper>ability_super_ddr</AbilitySuper>
+  <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
 </Character>

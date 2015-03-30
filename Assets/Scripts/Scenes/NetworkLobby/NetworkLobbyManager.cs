@@ -9,8 +9,6 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 {
     #region Constants
 
-    public const string GAME_VERSION = "0.1";
-    public const int MAX_CONNECTED_PLAYERS = 2;
     public const int ROOM_ID_RANDOM_SIZE = 5;
 
     public const string PROP_IS_READY = "isReady";
@@ -41,7 +39,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
     private PhotonView cPhotonView;
     private string username;
-    private bool[] playersReady = new bool[MAX_CONNECTED_PLAYERS];
+    private bool[] playersReady = new bool[Globals.MAX_CONNECTED_PLAYERS];
     private List<GameObject> roomPanelCloneList = new List<GameObject>();
     private InputField usernameField;
     private Button connectBtn;
@@ -57,6 +55,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         usernameField = PreconnectGroup.GetComponentInChildren<InputField>();
         connectBtn = PreconnectGroup.GetComponentInChildren<Button>();
         PhotonNetwork.automaticallySyncScene = true;
+
+        Globals.GameMode = GameModes.ONLINE_MULTIPLAYER;  // redundant set for debug/testing purposes
     }
 
     #endregion
@@ -131,7 +131,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         if (PhotonNetwork.connected || PhotonNetwork.connecting)
             throw new Exception("Already connected to PhotonNetwork!");
 
-        PhotonNetwork.ConnectUsingSettings(GAME_VERSION);
+        PhotonNetwork.ConnectUsingSettings(Globals.GAME_VERSION);
         PhotonNetwork.playerName = username;
         StatusGroup.GetComponentInChildren<Text>().text = MSG_CONNECTING;
         ToggleCanvasGroup(StatusGroup, true);
@@ -146,7 +146,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     {
         string roomID = username + " [" + RandomHelper.RandomString(ROOM_ID_RANDOM_SIZE) + "]";
 
-        RoomOptions roomOptions = new RoomOptions() { maxPlayers = MAX_CONNECTED_PLAYERS };
+        RoomOptions roomOptions = new RoomOptions() { maxPlayers = Globals.MAX_CONNECTED_PLAYERS };
         PhotonNetwork.CreateRoom(roomID, roomOptions, TypedLobby.Default);
     }
 
@@ -163,7 +163,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         {
             RoomInfo roomInfo = roomInfoList[i];
 
-            if (roomInfo.playerCount != MAX_CONNECTED_PLAYERS)
+            if (roomInfo.playerCount != Globals.MAX_CONNECTED_PLAYERS)
             {
                 GameObject roomPanel = Instantiate(RoomPanelPrefab, Vector3.zero, Quaternion.identity) as GameObject;
                 roomPanelCloneList.Add(roomPanel);
@@ -217,7 +217,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
             yield return new WaitForSeconds(1.0f);
         }
 
-        if (playersReady[0] && playersReady[1])
+        if (playersReady[0] && playersReady[1] && PhotonNetwork.isMasterClient)
             PhotonNetwork.LoadLevel(CHARACTER_SELECT_ID);
         else
             CountdownField.text = "";

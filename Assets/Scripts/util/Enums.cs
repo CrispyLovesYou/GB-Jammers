@@ -1,5 +1,12 @@
 ﻿#region Enums
 
+public enum GameModes
+{
+    MAIN_MENU,
+    LOCAL_MULTIPLAYER,
+    ONLINE_MULTIPLAYER
+}
+
 public enum Direction
 {
     LEFT,

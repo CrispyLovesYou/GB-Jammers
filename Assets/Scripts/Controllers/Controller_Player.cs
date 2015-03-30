@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Linq;
 
+[AddComponentMenu("Controllers/Controller (Player)")]
 public class Controller_Player : MonoBehaviour
 {
     #region Constants

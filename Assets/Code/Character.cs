@@ -22,8 +22,11 @@ public struct Character
     public float LobDuration;
 
     public string AbilityPassive;
+    public string AbilityPassiveDesc;
     public string AbilityEX;
+    public string AbilityEXDesc;
     public string AbilitySuper;
+    public string AbilitySuperDesc;
 
     #endregion
 

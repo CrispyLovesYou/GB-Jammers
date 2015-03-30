@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Game/ChargeBar")]
 public class ChargeBar : MonoBehaviour
 {
     #region Fields
