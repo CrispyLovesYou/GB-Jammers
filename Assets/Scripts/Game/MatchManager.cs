@@ -60,6 +60,9 @@ public class MatchManager : Singleton<MatchManager>
     public int LobPointValue = 2;
     public int BonusPointValue = 0;
 
+    public GameObject GreatPopup;
+    public GameObject PerfectPopup;
+
     public Vector3 TeamLeftSpawn { get; private set; }
     public Vector3 TeamRightSpawn { get; private set; }
     public Vector3 DiscSpawn { get; private set; }
@@ -88,6 +91,9 @@ public class MatchManager : Singleton<MatchManager>
         TeamLeftSpawn = GameObject.FindGameObjectWithTag(Team_Left_Spawn_Tag).transform.position;
         TeamRightSpawn = GameObject.FindGameObjectWithTag(Team_Right_Spawn_Tag).transform.position;
         DiscSpawn = GameObject.FindGameObjectWithTag(Disc_Spawn_Tag).transform.position;
+
+        Controller_Player.OnGreatThrow += Controller_Player_OnGreatThrow;
+        Controller_Player.OnPerfectThrow += Controller_Player_OnPerfectThrow;
     }
 
     private void Start()
@@ -167,6 +173,24 @@ public class MatchManager : Singleton<MatchManager>
         yield return new WaitForSeconds(2.0f);
         Disc.IsScoring = false;
         onCompleteResetAfterScore(this, EventArgs.Empty);
+    }
+
+    #endregion
+
+    #region Callbacks
+
+    private void Controller_Player_OnGreatThrow(object sender, EventArgs e)
+    {
+        Controller_Player player = (Controller_Player)sender;
+        GameObject gObj = Instantiate(GreatPopup, player.transform.position, Quaternion.identity) as GameObject;
+        gObj.transform.SetParent(player.transform);
+    }
+
+    private void Controller_Player_OnPerfectThrow(object sender, EventArgs e)
+    {
+        Controller_Player player = (Controller_Player)sender;
+        GameObject gObj = Instantiate(PerfectPopup, player.transform.position, Quaternion.identity) as GameObject;
+        gObj.transform.SetParent(player.transform);
     }
 
     #endregion

@@ -39,15 +39,15 @@ public class Controller_Player : MonoBehaviour
         remove { onThrow -= value; }
     }
 
-    private static EventHandler<EventArgs> onGoodThrow;
-    public static event EventHandler<EventArgs> OnGoodThrow
+    private static EventHandler<EventArgs> onGreatThrow;
+    public static event EventHandler<EventArgs> OnGreatThrow
     {
         add
         {
-            if (onGoodThrow == null || !onGoodThrow.GetInvocationList().Contains(value))
-                onGoodThrow += value;
+            if (onGreatThrow == null || !onGreatThrow.GetInvocationList().Contains(value))
+                onGreatThrow += value;
         }
-        remove { onGoodThrow -= value; }
+        remove { onGreatThrow -= value; }
     }
 
     private static EventHandler<EventArgs> onPerfectThrow;
@@ -89,8 +89,12 @@ public class Controller_Player : MonoBehaviour
     public float Stability = 2.5f;
     public float LobDuration = 0.5f;
 
+    public int Meter = 0;
+
     public Team Team = Team.UNASSIGNED;
     public Direction CurrentDirection = Direction.DOWN;
+    public float GreatThrowThreshhold = 80;
+    public float PerfectThrowThreshhold = 90;
 
     [SerializeField]
     private bool hasDisc = false;
@@ -319,6 +323,22 @@ public class Controller_Player : MonoBehaviour
         if (throwCharge == 0)
             throwVector.y = 0;
 
+        if (throwCharge >= GreatThrowThreshhold &&
+            throwCharge < PerfectThrowThreshhold)
+        {
+            if (onGreatThrow != null)
+                onGreatThrow(this, EventArgs.Empty);
+
+            cPhotonView.RPC("RPC_OnGreatThrowOthers", PhotonTargets.Others);
+        }
+        else if (throwCharge >= PerfectThrowThreshhold)
+        {
+            if (onPerfectThrow != null)
+                onPerfectThrow(this, EventArgs.Empty);
+
+            cPhotonView.RPC("RPC_OnPerfectThrowOthers", PhotonTargets.Others);
+        }
+
         hasDisc = false;
         isThrowing = false;
         throwCharge = 0;
@@ -435,6 +455,22 @@ public class Controller_Player : MonoBehaviour
         ThrowKnockback = ch.ThrowKnockback;
         Stability = ch.Stability;
         LobDuration = ch.LobDuration;
+    }
+
+    [RPC]
+    private void RPC_OnGreatThrowOthers()
+    {
+        if (!cPhotonView.isMine)
+            if (onGreatThrow != null)
+                onGreatThrow(this, EventArgs.Empty);
+    }
+
+    [RPC]
+    private void RPC_OnPerfectThrowOthers()
+    {
+        if (!cPhotonView.isMine)
+            if (onPerfectThrow != null)
+                onPerfectThrow(this, EventArgs.Empty);
     }
 
     #endregion

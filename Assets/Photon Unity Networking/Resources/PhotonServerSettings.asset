@@ -52,4 +52,7 @@ MonoBehaviour:
   - RPC_OnBeginResetAfterScore
   - RPC_OnCompleteResetAfterScore
   - RPC_ScorePoints
+  - RPC_TEST
+  - RPC_OnGreatThrowOthers
+  - RPC_OnPerfectThrowOthers
   DisableAutoOpenWizard: 0
