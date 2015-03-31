@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character>
+  <ID>dr_tracksuit</ID>
   <Name>Dr. Tracksuit</Name>
   <RealName>Jeff Gerstmann</RealName>
   <ThrowPower>15</ThrowPower>

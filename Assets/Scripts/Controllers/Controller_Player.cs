@@ -127,6 +127,8 @@ public class Controller_Player : MonoBehaviour
         cRigidbody2D = GetComponent<Rigidbody2D>();
         cPhotonView = GetComponent<PhotonView>();
         courtArea = GameObject.FindGameObjectWithTag(COURT_AREA_TAG);
+
+        MatchManager.OnBeginResetAfterScore += MoveToSpawnPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
@@ -372,6 +374,28 @@ public class Controller_Player : MonoBehaviour
     #endregion
 
     #region Callbacks
+
+    private void MoveToSpawnPosition(object sender, EventArgs e)
+    {
+        if (!cPhotonView.isMine)
+            return;
+
+        Stop();
+        Vector3 targetPos = Vector3.zero;
+        float duration = 2.0f;
+
+        switch (Team)
+        {
+            case global::Team.LEFT: targetPos = MatchManager.Instance.TeamLeftSpawn; break;
+            case global::Team.RIGHT: targetPos = MatchManager.Instance.TeamRightSpawn; break;
+        }
+
+        iTween.MoveTo(this.gameObject, targetPos, duration);
+    }
+
+    #endregion
+
+    #region RPC
 
     [RPC]
     private void RPC_SetCharacterData(int _id)

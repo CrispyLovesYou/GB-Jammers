@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 [AddComponentMenu("Game/Disc")]
@@ -14,6 +15,8 @@ public class Disc : Singleton<Disc>
     #endregion
 
     #region Fields
+
+    public static bool IsScoring = false;
 
     private Transform cTransform;
     private Rigidbody2D cRigidbody2D;
@@ -33,6 +36,9 @@ public class Disc : Singleton<Disc>
         cRigidbody2D = GetComponent<Rigidbody2D>();
         cPhotonView = GetComponent<PhotonView>();
         cCollider2D = GetComponent<Collider2D>();
+
+        MatchManager.OnBeginResetAfterScore += MatchManager_OnBeginResetAfterScore;
+        MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
     }
 
     private void Update()
@@ -50,14 +56,6 @@ public class Disc : Singleton<Disc>
                 
             case WALL_BOTTOM_TAG:
                 Bounce(Direction.UP);
-                break;
-
-            case WALL_LEFT_TAG:
-                Bounce(Direction.RIGHT);
-                break;
-
-            case WALL_RIGHT_TAG:
-                Bounce(Direction.LEFT);
                 break;
         }
     }
@@ -169,6 +167,22 @@ public class Disc : Singleton<Disc>
     #endregion
 
     #region Callbacks
+
+    private void MatchManager_OnBeginResetAfterScore(object sender, EventArgs e)
+    {
+        cCollider2D.enabled = false;
+        velocity = Vector3.zero;
+    }
+
+    private void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
+    {
+        cTransform.position = MatchManager.Instance.DiscSpawn;
+        cCollider2D.enabled = true;
+    }
+
+    #endregion
+
+    #region RPC
 
     [RPC]
     private void RPC_SetVelocity(Vector3 _velocity)

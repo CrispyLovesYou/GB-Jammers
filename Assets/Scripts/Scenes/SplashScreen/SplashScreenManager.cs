@@ -27,16 +27,16 @@ public class SplashScreenManager : Singleton<SplashScreenManager>
     {
         TextAsset ta;
 
-        ta = Resources.Load("data_dr-tracksuit") as TextAsset;
+        ta = Resources.Load("data_dr_tracksuit") as TextAsset;
         Globals.CharacterDict.Add(CharacterID.DR_TRACKSUIT, Character.Deserialize(ta.text));
 
-        ta = Resources.Load("data_v-bomb") as TextAsset;
+        ta = Resources.Load("data_v_bomb") as TextAsset;
         Globals.CharacterDict.Add(CharacterID.V_BOMB, Character.Deserialize(ta.text));
 
-        ta = Resources.Load("data_dirty-dan-ryckert") as TextAsset;
+        ta = Resources.Load("data_dirty_dan_ryckert") as TextAsset;
         Globals.CharacterDict.Add(CharacterID.DIRTY_DAN_RYCKERT, Character.Deserialize(ta.text));
 
-        ta = Resources.Load("data_metal-gear-scanlon") as TextAsset;
+        ta = Resources.Load("data_metal_gear_scanlon") as TextAsset;
         Globals.CharacterDict.Add(CharacterID.METAL_GEAR_SCANLON, Character.Deserialize(ta.text));
     }
 

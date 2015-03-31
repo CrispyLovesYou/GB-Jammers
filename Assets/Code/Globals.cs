@@ -8,6 +8,9 @@ public static class Globals
     public const string GAME_VERSION = "0.1";
     public const int MAX_CONNECTED_PLAYERS = 2;
 
+    public const int DEFAULT_SETS_TO_WIN_MATCH = 2;
+    public const int DEFAULT_POINTS_TO_WIN_SET = 11;
+
     #endregion
 
     #region Fields

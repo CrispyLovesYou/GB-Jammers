@@ -8,6 +8,7 @@ public struct Character
 {
     #region Fields
 
+    public string ID;
     public string Name;
     public string RealName;
 

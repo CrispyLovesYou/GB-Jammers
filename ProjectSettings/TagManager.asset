@@ -12,6 +12,7 @@ TagManager:
   - Wall_Left
   - Wall_Right
   - Court_Area
+  - Disc
   layers:
   - Default
   - TransparentFX

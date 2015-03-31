@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 [AddComponentMenu("Input/Joystick 1")]
@@ -17,12 +18,24 @@ public class Input_Joy : Input_Base
 
     public float DeadZone = 0.2f;
 
+    private bool isEnabled = true;
+
     #endregion
 
     #region Unity Callbacks
 
+    protected override void Awake()
+    {
+        base.Awake();
+        MatchManager.OnBeginResetAfterScore += Disable;
+        MatchManager.OnCompleteResetAfterScore += Enable;
+    }
+
     private void Update()
     {
+        if (!isEnabled)
+            return;
+
         CheckMovement();
         CheckAction();
         CheckLob();
@@ -60,6 +73,20 @@ public class Input_Joy : Input_Base
     {
         if (Input.GetButtonDown(INPUT_CANCEL))
             controller.Lob(inputVector);
+    }
+
+    #endregion
+
+    #region Callbacks
+
+    private void Enable(object sender, EventArgs e)
+    {
+        isEnabled = true;
+    }
+
+    private void Disable(object sender, EventArgs e)
+    {
+        isEnabled = false;
     }
 
     #endregion

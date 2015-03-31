@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character>
+  <ID>metal_gear_scanlon</ID>
   <Name>Metal Gear Scanlon</Name>
   <RealName>Drew Scanlon</RealName>
   <ThrowPower>11</ThrowPower>

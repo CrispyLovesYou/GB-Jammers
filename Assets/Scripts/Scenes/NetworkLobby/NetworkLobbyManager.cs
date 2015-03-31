@@ -274,7 +274,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
     #endregion
 
-    #region Callbacks
+    #region RPC
 
     [RPC]
     private void RPC_ToggleReady()

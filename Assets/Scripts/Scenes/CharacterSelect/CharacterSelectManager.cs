@@ -53,7 +53,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 
     #endregion
 
-    #region Callbacks
+    #region RPC
 
     [RPC]
     private void RPC_SelectCharacter(int _playerNum, int _id)

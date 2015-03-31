@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character>
+  <ID>v_bomb</ID>
   <Name>V-Bomb</Name>
   <RealName>Vinny Caravella</RealName>
   <ThrowPower>18</ThrowPower>

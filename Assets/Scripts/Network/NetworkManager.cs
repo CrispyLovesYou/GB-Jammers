@@ -18,9 +18,6 @@ public class NetworkManager : Singleton<NetworkManager>
     public string Player_Prefab_ID = "Player";
     public string Disc_Prefab_ID = "Disc";
     public string Crosshair_Prefab_ID = "Crosshair";
-    public string Player_Left_Spawn_Tag = "Team_Left_Spawn";
-    public string Player_Right_Spawn_Tag = "Team_Right_Spawn";
-    public string Disc_Spawn_Tag = "Disc_Spawn";
 
     #endregion
 
@@ -67,11 +64,11 @@ public class NetworkManager : Singleton<NetworkManager>
         switch (team)
         {
             case Team.LEFT:
-                spawnPosition = GameObject.FindGameObjectWithTag(Player_Left_Spawn_Tag).transform.position;
+                spawnPosition = MatchManager.Instance.TeamLeftSpawn;
                 break;
 
             case Team.RIGHT:
-                spawnPosition = GameObject.FindGameObjectWithTag(Player_Right_Spawn_Tag).transform.position;
+                spawnPosition = MatchManager.Instance.TeamRightSpawn;
                 break;
         }
 
@@ -85,7 +82,7 @@ public class NetworkManager : Singleton<NetworkManager>
 
     private void SpawnDisc()
     {
-        Vector3 spawnPosition = GameObject.FindGameObjectWithTag(Disc_Spawn_Tag).transform.position;
+        Vector3 spawnPosition = MatchManager.Instance.DiscSpawn;
         PhotonNetwork.Instantiate(Disc_Prefab_ID, spawnPosition, Quaternion.identity, 0);
     }
 
