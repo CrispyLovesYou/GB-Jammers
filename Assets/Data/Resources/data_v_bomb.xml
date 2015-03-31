@@ -9,7 +9,7 @@
   <MoveSpeed>1.75</MoveSpeed>
   <DashSpeed>5</DashSpeed>
   <DashDuration>0.4</DashDuration>
-  <LobDuration>1.8</LobDuration>
+  <LobDuration>2.2</LobDuration>
   <AbilityPassive>ability_passive_vbomb</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
   <AbilityEX>ability_ex_vbomb</AbilityEX>

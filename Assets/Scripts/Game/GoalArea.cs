@@ -15,7 +15,10 @@ public class GoalArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _collider)
     {
-        if (_collider.tag == "Disc" && !Disc.IsScoring)
+        if (_collider.tag == "Disc" &&
+            !Disc.IsScoring &&
+            PhotonNetwork.isMasterClient &&
+            !Controller_Player.isPingCompensating)
         {
             Disc.IsScoring = true;
             MatchManager.Instance.ScorePoints(TeamToScore, Points);

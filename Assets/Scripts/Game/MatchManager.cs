@@ -57,10 +57,14 @@ public class MatchManager : Singleton<MatchManager>
     public string Team_Right_Spawn_Tag = "Team_Right_Spawn";
     public string Disc_Spawn_Tag = "Disc_Spawn";
 
+    public int LobPointValue = 2;
+    public int BonusPointValue = 0;
+
     public Vector3 TeamLeftSpawn { get; private set; }
     public Vector3 TeamRightSpawn { get; private set; }
     public Vector3 DiscSpawn { get; private set; }
 
+    private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
 
     #endregion
@@ -70,6 +74,7 @@ public class MatchManager : Singleton<MatchManager>
     protected override void Awake()
     {
         base.Awake();
+        cPhotonView = GetComponent<PhotonView>();
 
         if (Rules.SetsToWinMatch == 0)
         {
@@ -96,16 +101,7 @@ public class MatchManager : Singleton<MatchManager>
 
     public void ScorePoints(Team _team, int _points)
     {
-        switch (_team)
-        {
-            case Team.LEFT: L_Points += _points; break;
-            case Team.RIGHT: R_Points += _points; break;
-        }
-
-        if (onScored != null)
-            onScored(this, new ScoredEventArgs(_team));
-
-        StartCoroutine(ResetAfterScore());
+        cPhotonView.RPC("RPC_ScorePoints", PhotonTargets.AllViaServer, (int)_team, _points);
     }
 
     #endregion
@@ -171,6 +167,25 @@ public class MatchManager : Singleton<MatchManager>
         yield return new WaitForSeconds(2.0f);
         Disc.IsScoring = false;
         onCompleteResetAfterScore(this, EventArgs.Empty);
+    }
+
+    #endregion
+
+    #region RPC
+
+    [RPC]
+    private void RPC_ScorePoints(int _team, int _points)
+    {
+        switch ((Team)_team)
+        {
+            case Team.LEFT: L_Points += _points + BonusPointValue; break;
+            case Team.RIGHT: R_Points += _points + BonusPointValue; break;
+        }
+
+        if (onScored != null)
+            onScored(this, new ScoredEventArgs((Team)_team));
+
+        StartCoroutine(ResetAfterScore());
     }
 
     #endregion

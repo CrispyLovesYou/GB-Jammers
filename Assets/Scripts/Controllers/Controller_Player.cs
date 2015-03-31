@@ -76,6 +76,7 @@ public class Controller_Player : MonoBehaviour
 
     #region Fields
 
+    public string ID = "";
     public string Name = "";
     public string RealName = "";
     public float MoveSpeed = 4.0f;
@@ -104,9 +105,12 @@ public class Controller_Player : MonoBehaviour
     private bool isRecovering { get { return (isDashRecovering || isThrowRecovering); } }
     public bool IsRecovering { get { return isRecovering; } }
 
+    public static bool isPingCompensating = false;
+
     private Transform cTransform;
     private Rigidbody2D cRigidbody2D;
     private PhotonView cPhotonView;
+
     private GameObject courtArea;
 
     private float throwCharge = 0;
@@ -126,6 +130,7 @@ public class Controller_Player : MonoBehaviour
         cTransform = GetComponent<Transform>();
         cRigidbody2D = GetComponent<Rigidbody2D>();
         cPhotonView = GetComponent<PhotonView>();
+
         courtArea = GameObject.FindGameObjectWithTag(COURT_AREA_TAG);
 
         MatchManager.OnBeginResetAfterScore += MoveToSpawnPosition;
@@ -133,11 +138,19 @@ public class Controller_Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
     {
-        if (!cPhotonView.isMine || hasDisc || Disc.Instance == null)
+        if (hasDisc || Disc.Instance == null)
             return;
 
-        if (_collider2D.gameObject == Disc.Instance.gameObject)
-            Catch();
+        if (_collider2D.tag == Disc.Instance.tag)
+        {
+            if (cPhotonView.isMine)
+                Catch();
+            else
+            {
+                isPingCompensating = true;
+                StartCoroutine(HandlePingCompensation());
+            }
+        }
     }
 
     #endregion
@@ -245,7 +258,7 @@ public class Controller_Player : MonoBehaviour
         targetPosition = new Vector2(targetX, targetY);
 
         hasDisc = false;
-        Disc.Instance.Lob(targetPosition, LobDuration);
+        Disc.Instance.Lob(Team, targetPosition, LobDuration);
         isThrowRecovering = true;
         StartCoroutine(THROW_RECOVERY_COROUTINE);
 
@@ -371,6 +384,13 @@ public class Controller_Player : MonoBehaviour
         isThrowRecovering = false;
     }
 
+    private IEnumerator HandlePingCompensation()
+    {
+        float delay = (float)PhotonNetwork.GetPing() / 1000;
+        yield return new WaitForSeconds(delay * 2);
+        isPingCompensating = false;
+    }
+
     #endregion
 
     #region Callbacks
@@ -405,6 +425,7 @@ public class Controller_Player : MonoBehaviour
 
         Character ch = Globals.CharacterDict[(CharacterID)_id];
 
+        ID = ch.ID;
         Name = ch.Name;
         RealName = ch.RealName;
         MoveSpeed = ch.MoveSpeed;

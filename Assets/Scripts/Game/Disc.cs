@@ -12,6 +12,8 @@ public class Disc : Singleton<Disc>
     private const string WALL_LEFT_TAG = "Wall_Left";
     private const string WALL_RIGHT_TAG = "Wall_Right";
 
+    private const float LOB_CATCH_PERIOD = 0.1f;
+
     #endregion
 
     #region Fields
@@ -24,6 +26,7 @@ public class Disc : Singleton<Disc>
     private Collider2D cCollider2D;
 
     private Vector3 velocity = Vector3.zero;
+    private IEnumerator lobRoutine;
 
     #endregion
 
@@ -66,9 +69,7 @@ public class Disc : Singleton<Disc>
 
     public void Catch(Vector2 _playerPosition, float _offsetX)
     {
-        cRigidbody2D.velocity = velocity = Vector3.zero;
-        cCollider2D.enabled = false;
-        cPhotonView.RPC("RPC_Catch", PhotonTargets.AllViaServer, (Vector3)_playerPosition, _offsetX);
+        cPhotonView.RPC("RPC_Catch", PhotonTargets.All, (Vector3)_playerPosition, _offsetX);
     }
 
     public void Throw(Vector2 _throwVector)
@@ -76,9 +77,9 @@ public class Disc : Singleton<Disc>
         cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, (Vector3)_throwVector);
     }
 
-    public void Lob(Vector2 _targetPosition, float _duration)
+    public void Lob(Team _team, Vector2 _targetPosition, float _duration)
     {
-        cPhotonView.RPC("RPC_Lob", PhotonTargets.AllViaServer, (Vector3)_targetPosition, _duration);
+        cPhotonView.RPC("RPC_Lob", PhotonTargets.AllViaServer, (int)_team, (Vector3)_targetPosition, _duration);
     }
 
     private void Bounce(Direction _direction)
@@ -101,7 +102,7 @@ public class Disc : Singleton<Disc>
 
     #region Coroutines
 
-    private IEnumerator HandleLob(Vector2 _targetPosition, float _duration)
+    private IEnumerator HandleLob(Team _team, Vector2 _targetPosition, float _duration)
     {
         Vector3 startPosition = cTransform.position;
 
@@ -109,10 +110,12 @@ public class Disc : Singleton<Disc>
         Crosshair.Instance.GetComponent<SpriteRenderer>().enabled = true;
         cCollider2D.enabled = false;
 
-        for (float i = 0; i < 100; i++)
+        float nFrames = _duration * (1.0f / Time.deltaTime);
+
+        for (float i = 0; i < nFrames; i++)
         {
-            float xDistance = (_targetPosition.x - startPosition.x) * (i / 100);
-            float yDistance = (_targetPosition.y - startPosition.y) * (i / 100);
+            float xDistance = (_targetPosition.x - startPosition.x) * (i / nFrames);
+            float yDistance = (_targetPosition.y - startPosition.y) * (i / nFrames);
             float x = startPosition.x + xDistance;
             float y = startPosition.y + yDistance;
 
@@ -122,7 +125,7 @@ public class Disc : Singleton<Disc>
             float scaleX = 0;
             float scaleY = 0;
 
-            if (i < 50)
+            if (i < nFrames / 2)
             {
                 scaleX = cTransform.localScale.x + scale;
                 scaleY = cTransform.localScale.y + scale;
@@ -135,11 +138,26 @@ public class Disc : Singleton<Disc>
 
             cTransform.localScale = new Vector3(scaleX, scaleY, 1);
 
-            yield return new WaitForSeconds(_duration / 100);
+            yield return 0;
         }
 
         Crosshair.Instance.GetComponent<SpriteRenderer>().enabled = false;
         cCollider2D.enabled = true;
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            lobRoutine = HandleLobScore(_team);
+            StartCoroutine(lobRoutine);
+        }
+    }
+
+    private IEnumerator HandleLobScore(Team _team)
+    {
+        float delay = (float)PhotonNetwork.GetPing() / 1000;
+
+        yield return new WaitForSeconds(LOB_CATCH_PERIOD + (delay * 2));
+        cCollider2D.enabled = false;
+        MatchManager.Instance.ScorePoints(_team, MatchManager.Instance.LobPointValue);
     }
 
     /*
@@ -193,7 +211,10 @@ public class Disc : Singleton<Disc>
     [RPC]
     private void RPC_Catch(Vector3 _playerPosition, float _offsetX)
     {
-        velocity = Vector3.zero;
+        if (lobRoutine != null)
+            StopCoroutine(lobRoutine);
+
+        cRigidbody2D.velocity = velocity = Vector3.zero;
         cCollider2D.enabled = false;
         cRigidbody2D.fixedAngle = true;
 
@@ -210,9 +231,9 @@ public class Disc : Singleton<Disc>
     }
 
     [RPC]
-    private void RPC_Lob(Vector3 _targetPosition, float _duration)
+    private void RPC_Lob(int _team, Vector3 _targetPosition, float _duration)
     {
-        StartCoroutine(HandleLob((Vector2)_targetPosition, _duration));
+        StartCoroutine(HandleLob((Team)_team, (Vector2)_targetPosition, _duration));
     }
 
     #endregion

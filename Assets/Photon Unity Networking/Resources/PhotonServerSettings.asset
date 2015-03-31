@@ -48,4 +48,8 @@ MonoBehaviour:
   - RPC_SetPlayerProperties
   - RPC_SelectCharacter
   - RPC_LockCharacter
+  - RPC_SetPosition
+  - RPC_OnBeginResetAfterScore
+  - RPC_OnCompleteResetAfterScore
+  - RPC_ScorePoints
   DisableAutoOpenWizard: 0

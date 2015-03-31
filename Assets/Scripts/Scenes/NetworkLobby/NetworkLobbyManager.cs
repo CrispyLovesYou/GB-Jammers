@@ -269,7 +269,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         newProperties.Add(PROP_IS_READY, ReadyToggle.isOn);
         PhotonNetwork.player.SetCustomProperties(newProperties);
 
-        cPhotonView.RPC("RPC_ToggleReady", PhotonTargets.AllViaServer);
+        cPhotonView.RPC("RPC_ToggleReady", PhotonTargets.AllBufferedViaServer);
     }
 
     #endregion

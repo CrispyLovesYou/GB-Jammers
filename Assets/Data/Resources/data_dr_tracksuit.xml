@@ -9,7 +9,7 @@
   <MoveSpeed>2</MoveSpeed>
   <DashSpeed>6</DashSpeed>
   <DashDuration>0.25</DashDuration>
-  <LobDuration>1.5</LobDuration>
+  <LobDuration>1.9</LobDuration>
   <AbilityPassive>ability_passive_tracksuit</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
   <AbilityEX>ability_ex_tracksuit</AbilityEX>
