@@ -72,6 +72,17 @@ public class Controller_Player : MonoBehaviour
         remove { onLob -= value; }
     }
 
+    private static EventHandler<MeterChangeEventArgs> onMeterChange;
+    public static event EventHandler<MeterChangeEventArgs> OnMeterChange
+    {
+        add
+        {
+            if (onMeterChange == null || !onMeterChange.GetInvocationList().Contains(value))
+                onMeterChange += value;
+        }
+        remove { onMeterChange -= value; }
+    }
+
     #endregion
 
     #region Fields
@@ -89,7 +100,22 @@ public class Controller_Player : MonoBehaviour
     public float Stability = 2.5f;
     public float LobDuration = 0.5f;
 
-    public int Meter = 0;
+    private int meter = 0;
+    public int Meter
+    {
+        get { return meter; }
+        set
+        {
+            int clampValue = Mathf.Clamp(value, 0, 100);
+
+            if (onMeterChange != null)
+                onMeterChange(this, new MeterChangeEventArgs(Team, clampValue - meter, clampValue));
+
+            meter = clampValue;
+        }
+    }
+    public int MeterGainOnGreat = 10;
+    public int MeterGainOnPerfect = 33;
 
     public Team Team = Team.UNASSIGNED;
     public Direction CurrentDirection = Direction.DOWN;
@@ -161,9 +187,9 @@ public class Controller_Player : MonoBehaviour
 
     #region Methods
 
-    public void SetCharacterData(CharacterID _id)
+    public void SetData(Team _team, CharacterID _id)
     {
-        cPhotonView.RPC("RPC_SetCharacterData", PhotonTargets.AllBufferedViaServer, (int)_id);
+        cPhotonView.RPC("RPC_SetData", PhotonTargets.AllBufferedViaServer, (int)_team, (int)_id);
     }
 
     public void Stop()
@@ -329,6 +355,7 @@ public class Controller_Player : MonoBehaviour
             if (onGreatThrow != null)
                 onGreatThrow(this, EventArgs.Empty);
 
+            Meter += MeterGainOnGreat;
             cPhotonView.RPC("RPC_OnGreatThrowOthers", PhotonTargets.Others);
         }
         else if (throwCharge >= PerfectThrowThreshhold)
@@ -336,6 +363,7 @@ public class Controller_Player : MonoBehaviour
             if (onPerfectThrow != null)
                 onPerfectThrow(this, EventArgs.Empty);
 
+            Meter += MeterGainOnPerfect;
             cPhotonView.RPC("RPC_OnPerfectThrowOthers", PhotonTargets.Others);
         }
 
@@ -438,8 +466,10 @@ public class Controller_Player : MonoBehaviour
     #region RPC
 
     [RPC]
-    private void RPC_SetCharacterData(int _id)
+    private void RPC_SetData(int _team, int _id)
     {
+        Team = (Team)_team;
+
         if (Globals.CharacterDict.Count == 0)
             return;
 
@@ -461,16 +491,24 @@ public class Controller_Player : MonoBehaviour
     private void RPC_OnGreatThrowOthers()
     {
         if (!cPhotonView.isMine)
+        {
             if (onGreatThrow != null)
                 onGreatThrow(this, EventArgs.Empty);
+
+            Meter += MeterGainOnGreat;
+        }
     }
 
     [RPC]
     private void RPC_OnPerfectThrowOthers()
     {
         if (!cPhotonView.isMine)
+        {
             if (onPerfectThrow != null)
                 onPerfectThrow(this, EventArgs.Empty);
+
+            Meter += MeterGainOnPerfect;
+        }
     }
 
     #endregion

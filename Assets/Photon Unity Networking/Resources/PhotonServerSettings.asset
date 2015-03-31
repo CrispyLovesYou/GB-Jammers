@@ -55,4 +55,5 @@ MonoBehaviour:
   - RPC_TEST
   - RPC_OnGreatThrowOthers
   - RPC_OnPerfectThrowOthers
+  - RPC_SetData
   DisableAutoOpenWizard: 0

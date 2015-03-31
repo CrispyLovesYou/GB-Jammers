@@ -73,7 +73,7 @@ public class NetworkManager : Singleton<NetworkManager>
         }
 
         GameObject player = PhotonNetwork.Instantiate(prefabID, spawnPosition, Quaternion.identity, 0) as GameObject;
-        player.GetComponent<Controller_Player>().SetCharacterData(Globals.SelectedCharacters[index]);
+        player.GetComponent<Controller_Player>().SetData(team, Globals.SelectedCharacters[index]);
         player.GetComponent<Controller_Player>().Team = team;
         player.GetComponent<Input_Joy>().enabled = true;
 
