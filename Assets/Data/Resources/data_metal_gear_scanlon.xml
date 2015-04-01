@@ -6,9 +6,9 @@
   <ThrowPower>11</ThrowPower>
   <ThrowKnockback>2.5</ThrowKnockback>
   <Stability>2</Stability>
-  <MoveSpeed>3.5</MoveSpeed>
-  <DashSpeed>15</DashSpeed>
-  <DashDuration>0.12</DashDuration>
+  <MoveSpeed>2.8</MoveSpeed>
+  <DashSpeed>11</DashSpeed>
+  <DashDuration>0.14</DashDuration>
   <LobDuration>1.7</LobDuration>
   <AbilityPassive>ability_passive_mgs</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>

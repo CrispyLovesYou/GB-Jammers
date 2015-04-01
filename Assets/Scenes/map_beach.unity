@@ -128,7 +128,8 @@ GameObject:
   - 33: {fileID: 214816221}
   - 23: {fileID: 214816220}
   - 61: {fileID: 214816219}
-  m_Layer: 0
+  - 114: {fileID: 214816222}
+  m_Layer: 10
   m_Name: Left
   m_TagString: Wall_Left
   m_Icon: {fileID: 0}
@@ -191,6 +192,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 214816217}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &214816222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 214816217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d992122438a527346bb6c08956fad69a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GizmoColor: {r: 1, g: .972413778, b: 0, a: .200000003}
+  GizmoAlpha: .200000003
 --- !u!1 &313952468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,7 +1874,8 @@ GameObject:
   - 33: {fileID: 1772412078}
   - 23: {fileID: 1772412077}
   - 61: {fileID: 1772412076}
-  m_Layer: 0
+  - 114: {fileID: 1772412079}
+  m_Layer: 10
   m_Name: Right
   m_TagString: Wall_Right
   m_Icon: {fileID: 0}
@@ -1923,6 +1938,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1772412074}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1772412079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1772412074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d992122438a527346bb6c08956fad69a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GizmoColor: {r: .903448343, g: 1, b: 0, a: .200000003}
+  GizmoAlpha: .200000003
 --- !u!1 &1780726926
 GameObject:
   m_ObjectHideFlags: 0

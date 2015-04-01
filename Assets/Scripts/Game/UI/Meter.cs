@@ -36,7 +36,7 @@ public class Meter : MonoBehaviour
 
     private IEnumerator HandleAnimation(int _meter)
     {
-        float nFrames = Duration * (1.0f / Time.deltaTime);
+        float nFrames = Duration * 60;
         float targetOffset = ((float)_meter / 100) * initWidth;
 
         targetOffset = initWidth - targetOffset;

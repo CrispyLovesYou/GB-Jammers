@@ -6,9 +6,9 @@
   <ThrowPower>18</ThrowPower>
   <ThrowKnockback>4</ThrowKnockback>
   <Stability>3</Stability>
-  <MoveSpeed>1.75</MoveSpeed>
-  <DashSpeed>5</DashSpeed>
-  <DashDuration>0.4</DashDuration>
+  <MoveSpeed>2</MoveSpeed>
+  <DashSpeed>7</DashSpeed>
+  <DashDuration>0.3</DashDuration>
   <LobDuration>2.2</LobDuration>
   <AbilityPassive>ability_passive_vbomb</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>

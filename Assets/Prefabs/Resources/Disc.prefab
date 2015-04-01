@@ -71,6 +71,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a051097f20beb459b617a7d3bfec70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsScoring: 0
+  HasKnockback: 0
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &11481128
 MonoBehaviour:
   m_ObjectHideFlags: 1

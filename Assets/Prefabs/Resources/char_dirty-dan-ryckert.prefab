@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744fe5f246583944abaa35c98ddc9187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 
   Name: 
   RealName: 
   MoveSpeed: 4
@@ -171,10 +172,16 @@ MonoBehaviour:
   ThrowKnockback: 3
   Stability: 2.5
   LobDuration: .5
+  MeterGainOnGreat: 10
+  MeterGainOnPerfect: 33
   Team: 0
+  State: 0
   CurrentDirection: 3
-  hasDisc: 0
-  isDashing: 0
+  GreatThrowThreshhold: 80
+  PerfectThrowThreshhold: 90
+  GoalWallLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &11430752
 MonoBehaviour:
   m_ObjectHideFlags: 1

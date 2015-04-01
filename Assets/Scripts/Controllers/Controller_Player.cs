@@ -8,11 +8,16 @@ public class Controller_Player : MonoBehaviour
 {
     #region Constants
 
+    public const float KNOCKBACK_NORMALIZER = 0.1f;
+    public const float MIN_KNOCKBACK_DURATION = 0.1f;
+
     private const string CR_DASH = "CR_Dash";
     private const string CR_CHARGE = "CR_Charge";
-    private const string CR_DASH_RECOVERY = "CR_DashRecovery";
     private const string CR_THROW_RECOVERY = "CR_ThrowRecovery";
+    private const string CR_KNOCKBACK = "CR_Knockback";
+
     private const string COURT_AREA_TAG = "Court_Area";
+    private const string GOAL_WALL_LAYER = "Goal Walls";
 
     #endregion
 
@@ -94,7 +99,6 @@ public class Controller_Player : MonoBehaviour
     public float MoveSpeed = 4.0f;
     public float DashSpeed = 15.0f;
     public float DashDuration = 0.15f;
-    public float DashRecovery = 0.0f;
     public float ThrowPower = 20.0f;
     public float ThrowRecovery = 0.3f;
     public float ThrowKnockback = 3.0f;
@@ -124,8 +128,6 @@ public class Controller_Player : MonoBehaviour
     public float GreatThrowThreshhold = 80;
     public float PerfectThrowThreshhold = 90;
 
-    public LayerMask GoalWallLayer;
-
     public static bool isPingCompensating = false;
 
     private Transform cTransform;
@@ -137,9 +139,10 @@ public class Controller_Player : MonoBehaviour
     private float throwCharge = 0;
     public float ThrowCharge { get { return throwCharge; } }
 
-    private float maxChargeDuration = 0.5f;
+    private float maxChargeDuration = 1.0f;
     private Vector2 throwDirection = Vector2.zero;
     private float throwDirectionThreshhold = 0.7f;
+    private Vector2 knockbackVector = Vector2.zero;
 
     #endregion
 
@@ -153,7 +156,8 @@ public class Controller_Player : MonoBehaviour
 
         courtArea = GameObject.FindGameObjectWithTag(COURT_AREA_TAG);
 
-        MatchManager.OnBeginResetAfterScore += MoveToSpawnPosition;
+        MatchManager.OnBeginResetAfterScore += MatchManager_OnBeginResetAfterScore;
+        MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
     }
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
@@ -211,7 +215,7 @@ public class Controller_Player : MonoBehaviour
         switch (State)
         {
             case PlayerState.NORMAL:
-                Dash(_inputVector.normalized);
+                StartCoroutine(CR_DASH, _inputVector.normalized);
                 break;
 
             case PlayerState.AIM:
@@ -291,24 +295,14 @@ public class Controller_Player : MonoBehaviour
         Stop();
 
         StopCoroutine(CR_DASH);
-        StopCoroutine(CR_DASH_RECOVERY);
         StopCoroutine(CR_THROW_RECOVERY);
 
-        float offsetX = 0;
-        float buffer = 0.1f;
+        knockbackVector = Disc.Instance.Velocity;
 
-        switch (Team)
-        {
-            case Team.LEFT:
-                offsetX = Disc.Instance.transform.localScale.x + buffer;
-                break;
+        Disc.Instance.Catch(cTransform.position + (Vector3.right * GetDiscOffset()));
 
-            case Team.RIGHT:
-                offsetX = -Disc.Instance.transform.localScale.x - buffer;
-                break;
-        }
-
-        Disc.Instance.Catch(cTransform.position, offsetX);
+        if (Disc.Instance.HasKnockback)
+            StartCoroutine(CR_KNOCKBACK);
 
         if (onCatch != null)
             onCatch(this, EventArgs.Empty);
@@ -335,6 +329,8 @@ public class Controller_Player : MonoBehaviour
         if (throwCharge == 0)
             throwVector.y = 0;
 
+        Disc.Instance.Throw(cTransform.position + (Vector3.right * GetDiscOffset()), (Vector3)throwVector);
+
         if (throwCharge >= GreatThrowThreshhold &&
             throwCharge < PerfectThrowThreshhold)
         {
@@ -350,12 +346,12 @@ public class Controller_Player : MonoBehaviour
                 onPerfectThrow(this, EventArgs.Empty);
 
             Meter += MeterGainOnPerfect;
+            Disc.Instance.HasKnockback = true;
+            Disc.Instance.KnockbackPower = ThrowKnockback;
             cPhotonView.RPC("RPC_OnPerfectThrowOthers", PhotonTargets.Others);
         }
 
         throwCharge = 0;
-        Disc.Instance.Throw((Vector3)throwVector);
-
         State = PlayerState.RECOVERY;
         StartCoroutine(CR_THROW_RECOVERY);
 
@@ -363,10 +359,23 @@ public class Controller_Player : MonoBehaviour
             onThrow(this, EventArgs.Empty);
     }
 
-    private void Dash(Vector2 _directionVector)
+    private float GetDiscOffset()
     {
-        cRigidbody2D.velocity = _directionVector * DashSpeed;
-        StartCoroutine(CR_DASH);
+        float discOffset = 0;
+        float buffer = 0.1f;
+
+        switch (Team)
+        {
+            case Team.LEFT:
+                discOffset = Disc.Instance.transform.localScale.x + buffer;
+                break;
+
+            case Team.RIGHT:
+                discOffset = -Disc.Instance.transform.localScale.x - buffer;
+                break;
+        }
+
+        return discOffset;
     }
 
     #endregion
@@ -378,7 +387,7 @@ public class Controller_Player : MonoBehaviour
         State = PlayerState.CHARGE;
         throwCharge = 0;
 
-        float nFrames = maxChargeDuration * (1.0f / Time.deltaTime);
+        float nFrames = maxChargeDuration * 60;
 
         for (float i = 0; i < nFrames; i++)
         {
@@ -395,18 +404,12 @@ public class Controller_Player : MonoBehaviour
         Throw();
     }
 
-    private IEnumerator CR_Dash()
+    private IEnumerator CR_Dash(Vector2 _directionVector)
     {
         State = PlayerState.DASH;
+        cRigidbody2D.velocity = _directionVector * DashSpeed;
         yield return new WaitForSeconds(DashDuration);
         Stop();
-        StartCoroutine(CR_DASH_RECOVERY);
-    }
-
-    private IEnumerator CR_DashRecovery()
-    {
-        State = PlayerState.RECOVERY;
-        yield return new WaitForSeconds(DashRecovery);
         State = PlayerState.NORMAL;
     }
 
@@ -417,10 +420,28 @@ public class Controller_Player : MonoBehaviour
         State = PlayerState.NORMAL;
     }
 
+    private IEnumerator CR_Knockback()
+    {
+        State = PlayerState.KNOCKBACK;
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(GOAL_WALL_LAYER), true);
+        cRigidbody2D.velocity = knockbackVector * KNOCKBACK_NORMALIZER;
+
+        float duration = (Disc.Instance.KnockbackPower - Stability) / 2;
+
+        if (duration < MIN_KNOCKBACK_DURATION)
+            duration = MIN_KNOCKBACK_DURATION;
+
+        yield return new WaitForSeconds(1.0f);
+        Stop();
+        cPhotonView.RPC("RPC_RemoveKnockback", PhotonTargets.All);
+        Disc.Instance.SetPosition(cTransform.position);
+        State = PlayerState.AIM;
+    }
+
     private IEnumerator CR_PingCompensation()
     {
         float delay = (float)PhotonNetwork.GetPing() / 1000;
-        yield return new WaitForSeconds(delay * 2);
+        yield return new WaitForSeconds(delay * 3);
         isPingCompensating = false;
     }
 
@@ -428,10 +449,12 @@ public class Controller_Player : MonoBehaviour
 
     #region Callbacks
 
-    private void MoveToSpawnPosition(object sender, EventArgs e)
+    private void MatchManager_OnBeginResetAfterScore(object sender, EventArgs e)
     {
         if (!cPhotonView.isMine)
             return;
+
+        State = PlayerState.RESET;
 
         Stop();
         Vector3 targetPos = Vector3.zero;
@@ -444,6 +467,12 @@ public class Controller_Player : MonoBehaviour
         }
 
         iTween.MoveTo(this.gameObject, targetPos, duration);
+    }
+
+    void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
+    {
+        State = PlayerState.NORMAL;
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(GOAL_WALL_LAYER), false);
     }
 
     #endregion
@@ -493,7 +522,16 @@ public class Controller_Player : MonoBehaviour
                 onPerfectThrow(this, EventArgs.Empty);
 
             Meter += MeterGainOnPerfect;
+            Disc.Instance.HasKnockback = true;
+            Disc.Instance.KnockbackPower = ThrowKnockback;
         }
+    }
+
+    [RPC]
+    private void RPC_RemoveKnockback()
+    {
+        Disc.Instance.HasKnockback = false;
+        Disc.Instance.KnockbackPower = 0;
     }
 
     #endregion

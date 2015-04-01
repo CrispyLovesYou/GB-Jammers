@@ -6,7 +6,7 @@
   <ThrowPower>15</ThrowPower>
   <ThrowKnockback>3</ThrowKnockback>
   <Stability>3</Stability>
-  <MoveSpeed>2</MoveSpeed>
+  <MoveSpeed>2.2</MoveSpeed>
   <DashSpeed>6</DashSpeed>
   <DashDuration>0.25</DashDuration>
   <LobDuration>1.9</LobDuration>

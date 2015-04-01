@@ -11,7 +11,9 @@ public class Disc : Singleton<Disc>
     private const string WALL_BOTTOM_TAG = "Wall_Bottom";
     private const string WALL_LEFT_TAG = "Wall_Left";
     private const string WALL_RIGHT_TAG = "Wall_Right";
+    private const string PLAYER_LAYER = "Default";
 
+    private const string CR_LOB_CATCH = "CR_LobCatch";
     private const float LOB_CATCH_PERIOD = 0.1f;
 
     #endregion
@@ -20,6 +22,7 @@ public class Disc : Singleton<Disc>
 
     public bool IsScoring = false;
     public bool HasKnockback = false;
+    public float KnockbackPower = 0;
 
     private Transform cTransform;
     private Rigidbody2D cRigidbody2D;
@@ -28,8 +31,6 @@ public class Disc : Singleton<Disc>
 
     private Vector3 velocity = Vector3.zero;
     public Vector3 Velocity { get { return velocity; } }
-
-    private IEnumerator lobRoutine;
 
     #endregion
 
@@ -71,19 +72,24 @@ public class Disc : Singleton<Disc>
 
     #region Methods
 
-    public void Catch(Vector2 _playerPosition, float _offsetX)
+    public void Catch(Vector3 _snapPosition)
     {
-        cPhotonView.RPC("RPC_Catch", PhotonTargets.All, (Vector3)_playerPosition, _offsetX);
+        cPhotonView.RPC("RPC_Catch", PhotonTargets.All, _snapPosition);
     }
 
-    public void Throw(Vector2 _throwVector)
+    public void Throw(Vector3 _snapPosition, Vector2 _throwVector)
     {
-        cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, (Vector3)_throwVector);
+        cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, _snapPosition, (Vector3)_throwVector);
     }
 
     public void Lob(Team _team, Vector2 _targetPosition, float _duration)
     {
         cPhotonView.RPC("RPC_Lob", PhotonTargets.AllViaServer, (int)_team, (Vector3)_targetPosition, _duration);
+    }
+
+    public void SetPosition(Vector3 _position)
+    {
+        cPhotonView.RPC("RPC_SetPosition", PhotonTargets.AllViaServer, _position);
     }
 
     private void Bounce(Direction _direction)
@@ -106,7 +112,7 @@ public class Disc : Singleton<Disc>
 
     #region Coroutines
 
-    private IEnumerator HandleLob(Team _team, Vector2 _targetPosition, float _duration)
+    private IEnumerator CR_Lob(Team _team, Vector2 _targetPosition, float _duration)
     {
         Vector3 startPosition = cTransform.position;
 
@@ -114,7 +120,7 @@ public class Disc : Singleton<Disc>
         Crosshair.Instance.GetComponent<SpriteRenderer>().enabled = true;
         cCollider2D.enabled = false;
 
-        float nFrames = _duration * (1.0f / Time.deltaTime);
+        float nFrames = _duration * 60;
 
         for (float i = 0; i < nFrames; i++)
         {
@@ -150,12 +156,11 @@ public class Disc : Singleton<Disc>
 
         if (PhotonNetwork.isMasterClient)
         {
-            lobRoutine = HandleLobScore(_team);
-            StartCoroutine(lobRoutine);
+            StartCoroutine(CR_LOB_CATCH, _team);
         }
     }
 
-    private IEnumerator HandleLobScore(Team _team)
+    private IEnumerator CR_LobCatch(Team _team)
     {
         float delay = (float)PhotonNetwork.GetPing() / 1000;
 
@@ -193,6 +198,7 @@ public class Disc : Singleton<Disc>
     private void MatchManager_OnBeginResetAfterScore(object sender, EventArgs e)
     {
         HasKnockback = false;
+        KnockbackPower = 0;
         cCollider2D.enabled = false;
         velocity = Vector3.zero;
     }
@@ -213,37 +219,42 @@ public class Disc : Singleton<Disc>
     #region RPC
 
     [RPC]
+    private void RPC_SetPosition(Vector3 _position)
+    {
+        cTransform.position = _position;
+    }
+
+    [RPC]
     private void RPC_SetVelocity(Vector3 _velocity)
     {
         velocity = _velocity;
     }
 
     [RPC]
-    private void RPC_Catch(Vector3 _playerPosition, float _offsetX)
+    private void RPC_Catch(Vector3 _snapPosition)
     {
-        if (lobRoutine != null)
-            StopCoroutine(lobRoutine);
+        StopCoroutine(CR_LOB_CATCH);
 
         cRigidbody2D.velocity = velocity = Vector3.zero;
-        cCollider2D.enabled = false;
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), true);
         cRigidbody2D.fixedAngle = true;
 
-        Vector3 snapPosition = new Vector3(_playerPosition.x + _offsetX, _playerPosition.y, 0);
-        cTransform.position = snapPosition;
+        cTransform.position = _snapPosition;
     }
 
     [RPC]
-    private void RPC_Throw(Vector3 _throwVector)
+    private void RPC_Throw(Vector3 _snapPosition, Vector3 _throwVector)
     {
+        cTransform.position = _snapPosition;
         velocity = _throwVector;
-        cCollider2D.enabled = true;
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
         cRigidbody2D.fixedAngle = false;
     }
 
     [RPC]
     private void RPC_Lob(int _team, Vector3 _targetPosition, float _duration)
     {
-        StartCoroutine(HandleLob((Team)_team, (Vector2)_targetPosition, _duration));
+        StartCoroutine(CR_Lob((Team)_team, (Vector2)_targetPosition, _duration));
     }
 
     #endregion

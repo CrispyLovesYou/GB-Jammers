@@ -56,4 +56,7 @@ MonoBehaviour:
   - RPC_OnGreatThrowOthers
   - RPC_OnPerfectThrowOthers
   - RPC_SetData
+  - RPC_OnGreatThrow
+  - RPC_OnPerfectThrow
+  - RPC_RemoveKnockback
   DisableAutoOpenWizard: 0

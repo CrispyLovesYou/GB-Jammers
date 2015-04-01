@@ -37,7 +37,8 @@ public enum PlayerState
     AIM,
     CHARGE,
     KNOCKBACK,
-    RECOVERY
+    RECOVERY,
+    RESET
 }
 
 #endregion

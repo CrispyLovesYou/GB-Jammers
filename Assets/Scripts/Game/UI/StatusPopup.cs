@@ -42,7 +42,7 @@ public class StatusPopup : MonoBehaviour
 
     private IEnumerator HandleFade()
     {
-        float nFrames = (Duration / 2) * (1.0f / Time.deltaTime);
+        float nFrames = (Duration / 2) * 60;
 
         for (int i = 0; i < nFrames; i++)
         {

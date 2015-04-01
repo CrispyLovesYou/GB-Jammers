@@ -1,0 +1,54 @@
+Initialize engine version: 5.0.0f4 (5b98b70ebeb9)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon HD 7800 Series (ID=0x6819)
+    Vendor:   ATI
+    VRAM:     1003 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+- Completed reload, in  0.179 seconds
+desktop: 1680x1050 60Hz; virtual: 3120x1050 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Xml.dll (this message is harmless)
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.431841 ms
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 256.
+Total: 0.288088 ms (FindLiveObjects: 0.012829 ms CreateObjectMapping: 0.012246 ms MarkObjects: 0.255430 ms  DeleteObjects: 0.006123 ms)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 7.837291 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 381.
+Total: 0.546726 ms (FindLiveObjects: 0.043154 ms CreateObjectMapping: 0.047528 ms MarkObjects: 0.449336 ms  DeleteObjects: 0.004956 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.032657 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 315.
+Total: 0.593089 ms (FindLiveObjects: 0.043738 ms CreateObjectMapping: 0.038197 ms MarkObjects: 0.504738 ms  DeleteObjects: 0.004665 ms)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.476162 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 396.
+Total: 0.466540 ms (FindLiveObjects: 0.017495 ms CreateObjectMapping: 0.015162 ms MarkObjects: 0.428050 ms  DeleteObjects: 0.004956 ms)
+
+Cannot find Singleton instance of Disc.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+

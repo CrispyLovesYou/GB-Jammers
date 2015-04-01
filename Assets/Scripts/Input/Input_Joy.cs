@@ -19,6 +19,7 @@ public class Input_Joy : Input_Base
     public float DeadZone = 0.2f;
 
     private bool isEnabled = true;
+    private bool appHasFocus = true;
 
     #endregion
 
@@ -33,12 +34,17 @@ public class Input_Joy : Input_Base
 
     private void Update()
     {
-        if (!isEnabled)
+        if (!isEnabled || !appHasFocus)
             return;
 
         CheckMovement();
         CheckAction();
         CheckLob();
+    }
+
+    private void OnApplicationFocus(bool _hasFocus)
+    {
+        appHasFocus = _hasFocus;
     }
 
     #endregion
