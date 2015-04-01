@@ -171,7 +171,7 @@ public class MatchManager : Singleton<MatchManager>
     {
         onBeginResetAfterScore(this, EventArgs.Empty);
         yield return new WaitForSeconds(2.0f);
-        Disc.IsScoring = false;
+        Disc.Instance.IsScoring = false;
         onCompleteResetAfterScore(this, EventArgs.Empty);
     }
 

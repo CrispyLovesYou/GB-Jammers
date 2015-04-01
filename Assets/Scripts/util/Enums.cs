@@ -30,4 +30,14 @@ public enum CharacterID
     METAL_GEAR_SCANLON = 3
 }
 
+public enum PlayerState
+{
+    NORMAL,
+    DASH,
+    AIM,
+    CHARGE,
+    KNOCKBACK,
+    RECOVERY
+}
+
 #endregion

@@ -23,6 +23,21 @@ public class NetworkManager : Singleton<NetworkManager>
 
     #region Unity Callbacks
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        // Debug code for ease-of-testing
+#if UNITY_EDITOR
+        if (Globals.CharacterDict.Count == 0)  // in case the splash screen didn't load Character Data (i.e. debugging in Editor)
+            SplashScreenManager.LoadCharacterData();
+        PhotonNetwork.offlineMode = true;
+        PhotonNetwork.CreateRoom(null);
+        Globals.SelectedCharacters[0] = CharacterID.DR_TRACKSUIT;
+#endif
+
+    }
+
     private void Start()
     {
         if (PhotonNetwork.isMasterClient)

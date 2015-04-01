@@ -18,7 +18,8 @@ public class Disc : Singleton<Disc>
 
     #region Fields
 
-    public static bool IsScoring = false;
+    public bool IsScoring = false;
+    public bool HasKnockback = false;
 
     private Transform cTransform;
     private Rigidbody2D cRigidbody2D;
@@ -26,6 +27,8 @@ public class Disc : Singleton<Disc>
     private Collider2D cCollider2D;
 
     private Vector3 velocity = Vector3.zero;
+    public Vector3 Velocity { get { return velocity; } }
+
     private IEnumerator lobRoutine;
 
     #endregion
@@ -42,6 +45,7 @@ public class Disc : Singleton<Disc>
 
         MatchManager.OnBeginResetAfterScore += MatchManager_OnBeginResetAfterScore;
         MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
+        Controller_Player.OnPerfectThrow += Controller_Player_OnPerfectThrow;
     }
 
     private void Update()
@@ -188,6 +192,7 @@ public class Disc : Singleton<Disc>
 
     private void MatchManager_OnBeginResetAfterScore(object sender, EventArgs e)
     {
+        HasKnockback = false;
         cCollider2D.enabled = false;
         velocity = Vector3.zero;
     }
@@ -196,6 +201,11 @@ public class Disc : Singleton<Disc>
     {
         cTransform.position = MatchManager.Instance.DiscSpawn;
         cCollider2D.enabled = true;
+    }
+
+    private void Controller_Player_OnPerfectThrow(object sender, EventArgs e)
+    {
+        HasKnockback = true;
     }
 
     #endregion

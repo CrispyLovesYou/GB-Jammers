@@ -8,9 +8,10 @@ public class Controller_Player : MonoBehaviour
 {
     #region Constants
 
-    private const string DASH_COROUTINE = "HandleDashTimer";
-    private const string DASH_RECOVERY_COROUTINE = "HandleDashRecoveryTimer";
-    private const string THROW_RECOVERY_COROUTINE = "HandleThrowRecoveryTimer";
+    private const string CR_DASH = "CR_Dash";
+    private const string CR_CHARGE = "CR_Charge";
+    private const string CR_DASH_RECOVERY = "CR_DashRecovery";
+    private const string CR_THROW_RECOVERY = "CR_ThrowRecovery";
     private const string COURT_AREA_TAG = "Court_Area";
 
     #endregion
@@ -118,22 +119,12 @@ public class Controller_Player : MonoBehaviour
     public int MeterGainOnPerfect = 33;
 
     public Team Team = Team.UNASSIGNED;
+    public PlayerState State = PlayerState.NORMAL;
     public Direction CurrentDirection = Direction.DOWN;
     public float GreatThrowThreshhold = 80;
     public float PerfectThrowThreshhold = 90;
 
-    [SerializeField]
-    private bool hasDisc = false;
-    public bool HasDisc { get { return hasDisc; } }
-
-    [SerializeField]
-    private bool isDashing = false;
-    public bool IsDashing { get { return isDashing; } }
-
-    private bool isDashRecovering = false;
-    private bool isThrowRecovering = false;
-    private bool isRecovering { get { return (isDashRecovering || isThrowRecovering); } }
-    public bool IsRecovering { get { return isRecovering; } }
+    public LayerMask GoalWallLayer;
 
     public static bool isPingCompensating = false;
 
@@ -146,7 +137,6 @@ public class Controller_Player : MonoBehaviour
     private float throwCharge = 0;
     public float ThrowCharge { get { return throwCharge; } }
 
-    private bool isThrowing = false;
     private float maxChargeDuration = 0.5f;
     private Vector2 throwDirection = Vector2.zero;
     private float throwDirectionThreshhold = 0.7f;
@@ -168,7 +158,7 @@ public class Controller_Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
     {
-        if (hasDisc || Disc.Instance == null)
+        if (State == PlayerState.AIM || Disc.Instance == null)
             return;
 
         if (_collider2D.tag == Disc.Instance.tag)
@@ -178,7 +168,7 @@ public class Controller_Player : MonoBehaviour
             else
             {
                 isPingCompensating = true;
-                StartCoroutine(HandlePingCompensation());
+                StartCoroutine(CR_PingCompensation());
             }
         }
     }
@@ -199,7 +189,7 @@ public class Controller_Player : MonoBehaviour
 
     public void Move(Vector2 _inputVector)
     {
-        if (isDashing || isRecovering || hasDisc)
+        if (State != PlayerState.NORMAL)
             return;
 
         if (Mathf.Abs(_inputVector.x) > Mathf.Abs(_inputVector.y))
@@ -218,31 +208,32 @@ public class Controller_Player : MonoBehaviour
 
     public void Action(Vector2 _inputVector)
     {
-        if (isDashing || isRecovering)
-            return;
-
-        if (hasDisc)
+        switch (State)
         {
-            throwDirection = _inputVector;
-            StartCoroutine("StartThrow");
+            case PlayerState.NORMAL:
+                Dash(_inputVector.normalized);
+                break;
+
+            case PlayerState.AIM:
+                throwDirection = _inputVector;
+                StartCoroutine(CR_CHARGE);
+                break;
         }
-        else
-            Dash(_inputVector.normalized);
     }
 
     public void ReleaseAction(Vector2 _inputVector)
     {
-        if (!isThrowing)
+        if (State != PlayerState.CHARGE)
             return;
 
         throwDirection = _inputVector;
-        StopCoroutine("StartThrow");
+        StopCoroutine(CR_CHARGE);
         Throw();
     }
 
     public void Lob(Vector2 _inputVector)
     {
-        if (!hasDisc)
+        if (State != PlayerState.AIM)
             return;
 
         Vector2 targetPosition = Vector2.zero;
@@ -287,10 +278,8 @@ public class Controller_Player : MonoBehaviour
 
         targetPosition = new Vector2(targetX, targetY);
 
-        hasDisc = false;
         Disc.Instance.Lob(Team, targetPosition, LobDuration);
-        isThrowRecovering = true;
-        StartCoroutine(THROW_RECOVERY_COROUTINE);
+        StartCoroutine(CR_THROW_RECOVERY);
 
         if (onLob != null)
             onLob(this, EventArgs.Empty);
@@ -298,15 +287,12 @@ public class Controller_Player : MonoBehaviour
 
     private void Catch()
     {
-        hasDisc = true;
+        State = PlayerState.AIM;
         Stop();
 
-        isDashing = false;
-        StopCoroutine(DASH_COROUTINE);
-        isDashRecovering = false;
-        StopCoroutine(DASH_RECOVERY_COROUTINE);
-        isThrowRecovering = false;
-        StopCoroutine(THROW_RECOVERY_COROUTINE);
+        StopCoroutine(CR_DASH);
+        StopCoroutine(CR_DASH_RECOVERY);
+        StopCoroutine(CR_THROW_RECOVERY);
 
         float offsetX = 0;
         float buffer = 0.1f;
@@ -367,12 +353,11 @@ public class Controller_Player : MonoBehaviour
             cPhotonView.RPC("RPC_OnPerfectThrowOthers", PhotonTargets.Others);
         }
 
-        hasDisc = false;
-        isThrowing = false;
         throwCharge = 0;
         Disc.Instance.Throw((Vector3)throwVector);
-        isThrowRecovering = true;
-        StartCoroutine(THROW_RECOVERY_COROUTINE);
+
+        State = PlayerState.RECOVERY;
+        StartCoroutine(CR_THROW_RECOVERY);
 
         if (onThrow != null)
             onThrow(this, EventArgs.Empty);
@@ -380,59 +365,59 @@ public class Controller_Player : MonoBehaviour
 
     private void Dash(Vector2 _directionVector)
     {
-        isDashing = true;
         cRigidbody2D.velocity = _directionVector * DashSpeed;
-        StartCoroutine(DASH_COROUTINE);
+        StartCoroutine(CR_DASH);
     }
 
     #endregion
 
     #region Coroutines
 
-    private IEnumerator StartThrow()
+    private IEnumerator CR_Charge()
     {
-        isThrowing = true;
+        State = PlayerState.CHARGE;
         throwCharge = 0;
 
-        int increment = 5;
+        float nFrames = maxChargeDuration * (1.0f / Time.deltaTime);
 
-        for (int i = 1; i <= 100; i += increment)  // Charge raising up to 100
+        for (float i = 0; i < nFrames; i++)
         {
-            throwCharge = i;
-            yield return new WaitForSeconds(maxChargeDuration / (100 / increment));
+            throwCharge = (i / nFrames) * 100;
+            yield return 0;
         }
 
-        for (int i = 100; i >= 0; i -= increment)  // Charge decaying down to 0
+        for (float i = nFrames; i > 0; i--)
         {
-            throwCharge = i;
-            yield return new WaitForSeconds(maxChargeDuration / (100 / increment));
+            throwCharge = (i / nFrames) * 100;
+            yield return 0;
         }
 
         Throw();
     }
 
-    private IEnumerator HandleDashTimer()
+    private IEnumerator CR_Dash()
     {
+        State = PlayerState.DASH;
         yield return new WaitForSeconds(DashDuration);
         Stop();
-        isDashing = false;
-        isDashRecovering = true;
-        StartCoroutine(DASH_RECOVERY_COROUTINE);
+        StartCoroutine(CR_DASH_RECOVERY);
     }
 
-    private IEnumerator HandleDashRecoveryTimer()
+    private IEnumerator CR_DashRecovery()
     {
+        State = PlayerState.RECOVERY;
         yield return new WaitForSeconds(DashRecovery);
-        isDashRecovering = false;
+        State = PlayerState.NORMAL;
     }
 
-    private IEnumerator HandleThrowRecoveryTimer()
+    private IEnumerator CR_ThrowRecovery()
     {
+        State = PlayerState.RECOVERY;
         yield return new WaitForSeconds(ThrowRecovery);
-        isThrowRecovering = false;
+        State = PlayerState.NORMAL;
     }
 
-    private IEnumerator HandlePingCompensation()
+    private IEnumerator CR_PingCompensation()
     {
         float delay = (float)PhotonNetwork.GetPing() / 1000;
         yield return new WaitForSeconds(delay * 2);
