@@ -13,14 +13,13 @@ public class Disc : Singleton<Disc>
     private const string WALL_RIGHT_TAG = "Wall_Right";
     private const string PLAYER_LAYER = "Default";
 
-    private const string CR_LOB_CATCH = "CR_LobCatch";
+    private const string CR_LOB_SCORE = "CR_LobScore";
     private const float LOB_CATCH_PERIOD = 0.1f;
 
     #endregion
 
     #region Fields
 
-    public bool IsScoring = false;
     public bool HasKnockback = false;
     public float KnockbackPower = 0;
 
@@ -64,6 +63,12 @@ public class Disc : Singleton<Disc>
                 
             case WALL_BOTTOM_TAG:
                 Bounce(Direction.UP);
+                break;
+
+            case WALL_LEFT_TAG:
+            case WALL_RIGHT_TAG:
+                cCollider2D.enabled = false;
+                velocity = Vector3.zero;
                 break;
         }
     }
@@ -156,11 +161,11 @@ public class Disc : Singleton<Disc>
 
         if (PhotonNetwork.isMasterClient)
         {
-            StartCoroutine(CR_LOB_CATCH, _team);
+            StartCoroutine(CR_LOB_SCORE, _team);
         }
     }
 
-    private IEnumerator CR_LobCatch(Team _team)
+    private IEnumerator CR_LobScore(Team _team)
     {
         float delay = (float)PhotonNetwork.GetPing() / 1000;
 
@@ -199,13 +204,12 @@ public class Disc : Singleton<Disc>
     {
         HasKnockback = false;
         KnockbackPower = 0;
-        cCollider2D.enabled = false;
-        velocity = Vector3.zero;
     }
 
     private void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
     {
         cTransform.position = MatchManager.Instance.DiscSpawn;
+        velocity = Vector3.zero;
         cCollider2D.enabled = true;
     }
 
@@ -233,7 +237,7 @@ public class Disc : Singleton<Disc>
     [RPC]
     private void RPC_Catch(Vector3 _snapPosition)
     {
-        StopCoroutine(CR_LOB_CATCH);
+        StopCoroutine(CR_LOB_SCORE);
 
         cRigidbody2D.velocity = velocity = Vector3.zero;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), true);

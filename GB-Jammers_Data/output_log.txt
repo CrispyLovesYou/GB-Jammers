@@ -16,7 +16,7 @@ Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\U
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.179 seconds
+- Completed reload, in  0.091 seconds
 desktop: 1680x1050 60Hz; virtual: 3120x1050 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -25,28 +25,28 @@ Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\S
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.dll (this message is harmless)
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Xml.dll (this message is harmless)
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.431841 ms
+UnloadTime: 0.323953 ms
 
 Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 256.
-Total: 0.288088 ms (FindLiveObjects: 0.012829 ms CreateObjectMapping: 0.012246 ms MarkObjects: 0.255430 ms  DeleteObjects: 0.006123 ms)
+Total: 0.432716 ms (FindLiveObjects: 0.096807 ms CreateObjectMapping: 0.017495 ms MarkObjects: 0.309082 ms  DeleteObjects: 0.008164 ms)
 
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 7.837291 ms
+UnloadTime: 4.943284 ms
 
 Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 381.
-Total: 0.546726 ms (FindLiveObjects: 0.043154 ms CreateObjectMapping: 0.047528 ms MarkObjects: 0.449336 ms  DeleteObjects: 0.004956 ms)
+Total: 0.433299 ms (FindLiveObjects: 0.023035 ms CreateObjectMapping: 0.019827 ms MarkObjects: 0.385187 ms  DeleteObjects: 0.004665 ms)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.032657 ms
+UnloadTime: 2.187781 ms
 
 Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 315.
-Total: 0.593089 ms (FindLiveObjects: 0.043738 ms CreateObjectMapping: 0.038197 ms MarkObjects: 0.504738 ms  DeleteObjects: 0.004665 ms)
+Total: 0.495115 ms (FindLiveObjects: 0.031199 ms CreateObjectMapping: 0.014870 ms MarkObjects: 0.443213 ms  DeleteObjects: 0.004665 ms)
 
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.476162 ms
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.759294 ms
 
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 396.
-Total: 0.466540 ms (FindLiveObjects: 0.017495 ms CreateObjectMapping: 0.015162 ms MarkObjects: 0.428050 ms  DeleteObjects: 0.004956 ms)
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 395.
+Total: 0.798950 ms (FindLiveObjects: 0.032074 ms CreateObjectMapping: 0.024493 ms MarkObjects: 0.733634 ms  DeleteObjects: 0.005540 ms)
 
 Cannot find Singleton instance of Disc.
  

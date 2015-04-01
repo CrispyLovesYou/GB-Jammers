@@ -169,10 +169,13 @@ public class MatchManager : Singleton<MatchManager>
 
     private IEnumerator ResetAfterScore()
     {
-        onBeginResetAfterScore(this, EventArgs.Empty);
+        if (onBeginResetAfterScore != null)
+            onBeginResetAfterScore(this, EventArgs.Empty);
+
         yield return new WaitForSeconds(2.0f);
-        Disc.Instance.IsScoring = false;
-        onCompleteResetAfterScore(this, EventArgs.Empty);
+
+        if (onCompleteResetAfterScore != null)
+            onCompleteResetAfterScore(this, EventArgs.Empty);
     }
 
     #endregion

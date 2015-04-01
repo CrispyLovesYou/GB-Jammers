@@ -162,7 +162,9 @@ public class Controller_Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
     {
-        if (State == PlayerState.AIM || Disc.Instance == null)
+        if (Disc.Instance == null ||
+            State == PlayerState.AIM ||
+            State == PlayerState.RESET)
             return;
 
         if (_collider2D.tag == Disc.Instance.tag)
@@ -423,7 +425,6 @@ public class Controller_Player : MonoBehaviour
     private IEnumerator CR_Knockback()
     {
         State = PlayerState.KNOCKBACK;
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(GOAL_WALL_LAYER), true);
         cRigidbody2D.velocity = knockbackVector * KNOCKBACK_NORMALIZER;
 
         float duration = (Disc.Instance.KnockbackPower - Stability) / 2;
@@ -472,7 +473,6 @@ public class Controller_Player : MonoBehaviour
     void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
     {
         State = PlayerState.NORMAL;
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(GOAL_WALL_LAYER), false);
     }
 
     #endregion
