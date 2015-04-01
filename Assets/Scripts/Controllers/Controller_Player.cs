@@ -9,7 +9,7 @@ public class Controller_Player : MonoBehaviour
     #region Constants
 
     public const float KNOCKBACK_NORMALIZER = 0.1f;
-    public const float MIN_KNOCKBACK_DURATION = 0.1f;
+    public const float MIN_KNOCKBACK_DURATION = 0.2f;
 
     private const string CR_DASH = "CR_Dash";
     private const string CR_CHARGE = "CR_Charge";
@@ -432,7 +432,7 @@ public class Controller_Player : MonoBehaviour
         if (duration < MIN_KNOCKBACK_DURATION)
             duration = MIN_KNOCKBACK_DURATION;
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(duration);
         Stop();
         cPhotonView.RPC("RPC_RemoveKnockback", PhotonTargets.All);
         Disc.Instance.SetPosition(cTransform.position);

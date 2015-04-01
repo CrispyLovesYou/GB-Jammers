@@ -19,8 +19,19 @@ public class GoalArea : MonoBehaviour
             PhotonNetwork.isMasterClient &&
             !Controller_Player.isPingCompensating)
         {
-            MatchManager.Instance.ScorePoints(TeamToScore, Points);
+            StartCoroutine(WaitForLag());
         }
+    }
+
+    #endregion
+
+    #region Coroutines
+
+    private IEnumerator WaitForLag()
+    {
+        float delay = PhotonNetwork.GetPing() / 1000;
+        yield return new WaitForSeconds(delay * 2);
+        MatchManager.Instance.ScorePoints(TeamToScore, Points);
     }
 
     #endregion

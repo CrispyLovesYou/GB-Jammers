@@ -160,9 +160,7 @@ public class Disc : Singleton<Disc>
         cCollider2D.enabled = true;
 
         if (PhotonNetwork.isMasterClient)
-        {
             StartCoroutine(CR_LOB_SCORE, _team);
-        }
     }
 
     private IEnumerator CR_LobScore(Team _team)
@@ -240,7 +238,6 @@ public class Disc : Singleton<Disc>
         StopCoroutine(CR_LOB_SCORE);
 
         cRigidbody2D.velocity = velocity = Vector3.zero;
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), true);
         cRigidbody2D.fixedAngle = true;
 
         cTransform.position = _snapPosition;
@@ -251,7 +248,6 @@ public class Disc : Singleton<Disc>
     {
         cTransform.position = _snapPosition;
         velocity = _throwVector;
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
         cRigidbody2D.fixedAngle = false;
     }
 
