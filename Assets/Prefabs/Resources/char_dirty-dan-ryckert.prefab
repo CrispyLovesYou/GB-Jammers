@@ -17,6 +17,7 @@ GameObject:
   - 114: {fileID: 11430752}
   - 114: {fileID: 11406864}
   - 114: {fileID: 11459518}
+  - 114: {fileID: 11446622}
   m_Layer: 10
   m_Name: char_dirty-dan-ryckert
   m_TagString: Untagged
@@ -191,6 +192,8 @@ MonoBehaviour:
   CurrentDirection: 3
   GreatThrowThreshhold: 80
   PerfectThrowThreshhold: 90
+  MeterForEX: 33
+  SFXError: {fileID: 8300000, guid: ee909d9c07bb8ad4e8db7f113bc823ff, type: 3}
 --- !u!114 &11430752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,6 +207,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
   m_SynchronizeAngularVelocity: 1
+--- !u!114 &11446622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69798de4570abe4bbd463bda3a47da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeedUp: .100000001
+  DashSpeedUp: .200000003
+  ThrowPowerUp: .300000012
+  KnockbackUp: .100000001
+  StabilityUp: .0500000007
 --- !u!114 &11450152
 MonoBehaviour:
   m_ObjectHideFlags: 1

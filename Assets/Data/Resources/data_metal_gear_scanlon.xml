@@ -4,11 +4,11 @@
   <Name>Metal Gear Scanlon</Name>
   <RealName>Drew Scanlon</RealName>
   <ThrowPower>11</ThrowPower>
-  <ThrowKnockback>2.5</ThrowKnockback>
+  <ThrowKnockback>2.8</ThrowKnockback>
   <Stability>2</Stability>
   <MoveSpeed>2.8</MoveSpeed>
-  <DashSpeed>11</DashSpeed>
-  <DashDuration>0.14</DashDuration>
+  <DashSpeed>10</DashSpeed>
+  <DashDuration>0.17</DashDuration>
   <LobDuration>1.7</LobDuration>
   <AbilityPassive>ability_passive_mgs</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>

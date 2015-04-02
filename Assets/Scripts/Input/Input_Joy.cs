@@ -11,6 +11,8 @@ public class Input_Joy : Input_Base
     private const string INPUT_VERTICAL = "Joy1_Vertical";
     private const string INPUT_ACTION = "Joy1_Action";
     private const string INPUT_CANCEL = "Joy1_Cancel";
+    private const string INPUT_EX = "Joy1_EX";
+    private const string INPUT_SUPER = "Joy1_Super";
 
     #endregion
 
@@ -40,6 +42,7 @@ public class Input_Joy : Input_Base
         CheckMovement();
         CheckAction();
         CheckLob();
+        CheckEX();
     }
 
     private void OnApplicationFocus(bool _hasFocus)
@@ -79,6 +82,12 @@ public class Input_Joy : Input_Base
     {
         if (Input.GetButtonDown(INPUT_CANCEL))
             controller.Lob(inputVector);
+    }
+
+    private void CheckEX()
+    {
+        if (Input.GetButtonDown(INPUT_EX))
+            controller.EX(inputVector);
     }
 
     #endregion

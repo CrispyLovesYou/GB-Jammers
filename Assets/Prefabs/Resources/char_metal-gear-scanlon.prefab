@@ -17,6 +17,7 @@ GameObject:
   - 114: {fileID: 11424186}
   - 114: {fileID: 11470884}
   - 114: {fileID: 11430248}
+  - 114: {fileID: 11413422}
   m_Layer: 10
   m_Name: char_metal-gear-scanlon
   m_TagString: Untagged
@@ -76,6 +77,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeadZone: .200000003
+--- !u!114 &11413422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc88973d0c9621e4aa5278915a581670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Amount: 5
 --- !u!114 &11424186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,6 +161,8 @@ MonoBehaviour:
   CurrentDirection: 3
   GreatThrowThreshhold: 80
   PerfectThrowThreshhold: 90
+  MeterForEX: 33
+  SFXError: {fileID: 8300000, guid: ee909d9c07bb8ad4e8db7f113bc823ff, type: 3}
 --- !u!114 &11450654
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -206,6 +206,9 @@ public class Controller_Player : MonoBehaviour
     public Direction CurrentDirection = Direction.DOWN;
     public float GreatThrowThreshhold = 80;
     public float PerfectThrowThreshhold = 90;
+    public float MeterForEX = 33;
+
+    public AudioClip SFXError;
 
     public static bool isPingCompensating = false;
 
@@ -374,6 +377,20 @@ public class Controller_Player : MonoBehaviour
 
         if (onLob != null)
             onLob(this, EventArgs.Empty);
+    }
+
+    public void EX(Vector2 _inputVector)
+    {
+        if (State != PlayerState.AIM)
+            return;
+
+        if (Meter < MeterForEX)
+        {
+            AudioSource.PlayClipAtPoint(SFXError, Vector3.zero);
+            return;
+        }
+
+        cPhotonView.RPC("RPC_EX", PhotonTargets.AllViaServer, (Vector3)_inputVector);
     }
 
     private void Catch()
@@ -598,6 +615,12 @@ public class Controller_Player : MonoBehaviour
     {
         if (onCatch != null)
             onCatch(this, EventArgs.Empty);
+    }
+
+    [RPC]
+    private void RPC_EX(Vector3 _inputVector)
+    {
+
     }
 
     [RPC]

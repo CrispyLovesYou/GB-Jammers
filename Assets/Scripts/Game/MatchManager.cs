@@ -76,10 +76,10 @@ public class MatchManager : Singleton<MatchManager>
     public Vector3 TeamLeftSpawn { get; private set; }
     public Vector3 TeamRightSpawn { get; private set; }
     public Vector3 DiscSpawn { get; private set; }
+    public bool isInitialCatchComplete { get; private set; }
 
     private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
-    private bool initialCatchComplete = false;
     private bool hasVolleyStarted = false;
 
     #endregion
@@ -181,7 +181,7 @@ public class MatchManager : Singleton<MatchManager>
     private IEnumerator ResetAfterScore()
     {
         VolleyCountBeforeScore = 0;
-        initialCatchComplete = false;
+        isInitialCatchComplete = false;
         hasVolleyStarted = false;
 
         if (onBeginResetAfterScore != null)
@@ -199,9 +199,9 @@ public class MatchManager : Singleton<MatchManager>
 
     private void Controller_Player_OnCatch(object sender, EventArgs e)
     {
-        if (!initialCatchComplete)
+        if (!isInitialCatchComplete)
         {
-            initialCatchComplete = true;
+            isInitialCatchComplete = true;
             return;
         }
 
@@ -233,7 +233,7 @@ public class MatchManager : Singleton<MatchManager>
         }
 
         if (onScored != null)
-            onScored(this, new ScoredEventArgs((Team)_team));
+            onScored(this, new ScoredEventArgs((Team)_team, _points));
 
         StartCoroutine(ResetAfterScore());
     }

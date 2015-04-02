@@ -249,6 +249,8 @@ MonoBehaviour:
   CurrentDirection: 3
   GreatThrowThreshhold: 80
   PerfectThrowThreshhold: 90
+  MeterForEX: 33
+  SFXError: {fileID: 8300000, guid: ee909d9c07bb8ad4e8db7f113bc823ff, type: 3}
 --- !u!212 &21286570
 SpriteRenderer:
   m_ObjectHideFlags: 1
