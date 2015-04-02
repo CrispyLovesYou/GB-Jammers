@@ -11,7 +11,7 @@ public class Disc : Singleton<Disc>
     private const string WALL_BOTTOM_TAG = "Wall_Bottom";
     private const string WALL_LEFT_TAG = "Wall_Left";
     private const string WALL_RIGHT_TAG = "Wall_Right";
-    private const string PLAYER_LAYER = "Default";
+    private const string PLAYER_LAYER = "Player";
 
     private const string CR_LOB_SCORE = "CR_LobScore";
     private const float LOB_CATCH_PERIOD = 0.1f;
@@ -167,7 +167,7 @@ public class Disc : Singleton<Disc>
     {
         float delay = (float)PhotonNetwork.GetPing() / 1000;
 
-        yield return new WaitForSeconds(LOB_CATCH_PERIOD + (delay * 2));
+        yield return new WaitForSeconds(LOB_CATCH_PERIOD + (delay * 3));
         cCollider2D.enabled = false;
         MatchManager.Instance.ScorePoints(_team, MatchManager.Instance.LobPointValue);
     }
@@ -206,6 +206,7 @@ public class Disc : Singleton<Disc>
 
     private void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
     {
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
         cTransform.position = MatchManager.Instance.DiscSpawn;
         velocity = Vector3.zero;
         cCollider2D.enabled = true;
@@ -237,6 +238,7 @@ public class Disc : Singleton<Disc>
     {
         StopCoroutine(CR_LOB_SCORE);
 
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), true);
         cRigidbody2D.velocity = velocity = Vector3.zero;
         cRigidbody2D.fixedAngle = true;
 
@@ -246,6 +248,7 @@ public class Disc : Singleton<Disc>
     [RPC]
     private void RPC_Throw(Vector3 _snapPosition, Vector3 _throwVector)
     {
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
         cTransform.position = _snapPosition;
         velocity = _throwVector;
         cRigidbody2D.fixedAngle = false;
@@ -254,6 +257,7 @@ public class Disc : Singleton<Disc>
     [RPC]
     private void RPC_Lob(int _team, Vector3 _targetPosition, float _duration)
     {
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
         StartCoroutine(CR_Lob((Team)_team, (Vector2)_targetPosition, _duration));
     }
 

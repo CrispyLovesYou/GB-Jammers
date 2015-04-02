@@ -16,7 +16,9 @@ GameObject:
   - 114: {fileID: 11462894}
   - 114: {fileID: 11477260}
   - 114: {fileID: 11427854}
-  m_Layer: 0
+  - 114: {fileID: 11479682}
+  - 114: {fileID: 11486810}
+  m_Layer: 10
   m_Name: char_v-bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,11 +144,23 @@ MonoBehaviour:
   DashDuration: .150000006
   ThrowPower: 20
   ThrowRecovery: .300000012
-  ThrowKnockback: 3
+  Knockback: 3
   Stability: 2.5
   LobDuration: .5
   MeterGainOnGreat: 10
   MeterGainOnPerfect: 33
+  MoveSpeedMod: 0
+  MoveSpeedMultiplier: 1
+  DashSpeedMod: 0
+  DashSpeedMultiplier: 1
+  ThrowPowerMod: 0
+  ThrowPowerMultiplier: 1
+  KnockbackMod: 0
+  KnockbackMultiplier: 1
+  StabilityMod: 0
+  StabilityMultiplier: 1
+  LobDurationMod: 0
+  LobDurationMultiplier: 1
   Team: 0
   State: 0
   CurrentDirection: 3
@@ -191,6 +205,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
   m_SynchronizeAngularVelocity: 1
+--- !u!114 &11479682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9f51defe3d2ac439ea63ccd270182c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedBuffPopup: {fileID: 103710, guid: ca3a68beeedf2c349a8e056e5f5f0904, type: 2}
+  SpeedDebuffPopup: {fileID: 155572, guid: 394b9928904dfe34a97dee36aecb54ad, type: 2}
+  PowerBuffPopup: {fileID: 159016, guid: 87b4b55da1ec3df418cef512846eb3f8, type: 2}
+  PowerDebuffPopup: {fileID: 126550, guid: 71a5c6b861feeef419bff994d938921a, type: 2}
+  GreatPopup: {fileID: 120912, guid: eb8118606bf5e28448e7d90f4e01f49e, type: 2}
+  PerfectPopup: {fileID: 163782, guid: e51d32da106b6a24b96079cb25800354, type: 2}
+  LeftRightOffset: 1
+--- !u!114 &11486810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3aa5c159697c3468f7e3e7431fb1f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VolleysToActivate: 2
+  MaxStacks: 5
+  ThrowPowerMod: 1
+  KnockbackMod: .5
+  StabilityMod: .5
+  MoveSpeedMod: -.25
+  DashSpeedMod: -.75
 --- !u!114 &11488058
 MonoBehaviour:
   m_ObjectHideFlags: 1

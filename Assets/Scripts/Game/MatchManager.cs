@@ -8,6 +8,17 @@ public class MatchManager : Singleton<MatchManager>
 {
     #region Events
 
+    private static EventHandler<EventArgs> onVolley;
+    public static event EventHandler<EventArgs> OnVolley
+    {
+        add
+        {
+            if (onVolley == null || !onVolley.GetInvocationList().Contains(value))
+                onVolley += value;
+        }
+        remove { onVolley -= value; }
+    }
+
     private static EventHandler<ScoredEventArgs> onScored;
     public static event EventHandler<ScoredEventArgs> OnScored
     {
@@ -53,6 +64,8 @@ public class MatchManager : Singleton<MatchManager>
     public int R_Points = 0;
     public int R_Sets = 0;
 
+    public int VolleyCountBeforeScore = 0;
+
     public string Team_Left_Spawn_Tag = "Team_Left_Spawn";
     public string Team_Right_Spawn_Tag = "Team_Right_Spawn";
     public string Disc_Spawn_Tag = "Disc_Spawn";
@@ -60,15 +73,14 @@ public class MatchManager : Singleton<MatchManager>
     public int LobPointValue = 2;
     public int BonusPointValue = 0;
 
-    public GameObject GreatPopup;
-    public GameObject PerfectPopup;
-
     public Vector3 TeamLeftSpawn { get; private set; }
     public Vector3 TeamRightSpawn { get; private set; }
     public Vector3 DiscSpawn { get; private set; }
 
     private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
+    private bool initialCatchComplete = false;
+    private bool hasVolleyStarted = false;
 
     #endregion
 
@@ -92,8 +104,7 @@ public class MatchManager : Singleton<MatchManager>
         TeamRightSpawn = GameObject.FindGameObjectWithTag(Team_Right_Spawn_Tag).transform.position;
         DiscSpawn = GameObject.FindGameObjectWithTag(Disc_Spawn_Tag).transform.position;
 
-        Controller_Player.OnGreatThrow += Controller_Player_OnGreatThrow;
-        Controller_Player.OnPerfectThrow += Controller_Player_OnPerfectThrow;
+        Controller_Player.OnCatch += Controller_Player_OnCatch;
     }
 
     private void Start()
@@ -169,6 +180,10 @@ public class MatchManager : Singleton<MatchManager>
 
     private IEnumerator ResetAfterScore()
     {
+        VolleyCountBeforeScore = 0;
+        initialCatchComplete = false;
+        hasVolleyStarted = false;
+
         if (onBeginResetAfterScore != null)
             onBeginResetAfterScore(this, EventArgs.Empty);
 
@@ -182,18 +197,26 @@ public class MatchManager : Singleton<MatchManager>
 
     #region Callbacks
 
-    private void Controller_Player_OnGreatThrow(object sender, EventArgs e)
+    private void Controller_Player_OnCatch(object sender, EventArgs e)
     {
-        Controller_Player player = (Controller_Player)sender;
-        GameObject gObj = Instantiate(GreatPopup, player.transform.position, Quaternion.identity) as GameObject;
-        gObj.transform.SetParent(player.transform);
-    }
+        if (!initialCatchComplete)
+        {
+            initialCatchComplete = true;
+            return;
+        }
 
-    private void Controller_Player_OnPerfectThrow(object sender, EventArgs e)
-    {
-        Controller_Player player = (Controller_Player)sender;
-        GameObject gObj = Instantiate(PerfectPopup, player.transform.position, Quaternion.identity) as GameObject;
-        gObj.transform.SetParent(player.transform);
+        if (!hasVolleyStarted)
+        {
+            hasVolleyStarted = true;
+            return;
+        }
+
+        // Volley is complete
+        VolleyCountBeforeScore++;
+        hasVolleyStarted = false;
+
+        if (onVolley != null)
+            onVolley(this, EventArgs.Empty);
     }
 
     #endregion

@@ -1,10 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Game/UI/Status Popup")]
 public class StatusPopup : MonoBehaviour
 {
+    #region Enums
+
+    public enum PopupDirection
+    {
+        UP,
+        DOWN
+    }
+
+    #endregion
+
     #region Fields
 
+    public PopupDirection Direction = PopupDirection.UP;
     public float Distance = 0.5f;
     public float Duration = 2.0f;
 
@@ -33,7 +45,11 @@ public class StatusPopup : MonoBehaviour
 
     private void Update()
     {
-        cTransform.position += Vector3.up * Distance * Time.deltaTime;
+        switch (Direction)
+        {
+            case PopupDirection.UP: cTransform.position += Vector3.up * Distance * Time.deltaTime; break;
+            case PopupDirection.DOWN: cTransform.position += Vector3.down * Distance * Time.deltaTime; break;
+        }
     }
 
     #endregion

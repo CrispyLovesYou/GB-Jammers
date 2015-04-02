@@ -639,13 +639,12 @@ MonoBehaviour:
   L_Sets: 0
   R_Points: 0
   R_Sets: 0
+  VolleyCountBeforeScore: 0
   Team_Left_Spawn_Tag: Team_Left_Spawn
   Team_Right_Spawn_Tag: Team_Right_Spawn
   Disc_Spawn_Tag: Disc_Spawn
   LobPointValue: 2
   BonusPointValue: 0
-  GreatPopup: {fileID: 120912, guid: eb8118606bf5e28448e7d90f4e01f49e, type: 2}
-  PerfectPopup: {fileID: 163782, guid: e51d32da106b6a24b96079cb25800354, type: 2}
 --- !u!4 &795162138
 Transform:
   m_ObjectHideFlags: 0

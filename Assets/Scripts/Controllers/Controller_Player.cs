@@ -10,6 +10,8 @@ public class Controller_Player : MonoBehaviour
 
     public const float KNOCKBACK_NORMALIZER = 0.1f;
     public const float MIN_KNOCKBACK_DURATION = 0.2f;
+    public const float MIN_MOVE_SPEED = 1.0f;
+    public const float MIN_DASH_SPEED = 3.0f;
 
     private const string CR_DASH = "CR_Dash";
     private const string CR_CHARGE = "CR_Charge";
@@ -22,6 +24,70 @@ public class Controller_Player : MonoBehaviour
     #endregion
 
     #region Events
+
+    private static EventHandler<EventArgs> onSpeedBuff;
+    public static event EventHandler<EventArgs> OnSpeedBuff
+    {
+        add
+        {
+            if (onSpeedBuff == null || !onSpeedBuff.GetInvocationList().Contains(value))
+                onSpeedBuff += value;
+        }
+        remove { onSpeedBuff -= value; }
+    }
+    public void CallOnSpeedBuff()
+    {
+        if (onSpeedBuff != null)
+            onSpeedBuff(this, EventArgs.Empty);
+    }
+
+    private static EventHandler<EventArgs> onSpeedDebuff;
+    public static event EventHandler<EventArgs> OnSpeedDebuff
+    {
+        add
+        {
+            if (onSpeedDebuff == null || !onSpeedDebuff.GetInvocationList().Contains(value))
+                onSpeedDebuff += value;
+        }
+        remove { onSpeedDebuff -= value; }
+    }
+    public void CallOnSpeedDebuff()
+    {
+        if (onSpeedDebuff != null)
+            onSpeedDebuff(this, EventArgs.Empty);
+    }
+
+    private static EventHandler<EventArgs> onPowerBuff;
+    public static event EventHandler<EventArgs> OnPowerBuff
+    {
+        add
+        {
+            if (onPowerBuff == null || !onPowerBuff.GetInvocationList().Contains(value))
+                onPowerBuff += value;
+        }
+        remove { onPowerBuff -= value; }
+    }
+    public void CallOnPowerBuff()
+    {
+        if (onPowerBuff != null)
+            onPowerBuff(this, EventArgs.Empty);
+    }
+
+    private static EventHandler<EventArgs> onPowerDebuff;
+    public static event EventHandler<EventArgs> OnPowerDebuff
+    {
+        add
+        {
+            if (onPowerDebuff == null || !onPowerDebuff.GetInvocationList().Contains(value))
+                onPowerDebuff += value;
+        }
+        remove { onPowerDebuff -= value; }
+    }
+    public void CallOnPowerDebuff()
+    {
+        if (onPowerDebuff != null)
+            onPowerDebuff(this, EventArgs.Empty);
+    }
 
     private static EventHandler<EventArgs> onCatch;
     public static event EventHandler<EventArgs> OnCatch
@@ -101,7 +167,7 @@ public class Controller_Player : MonoBehaviour
     public float DashDuration = 0.15f;
     public float ThrowPower = 20.0f;
     public float ThrowRecovery = 0.3f;
-    public float ThrowKnockback = 3.0f;
+    public float Knockback = 3.0f;
     public float Stability = 2.5f;
     public float LobDuration = 0.5f;
 
@@ -121,6 +187,19 @@ public class Controller_Player : MonoBehaviour
     }
     public int MeterGainOnGreat = 10;
     public int MeterGainOnPerfect = 33;
+
+    public float MoveSpeedMod = 0;
+    public float MoveSpeedMultiplier = 1.0f;
+    public float DashSpeedMod = 0;
+    public float DashSpeedMultiplier = 1.0f;
+    public float ThrowPowerMod = 0;
+    public float ThrowPowerMultiplier = 1.0f;
+    public float KnockbackMod = 0;
+    public float KnockbackMultiplier = 1.0f;
+    public float StabilityMod = 0;
+    public float StabilityMultiplier = 1.0f;
+    public float LobDurationMod = 0;
+    public float LobDurationMultiplier = 1.0f;
 
     public Team Team = Team.UNASSIGNED;
     public PlayerState State = PlayerState.NORMAL;
@@ -209,7 +288,12 @@ public class Controller_Player : MonoBehaviour
             else if (_inputVector.y < 0) CurrentDirection = Direction.DOWN;
         }
 
-        cRigidbody2D.velocity = _inputVector * MoveSpeed;
+        float moveSpeed = (MoveSpeed + MoveSpeedMod) * MoveSpeedMultiplier;
+
+        if (moveSpeed < MIN_MOVE_SPEED)
+            moveSpeed = MIN_MOVE_SPEED;
+
+        cRigidbody2D.velocity = _inputVector * moveSpeed;
     }
 
     public void Action(Vector2 _inputVector)
@@ -284,7 +368,8 @@ public class Controller_Player : MonoBehaviour
 
         targetPosition = new Vector2(targetX, targetY);
 
-        Disc.Instance.Lob(Team, targetPosition, LobDuration);
+        float lobDuration = (LobDuration + LobDurationMod) * LobDurationMultiplier;
+        Disc.Instance.Lob(Team, targetPosition, lobDuration);
         StartCoroutine(CR_THROW_RECOVERY);
 
         if (onLob != null)
@@ -306,8 +391,7 @@ public class Controller_Player : MonoBehaviour
         if (Disc.Instance.HasKnockback)
             StartCoroutine(CR_KNOCKBACK);
 
-        if (onCatch != null)
-            onCatch(this, EventArgs.Empty);
+        cPhotonView.RPC("RPC_Catch", PhotonTargets.AllViaServer);
     }
 
     private void Throw()
@@ -319,8 +403,9 @@ public class Controller_Player : MonoBehaviour
                 case Team.RIGHT: throwDirection.x = -throwDirectionThreshhold; break;
             }
 
-        // When throwCharge = 0, throwVector.x = ThrowPower / 2; throwCharge = 100, throwVector.x = ThrowPower
-        Vector2 throwVector = throwDirection * ((((ThrowPower / 2) * throwCharge) / 100) + (ThrowPower / 2));
+        // When throwCharge = 0, throwVector.x = throwPower / 2; throwCharge = 100, throwVector.x = throwPower
+        float throwPower = (ThrowPower + ThrowPowerMod) * ThrowPowerMultiplier;
+        Vector2 throwVector = throwDirection * ((((throwPower / 2) * throwCharge) / 100) + (throwPower / 2));
 
         switch (Team)
         {
@@ -349,7 +434,8 @@ public class Controller_Player : MonoBehaviour
 
             Meter += MeterGainOnPerfect;
             Disc.Instance.HasKnockback = true;
-            Disc.Instance.KnockbackPower = ThrowKnockback;
+            float knockback = (Knockback + KnockbackMod) * KnockbackMultiplier;
+            Disc.Instance.KnockbackPower = knockback;
             cPhotonView.RPC("RPC_OnPerfectThrowOthers", PhotonTargets.Others);
         }
 
@@ -409,7 +495,12 @@ public class Controller_Player : MonoBehaviour
     private IEnumerator CR_Dash(Vector2 _directionVector)
     {
         State = PlayerState.DASH;
-        cRigidbody2D.velocity = _directionVector * DashSpeed;
+        float dashSpeed = (DashSpeed + DashSpeedMod) * DashSpeedMultiplier;
+
+        if (dashSpeed < MIN_DASH_SPEED)
+            dashSpeed = MIN_DASH_SPEED;
+
+        cRigidbody2D.velocity = _directionVector * dashSpeed;
         yield return new WaitForSeconds(DashDuration);
         Stop();
         State = PlayerState.NORMAL;
@@ -427,7 +518,8 @@ public class Controller_Player : MonoBehaviour
         State = PlayerState.KNOCKBACK;
         cRigidbody2D.velocity = knockbackVector * KNOCKBACK_NORMALIZER;
 
-        float duration = (Disc.Instance.KnockbackPower - Stability) / 2;
+        float stability = (Stability + StabilityMod) * StabilityMultiplier;
+        float duration = (Disc.Instance.KnockbackPower - stability) / 2;
 
         if (duration < MIN_KNOCKBACK_DURATION)
             duration = MIN_KNOCKBACK_DURATION;
@@ -496,9 +588,16 @@ public class Controller_Player : MonoBehaviour
         DashSpeed = ch.DashSpeed;
         DashDuration = ch.DashDuration;
         ThrowPower = ch.ThrowPower;
-        ThrowKnockback = ch.ThrowKnockback;
+        Knockback = ch.ThrowKnockback;
         Stability = ch.Stability;
         LobDuration = ch.LobDuration;
+    }
+
+    [RPC]
+    private void RPC_Catch()
+    {
+        if (onCatch != null)
+            onCatch(this, EventArgs.Empty);
     }
 
     [RPC]
@@ -523,7 +622,7 @@ public class Controller_Player : MonoBehaviour
 
             Meter += MeterGainOnPerfect;
             Disc.Instance.HasKnockback = true;
-            Disc.Instance.KnockbackPower = ThrowKnockback;
+            Disc.Instance.KnockbackPower = Knockback;
         }
     }
 
