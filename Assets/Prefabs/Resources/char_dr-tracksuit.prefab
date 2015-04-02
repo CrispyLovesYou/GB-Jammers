@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeedUp: 1
-  DashSpeedUp: 3
+  DashSpeedUp: 1.5
   Duration: 10
 --- !u!114 &11434436
 MonoBehaviour:

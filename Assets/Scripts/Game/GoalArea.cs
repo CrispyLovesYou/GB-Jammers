@@ -9,17 +9,35 @@ public class GoalArea : MonoBehaviour
     public Team TeamToScore = Team.LEFT;
     public int Points = 3;
 
+    private static bool hasScored = false;
+
     #endregion
 
     #region Unity Callbacks
 
+    private void Awake()
+    {
+        MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
+    }
+
     private void OnTriggerEnter2D(Collider2D _collider)
     {
         if (_collider.tag == "Disc" &&
-            !Controller_Player.isPingCompensating)
+            !Controller_Player.isPingCompensating &&
+            !hasScored)
         {
+            hasScored = true;
             MatchManager.Instance.ScorePoints(TeamToScore, Points);
         }
+    }
+
+    #endregion
+
+    #region Callbacks
+
+    private void MatchManager_OnCompleteResetAfterScore(object sender, System.EventArgs e)
+    {
+        hasScored = false;
     }
 
     #endregion

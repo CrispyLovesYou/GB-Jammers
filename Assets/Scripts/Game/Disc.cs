@@ -12,6 +12,7 @@ public class Disc : Singleton<Disc>
     private const string WALL_LEFT_TAG = "Wall_Left";
     private const string WALL_RIGHT_TAG = "Wall_Right";
     private const string PLAYER_LAYER = "Player";
+    private const string GOAL_LAYER = "Goal";
 
     private const string CR_LOB_SCORE = "CR_LobScore";
     private const float LOB_CATCH_PERIOD = 0.1f;
@@ -181,10 +182,10 @@ public class Disc : Singleton<Disc>
 
     private void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
     {
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
         cTransform.position = MatchManager.Instance.DiscSpawn;
         velocity = Vector3.zero;
         cCollider2D.enabled = true;
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
     }
 
     private void Controller_Player_OnPerfectThrow(object sender, EventArgs e)
