@@ -34,36 +34,6 @@ public class Meter : MonoBehaviour
 
     #region Coroutines
 
-    private IEnumerator HandleAnimation(int _meter)
-    {
-        float nFrames = Duration * 60;
-        float targetOffset = ((float)_meter / 100) * initWidth;
-
-        targetOffset = initWidth - targetOffset;
-
-        for (int i = 0; i < nFrames; i++)
-        {
-            float offset = 0;
-            float newWidth = 0;
-
-            switch (Team)
-            {
-                case global::Team.LEFT:
-                    offset = cRectTransform.offsetMax.x;
-                    newWidth = Mathf.Lerp(offset, -targetOffset, 1.0f / nFrames);
-                    cRectTransform.offsetMax = new Vector2(newWidth, 0);
-                    break;
-                case global::Team.RIGHT:
-                    offset = cRectTransform.offsetMin.x;
-                    newWidth = Mathf.Lerp(offset, targetOffset, 1.0f / nFrames);
-                    cRectTransform.offsetMin = new Vector2(newWidth, 0);
-                    break;
-            }
-
-            yield return 0;
-        }
-    }
-
     #endregion
 
     #region Callbacks
@@ -73,7 +43,44 @@ public class Meter : MonoBehaviour
         if (e.Team != this.Team)
             return;
 
-        StartCoroutine(HandleAnimation(e.Total));
+        float targetOffset = ((float)e.Total / 100) * initWidth;
+        targetOffset = initWidth - targetOffset;
+
+        switch (Team)
+        {
+            case global::Team.LEFT:
+                iTween.ValueTo(gameObject, iTween.Hash(
+                    "from", cRectTransform.offsetMax.x,
+                    "to", -targetOffset,
+                    "time", Duration,
+                    "onupdate",
+                        (System.Action<object>)(value => {
+                            switch (Team)
+                            {
+                                case global::Team.LEFT: cRectTransform.offsetMax = new Vector2((float)value, 0); break;
+                                case global::Team.RIGHT: cRectTransform.offsetMin = new Vector2((float)value, 0); break;
+                            }
+                        })
+                    ));
+                break;
+
+            case global::Team.RIGHT:
+                iTween.ValueTo(gameObject, iTween.Hash(
+                    "from", cRectTransform.offsetMin.x,
+                    "to", targetOffset,
+                    "time", Duration,
+                    "onupdate",
+                        (System.Action<object>)(value =>
+                        {
+                            switch (Team)
+                            {
+                                case global::Team.LEFT: cRectTransform.offsetMax = new Vector2((float)value, 0); break;
+                                case global::Team.RIGHT: cRectTransform.offsetMin = new Vector2((float)value, 0); break;
+                            }
+                        })
+                    ));
+                break;
+        }
     }
 
     #endregion

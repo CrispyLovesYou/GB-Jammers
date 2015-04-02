@@ -60,4 +60,5 @@ MonoBehaviour:
   - RPC_OnPerfectThrow
   - RPC_RemoveKnockback
   - RPC_EX
+  - RPC_Test
   DisableAutoOpenWizard: 0

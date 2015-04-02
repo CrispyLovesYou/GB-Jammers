@@ -118,6 +118,9 @@ public class MatchManager : Singleton<MatchManager>
 
     public void ScorePoints(Team _team, int _points)
     {
+        if (!PhotonNetwork.isMasterClient)
+            return;
+
         cPhotonView.RPC("RPC_ScorePoints", PhotonTargets.AllViaServer, (int)_team, _points);
     }
 

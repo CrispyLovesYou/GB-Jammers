@@ -244,15 +244,17 @@ public class Controller_Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
     {
-        if (Disc.Instance == null ||
-            State == PlayerState.AIM ||
+        if (Disc.Instance == null)
+            return;
+
+        if (State == PlayerState.AIM ||
             State == PlayerState.RESET)
             return;
 
         if (_collider2D.tag == Disc.Instance.tag)
         {
             if (cPhotonView.isMine)
-                Catch();
+                cPhotonView.RPC("RPC_Catch", PhotonTargets.All);
             else
             {
                 isPingCompensating = true;
@@ -321,7 +323,9 @@ public class Controller_Player : MonoBehaviour
 
         throwDirection = _inputVector;
         StopCoroutine(CR_CHARGE);
-        Throw();
+        iTween.StopByName("ChargeUp");
+        iTween.StopByName("ChargeDown");
+        cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, (Vector3)throwDirection, throwCharge);
     }
 
     public void Lob(Vector2 _inputVector)
@@ -329,54 +333,7 @@ public class Controller_Player : MonoBehaviour
         if (State != PlayerState.AIM)
             return;
 
-        Vector2 targetPosition = Vector2.zero;
-        Transform courtTransform = courtArea.transform;
-
-        // First, we have to define the targetable area for lobs (opponent's side of court, minus disc width / 2)
-        float xMin, yMin, xMax, yMax, xDiff, yDiff, xLength, yLength, targetX, targetY;
-        float courtCenterX = courtArea.transform.position.x;
-        float courtCenterY = courtArea.transform.position.y;
-        float halfCourtWidth = courtTransform.localScale.x / 2;
-        float halfCourtHeight = courtTransform.localScale.y / 2;
-        float halfDiscWidth = Disc.Instance.transform.localScale.x / 2;
-        float halfDiscHeight = Disc.Instance.transform.localScale.y / 2;
-        float buffer = 0.1f;  // keeps the Disc from accidentally colliding with goal zone
-
-        xMin = yMin = xMax = yMax = xDiff = yDiff = xLength = yLength = targetX = targetY = 0;
-
-        switch (Team)
-        {
-            case Team.LEFT:
-                xMin = courtCenterX + halfDiscWidth + buffer;
-                xMax = courtCenterX + halfCourtWidth - halfDiscWidth - buffer;
-                break;
-
-            case Team.RIGHT:
-                xMin = courtCenterX - halfCourtWidth + halfDiscWidth + buffer;
-                xMax = courtCenterX - halfDiscWidth - buffer;
-                break;
-        }
-
-        yMin = courtCenterY - halfCourtHeight + halfDiscHeight + buffer;
-        yMax = courtCenterY + halfCourtHeight - halfDiscHeight - buffer;
-
-        xDiff = xMax - xMin;
-        yDiff = yMax - yMin;
-
-        xLength = (xDiff / 2) * _inputVector.x;
-        yLength = (yDiff / 2) * _inputVector.y;
-
-        targetX = xMin + (xDiff / 2) + xLength;
-        targetY = yMin + (yDiff / 2) + yLength;
-
-        targetPosition = new Vector2(targetX, targetY);
-
-        float lobDuration = (LobDuration + LobDurationMod) * LobDurationMultiplier;
-        Disc.Instance.Lob(Team, targetPosition, lobDuration);
-        StartCoroutine(CR_THROW_RECOVERY);
-
-        if (onLob != null)
-            onLob(this, EventArgs.Empty);
+        cPhotonView.RPC("RPC_Lob", PhotonTargets.AllViaServer, (Vector3)_inputVector);
     }
 
     public void EX(Vector2 _inputVector)
@@ -391,77 +348,6 @@ public class Controller_Player : MonoBehaviour
         }
 
         cPhotonView.RPC("RPC_EX", PhotonTargets.AllViaServer, (Vector3)_inputVector);
-    }
-
-    private void Catch()
-    {
-        State = PlayerState.AIM;
-        Stop();
-
-        StopCoroutine(CR_DASH);
-        StopCoroutine(CR_THROW_RECOVERY);
-
-        knockbackVector = Disc.Instance.Velocity;
-
-        Disc.Instance.Catch(cTransform.position + (Vector3.right * GetDiscOffset()));
-
-        if (Disc.Instance.HasKnockback)
-            StartCoroutine(CR_KNOCKBACK);
-
-        cPhotonView.RPC("RPC_Catch", PhotonTargets.AllViaServer);
-    }
-
-    private void Throw()
-    {
-        if (throwDirection.x < Mathf.Abs(throwDirectionThreshhold))
-            switch (Team)
-            {
-                case Team.LEFT: throwDirection.x = throwDirectionThreshhold; break;
-                case Team.RIGHT: throwDirection.x = -throwDirectionThreshhold; break;
-            }
-
-        // When throwCharge = 0, throwVector.x = throwPower / 2; throwCharge = 100, throwVector.x = throwPower
-        float throwPower = (ThrowPower + ThrowPowerMod) * ThrowPowerMultiplier;
-        Vector2 throwVector = throwDirection * ((((throwPower / 2) * throwCharge) / 100) + (throwPower / 2));
-
-        switch (Team)
-        {
-            case Team.LEFT: throwVector.x = Mathf.Abs(throwVector.x); break;
-            case Team.RIGHT: throwVector.x = -Mathf.Abs(throwVector.x); break;
-        }
-
-        if (throwCharge == 0)
-            throwVector.y = 0;
-
-        Disc.Instance.Throw(cTransform.position + (Vector3.right * GetDiscOffset()), (Vector3)throwVector);
-
-        if (throwCharge >= GreatThrowThreshhold &&
-            throwCharge < PerfectThrowThreshhold)
-        {
-            if (onGreatThrow != null)
-                onGreatThrow(this, EventArgs.Empty);
-
-            Meter += MeterGainOnGreat;
-            cPhotonView.RPC("RPC_OnGreatThrowOthers", PhotonTargets.Others);
-        }
-        else if (throwCharge >= PerfectThrowThreshhold)
-        {
-            if (onPerfectThrow != null)
-                onPerfectThrow(this, EventArgs.Empty);
-
-            Meter += MeterGainOnPerfect;
-            Disc.Instance.HasKnockback = true;
-            float knockback = (Knockback + KnockbackMod) * KnockbackMultiplier;
-            Disc.Instance.KnockbackPower = knockback;
-            cPhotonView.RPC("RPC_OnPerfectThrowOthers", PhotonTargets.Others);
-        }
-
-        throwCharge = 0;
-        State = PlayerState.RECOVERY;
-        StartCoroutine(CR_THROW_RECOVERY);
-
-        if (onThrow != null)
-            onThrow(this, EventArgs.Empty);
     }
 
     private float GetDiscOffset()
@@ -483,6 +369,25 @@ public class Controller_Player : MonoBehaviour
         return discOffset;
     }
 
+    private void GreatThrow()
+    {
+        if (onGreatThrow != null)
+            onGreatThrow(this, EventArgs.Empty);
+
+        Meter += MeterGainOnGreat;
+    }
+
+    private void PerfectThrow()
+    {
+        if (onPerfectThrow != null)
+            onPerfectThrow(this, EventArgs.Empty);
+
+        Meter += MeterGainOnPerfect;
+        Disc.Instance.HasKnockback = true;
+        float knockback = (Knockback + KnockbackMod) * KnockbackMultiplier;
+        Disc.Instance.KnockbackPower = knockback;
+    }
+
     #endregion
 
     #region Coroutines
@@ -492,21 +397,35 @@ public class Controller_Player : MonoBehaviour
         State = PlayerState.CHARGE;
         throwCharge = 0;
 
-        float nFrames = maxChargeDuration * 60;
+        iTween.ValueTo(gameObject, iTween.Hash(
+            "name", "ChargeUp",
+            "from", 0,
+            "to", 100,
+            "time", maxChargeDuration / 2,
+            "onupdate",
+                (Action<object>)(_value =>
+                {
+                    throwCharge = (float)_value;
+                }),
+            "oncomplete",
+                (Action<object>)(param => {
+                    iTween.ValueTo(gameObject, iTween.Hash(
+                        "name", "ChargeDown",
+                        "from", 100,
+                        "to", 0,
+                        "time", maxChargeDuration / 2,
+                        "onupdate",
+                            (Action<object>)(_value =>
+                            {
+                                throwCharge = (float)_value;
+                            })
+                    ));
+                })
+            ));
 
-        for (float i = 0; i < nFrames; i++)
-        {
-            throwCharge = (i / nFrames) * 100;
-            yield return 0;
-        }
+        yield return new WaitForSeconds(maxChargeDuration);
 
-        for (float i = nFrames; i > 0; i--)
-        {
-            throwCharge = (i / nFrames) * 100;
-            yield return 0;
-        }
-
-        Throw();
+        cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, (Vector3)throwDirection, throwCharge);
     }
 
     private IEnumerator CR_Dash(Vector2 _directionVector)
@@ -579,7 +498,7 @@ public class Controller_Player : MonoBehaviour
         iTween.MoveTo(this.gameObject, targetPos, duration);
     }
 
-    void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
+    private void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
     {
         State = PlayerState.NORMAL;
     }
@@ -611,42 +530,128 @@ public class Controller_Player : MonoBehaviour
     }
 
     [RPC]
+    private void RPC_Throw(Vector3 _throwDirection, float _throwCharge)
+    {
+        throwDirection = _throwDirection;
+        throwCharge = _throwCharge;
+
+        if (throwDirection.x < Mathf.Abs(throwDirectionThreshhold))
+            switch (Team)
+            {
+                case Team.LEFT: throwDirection.x = throwDirectionThreshhold; break;
+                case Team.RIGHT: throwDirection.x = -throwDirectionThreshhold; break;
+            }
+
+        // When throwCharge = 0, throwVector.x = throwPower / 2; throwCharge = 100, throwVector.x = throwPower
+        float throwPower = (ThrowPower + ThrowPowerMod) * ThrowPowerMultiplier;
+        Vector2 throwVector = throwDirection * ((((throwPower / 2) * throwCharge) / 100) + (throwPower / 2));
+
+        switch (Team)
+        {
+            case Team.LEFT: throwVector.x = Mathf.Abs(throwVector.x); break;
+            case Team.RIGHT: throwVector.x = -Mathf.Abs(throwVector.x); break;
+        }
+
+        if (throwCharge == 0)
+            throwVector.y = 0;
+
+        Disc.Instance.Throw(cTransform.position + (Vector3.right * GetDiscOffset()), (Vector3)throwVector);
+
+        if (throwCharge >= GreatThrowThreshhold &&
+            throwCharge < PerfectThrowThreshhold)
+        {
+            GreatThrow();
+        }
+        else if (throwCharge >= PerfectThrowThreshhold)
+        {
+            PerfectThrow();
+        }
+
+        throwCharge = 0;
+        State = PlayerState.RECOVERY;
+        StartCoroutine(CR_THROW_RECOVERY);
+
+        if (onThrow != null)
+            onThrow(this, EventArgs.Empty);
+    }
+
+    [RPC]
     private void RPC_Catch()
     {
+        State = PlayerState.AIM;
+        Stop();
+
+        StopCoroutine(CR_DASH);
+        StopCoroutine(CR_THROW_RECOVERY);
+
+        knockbackVector = Disc.Instance.Velocity;
+
+        Disc.Instance.Catch(cTransform.position + (Vector3.right * GetDiscOffset()));
+
+        if (Disc.Instance.HasKnockback)
+            StartCoroutine(CR_KNOCKBACK);
+
         if (onCatch != null)
             onCatch(this, EventArgs.Empty);
+    }
+
+    [RPC]
+    private void RPC_Lob(Vector3 _inputVector)
+    {
+        Vector2 targetPosition = Vector2.zero;
+        Transform courtTransform = courtArea.transform;
+
+        // First, we have to define the targetable area for lobs (opponent's side of court, minus disc width / 2)
+        float xMin, yMin, xMax, yMax, xDiff, yDiff, xLength, yLength, targetX, targetY;
+        float courtCenterX = courtArea.transform.position.x;
+        float courtCenterY = courtArea.transform.position.y;
+        float halfCourtWidth = courtTransform.localScale.x / 2;
+        float halfCourtHeight = courtTransform.localScale.y / 2;
+        float halfDiscWidth = Disc.Instance.transform.localScale.x / 2;
+        float halfDiscHeight = Disc.Instance.transform.localScale.y / 2;
+        float buffer = 0.1f;  // keeps the Disc from accidentally colliding with goal zone
+
+        xMin = yMin = xMax = yMax = xDiff = yDiff = xLength = yLength = targetX = targetY = 0;
+
+        switch (Team)
+        {
+            case Team.LEFT:
+                xMin = courtCenterX + halfDiscWidth + buffer;
+                xMax = courtCenterX + halfCourtWidth - halfDiscWidth - buffer;
+                break;
+
+            case Team.RIGHT:
+                xMin = courtCenterX - halfCourtWidth + halfDiscWidth + buffer;
+                xMax = courtCenterX - halfDiscWidth - buffer;
+                break;
+        }
+
+        yMin = courtCenterY - halfCourtHeight + halfDiscHeight + buffer;
+        yMax = courtCenterY + halfCourtHeight - halfDiscHeight - buffer;
+
+        xDiff = xMax - xMin;
+        yDiff = yMax - yMin;
+
+        xLength = (xDiff / 2) * _inputVector.x;
+        yLength = (yDiff / 2) * _inputVector.y;
+
+        targetX = xMin + (xDiff / 2) + xLength;
+        targetY = yMin + (yDiff / 2) + yLength;
+
+        targetPosition = new Vector2(targetX, targetY);
+
+        float lobDuration = (LobDuration + LobDurationMod) * LobDurationMultiplier;
+        Disc.Instance.Lob(Team, targetPosition, lobDuration);
+        StartCoroutine(CR_THROW_RECOVERY);
+
+        if (onLob != null)
+            onLob(this, EventArgs.Empty);
     }
 
     [RPC]
     private void RPC_EX(Vector3 _inputVector)
     {
 
-    }
-
-    [RPC]
-    private void RPC_OnGreatThrowOthers()
-    {
-        if (!cPhotonView.isMine)
-        {
-            if (onGreatThrow != null)
-                onGreatThrow(this, EventArgs.Empty);
-
-            Meter += MeterGainOnGreat;
-        }
-    }
-
-    [RPC]
-    private void RPC_OnPerfectThrowOthers()
-    {
-        if (!cPhotonView.isMine)
-        {
-            if (onPerfectThrow != null)
-                onPerfectThrow(this, EventArgs.Empty);
-
-            Meter += MeterGainOnPerfect;
-            Disc.Instance.HasKnockback = true;
-            Disc.Instance.KnockbackPower = Knockback;
-        }
     }
 
     [RPC]

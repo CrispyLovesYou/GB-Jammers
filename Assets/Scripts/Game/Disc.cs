@@ -15,6 +15,7 @@ public class Disc : Singleton<Disc>
 
     private const string CR_LOB_SCORE = "CR_LobScore";
     private const float LOB_CATCH_PERIOD = 0.1f;
+    private const float LOB_SCALE_AMOUNT = 5.0f;
 
     #endregion
 
@@ -79,17 +80,27 @@ public class Disc : Singleton<Disc>
 
     public void Catch(Vector3 _snapPosition)
     {
-        cPhotonView.RPC("RPC_Catch", PhotonTargets.All, _snapPosition);
+        StopCoroutine(CR_LOB_SCORE);
+
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), true);
+        cRigidbody2D.velocity = velocity = Vector3.zero;
+        cRigidbody2D.fixedAngle = true;
+
+        cPhotonView.RPC("RPC_SetPosition", PhotonTargets.All, _snapPosition);
     }
 
     public void Throw(Vector3 _snapPosition, Vector2 _throwVector)
     {
-        cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, _snapPosition, (Vector3)_throwVector);
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
+        cTransform.position = _snapPosition;
+        velocity = _throwVector;
+        cRigidbody2D.fixedAngle = false;
     }
 
     public void Lob(Team _team, Vector2 _targetPosition, float _duration)
     {
-        cPhotonView.RPC("RPC_Lob", PhotonTargets.AllViaServer, (int)_team, (Vector3)_targetPosition, _duration);
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
+        StartCoroutine(CR_Lob((Team)_team, (Vector2)_targetPosition, _duration));
     }
 
     public void SetPosition(Vector3 _position)
@@ -119,80 +130,44 @@ public class Disc : Singleton<Disc>
 
     private IEnumerator CR_Lob(Team _team, Vector2 _targetPosition, float _duration)
     {
-        Vector3 startPosition = cTransform.position;
-
         Crosshair.Instance.transform.position = _targetPosition;
         Crosshair.Instance.GetComponent<SpriteRenderer>().enabled = true;
         cCollider2D.enabled = false;
 
-        float nFrames = _duration * 60;
+        iTween.MoveTo(gameObject, iTween.Hash(
+            "position", (Vector3)_targetPosition,
+            "time", _duration,
+            "easetype", iTween.EaseType.linear));
 
-        for (float i = 0; i < nFrames; i++)
-        {
-            float xDistance = (_targetPosition.x - startPosition.x) * (i / nFrames);
-            float yDistance = (_targetPosition.y - startPosition.y) * (i / nFrames);
-            float x = startPosition.x + xDistance;
-            float y = startPosition.y + yDistance;
+        iTween.ScaleTo(gameObject, iTween.Hash(
+            "scale", cTransform.localScale * LOB_SCALE_AMOUNT,
+            "time", _duration / 2,
+            "easetype", iTween.EaseType.easeOutQuad,
+            "oncomplete",
+                (Action<object>)(duration =>
+                {
+                    iTween.ScaleTo(gameObject, iTween.Hash(
+                        "scale", cTransform.localScale / LOB_SCALE_AMOUNT,
+                        "time", (float)duration / 2,
+                        "easetype", iTween.EaseType.easeInQuad));
+                })
+            ));
 
-            cTransform.position = new Vector3(x, y, 0);
-
-            float scale = 0.05f;
-            float scaleX = 0;
-            float scaleY = 0;
-
-            if (i < nFrames / 2)
-            {
-                scaleX = cTransform.localScale.x + scale;
-                scaleY = cTransform.localScale.y + scale;
-            }
-            else
-            {
-                scaleX = cTransform.localScale.x - scale;
-                scaleY = cTransform.localScale.y - scale;
-            }
-
-            cTransform.localScale = new Vector3(scaleX, scaleY, 1);
-
-            yield return 0;
-        }
+        yield return new WaitForSeconds(_duration);
 
         Crosshair.Instance.GetComponent<SpriteRenderer>().enabled = false;
         cCollider2D.enabled = true;
 
-        if (PhotonNetwork.isMasterClient)
-            StartCoroutine(CR_LOB_SCORE, _team);
+        StartCoroutine(CR_LOB_SCORE, _team);
     }
 
     private IEnumerator CR_LobScore(Team _team)
     {
         float delay = (float)PhotonNetwork.GetPing() / 1000;
-
         yield return new WaitForSeconds(LOB_CATCH_PERIOD + (delay * 3));
         cCollider2D.enabled = false;
         MatchManager.Instance.ScorePoints(_team, MatchManager.Instance.LobPointValue);
     }
-
-    /*
-    private IEnumerator BezierMovement(Vector2 _startPosition, Vector2 _targetPosition, float _duration)
-    {
-        float initX = _startPosition.x;
-        float initY = _startPosition.y;
-        float targetX = _targetPosition.x;
-        float targetY = _targetPosition.y;
-        float bezierX = 0;
-        float bezierY = Vector2.Distance(_startPosition, _targetPosition);
-
-        for (float i = 0; i <= 1; i += 0.01f)
-        {
-            float x = (float)((1 - i) * (1 - i) * initX + 2 * (1 - i) * i * bezierX + i * i * targetX);
-            float y = (float)((1 - i) * (1 - i) * initY + 2 * (1 - i) * i * bezierY + i * i * targetY);
-
-            cTransform.position = new Vector3(x, y, 0);
-
-            yield return new WaitForSeconds(_duration / (1 / 0.01f));
-        }
-    
-     } */
 
     #endregion
 
@@ -231,34 +206,6 @@ public class Disc : Singleton<Disc>
     private void RPC_SetVelocity(Vector3 _velocity)
     {
         velocity = _velocity;
-    }
-
-    [RPC]
-    private void RPC_Catch(Vector3 _snapPosition)
-    {
-        StopCoroutine(CR_LOB_SCORE);
-
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), true);
-        cRigidbody2D.velocity = velocity = Vector3.zero;
-        cRigidbody2D.fixedAngle = true;
-
-        cTransform.position = _snapPosition;
-    }
-
-    [RPC]
-    private void RPC_Throw(Vector3 _snapPosition, Vector3 _throwVector)
-    {
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
-        cTransform.position = _snapPosition;
-        velocity = _throwVector;
-        cRigidbody2D.fixedAngle = false;
-    }
-
-    [RPC]
-    private void RPC_Lob(int _team, Vector3 _targetPosition, float _duration)
-    {
-        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
-        StartCoroutine(CR_Lob((Team)_team, (Vector2)_targetPosition, _duration));
     }
 
     #endregion

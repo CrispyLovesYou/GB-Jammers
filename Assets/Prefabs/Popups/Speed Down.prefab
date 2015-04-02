@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: 1
-  Distance: .5
+  Distance: .25
   Duration: 2
 --- !u!212 &21254744
 SpriteRenderer:

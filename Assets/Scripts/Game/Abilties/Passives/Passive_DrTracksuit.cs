@@ -7,7 +7,7 @@ public class Passive_DrTracksuit : Passive_Base
     #region Fields
 
     public float MoveSpeedUp = 1.0f;
-    public float DashSpeedUp = 3.0f;
+    public float DashSpeedUp = 1.5f;
     public float Duration = 10.0f;
 
     #endregion

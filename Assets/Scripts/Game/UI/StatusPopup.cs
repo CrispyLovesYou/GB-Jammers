@@ -17,7 +17,7 @@ public class StatusPopup : MonoBehaviour
     #region Fields
 
     public PopupDirection Direction = PopupDirection.UP;
-    public float Distance = 0.5f;
+    public float Distance = 0.25f;
     public float Duration = 2.0f;
 
     private Transform cTransform;
@@ -40,7 +40,32 @@ public class StatusPopup : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(HandleFade());
+        iTween.ValueTo(gameObject, iTween.Hash(
+            "from", color.a,
+            "to", 1.0f,
+            "time", Duration / 2,
+            "onupdate",
+                (System.Action<object>)(value =>
+                {
+                    color.a = (float)value;
+                    cSpriteRenderer.color = color;
+                }),
+            "oncomplete",
+                (System.Action<object>)(param =>
+                {
+                    iTween.ValueTo(gameObject, iTween.Hash(
+                        "from", color.a,
+                        "to", 0,
+                        "time", Duration / 2,
+                        "onupdate",
+                            (System.Action<object>)(value =>
+                            {
+                                color.a = (float)value;
+                                cSpriteRenderer.color = color;
+                            })
+                    ));
+                })
+        ));
     }
 
     private void Update()
@@ -50,33 +75,6 @@ public class StatusPopup : MonoBehaviour
             case PopupDirection.UP: cTransform.position += Vector3.up * Distance * Time.deltaTime; break;
             case PopupDirection.DOWN: cTransform.position += Vector3.down * Distance * Time.deltaTime; break;
         }
-    }
-
-    #endregion
-
-    #region Coroutines
-
-    private IEnumerator HandleFade()
-    {
-        float nFrames = (Duration / 2) * 60;
-
-        for (int i = 0; i < nFrames; i++)
-        {
-            color.a = i / nFrames;
-            cSpriteRenderer.color = color;
-
-            yield return 0;
-        }
-
-        for (float i = nFrames; i >= 0; i--)
-        {
-            color.a = i / nFrames;
-            cSpriteRenderer.color = color;
-
-            yield return 0;
-        }
-
-        Destroy(this.gameObject);
     }
 
     #endregion

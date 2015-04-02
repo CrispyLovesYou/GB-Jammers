@@ -23,6 +23,8 @@ public class MainMenuManager : Singleton<MainMenuManager>
         base.Awake();
         Globals.GameMode = GameModes.MAIN_MENU;
 
+        iTween.Defaults.easeType = iTween.EaseType.linear;
+
         if (Globals.CharacterDict.Count == 0)  // in case the splash screen didn't load Character Data (i.e. debugging in Editor)
             SplashScreenManager.LoadCharacterData();
     }
