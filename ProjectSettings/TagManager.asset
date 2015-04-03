@@ -13,6 +13,7 @@ TagManager:
   - Wall_Right
   - Court_Area
   - Disc
+  - Book
   layers:
   - Default
   - TransparentFX

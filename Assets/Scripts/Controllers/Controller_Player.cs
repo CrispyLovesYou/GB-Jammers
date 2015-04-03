@@ -19,7 +19,7 @@ public class Controller_Player : MonoBehaviour
     private const string CR_KNOCKBACK = "CR_Knockback";
 
     private const string COURT_AREA_TAG = "Court_Area";
-    private const string GOAL_WALL_LAYER = "Goal Walls";
+    private const string BOOK_TAG = "Book";
 
     #endregion
 
@@ -144,6 +144,17 @@ public class Controller_Player : MonoBehaviour
         remove { onLob -= value; }
     }
 
+    private static EventHandler<EXEventArgs> onEX;
+    public static event EventHandler<EXEventArgs> OnEX
+    {
+        add
+        {
+            if (onEX == null || !onEX.GetInvocationList().Contains(value))
+                onEX += value;
+        }
+        remove { onEX -= value; }
+    }
+
     private static EventHandler<MeterChangeEventArgs> onMeterChange;
     public static event EventHandler<MeterChangeEventArgs> OnMeterChange
     {
@@ -153,6 +164,17 @@ public class Controller_Player : MonoBehaviour
                 onMeterChange += value;
         }
         remove { onMeterChange -= value; }
+    }
+
+    private static EventHandler<EventArgs> onBookStun;
+    public static event EventHandler<EventArgs> OnBookStun
+    {
+        add
+        {
+            if (onBookStun == null || !onBookStun.GetInvocationList().Contains(value))
+                onBookStun += value;
+        }
+        remove { onBookStun -= value; }
     }
 
     #endregion
@@ -206,7 +228,7 @@ public class Controller_Player : MonoBehaviour
     public Direction CurrentDirection = Direction.DOWN;
     public float GreatThrowThreshhold = 80;
     public float PerfectThrowThreshhold = 90;
-    public float MeterForEX = 33;
+    public int MeterForEX = 33;
 
     public AudioClip SFXError;
 
@@ -214,6 +236,7 @@ public class Controller_Player : MonoBehaviour
 
     private Transform cTransform;
     private Rigidbody2D cRigidbody2D;
+    private Collider2D cCollider2D;
     private PhotonView cPhotonView;
 
     private GameObject courtArea;
@@ -234,6 +257,7 @@ public class Controller_Player : MonoBehaviour
     {
         cTransform = GetComponent<Transform>();
         cRigidbody2D = GetComponent<Rigidbody2D>();
+        cCollider2D = GetComponent<Collider2D>();
         cPhotonView = GetComponent<PhotonView>();
 
         courtArea = GameObject.FindGameObjectWithTag(COURT_AREA_TAG);
@@ -259,6 +283,14 @@ public class Controller_Player : MonoBehaviour
             {
                 isPingCompensating = true;
                 StartCoroutine(CR_PingCompensation());
+            }
+        }
+        else if (_collider2D.tag == BOOK_TAG)
+        {
+            if (cPhotonView.isMine)
+            {
+                Book book = _collider2D.gameObject.GetSafeComponent<Book>();
+                cPhotonView.RPC("RPC_BookStun", PhotonTargets.AllViaServer, book.ID);
             }
         }
     }
@@ -328,6 +360,12 @@ public class Controller_Player : MonoBehaviour
         cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, (Vector3)throwDirection, throwCharge);
     }
 
+    public void SpecialThrow(Vector2 _inputVector, bool _hasKnockback)
+    {
+        throwDirection = _inputVector;
+        cPhotonView.RPC("RPC_SpecialThrow", PhotonTargets.AllViaServer, (Vector3)throwDirection, _hasKnockback);
+    }
+
     public void Lob(Vector2 _inputVector)
     {
         if (State != PlayerState.AIM)
@@ -348,6 +386,53 @@ public class Controller_Player : MonoBehaviour
         }
 
         cPhotonView.RPC("RPC_EX", PhotonTargets.AllViaServer, (Vector3)_inputVector);
+    }
+
+    public Vector2 GetLobTargetPosition(Vector2 _inputVector)
+    {
+        Vector2 targetPosition = Vector2.zero;
+        Transform courtTransform = courtArea.transform;
+
+        // First, we have to define the targetable area for lobs (opponent's side of court, minus disc width / 2)
+        float xMin, yMin, xMax, yMax, xDiff, yDiff, xLength, yLength, targetX, targetY;
+        float courtCenterX = courtArea.transform.position.x;
+        float courtCenterY = courtArea.transform.position.y;
+        float halfCourtWidth = courtTransform.localScale.x / 2;
+        float halfCourtHeight = courtTransform.localScale.y / 2;
+        float halfDiscWidth = Disc.Instance.transform.localScale.x / 2;
+        float halfDiscHeight = Disc.Instance.transform.localScale.y / 2;
+        float buffer = 0.1f;  // keeps the Disc from accidentally colliding with goal zone
+
+        xMin = yMin = xMax = yMax = xDiff = yDiff = xLength = yLength = targetX = targetY = 0;
+
+        switch (Team)
+        {
+            case Team.LEFT:
+                xMin = courtCenterX + halfDiscWidth + buffer;
+                xMax = courtCenterX + halfCourtWidth - halfDiscWidth - buffer;
+                break;
+
+            case Team.RIGHT:
+                xMin = courtCenterX - halfCourtWidth + halfDiscWidth + buffer;
+                xMax = courtCenterX - halfDiscWidth - buffer;
+                break;
+        }
+
+        yMin = courtCenterY - halfCourtHeight + halfDiscHeight + buffer;
+        yMax = courtCenterY + halfCourtHeight - halfDiscHeight - buffer;
+
+        xDiff = xMax - xMin;
+        yDiff = yMax - yMin;
+
+        xLength = (xDiff / 2) * _inputVector.x;
+        yLength = (yDiff / 2) * _inputVector.y;
+
+        targetX = xMin + (xDiff / 2) + xLength;
+        targetY = yMin + (yDiff / 2) + yLength;
+
+        targetPosition = new Vector2(targetX, targetY);
+
+        return targetPosition;
     }
 
     private float GetDiscOffset()
@@ -382,7 +467,7 @@ public class Controller_Player : MonoBehaviour
         if (onPerfectThrow != null)
             onPerfectThrow(this, EventArgs.Empty);
 
-        Meter += MeterGainOnPerfect;
+        Meter += MeterGainOnPerfect;    
         Disc.Instance.HasKnockback = true;
         float knockback = (Knockback + KnockbackMod) * KnockbackMultiplier;
         Disc.Instance.KnockbackPower = knockback;
@@ -465,6 +550,19 @@ public class Controller_Player : MonoBehaviour
         cPhotonView.RPC("RPC_RemoveKnockback", PhotonTargets.All);
         Disc.Instance.SetPosition(cTransform.position);
         State = PlayerState.AIM;
+    }
+
+    private IEnumerator CR_BookStun(Book _book)
+    {
+        State = PlayerState.STUN;
+        Stop();
+        cCollider2D.enabled = false;
+        _book.DestroySelf();
+
+        yield return new WaitForSeconds(Book.StunDuration);
+
+        cCollider2D.enabled = true;
+        State = PlayerState.NORMAL;
     }
 
     private IEnumerator CR_PingCompensation()
@@ -576,6 +674,49 @@ public class Controller_Player : MonoBehaviour
     }
 
     [RPC]
+    private void RPC_SpecialThrow(Vector3 _throwDirection, bool _hasKnockback)
+    {
+        throwDirection = _throwDirection;
+        throwCharge = 100;
+
+        if (throwDirection.x < Mathf.Abs(throwDirectionThreshhold))
+            switch (Team)
+            {
+                case Team.LEFT: throwDirection.x = throwDirectionThreshhold; break;
+                case Team.RIGHT: throwDirection.x = -throwDirectionThreshhold; break;
+            }
+
+        // When throwCharge = 0, throwVector.x = throwPower / 2; throwCharge = 100, throwVector.x = throwPower
+        float throwPower = (ThrowPower + ThrowPowerMod) * ThrowPowerMultiplier;
+        Vector2 throwVector = throwDirection * ((((throwPower / 2) * throwCharge) / 100) + (throwPower / 2));
+
+        switch (Team)
+        {
+            case Team.LEFT: throwVector.x = Mathf.Abs(throwVector.x); break;
+            case Team.RIGHT: throwVector.x = -Mathf.Abs(throwVector.x); break;
+        }
+
+        if (throwCharge == 0)
+            throwVector.y = 0;
+
+        if (_hasKnockback)
+        {
+            Disc.Instance.HasKnockback = true;
+            float knockback = (Knockback + KnockbackMod) * KnockbackMultiplier;
+            Disc.Instance.KnockbackPower = knockback;
+        }
+
+        Disc.Instance.Throw(cTransform.position + (Vector3.right * GetDiscOffset()), (Vector3)throwVector);
+
+        throwCharge = 0;
+        State = PlayerState.RECOVERY;
+        StartCoroutine(CR_THROW_RECOVERY);
+
+        if (onThrow != null)
+            onThrow(this, EventArgs.Empty);
+    }
+
+    [RPC]
     private void RPC_Catch()
     {
         State = PlayerState.AIM;
@@ -593,52 +734,15 @@ public class Controller_Player : MonoBehaviour
 
         if (onCatch != null)
             onCatch(this, EventArgs.Empty);
+
+        if (!MatchManager.Instance.isInitialCatchComplete)
+            MatchManager.Instance.isInitialCatchComplete = true;
     }
 
     [RPC]
     private void RPC_Lob(Vector3 _inputVector)
     {
-        Vector2 targetPosition = Vector2.zero;
-        Transform courtTransform = courtArea.transform;
-
-        // First, we have to define the targetable area for lobs (opponent's side of court, minus disc width / 2)
-        float xMin, yMin, xMax, yMax, xDiff, yDiff, xLength, yLength, targetX, targetY;
-        float courtCenterX = courtArea.transform.position.x;
-        float courtCenterY = courtArea.transform.position.y;
-        float halfCourtWidth = courtTransform.localScale.x / 2;
-        float halfCourtHeight = courtTransform.localScale.y / 2;
-        float halfDiscWidth = Disc.Instance.transform.localScale.x / 2;
-        float halfDiscHeight = Disc.Instance.transform.localScale.y / 2;
-        float buffer = 0.1f;  // keeps the Disc from accidentally colliding with goal zone
-
-        xMin = yMin = xMax = yMax = xDiff = yDiff = xLength = yLength = targetX = targetY = 0;
-
-        switch (Team)
-        {
-            case Team.LEFT:
-                xMin = courtCenterX + halfDiscWidth + buffer;
-                xMax = courtCenterX + halfCourtWidth - halfDiscWidth - buffer;
-                break;
-
-            case Team.RIGHT:
-                xMin = courtCenterX - halfCourtWidth + halfDiscWidth + buffer;
-                xMax = courtCenterX - halfDiscWidth - buffer;
-                break;
-        }
-
-        yMin = courtCenterY - halfCourtHeight + halfDiscHeight + buffer;
-        yMax = courtCenterY + halfCourtHeight - halfDiscHeight - buffer;
-
-        xDiff = xMax - xMin;
-        yDiff = yMax - yMin;
-
-        xLength = (xDiff / 2) * _inputVector.x;
-        yLength = (yDiff / 2) * _inputVector.y;
-
-        targetX = xMin + (xDiff / 2) + xLength;
-        targetY = yMin + (yDiff / 2) + yLength;
-
-        targetPosition = new Vector2(targetX, targetY);
+        Vector2 targetPosition = GetLobTargetPosition(_inputVector);
 
         float lobDuration = (LobDuration + LobDurationMod) * LobDurationMultiplier;
         Disc.Instance.Lob(Team, targetPosition, lobDuration);
@@ -651,7 +755,29 @@ public class Controller_Player : MonoBehaviour
     [RPC]
     private void RPC_EX(Vector3 _inputVector)
     {
+        if (onEX != null)
+            onEX(this, new EXEventArgs(_inputVector));
 
+        Meter -= MeterForEX;
+    }
+
+    [RPC]
+    private void RPC_BookStun(int _id)
+    {
+        if (onBookStun != null)
+            onBookStun(this, EventArgs.Empty);
+
+        GameObject[] gObjList = GameObject.FindGameObjectsWithTag(BOOK_TAG);
+        GameObject book = null;
+
+        foreach (GameObject gObj in gObjList)
+        {
+            if (gObj.GetSafeComponent<Book>().ID == _id)
+                book = gObj;
+        }
+
+        if (book != null)
+            StartCoroutine(CR_BookStun(book.GetSafeComponent<Book>()));
     }
 
     [RPC]

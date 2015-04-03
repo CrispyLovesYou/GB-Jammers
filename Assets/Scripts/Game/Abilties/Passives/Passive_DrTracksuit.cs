@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[AddComponentMenu("Game/Abilities/(Passive) Dr. Tracksuit")]
+[AddComponentMenu("Game/Abilities/Passive/Dr. Tracksuit")]
 public class Passive_DrTracksuit : Passive_Base
 {
     #region Fields

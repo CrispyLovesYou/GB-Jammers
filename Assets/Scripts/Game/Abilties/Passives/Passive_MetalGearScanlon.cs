@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[AddComponentMenu("Game/Abilities/(Passive) Metal Gear Scanlon")]
+[AddComponentMenu("Game/Abilities/Passive/Metal Gear Scanlon")]
 public class Passive_MetalGearScanlon : Passive_Base
 {
     #region Fields

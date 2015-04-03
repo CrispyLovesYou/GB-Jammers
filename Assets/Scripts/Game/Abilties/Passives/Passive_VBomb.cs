@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[AddComponentMenu("Game/Abilities/(Passive) V-Bomb")]
+[AddComponentMenu("Game/Abilities/Passive/V-Bomb")]
 public class Passive_VBomb : Passive_Base
 {
     #region Fields

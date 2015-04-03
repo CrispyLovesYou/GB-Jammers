@@ -62,6 +62,11 @@ public class StatusPopup : MonoBehaviour
                             {
                                 color.a = (float)value;
                                 cSpriteRenderer.color = color;
+                            }),
+                        "oncomplete",
+                            (System.Action<object>)(param2 =>
+                            {
+                                Destroy(this.gameObject);
                             })
                     ));
                 })

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Controller_Player))]
 public abstract class Passive_Base : MonoBehaviour
 {
     #region Fields
@@ -14,7 +13,7 @@ public abstract class Passive_Base : MonoBehaviour
 
     protected virtual void Awake()
     {
-        player = GetComponent<Controller_Player>();
+        player = gameObject.GetSafeComponent<Controller_Player>();
     }
 
     #endregion

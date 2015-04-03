@@ -38,6 +38,7 @@ public enum PlayerState
     CHARGE,
     KNOCKBACK,
     RECOVERY,
+    STUN,
     RESET
 }
 

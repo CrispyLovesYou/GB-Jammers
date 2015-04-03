@@ -76,7 +76,7 @@ public class MatchManager : Singleton<MatchManager>
     public Vector3 TeamLeftSpawn { get; private set; }
     public Vector3 TeamRightSpawn { get; private set; }
     public Vector3 DiscSpawn { get; private set; }
-    public bool isInitialCatchComplete { get; private set; }
+    public bool isInitialCatchComplete = false;
 
     private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
@@ -203,10 +203,7 @@ public class MatchManager : Singleton<MatchManager>
     private void Controller_Player_OnCatch(object sender, EventArgs e)
     {
         if (!isInitialCatchComplete)
-        {
-            isInitialCatchComplete = true;
             return;
-        }
 
         if (!hasVolleyStarted)
         {

@@ -18,6 +18,7 @@ GameObject:
   - 114: {fileID: 11441552}
   - 114: {fileID: 11479464}
   - 114: {fileID: 11416012}
+  - 114: {fileID: 11422018}
   m_Layer: 10
   m_Name: char_dr-tracksuit
   m_TagString: Untagged
@@ -105,6 +106,18 @@ MonoBehaviour:
   MoveSpeedUp: 1
   DashSpeedUp: 1.5
   Duration: 10
+--- !u!114 &11422018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f455dab84936a4cb918516dc04c937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HasKnockback: 0
 --- !u!114 &11434436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,6 +208,7 @@ MonoBehaviour:
   PowerDebuffPopup: {fileID: 126550, guid: 71a5c6b861feeef419bff994d938921a, type: 2}
   GreatPopup: {fileID: 120912, guid: eb8118606bf5e28448e7d90f4e01f49e, type: 2}
   PerfectPopup: {fileID: 163782, guid: e51d32da106b6a24b96079cb25800354, type: 2}
+  HeartsPopup: {fileID: 189914, guid: 46fd3eff2cc68b949bbad9682b16d13d, type: 2}
   LeftRightOffset: 1
 --- !u!114 &11486570
 MonoBehaviour:

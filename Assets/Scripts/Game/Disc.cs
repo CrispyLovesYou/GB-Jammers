@@ -24,6 +24,7 @@ public class Disc : Singleton<Disc>
 
     public bool HasKnockback = false;
     public float KnockbackPower = 0;
+    public bool IsMagnet = false;
 
     private Transform cTransform;
     private Rigidbody2D cRigidbody2D;
@@ -120,7 +121,10 @@ public class Disc : Singleton<Disc>
 
             case Direction.UP:
             case Direction.DOWN:
-                velocity = new Vector3(velocity.x, velocity.y * -1, 0);
+                if (!IsMagnet)
+                    velocity = new Vector3(velocity.x, velocity.y * -1, 0);
+                else
+                    velocity = new Vector3(velocity.x, 0, 0);
                 break;
         }
     }
@@ -145,11 +149,11 @@ public class Disc : Singleton<Disc>
             "time", _duration / 2,
             "easetype", iTween.EaseType.easeOutQuad,
             "oncomplete",
-                (Action<object>)(duration =>
+                (Action<object>)(param =>
                 {
                     iTween.ScaleTo(gameObject, iTween.Hash(
                         "scale", cTransform.localScale / LOB_SCALE_AMOUNT,
-                        "time", (float)duration / 2,
+                        "time", _duration / 2,
                         "easetype", iTween.EaseType.easeInQuad));
                 })
             ));

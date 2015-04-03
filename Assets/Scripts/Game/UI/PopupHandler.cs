@@ -12,6 +12,7 @@ public class PopupHandler : MonoBehaviour
     public GameObject PowerDebuffPopup;
     public GameObject GreatPopup;
     public GameObject PerfectPopup;
+    public GameObject HeartsPopup;
 
     public float LeftRightOffset = 1.0f;
 
@@ -27,6 +28,7 @@ public class PopupHandler : MonoBehaviour
         Controller_Player.OnPowerDebuff += Controller_Player_OnPowerDebuff;
         Controller_Player.OnGreatThrow += Controller_Player_OnGreatThrow;
         Controller_Player.OnPerfectThrow += Controller_Player_OnPerfectThrow;
+        Controller_Player.OnBookStun += Controller_Player_OnBookStun;
     }
 
     #endregion
@@ -80,6 +82,13 @@ public class PopupHandler : MonoBehaviour
     {
         Controller_Player player = (Controller_Player)sender;
         GameObject gObj = Instantiate(PerfectPopup, player.transform.position, Quaternion.identity) as GameObject;
+        gObj.transform.SetParent(player.transform);
+    }
+
+    private void Controller_Player_OnBookStun(object sender, System.EventArgs e)
+    {
+        Controller_Player player = (Controller_Player)sender;
+        GameObject gObj = Instantiate(HeartsPopup, player.transform.position + (Vector3.up * 0.5f), Quaternion.identity) as GameObject;
         gObj.transform.SetParent(player.transform);
     }
 

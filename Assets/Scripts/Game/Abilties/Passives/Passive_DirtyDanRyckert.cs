@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[AddComponentMenu("Game/Abilities/(Passive) Dirty Dan Ryckert")]
+[AddComponentMenu("Game/Abilities/Passive/Dirty Dan Ryckert")]
 public class Passive_DirtyDanRyckert : Passive_Base
 {
     #region Fields
