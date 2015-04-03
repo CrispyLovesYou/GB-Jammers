@@ -12,11 +12,13 @@ public class Controller_Player : MonoBehaviour
     public const float MIN_KNOCKBACK_DURATION = 0.2f;
     public const float MIN_MOVE_SPEED = 1.0f;
     public const float MIN_DASH_SPEED = 3.0f;
+    public const float THROW_AFTER_IDLE_DURATION = 3.0f;
 
     private const string CR_DASH = "CR_Dash";
     private const string CR_CHARGE = "CR_Charge";
     private const string CR_THROW_RECOVERY = "CR_ThrowRecovery";
     private const string CR_KNOCKBACK = "CR_Knockback";
+    private const string CR_THROW_AFTER_IDLE = "CR_ThrowAfterIdle";
 
     private const string COURT_AREA_TAG = "Court_Area";
     private const string BOOK_TAG = "Book";
@@ -155,6 +157,17 @@ public class Controller_Player : MonoBehaviour
         remove { onEX -= value; }
     }
 
+    private static EventHandler<SuperEventArgs> onSuper;
+    public static event EventHandler<SuperEventArgs> OnSuper
+    {
+        add
+        {
+            if (onSuper == null || !onSuper.GetInvocationList().Contains(value))
+                onSuper += value;
+        }
+        remove { onSuper -= value; }
+    }
+
     private static EventHandler<MeterChangeEventArgs> onMeterChange;
     public static event EventHandler<MeterChangeEventArgs> OnMeterChange
     {
@@ -229,6 +242,7 @@ public class Controller_Player : MonoBehaviour
     public float GreatThrowThreshhold = 80;
     public float PerfectThrowThreshhold = 90;
     public int MeterForEX = 33;
+    public int MeterForSuper = 99;
 
     public AudioClip SFXError;
 
@@ -388,6 +402,20 @@ public class Controller_Player : MonoBehaviour
         cPhotonView.RPC("RPC_EX", PhotonTargets.AllViaServer, (Vector3)_inputVector);
     }
 
+    public void Super(Vector2 _inputVector)
+    {
+        if (State != PlayerState.AIM)
+            return;
+
+        if (Meter < MeterForSuper)
+        {
+            AudioSource.PlayClipAtPoint(SFXError, Vector3.zero);
+            return;
+        }
+
+        cPhotonView.RPC("RPC_Super", PhotonTargets.AllViaServer, (Vector3)_inputVector);
+    }
+
     public Vector2 GetLobTargetPosition(Vector2 _inputVector)
     {
         Vector2 targetPosition = Vector2.zero;
@@ -527,6 +555,14 @@ public class Controller_Player : MonoBehaviour
         State = PlayerState.NORMAL;
     }
 
+    private IEnumerator CR_ThrowAfterIdle()
+    {
+        yield return new WaitForSeconds(THROW_AFTER_IDLE_DURATION);
+
+        if (State == PlayerState.AIM)
+            cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, Vector3.right, (float)0);
+    }
+
     private IEnumerator CR_ThrowRecovery()
     {
         State = PlayerState.RECOVERY;
@@ -630,6 +666,7 @@ public class Controller_Player : MonoBehaviour
     [RPC]
     private void RPC_Throw(Vector3 _throwDirection, float _throwCharge)
     {
+        StopCoroutine(CR_THROW_AFTER_IDLE);
         throwDirection = _throwDirection;
         throwCharge = _throwCharge;
 
@@ -676,6 +713,7 @@ public class Controller_Player : MonoBehaviour
     [RPC]
     private void RPC_SpecialThrow(Vector3 _throwDirection, bool _hasKnockback)
     {
+        StopCoroutine(CR_THROW_AFTER_IDLE);
         throwDirection = _throwDirection;
         throwCharge = 100;
 
@@ -735,6 +773,8 @@ public class Controller_Player : MonoBehaviour
         if (onCatch != null)
             onCatch(this, EventArgs.Empty);
 
+        StartCoroutine(CR_THROW_AFTER_IDLE);
+
         if (!MatchManager.Instance.isInitialCatchComplete)
             MatchManager.Instance.isInitialCatchComplete = true;
     }
@@ -759,6 +799,28 @@ public class Controller_Player : MonoBehaviour
             onEX(this, new EXEventArgs(_inputVector));
 
         Meter -= MeterForEX;
+
+        StopCoroutine(CR_THROW_AFTER_IDLE);
+
+        if (State == PlayerState.AIM)
+            StartCoroutine(CR_THROW_AFTER_IDLE);
+    }
+
+    [RPC]
+    private void RPC_Super(Vector3 _inputVector)
+    {
+        if (onSuper != null)
+            onSuper(this, new SuperEventArgs(_inputVector));
+
+        if (MeterForSuper == 99 && Meter == 100)
+            Meter = 0;
+        else
+            Meter -= MeterForSuper;
+
+        StopCoroutine(CR_THROW_AFTER_IDLE);
+
+        if (State == PlayerState.AIM)
+            StartCoroutine(CR_THROW_AFTER_IDLE);
     }
 
     [RPC]

@@ -19,9 +19,10 @@ GameObject:
   - 114: {fileID: 11459518}
   - 114: {fileID: 11446622}
   - 114: {fileID: 11432454}
+  - 114: {fileID: 11486330}
   m_Layer: 10
   m_Name: char_dirty-dan-ryckert
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,6 +195,7 @@ MonoBehaviour:
   GreatThrowThreshhold: 80
   PerfectThrowThreshhold: 90
   MeterForEX: 33
+  MeterForSuper: 99
   SFXError: {fileID: 8300000, guid: ee909d9c07bb8ad4e8db7f113bc823ff, type: 3}
 --- !u!114 &11430752
 MonoBehaviour:
@@ -267,6 +269,20 @@ MonoBehaviour:
   PerfectPopup: {fileID: 163782, guid: e51d32da106b6a24b96079cb25800354, type: 2}
   HeartsPopup: {fileID: 189914, guid: 46fd3eff2cc68b949bbad9682b16d13d, type: 2}
   LeftRightOffset: 1
+--- !u!114 &11486330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c64620d450837d48abea73f527ca448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Flag: {fileID: 133498, guid: 21726faae75bed34fb4d5d628919aaeb, type: 2}
+  Fireworks: {fileID: 199806, guid: c991e3f70d190984f927031001a290ba, type: 2}
+  Duration: 10
 --- !u!212 &21267336
 SpriteRenderer:
   m_ObjectHideFlags: 1

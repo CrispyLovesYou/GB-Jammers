@@ -28,13 +28,16 @@ public class Passive_DirtyDanRyckert : Passive_Base
 
     private void MatchManager_OnScored(object sender, ScoredEventArgs e)
     {
-        player.MoveSpeedMod += MoveSpeedUp * e.Points;
-        player.DashSpeedMod += DashSpeedUp * e.Points;
-        player.ThrowPowerMod += ThrowPowerUp * e.Points;
-        player.KnockbackMod += KnockbackUp * e.Points;
-        player.StabilityMod += StabilityUp * e.Points;
-        player.CallOnSpeedBuff();
-        player.CallOnPowerBuff();
+        if (e.Team != player.Team)
+        {
+            player.MoveSpeedMod += MoveSpeedUp * e.Points;
+            player.DashSpeedMod += DashSpeedUp * e.Points;
+            player.ThrowPowerMod += ThrowPowerUp * e.Points;
+            player.KnockbackMod += KnockbackUp * e.Points;
+            player.StabilityMod += StabilityUp * e.Points;
+            player.CallOnSpeedBuff();
+            player.CallOnPowerBuff();
+        }
     }
 
     #endregion

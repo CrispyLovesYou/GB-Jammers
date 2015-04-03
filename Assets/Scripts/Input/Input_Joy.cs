@@ -43,6 +43,7 @@ public class Input_Joy : Input_Base
         CheckAction();
         CheckLob();
         CheckEX();
+        CheckSuper();
     }
 
     private void OnApplicationFocus(bool _hasFocus)
@@ -88,6 +89,12 @@ public class Input_Joy : Input_Base
     {
         if (Input.GetButtonDown(INPUT_EX))
             controller.EX(inputVector);
+    }
+
+    private void CheckSuper()
+    {
+        if (Input.GetButtonDown(INPUT_SUPER))
+            controller.Super(inputVector);
     }
 
     #endregion

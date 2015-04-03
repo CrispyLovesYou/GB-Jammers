@@ -19,9 +19,10 @@ GameObject:
   - 114: {fileID: 11479464}
   - 114: {fileID: 11416012}
   - 114: {fileID: 11422018}
+  - 114: {fileID: 11454294}
   m_Layer: 10
   m_Name: char_dr-tracksuit
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,6 +192,19 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &11454294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e51bd6b7b25e2f8439e64c11f5d8fd11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeedMultiplier: .5
+  DashSpeedMultiplier: .5
 --- !u!114 &11479464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,6 +278,7 @@ MonoBehaviour:
   GreatThrowThreshhold: 80
   PerfectThrowThreshhold: 90
   MeterForEX: 33
+  MeterForSuper: 99
   SFXError: {fileID: 8300000, guid: ee909d9c07bb8ad4e8db7f113bc823ff, type: 3}
 --- !u!212 &21286570
 SpriteRenderer:
