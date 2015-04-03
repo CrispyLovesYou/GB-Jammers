@@ -796,9 +796,9 @@ public class Controller_Player : MonoBehaviour
     [RPC]
     private void RPC_Catch()
     {
-        Stop();
         State = PlayerState.AIM;
         cAnimator.SetInteger("state", (int)State);
+        Stop();
 
         StopCoroutine(CR_DASH);
         StopCoroutine(CR_THROW_RECOVERY);
