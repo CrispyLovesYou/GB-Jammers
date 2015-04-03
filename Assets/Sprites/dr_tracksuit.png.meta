@@ -1,0 +1,231 @@
+fileFormatVersion: 2
+guid: b097424aacb0bc64790a00b8a9b6bea5
+timeCreated: 1428057223
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: dr_tracksuit_idle1
+    21300002: dr_tracksuit_walk1
+    21300004: dr_tracksuit_walk2
+    21300006: dr_tracksuit_walk3
+    21300008: dr_tracksuit_idle2
+    21300010: dr_tracksuit_walk4
+    21300012: dr_tracksuit_catch
+    21300014: dr_tracksuit_throw1
+    21300016: dr_tracksuit_idle3
+    21300018: dr_tracksuit_walk5
+    21300020: dr_tracksuit_throw2
+    21300022: dr_tracksuit_throw4
+    21300024: dr_tracksuit_idle4
+    21300026: dr_tracksuit_dash
+    21300028: dr_tracksuit_throw3
+    21300030: dr_tracksuit_throw5
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: dr_tracksuit_idle1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1086
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_walk1
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 1086
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_walk2
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 1086
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_walk3
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 1086
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_idle2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 726
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_walk4
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 726
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_catch
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 726
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_throw1
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 726
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_idle3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 366
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_walk5
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 366
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_throw2
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 366
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_throw4
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 366
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_idle4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_dash
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 6
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_throw3
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 6
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dr_tracksuit_throw5
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 6
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

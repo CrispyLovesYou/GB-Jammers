@@ -8,6 +8,17 @@ public class MatchManager : Singleton<MatchManager>
 {
     #region Events
 
+    private static EventHandler<EventArgs> onMatchStart;
+    public static event EventHandler<EventArgs> OnMatchStart
+    {
+        add
+        {
+            if (onMatchStart == null || !onMatchStart.GetInvocationList().Contains(value))
+                onMatchStart += value;
+        }
+        remove { onMatchStart -= value; }
+    }
+
     private static EventHandler<EventArgs> onVolley;
     public static event EventHandler<EventArgs> OnVolley
     {
@@ -156,6 +167,8 @@ public class MatchManager : Singleton<MatchManager>
     private IEnumerator HandleMatchSetup()
     {
         yield return 0;
+        if (onMatchStart != null)
+            onMatchStart(this, EventArgs.Empty);
     }
 
     private IEnumerator HandleSetWon()

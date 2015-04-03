@@ -8,6 +8,7 @@ public class Super_DrTracksuit : Super_Base
 
     public float MoveSpeedMultiplier = 0.5f;
     public float DashSpeedMultiplier = 0.5f;
+    public bool IsActive { get; private set; }
 
     private Controller_Player targetPlayer;
 
@@ -39,11 +40,12 @@ public class Super_DrTracksuit : Super_Base
 
         targetPlayer.MoveSpeedMultiplier *= MoveSpeedMultiplier;
         targetPlayer.DashSpeedMultiplier *= DashSpeedMultiplier;
+        IsActive = true;
     }
 
     private void MatchManager_OnScored(object sender, ScoredEventArgs e)
     {
-        if (e.Team != player.Team)
+        if (e.Team != player.Team || !IsActive)
             return;
 
         targetPlayer.MoveSpeedMultiplier /= MoveSpeedMultiplier;

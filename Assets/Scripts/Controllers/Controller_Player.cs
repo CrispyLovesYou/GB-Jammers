@@ -237,7 +237,7 @@ public class Controller_Player : MonoBehaviour
     public float LobDurationMultiplier = 1.0f;
 
     public Team Team = Team.UNASSIGNED;
-    public PlayerState State = PlayerState.NORMAL;
+    public PlayerState State = PlayerState.WALK;
     public Direction CurrentDirection = Direction.DOWN;
     public float GreatThrowThreshhold = 80;
     public float PerfectThrowThreshhold = 90;
@@ -252,6 +252,7 @@ public class Controller_Player : MonoBehaviour
     private Rigidbody2D cRigidbody2D;
     private Collider2D cCollider2D;
     private PhotonView cPhotonView;
+    private Animator cAnimator;
 
     private GameObject courtArea;
 
@@ -261,7 +262,9 @@ public class Controller_Player : MonoBehaviour
     private float maxChargeDuration = 1.0f;
     private Vector2 throwDirection = Vector2.zero;
     private float throwDirectionThreshhold = 0.7f;
+    private Vector2 throwVector = Vector2.zero;
     private Vector2 knockbackVector = Vector2.zero;
+    private Vector2 lobTarget = Vector2.zero;
 
     #endregion
 
@@ -273,6 +276,7 @@ public class Controller_Player : MonoBehaviour
         cRigidbody2D = GetComponent<Rigidbody2D>();
         cCollider2D = GetComponent<Collider2D>();
         cPhotonView = GetComponent<PhotonView>();
+        cAnimator = GetComponent<Animator>();
 
         courtArea = GameObject.FindGameObjectWithTag(COURT_AREA_TAG);
 
@@ -321,12 +325,17 @@ public class Controller_Player : MonoBehaviour
     public void Stop()
     {
         cRigidbody2D.velocity = Vector2.zero;
+
+        if (State == PlayerState.WALK)
+            cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.IDLE);
     }
 
     public void Move(Vector2 _inputVector)
     {
-        if (State != PlayerState.NORMAL)
+        if (State != PlayerState.IDLE && State != PlayerState.WALK)
             return;
+
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.WALK);
 
         if (Mathf.Abs(_inputVector.x) > Mathf.Abs(_inputVector.y))
         {
@@ -351,7 +360,7 @@ public class Controller_Player : MonoBehaviour
     {
         switch (State)
         {
-            case PlayerState.NORMAL:
+            case PlayerState.WALK:
                 StartCoroutine(CR_DASH, _inputVector.normalized);
                 break;
 
@@ -378,6 +387,20 @@ public class Controller_Player : MonoBehaviour
     {
         throwDirection = _inputVector;
         cPhotonView.RPC("RPC_SpecialThrow", PhotonTargets.AllViaServer, (Vector3)throwDirection, _hasKnockback);
+    }
+
+    public void ThrowAfterAnimation()
+    {
+        Disc.Instance.Throw(cTransform.position + (Vector3.right * GetDiscOffset()), (Vector3)throwVector);
+
+        StartCoroutine(CR_THROW_RECOVERY);
+    }
+
+    public void LobAfterAnimation()
+    {
+        float lobDuration = (LobDuration + LobDurationMod) * LobDurationMultiplier;
+        Disc.Instance.Lob(Team, lobTarget, lobDuration);
+        StartCoroutine(CR_THROW_RECOVERY);
     }
 
     public void Lob(Vector2 _inputVector)
@@ -507,7 +530,7 @@ public class Controller_Player : MonoBehaviour
 
     private IEnumerator CR_Charge()
     {
-        State = PlayerState.CHARGE;
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.CHARGE);
         throwCharge = 0;
 
         iTween.ValueTo(gameObject, iTween.Hash(
@@ -543,7 +566,8 @@ public class Controller_Player : MonoBehaviour
 
     private IEnumerator CR_Dash(Vector2 _directionVector)
     {
-        State = PlayerState.DASH;
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.DASH);
+
         float dashSpeed = (DashSpeed + DashSpeedMod) * DashSpeedMultiplier;
 
         if (dashSpeed < MIN_DASH_SPEED)
@@ -552,7 +576,7 @@ public class Controller_Player : MonoBehaviour
         cRigidbody2D.velocity = _directionVector * dashSpeed;
         yield return new WaitForSeconds(DashDuration);
         Stop();
-        State = PlayerState.NORMAL;
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.IDLE);
     }
 
     private IEnumerator CR_ThrowAfterIdle()
@@ -565,9 +589,9 @@ public class Controller_Player : MonoBehaviour
 
     private IEnumerator CR_ThrowRecovery()
     {
-        State = PlayerState.RECOVERY;
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.RECOVERY);
         yield return new WaitForSeconds(ThrowRecovery);
-        State = PlayerState.NORMAL;
+        State = PlayerState.IDLE;
     }
 
     private IEnumerator CR_Knockback()
@@ -598,7 +622,7 @@ public class Controller_Player : MonoBehaviour
         yield return new WaitForSeconds(Book.StunDuration);
 
         cCollider2D.enabled = true;
-        State = PlayerState.NORMAL;
+        State = PlayerState.IDLE;
     }
 
     private IEnumerator CR_PingCompensation()
@@ -617,7 +641,7 @@ public class Controller_Player : MonoBehaviour
         if (!cPhotonView.isMine)
             return;
 
-        State = PlayerState.RESET;
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.RESET);
 
         Stop();
         Vector3 targetPos = Vector3.zero;
@@ -634,7 +658,7 @@ public class Controller_Player : MonoBehaviour
 
     private void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
     {
-        State = PlayerState.NORMAL;
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.IDLE);
     }
 
     #endregion
@@ -645,6 +669,9 @@ public class Controller_Player : MonoBehaviour
     private void RPC_SetData(int _team, int _id)
     {
         Team = (Team)_team;
+
+        if (Team == Team.RIGHT)  // Flip the player on the right
+            cTransform.localScale = new Vector3(-cTransform.localScale.x, cTransform.localScale.y, 1);
 
         if (Globals.CharacterDict.Count == 0)
             return;
@@ -664,9 +691,17 @@ public class Controller_Player : MonoBehaviour
     }
 
     [RPC]
+    private void RPC_SetState(int _state)
+    {
+        State = (PlayerState)_state;
+        cAnimator.SetInteger("state", _state);
+    }
+
+    [RPC]
     private void RPC_Throw(Vector3 _throwDirection, float _throwCharge)
     {
         StopCoroutine(CR_THROW_AFTER_IDLE);
+
         throwDirection = _throwDirection;
         throwCharge = _throwCharge;
 
@@ -679,7 +714,7 @@ public class Controller_Player : MonoBehaviour
 
         // When throwCharge = 0, throwVector.x = throwPower / 2; throwCharge = 100, throwVector.x = throwPower
         float throwPower = (ThrowPower + ThrowPowerMod) * ThrowPowerMultiplier;
-        Vector2 throwVector = throwDirection * ((((throwPower / 2) * throwCharge) / 100) + (throwPower / 2));
+        throwVector = throwDirection * ((((throwPower / 2) * throwCharge) / 100) + (throwPower / 2));
 
         switch (Team)
         {
@@ -689,8 +724,6 @@ public class Controller_Player : MonoBehaviour
 
         if (throwCharge == 0)
             throwVector.y = 0;
-
-        Disc.Instance.Throw(cTransform.position + (Vector3.right * GetDiscOffset()), (Vector3)throwVector);
 
         if (throwCharge >= GreatThrowThreshhold &&
             throwCharge < PerfectThrowThreshhold)
@@ -703,17 +736,18 @@ public class Controller_Player : MonoBehaviour
         }
 
         throwCharge = 0;
-        State = PlayerState.RECOVERY;
-        StartCoroutine(CR_THROW_RECOVERY);
 
         if (onThrow != null)
             onThrow(this, EventArgs.Empty);
+
+        cAnimator.SetTrigger("throw");
     }
 
     [RPC]
     private void RPC_SpecialThrow(Vector3 _throwDirection, bool _hasKnockback)
     {
         StopCoroutine(CR_THROW_AFTER_IDLE);
+
         throwDirection = _throwDirection;
         throwCharge = 100;
 
@@ -726,7 +760,7 @@ public class Controller_Player : MonoBehaviour
 
         // When throwCharge = 0, throwVector.x = throwPower / 2; throwCharge = 100, throwVector.x = throwPower
         float throwPower = (ThrowPower + ThrowPowerMod) * ThrowPowerMultiplier;
-        Vector2 throwVector = throwDirection * ((((throwPower / 2) * throwCharge) / 100) + (throwPower / 2));
+        throwVector = throwDirection * ((((throwPower / 2) * throwCharge) / 100) + (throwPower / 2));
 
         switch (Team)
         {
@@ -744,21 +778,19 @@ public class Controller_Player : MonoBehaviour
             Disc.Instance.KnockbackPower = knockback;
         }
 
-        Disc.Instance.Throw(cTransform.position + (Vector3.right * GetDiscOffset()), (Vector3)throwVector);
-
         throwCharge = 0;
-        State = PlayerState.RECOVERY;
-        StartCoroutine(CR_THROW_RECOVERY);
 
         if (onThrow != null)
             onThrow(this, EventArgs.Empty);
+
+        cAnimator.SetTrigger("throw");
     }
 
     [RPC]
     private void RPC_Catch()
     {
-        State = PlayerState.AIM;
         Stop();
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.AIM);
 
         StopCoroutine(CR_DASH);
         StopCoroutine(CR_THROW_RECOVERY);
@@ -782,11 +814,9 @@ public class Controller_Player : MonoBehaviour
     [RPC]
     private void RPC_Lob(Vector3 _inputVector)
     {
-        Vector2 targetPosition = GetLobTargetPosition(_inputVector);
+        lobTarget = GetLobTargetPosition(_inputVector);
 
-        float lobDuration = (LobDuration + LobDurationMod) * LobDurationMultiplier;
-        Disc.Instance.Lob(Team, targetPosition, lobDuration);
-        StartCoroutine(CR_THROW_RECOVERY);
+        cAnimator.SetTrigger("lob");
 
         if (onLob != null)
             onLob(this, EventArgs.Empty);

@@ -1,18 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &122678
+--- !u!1 &165906
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 422678}
-  - 212: {fileID: 21222678}
-  - 50: {fileID: 5022678}
-  - 58: {fileID: 5822678}
+  - 4: {fileID: 458348}
+  - 212: {fileID: 21258080}
+  - 50: {fileID: 5041360}
+  - 58: {fileID: 5840690}
   - 114: {fileID: 11481128}
-  - 114: {fileID: 11456166}
+  - 114: {fileID: 11413258}
   m_Layer: 8
   m_Name: Disc
   m_TagString: Disc
@@ -20,24 +20,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &422678
+--- !u!4 &458348
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122678}
+  m_GameObject: {fileID: 165906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.24000001, y: -1.41999996, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &5022678
+--- !u!50 &5041360
 Rigidbody2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122678}
+  m_GameObject: {fileID: 165906}
   m_Mass: .5
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
@@ -47,12 +47,12 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
---- !u!58 &5822678
+--- !u!58 &5840690
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122678}
+  m_GameObject: {fileID: 165906}
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: 27fbf65d0df94c34cb0a8720ace94f2e, type: 2}
   m_IsTrigger: 1
@@ -60,26 +60,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .5
---- !u!114 &11456166
+--- !u!114 &11413258
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122678}
+  m_GameObject: {fileID: 165906}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46a051097f20beb459b617a7d3bfec70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsScoring: 0
+  AngularVelocity: 720
   HasKnockback: 0
   KnockbackPower: 0
+  IsMagnet: 0
 --- !u!114 &11481128
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122678}
+  m_GameObject: {fileID: 165906}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
@@ -99,12 +100,12 @@ MonoBehaviour:
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
---- !u!212 &21222678
+--- !u!212 &21258080
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122678}
+  m_GameObject: {fileID: 165906}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -123,7 +124,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -243702099
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9a9a55a0bfebbb8449e3e25b7fa6e51e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b99b90ca33d2ba49ac1d79847ceee0b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -134,5 +135,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 122678}
+  m_RootGameObject: {fileID: 165906}
   m_IsPrefabParent: 1

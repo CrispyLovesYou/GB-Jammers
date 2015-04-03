@@ -16,7 +16,106 @@ Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\U
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.073 seconds
+- Completed reload, in  0.060 seconds
 desktop: 1680x1050 60Hz; virtual: 3120x1050 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
+<RI> Initialized touch support.
+Initialize engine version: 5.0.0f4 (5b98b70ebeb9)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon HD 7800 Series (ID=0x6819)
+    Vendor:   ATI
+    VRAM:     1003 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+- Completed reload, in  0.058 seconds
+desktop: 1680x1050 60Hz; virtual: 3120x1050 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Xml.dll (this message is harmless)
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.305586 ms
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 276.
+Total: 0.313750 ms (FindLiveObjects: 0.016620 ms CreateObjectMapping: 0.030033 ms MarkObjects: 0.258931 ms  DeleteObjects: 0.006706 ms)
+
+<RI> Initialized touch support.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 11.720463 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 401.
+Total: 0.538566 ms (FindLiveObjects: 0.044613 ms CreateObjectMapping: 0.049861 ms MarkObjects: 0.437968 ms  DeleteObjects: 0.004665 ms)
+
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Xml.dll (this message is harmless)
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.406768 ms
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 276.
+Total: 0.296255 ms (FindLiveObjects: 0.031783 ms CreateObjectMapping: 0.041988 ms MarkObjects: 0.214610 ms  DeleteObjects: 0.006123 ms)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 7.583674 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 401.
+Total: 0.717311 ms (FindLiveObjects: 0.031200 ms CreateObjectMapping: 0.034990 ms MarkObjects: 0.641789 ms  DeleteObjects: 0.007872 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.855849 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 335.
+Total: 1.026397 ms (FindLiveObjects: 0.032366 ms CreateObjectMapping: 0.039947 ms MarkObjects: 0.942710 ms  DeleteObjects: 0.009622 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.714136 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 335.
+Total: 1.141283 ms (FindLiveObjects: 0.038489 ms CreateObjectMapping: 0.039656 ms MarkObjects: 1.050599 ms  DeleteObjects: 0.011080 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 5.213047 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 408.
+Total: 0.641498 ms (FindLiveObjects: 0.039364 ms CreateObjectMapping: 0.041114 ms MarkObjects: 0.554312 ms  DeleteObjects: 0.004957 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 5.235791 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 408.
+Total: 0.443216 ms (FindLiveObjects: 0.017203 ms CreateObjectMapping: 0.015745 ms MarkObjects: 0.404727 ms  DeleteObjects: 0.004957 ms)
+
+Cannot find Singleton instance of Disc.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Super_MetalGearScanlon.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+NetworkingPeer:DoInstantiate(Hashtable, PhotonPlayer, GameObject)
+PhotonNetwork:Instantiate(String, Vector3, Quaternion, Int32, Object[])
+PhotonNetwork:Instantiate(String, Vector3, Quaternion, Int32)
+NetworkManager:SpawnLocalPlayer()
+NetworkManager:Start()
+ 
+(Filename:  Line: -1)
+
+Cannot find Singleton instance of Disc.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+

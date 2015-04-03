@@ -6,6 +6,8 @@ public class ChargeBar : MonoBehaviour
 {
     #region Fields
 
+    public float OffsetX = 0.7f;
+
     private Transform cTransform;
     private GameObject player;
     private Controller_Player playerScript;
@@ -26,7 +28,7 @@ public class ChargeBar : MonoBehaviour
             return;
 
         Vector3 position = player.transform.position;
-        position.x -= 0.5f;
+        position.x -= OffsetX;
         cTransform.position = position;
         cTransform.localScale = new Vector3(cTransform.localScale.x, playerScript.ThrowCharge / 100, 1);
     }

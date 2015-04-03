@@ -33,14 +33,15 @@ public enum CharacterID
 
 public enum PlayerState
 {
-    NORMAL,
-    DASH,
-    AIM,
-    CHARGE,
-    KNOCKBACK,
-    RECOVERY,
-    STUN,
-    RESET
+    IDLE = 0,
+    WALK = 1,
+    DASH = 2,
+    AIM = 3,
+    CHARGE = 4,
+    KNOCKBACK = 5,
+    RECOVERY = 6,
+    STUN = 7,
+    RESET = 8
 }
 
 #endregion

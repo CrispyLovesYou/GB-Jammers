@@ -11,6 +11,9 @@ public class Input_KM : Input_Base
     private const string INPUT_UP = "Key_Up";
     private const string INPUT_DOWN = "Key_Down";
     private const string INPUT_ACTION = "Key_Action";
+    private const string INPUT_CANCEL = "Key_Cancel";
+    private const string INPUT_EX = "Key_EX";
+    private const string INPUT_SUPER = "Key_Super";
 
     #endregion
 
@@ -18,8 +21,14 @@ public class Input_KM : Input_Base
 
     private void Update()
     {
+        if (!isEnabled || !appHasFocus)
+            return;
+
         CheckMovement();
         CheckAction();
+        CheckLob();
+        CheckEX();
+        CheckSuper();
     }
 
     #endregion
@@ -40,13 +49,34 @@ public class Input_KM : Input_Base
         else if (Input.GetButton(INPUT_DOWN))
             inputVector.y = -1.0f;
 
-        controller.Move(inputVector);
+        if (inputVector != Vector2.zero)
+            controller.Move(inputVector);
+        else
+            controller.Stop();
     }
 
     private void CheckAction()
     {
         if (Input.GetButtonDown(INPUT_ACTION))
             controller.Action(inputVector);
+    }
+
+    private void CheckLob()
+    {
+        if (Input.GetButtonDown(INPUT_CANCEL))
+            controller.Lob(inputVector);
+    }
+
+    private void CheckEX()
+    {
+        if (Input.GetButtonDown(INPUT_EX))
+            controller.EX(inputVector);
+    }
+
+    private void CheckSuper()
+    {
+        if (Input.GetButtonDown(INPUT_SUPER))
+            controller.Super(inputVector);
     }
 
     #endregion

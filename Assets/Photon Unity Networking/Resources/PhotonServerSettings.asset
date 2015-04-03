@@ -64,4 +64,6 @@ MonoBehaviour:
   - RPC_SpecialThrow
   - RPC_BookStun
   - RPC_Super
+  - RPC_StartThrowAnimation
+  - RPC_SetState
   DisableAutoOpenWizard: 0

@@ -22,6 +22,7 @@ public class Disc : Singleton<Disc>
 
     #region Fields
 
+    public float AngularVelocity = 720.0f;
     public bool HasKnockback = false;
     public float KnockbackPower = 0;
     public bool IsMagnet = false;
@@ -30,6 +31,7 @@ public class Disc : Singleton<Disc>
     private Rigidbody2D cRigidbody2D;
     private PhotonView cPhotonView;
     private Collider2D cCollider2D;
+    private SpriteRenderer cSpriteRenderer;
 
     private Vector3 velocity = Vector3.zero;
     public Vector3 Velocity { get { return velocity; } }
@@ -45,6 +47,7 @@ public class Disc : Singleton<Disc>
         cRigidbody2D = GetComponent<Rigidbody2D>();
         cPhotonView = GetComponent<PhotonView>();
         cCollider2D = GetComponent<Collider2D>();
+        cSpriteRenderer = GetComponent<SpriteRenderer>();
 
         MatchManager.OnBeginResetAfterScore += MatchManager_OnBeginResetAfterScore;
         MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
@@ -88,20 +91,25 @@ public class Disc : Singleton<Disc>
         cRigidbody2D.velocity = velocity = Vector3.zero;
         cRigidbody2D.fixedAngle = true;
 
-        cPhotonView.RPC("RPC_SetPosition", PhotonTargets.All, _snapPosition);
+        cPhotonView.RPC("RPC_Catch", PhotonTargets.All);
     }
 
     public void Throw(Vector3 _snapPosition, Vector2 _throwVector)
     {
+        cSpriteRenderer.enabled = true;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
         cTransform.position = _snapPosition;
         velocity = _throwVector;
         cRigidbody2D.fixedAngle = false;
+        cRigidbody2D.angularVelocity = AngularVelocity;
     }
 
     public void Lob(Team _team, Vector2 _targetPosition, float _duration)
     {
+        cSpriteRenderer.enabled = true;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
+        cRigidbody2D.fixedAngle = false;
+        cRigidbody2D.angularVelocity = AngularVelocity;
         StartCoroutine(CR_Lob((Team)_team, (Vector2)_targetPosition, _duration));
     }
 
@@ -180,6 +188,7 @@ public class Disc : Singleton<Disc>
 
     private void MatchManager_OnBeginResetAfterScore(object sender, EventArgs e)
     {
+        cRigidbody2D.fixedAngle = true;
         HasKnockback = false;
         KnockbackPower = 0;
     }
@@ -200,6 +209,12 @@ public class Disc : Singleton<Disc>
     #endregion
 
     #region RPC
+
+    [RPC]
+    private void RPC_Catch()
+    {
+        cSpriteRenderer.enabled = false;
+    }
 
     [RPC]
     private void RPC_SetPosition(Vector3 _position)
