@@ -73,7 +73,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: .333333343
+  - time: .25
     functionName: ThrowAfterAnimation
     data: 
     objectReferenceParameter: {fileID: 0}
