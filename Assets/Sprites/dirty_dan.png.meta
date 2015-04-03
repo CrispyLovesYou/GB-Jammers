@@ -1,0 +1,247 @@
+fileFormatVersion: 2
+guid: 408e3fd1d4f073a4bacbca2504fd8e72
+timeCreated: 1428103181
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: dirty_dan_idle1
+    21300002: dirty_dan_walk1
+    21300004: dirty_dan_walk2
+    21300006: dirty_dan_walk3
+    21300008: dirty_dan_idle2
+    21300010: dirty_dan_walk4
+    21300012: dirty_dan_catch
+    21300014: dirty_dan_throw1
+    21300016: dirty_dan_idle3
+    21300018: dirty_dan_walk5
+    21300020: dirty_dan_throw2
+    21300022: dirty_dan_throw4
+    21300024: dirty_dan_idle4
+    21300026: dirty_dan_dash
+    21300028: dirty_dan_throw3
+    21300030: dirty_dan_throw5
+    21300032: dirty_dan_idle1
+    21300034: dirty_dan_walk1
+    21300036: dirty_dan_walk2
+    21300038: dirty_dan_walk3
+    21300040: dirty_dan_idle2
+    21300042: dirty_dan_walk4
+    21300044: dirty_dan_catch
+    21300046: dirty_dan_throw1
+    21300048: dirty_dan_idle3
+    21300050: dirty_dan_walk5
+    21300052: dirty_dan_throw2
+    21300054: dirty_dan_throw4
+    21300056: dirty_dan_idle4
+    21300058: dirty_dan_dash
+    21300060: dirty_dan_throw3
+    21300062: dirty_dan_throw5
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: dirty_dan_idle1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1084
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_walk1
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1084
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_walk2
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 1084
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_walk3
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 1084
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_idle2
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 724
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_walk4
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 724
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_catch
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 724
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_throw1
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 724
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_idle3
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 364
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_walk5
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 364
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_throw2
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 364
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_throw4
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 364
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_idle4
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 4
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_dash
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 4
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_throw3
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 4
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirty_dan_throw5
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 4
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

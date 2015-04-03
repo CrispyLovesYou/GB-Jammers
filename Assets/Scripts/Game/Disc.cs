@@ -196,6 +196,7 @@ public class Disc : Singleton<Disc>
     private void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
     {
         cTransform.position = MatchManager.Instance.DiscSpawn;
+        cSpriteRenderer.enabled = true;
         velocity = Vector3.zero;
         cCollider2D.enabled = true;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
