@@ -53,6 +53,7 @@ public class MainMenuManager : Singleton<MainMenuManager>
         PhotonNetwork.offlineMode = true;
         PhotonNetwork.CreateRoom(null);
         Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID;
+        Globals.GameMode = GameModes.DEBUG;
         PhotonNetwork.LoadLevel("map_beach");
     }
 

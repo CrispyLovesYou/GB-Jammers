@@ -2,6 +2,7 @@
 
 public enum GameModes
 {
+    DEBUG,
     MAIN_MENU,
     LOCAL_MULTIPLAYER,
     ONLINE_MULTIPLAYER

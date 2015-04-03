@@ -78,6 +78,15 @@ public class NetworkManager : Singleton<NetworkManager>
         cPlayer.Team = team;
         player.GetComponent<Input_Joy>().enabled = true;
 
+        // ========== DEBUG CODE
+        if (Globals.GameMode == GameModes.DEBUG)
+        {
+            cPlayer.Meter = 100;
+            cPlayer.MeterForEX = 0;
+            cPlayer.MeterForSuper = 0;
+        }
+        // =====================
+
         SpawnChargeBar(player, team);
     }
 
