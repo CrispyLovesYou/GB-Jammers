@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 
-[AddComponentMenu("Game/Match Manager")]
+[AddComponentMenu("Managers/Game/Match Manager")]
 public class MatchManager : Singleton<MatchManager>
 {
     #region Events
@@ -120,6 +120,7 @@ public class MatchManager : Singleton<MatchManager>
 
     private void Start()
     {
+        NetworkManager.Instance.Spawn();
         StartCoroutine(MatchDirector());
     }
 

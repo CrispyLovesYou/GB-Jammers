@@ -18,6 +18,7 @@ public static class Globals
     public static GameModes GameMode = GameModes.MAIN_MENU;
     public static Dictionary<CharacterID, Character> CharacterDict = new Dictionary<CharacterID, Character>();
     public static CharacterID[] SelectedCharacters = new CharacterID[MAX_CONNECTED_PLAYERS];
+    public static string Username = "";
 
     #endregion
 }

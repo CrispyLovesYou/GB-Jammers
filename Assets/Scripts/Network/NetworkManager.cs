@@ -11,32 +11,56 @@ public class NetworkManager : Singleton<NetworkManager>
     private const string PREFAB_ID_DDR = "char_dirty-dan-ryckert";
     private const string PREFAB_ID_MGS = "char_metal-gear-scanlon";
 
+    public const int ROOM_ID_RANDOM_SIZE = 5;
+
     #endregion
 
     #region Fields
 
     public string Player_Prefab_ID = "Player";
     public string Disc_Prefab_ID = "Disc";
-    public string Crosshair_Prefab_ID = "Crosshair";
 
     #endregion
 
     #region Unity Callbacks
 
-    private void Start()
+    protected override void Awake()
     {
-        if (PhotonNetwork.isMasterClient)
-        {
-            SpawnDisc();
-            SpawnMisc();
-        }
+        base.Awake();
+        PhotonNetwork.automaticallySyncScene = true;
 
-        SpawnLocalPlayer();
+        Globals.GameMode = GameModes.ONLINE_MULTIPLAYER;  // redundant set for debug/testing purposes
+        DontDestroyOnLoad(this);
     }
 
     #endregion
 
     #region Methods
+
+    public void ConnectToNetwork()
+    {
+        if (PhotonNetwork.connected || PhotonNetwork.connecting)
+            return;
+
+        PhotonNetwork.ConnectUsingSettings(Globals.GAME_VERSION);
+        PhotonNetwork.playerName = Globals.Username;
+    }
+
+    public bool CreateRoom()
+    {
+        string roomID = Globals.Username + " [" + RandomHelper.RandomString(ROOM_ID_RANDOM_SIZE) + "]";
+
+        RoomOptions roomOptions = new RoomOptions() { maxPlayers = Globals.MAX_CONNECTED_PLAYERS };
+        return PhotonNetwork.CreateRoom(roomID, roomOptions, TypedLobby.Default);
+    }
+
+    public void Spawn()
+    {
+        if (PhotonNetwork.isMasterClient)
+            SpawnDisc();
+
+        SpawnLocalPlayer();
+    }
 
     private void SpawnLocalPlayer()
     {
@@ -100,11 +124,6 @@ public class NetworkManager : Singleton<NetworkManager>
     {
         GameObject chargeBar = PhotonNetwork.Instantiate("Charge Bar", Vector3.zero, Quaternion.identity, 0);
         chargeBar.GetComponent<ChargeBar>().SetPlayer(_player);
-    }
-
-    private void SpawnMisc()
-    {
-        PhotonNetwork.Instantiate(Crosshair_Prefab_ID, Vector3.zero, Quaternion.identity, 0);
     }
 
     #endregion

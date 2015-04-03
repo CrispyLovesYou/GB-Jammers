@@ -2,6 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(AudioClip))]
+[AddComponentMenu("Managers/Game/Audio Manager")]
 public class AudioManager : MonoBehaviour
 {
     #region Fields

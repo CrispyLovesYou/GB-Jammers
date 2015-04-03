@@ -276,6 +276,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+--- !u!1001 &385288574
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 426128, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 426128, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 426128, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426128, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426128, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426128, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426128, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 426128, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11469268, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11469268, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+      propertyPath: instantiationId
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b4b7814ac7848f64db1d24ad84e278a1, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &471676533
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +730,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 795162136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49bc3287aa7a5d94ab1eee4cd1002c10, type: 3}
+  m_Script: {fileID: 11500000, guid: cc099975418e92440b117261c97b698a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentSet: 0
@@ -706,7 +756,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &795162139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,7 +1094,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1 &1291644177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,45 +1302,3 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 898313409
   m_SortingOrder: 0
---- !u!1 &1780726926
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1780726928}
-  - 114: {fileID: 1780726927}
-  m_Layer: 0
-  m_Name: Network Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1780726927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1780726926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b4ba3b90cebf884f83c1b9e6bd00762, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player_Prefab_ID: Player
-  Disc_Prefab_ID: Disc
-  Crosshair_Prefab_ID: Crosshair
---- !u!4 &1780726928
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1780726926}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2

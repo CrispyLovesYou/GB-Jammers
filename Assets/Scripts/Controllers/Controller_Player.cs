@@ -266,6 +266,8 @@ public class Controller_Player : MonoBehaviour
     private Vector2 knockbackVector = Vector2.zero;
     private Vector2 lobTarget = Vector2.zero;
 
+    private bool walking = false;  // for bandwidth purposes
+
     #endregion
 
     #region Unity Callbacks
@@ -325,6 +327,7 @@ public class Controller_Player : MonoBehaviour
     public void Stop()
     {
         cRigidbody2D.velocity = Vector2.zero;
+        walking = false;
 
         if (State == PlayerState.WALK)
             cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.IDLE);
@@ -335,7 +338,10 @@ public class Controller_Player : MonoBehaviour
         if (State != PlayerState.IDLE && State != PlayerState.WALK)
             return;
 
-        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.WALK);
+        if (!walking)
+            cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.WALK);
+
+        walking = true;
 
         if (Mathf.Abs(_inputVector.x) > Mathf.Abs(_inputVector.y))
         {
@@ -592,6 +598,7 @@ public class Controller_Player : MonoBehaviour
         cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.RECOVERY);
         yield return new WaitForSeconds(ThrowRecovery);
         State = PlayerState.IDLE;
+        walking = false;
     }
 
     private IEnumerator CR_Knockback()
@@ -790,7 +797,8 @@ public class Controller_Player : MonoBehaviour
     private void RPC_Catch()
     {
         Stop();
-        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.AIM);
+        State = PlayerState.AIM;
+        cAnimator.SetInteger("state", (int)State);
 
         StopCoroutine(CR_DASH);
         StopCoroutine(CR_THROW_RECOVERY);

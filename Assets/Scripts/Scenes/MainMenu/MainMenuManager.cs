@@ -54,6 +54,8 @@ public class MainMenuManager : Singleton<MainMenuManager>
         PhotonNetwork.CreateRoom(null);
         Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID;
         Globals.GameMode = GameModes.DEBUG;
+        if (NetworkManager.IsNull)
+            gameObject.AddComponent<NetworkManager>();
         PhotonNetwork.LoadLevel("map_beach");
     }
 
