@@ -17,9 +17,20 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
     public Text P1CharacterText;
     public Text P2CharacterText;
 
+	public CharacterPanel P1CharacterPanel;
+	public CharacterPanel P2CharacterPanel;
+
+	public RectTransform P1Selector;
+	public RectTransform P2Selector;
+	public RectTransform DualSelector;
+
+	public RectTransform[] CharacterButtons;
+
     private PhotonView cPhotonView;
     private bool[] playersReady = new bool[Globals.MAX_CONNECTED_PLAYERS];
     private int currentSelected = 0;
+	private int p1CurrentSelected = 0;
+	private int p2CurrentSelected = 0;
 
     #endregion
 
@@ -37,6 +48,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 
     public void OnClick_SelectCharacter(int _id)
     {
+		Debug.Log ("Id was " + _id);
         currentSelected = _id;
         cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.AllViaServer, PhotonNetwork.player.ID, currentSelected);
     }
@@ -61,32 +73,45 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
         switch (_playerNum)
         {
             case 1:
-                switch (_id)
-                {
-                    case (int)CharacterID.DR_TRACKSUIT: P1CharacterText.text = "Dr. Tracksuit"; break;
-                    case (int)CharacterID.V_BOMB: P1CharacterText.text = "V-Bomb"; break;
-                    case (int)CharacterID.DIRTY_DAN_RYCKERT: P1CharacterText.text = "Dirty Dan Ryckert"; break;
-                    case (int)CharacterID.METAL_GEAR_SCANLON: P1CharacterText.text = "Metal Gear Scanlon"; break;
-                }
+				p1CurrentSelected = _id;
+				P1Selector.anchoredPosition = new Vector2(CharacterButtons[_id].anchoredPosition.x, P1Selector.anchoredPosition.y) ;
+				P1CharacterPanel.OnCharacterSelect(_id);
                 break;
 
             case 2:
-                switch (_id)
-                {
-                    case (int)CharacterID.DR_TRACKSUIT: P2CharacterText.text = "Dr. Tracksuit"; break;
-                    case (int)CharacterID.V_BOMB: P2CharacterText.text = "V-Bomb"; break;
-                    case (int)CharacterID.DIRTY_DAN_RYCKERT: P2CharacterText.text = "Dirty Dan Ryckert"; break;
-                    case (int)CharacterID.METAL_GEAR_SCANLON: P2CharacterText.text = "Metal Gear Scanlon"; break;
-                }
+				p2CurrentSelected = _id;
+				P2Selector.anchoredPosition = new Vector2(CharacterButtons[_id].anchoredPosition.x, P1Selector.anchoredPosition.y) ;
+				P2CharacterPanel.OnCharacterSelect(_id);
                 break;
+
         }
+		if(p1CurrentSelected == p2CurrentSelected && DualSelector.GetComponent<Image>().enabled == false){
+			P1Selector.GetComponent<Image>().enabled = false;	
+			P2Selector.GetComponent<Image>().enabled = false;
+			DualSelector.GetComponent<Image>().enabled = true;
+			DualSelector.anchoredPosition = P1Selector.anchoredPosition;
+		}else if(p1CurrentSelected != p2CurrentSelected && DualSelector.GetComponent<Image>().enabled == true) {
+			P1Selector.GetComponent<Image>().enabled = true;	
+			P2Selector.GetComponent<Image>().enabled = true;
+			DualSelector.GetComponent<Image>().enabled = false;
+		}
     }
 
     [RPC]
     private void RPC_LockCharacter(int _index, int _id)
     {
+
         Globals.SelectedCharacters[_index] = (CharacterID)_id;
         playersReady[_index] = true;
+		switch(_index){
+			case 0:
+				P1CharacterPanel.OnCharacterConfirm();
+				break;
+			case 1:
+				P2CharacterPanel.OnCharacterConfirm();
+				break;
+		}
+
 
         if (playersReady[0] && playersReady[1] && PhotonNetwork.isMasterClient)
             PhotonNetwork.LoadLevel(MAP_BEACH);
