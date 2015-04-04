@@ -1,0 +1,319 @@
+fileFormatVersion: 2
+guid: 7d91fdb1bb5e8944c8703c4ec08b2201
+timeCreated: 1428170702
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: 1P
+    21300002: 2P
+    21300004: FighterNameLeft
+    21300006: GRAD
+    21300008: Header_CharacterSelect
+    21300010: Name_DirtyDan
+    21300012: Name_DrTrackSuit
+    21300014: Name_SolidScanlon
+    21300016: Name_Vbomb
+    21300018: Panel
+    21300020: PortraitDan
+    21300022: PortraitScanlon
+    21300024: PortraitTracksuit
+    21300026: PortraitVbomb
+    21300028: Skills_Right
+    21300030: Skills_left
+    21300032: StatsStar
+    21300034: StatsStarNot
+    21300036: StatsTitle
+    21300038: TracksuitTemp
+    21300040: VS
+    21300042: 12PSelect
+    21300044: 1PSelect
+    21300046: 2PSelect
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: 12PSelect
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1118
+        width: 328
+        height: 240
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1P
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 1398
+        width: 118
+        height: 110
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1PSelect
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 1118
+        width: 328
+        height: 240
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2P
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 1510
+        width: 139
+        height: 110
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2PSelect
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 876
+        width: 328
+        height: 240
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FighterNameLeft
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 1956
+        width: 877
+        height: 90
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GRAD
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 1494
+        width: 870
+        height: 460
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Header_CharacterSelect
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1486
+        width: 724
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Name_DirtyDan
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 1432
+        width: 331
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Name_DrTrackSuit
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1423
+        width: 474
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Name_SolidScanlon
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1360
+        width: 472
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Name_Vbomb
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1985
+        width: 211
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Panel
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1564
+        width: 937
+        height: 482
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PortraitDan
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 1146
+        width: 328
+        height: 284
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PortraitScanlon
+      rect:
+        serializedVersion: 2
+        x: 1700
+        y: 1112
+        width: 328
+        height: 284
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PortraitTracksuit
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 860
+        width: 328
+        height: 284
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PortraitVbomb
+      rect:
+        serializedVersion: 2
+        x: 1700
+        y: 826
+        width: 328
+        height: 284
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Skills_Right
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 1735
+        width: 150
+        height: 111
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Skills_left
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 1622
+        width: 148
+        height: 111
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: StatsStar
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1948
+        width: 33
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: StatsStarNot
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1911
+        width: 33
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: StatsTitle
+      rect:
+        serializedVersion: 2
+        x: 1963
+        y: 1664
+        width: 82
+        height: 69
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TracksuitTemp
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1020
+        width: 640
+        height: 472
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: VS
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1848
+        width: 184
+        height: 135
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
