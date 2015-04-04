@@ -558,7 +558,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_CreateGame
+        m_MethodName: OnClick_Connect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -997,7 +997,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_CreateGame
+        m_MethodName: OnClick_CreatePrivateGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3419,7 +3419,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_CreateGame
+        m_MethodName: OnClick_JoinPrivateGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
