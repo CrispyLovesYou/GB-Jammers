@@ -3,12 +3,12 @@
   <ID>v_bomb</ID>
   <Name>V-Bomb</Name>
   <RealName>Vinny Caravella</RealName>
-  <ThrowPower>12</ThrowPower>
-  <ThrowKnockback>4</ThrowKnockback>
+  <ThrowPower>11</ThrowPower>
+  <ThrowKnockback>3.6</ThrowKnockback>
   <Stability>3</Stability>
   <MoveSpeed>1.6</MoveSpeed>
   <DashSpeed>4</DashSpeed>
-  <DashDuration>0.3</DashDuration>
+  <DashDuration>0.5</DashDuration>
   <LobDuration>2.2</LobDuration>
   <AbilityPassive>ability_passive_vbomb</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>

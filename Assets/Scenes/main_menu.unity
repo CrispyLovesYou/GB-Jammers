@@ -843,8 +843,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a496951b61ea41341aba635783bffc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG_CharacterID_1: 1
-  DEBUG_CharacterID_2: 2
+  DEBUG_CharacterID_1: 0
+  DEBUG_CharacterID_2: 1
 --- !u!4 &2074825235
 Transform:
   m_ObjectHideFlags: 0

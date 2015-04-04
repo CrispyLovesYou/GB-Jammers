@@ -267,6 +267,8 @@ public class Controller_Player : MonoBehaviour
     private Vector2 knockbackVector = Vector2.zero;
     private Vector2 lobTarget = Vector2.zero;
 
+    private Vector3 initLocalScale;
+
     private bool walking = false;  // for bandwidth purposes
 
     #endregion
@@ -286,6 +288,11 @@ public class Controller_Player : MonoBehaviour
 
         MatchManager.OnBeginResetAfterScore += MatchManager_OnBeginResetAfterScore;
         MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
+    }
+
+    private void Start()
+    {
+        initLocalScale = cTransform.localScale;  // must be set in Start so that proper flip is recorded
     }
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
@@ -623,7 +630,6 @@ public class Controller_Player : MonoBehaviour
 
     private IEnumerator CR_Dash(Vector2 _directionVector)
     {
-        float initX = cTransform.localScale.x;
         bool flip = ((Team == Team.LEFT && cRigidbody2D.velocity.x < 0) || (Team == Team.RIGHT && cRigidbody2D.velocity.x > 0));
 
         cPhotonView.RPC("RPC_SetStateAndFlip", PhotonTargets.All, (int)PlayerState.DASH, flip);
@@ -681,7 +687,7 @@ public class Controller_Player : MonoBehaviour
 
     private IEnumerator CR_BookStun(Book _book)
     {
-        State = PlayerState.STUN;
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.STUN);
         Stop();
         cCollider2D.enabled = false;
         _book.DestroySelf();
@@ -689,7 +695,7 @@ public class Controller_Player : MonoBehaviour
         yield return new WaitForSeconds(Book.StunDuration);
 
         cCollider2D.enabled = true;
-        State = PlayerState.IDLE;
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.IDLE);
     }
 
     private IEnumerator CR_PingCompensation()
@@ -869,6 +875,7 @@ public class Controller_Player : MonoBehaviour
     private void RPC_Catch()
     {
         State = PlayerState.AIM;
+        cTransform.localScale = initLocalScale;  // Flips sprite if they caught it during a backward dash
         cAnimator.SetInteger("state", (int)State);
         Stop();
 
