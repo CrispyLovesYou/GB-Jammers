@@ -191,12 +191,45 @@ public class Disc : Singleton<Disc>
         cRigidbody2D.fixedAngle = true;
         HasKnockback = false;
         KnockbackPower = 0;
+
+        Color color = cSpriteRenderer.color;
+
+        iTween.ValueTo(gameObject, iTween.Hash(
+            "from", color.a,
+            "to", 0,
+            "time", 0.5f,
+            "onupdate",
+                (Action<object>)(value =>
+                {
+                    color.a = (float)value;
+                    cSpriteRenderer.color = color;
+                })
+            ));
     }
 
     private void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
     {
-        cTransform.position = MatchManager.Instance.DiscSpawn;
+        switch (MatchManager.Instance.LastTeamToScore)
+        {
+            case Team.LEFT: cTransform.position = MatchManager.Instance.DiscRightSpawn; break;
+            case Team.RIGHT: cTransform.position = MatchManager.Instance.DiscLeftSpawn; break;
+        }
+
         cSpriteRenderer.enabled = true;
+        Color color = cSpriteRenderer.color;
+
+        iTween.ValueTo(gameObject, iTween.Hash(
+            "from", color.a,
+            "to", 1.0f,
+            "time", 0.5f,
+            "onupdate",
+                (Action<object>)(value =>
+                {
+                    color.a = (float)value;
+                    cSpriteRenderer.color = color;
+                })
+            ));
+
         velocity = Vector3.zero;
         cCollider2D.enabled = true;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);

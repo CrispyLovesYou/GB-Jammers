@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 408e3fd1d4f073a4bacbca2504fd8e72
-timeCreated: 1428103181
+timeCreated: 1428124272
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -85,7 +85,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 1084
+        y: 1085
         width: 360
         height: 360
       alignment: 0
@@ -95,7 +95,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 364
-        y: 1084
+        y: 1085
         width: 360
         height: 360
       alignment: 0
@@ -105,7 +105,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 724
-        y: 1084
+        y: 1085
         width: 360
         height: 360
       alignment: 0
@@ -115,7 +115,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1084
-        y: 1084
+        y: 1085
         width: 360
         height: 360
       alignment: 0
@@ -125,7 +125,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 724
+        y: 725
         width: 360
         height: 360
       alignment: 0
@@ -135,7 +135,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 364
-        y: 724
+        y: 725
         width: 360
         height: 360
       alignment: 0
@@ -145,7 +145,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 724
-        y: 724
+        y: 725
         width: 360
         height: 360
       alignment: 0
@@ -155,7 +155,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1084
-        y: 724
+        y: 725
         width: 360
         height: 360
       alignment: 0
@@ -165,7 +165,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 364
+        y: 365
         width: 360
         height: 360
       alignment: 0
@@ -175,7 +175,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 364
-        y: 364
+        y: 365
         width: 360
         height: 360
       alignment: 0
@@ -185,7 +185,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 724
-        y: 364
+        y: 365
         width: 360
         height: 360
       alignment: 0
@@ -195,7 +195,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1084
-        y: 364
+        y: 365
         width: 360
         height: 360
       alignment: 0
@@ -205,7 +205,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 4
+        y: 5
         width: 360
         height: 360
       alignment: 0
@@ -215,7 +215,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 364
-        y: 4
+        y: 5
         width: 360
         height: 360
       alignment: 0
@@ -225,7 +225,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 724
-        y: 4
+        y: 5
         width: 360
         height: 360
       alignment: 0
@@ -235,7 +235,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1084
-        y: 4
+        y: 5
         width: 360
         height: 360
       alignment: 0

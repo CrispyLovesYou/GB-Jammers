@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Team_Left_Spawn
   - Team_Right_Spawn
-  - Disc_Spawn
+  - Disc_Spawn_Left
   - Wall_Top
   - Wall_Bottom
   - Wall_Left
@@ -14,6 +14,7 @@ TagManager:
   - Court_Area
   - Disc
   - Book
+  - Disc_Spawn_Right
   layers:
   - Default
   - TransparentFX

@@ -328,6 +328,9 @@ public class Controller_Player : MonoBehaviour
 
     public void Stop()
     {
+        if (State == PlayerState.KNOCKBACK)
+            return;
+
         cRigidbody2D.velocity = Vector2.zero;
         walking = false;
 
@@ -664,11 +667,12 @@ public class Controller_Player : MonoBehaviour
             duration = MIN_KNOCKBACK_DURATION;
 
         yield return new WaitForSeconds(duration);
-        Stop();
+
         Disc.Instance.HasKnockback = false;
         Disc.Instance.KnockbackPower = 0;
         Disc.Instance.SetPosition(cTransform.position);
         State = PlayerState.AIM;
+        Stop();
     }
 
     private IEnumerator CR_BookStun(Book _book)

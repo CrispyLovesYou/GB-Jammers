@@ -177,7 +177,13 @@ public class NetworkManager : Singleton<NetworkManager>
 
     private void SpawnDisc()
     {
-        Vector3 spawnPosition = MatchManager.Instance.DiscSpawn;
+        Vector3 spawnPosition = Vector3.zero;
+
+        if (UnityEngine.Random.Range(1, 3) == 1)
+            spawnPosition = MatchManager.Instance.DiscLeftSpawn;
+        else
+            spawnPosition = MatchManager.Instance.DiscRightSpawn;
+
         PhotonNetwork.Instantiate(Disc_Prefab_ID, spawnPosition, Quaternion.identity, 0);
     }
 
