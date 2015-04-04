@@ -10,8 +10,8 @@ public class Controller_Player : MonoBehaviour
 
     public const float KNOCKBACK_NORMALIZER = 0.1f;
     public const float MIN_KNOCKBACK_DURATION = 0.2f;
-    public const float MIN_MOVE_SPEED = 1.0f;
-    public const float MIN_DASH_SPEED = 3.0f;
+    public const float MIN_MOVE_SPEED = 0.75f;
+    public const float MIN_DASH_SPEED = 1.5f;
     public const float THROW_AFTER_IDLE_DURATION = 3.0f;
 
     private const string CR_DASH = "CR_Dash";
@@ -194,6 +194,7 @@ public class Controller_Player : MonoBehaviour
 
     #region Fields
 
+    public CharacterID Character;
     public string ID = "";
     public string Name = "";
     public string RealName = "";
@@ -244,6 +245,7 @@ public class Controller_Player : MonoBehaviour
     public int MeterForEX = 33;
     public int MeterForSuper = 99;
 
+    public GameObject SuperMaskPrefab;
     public AudioClip SFXError;
 
     public static bool isPingCompensating = false;
@@ -330,6 +332,7 @@ public class Controller_Player : MonoBehaviour
 
     public void SetData(Team _team, CharacterID _id)
     {
+        Character = _id;
         cPhotonView.RPC("RPC_SetData", PhotonTargets.AllBufferedViaServer, (int)_team, (int)_id);
     }
 
@@ -935,6 +938,8 @@ public class Controller_Player : MonoBehaviour
             Meter = 0;
         else
             Meter -= MeterForSuper;
+
+        Instantiate(SuperMaskPrefab, Vector3.zero, Quaternion.identity);
 
         StopCoroutine(CR_THROW_AFTER_IDLE);
 

@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744fe5f246583944abaa35c98ddc9187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Character: 0
   ID: 
   Name: 
   RealName: 
@@ -213,6 +214,7 @@ MonoBehaviour:
   PerfectThrowThreshhold: 90
   MeterForEX: 33
   MeterForSuper: 99
+  SuperMaskPrefab: {fileID: 196278, guid: 7651f74a787ce634996f31f6fbcbde0a, type: 2}
   SFXError: {fileID: 8300000, guid: ee909d9c07bb8ad4e8db7f113bc823ff, type: 3}
 --- !u!114 &11462894
 MonoBehaviour:

@@ -19,7 +19,10 @@ public class Input_KM : Input_Base
 
     private void Update()
     {
-        if (!isEnabled || !appHasFocus || !cPhotonView.isMine)
+        if (!isEnabled ||
+            !appHasFocus ||
+            !cPhotonView.isMine ||
+            Time.timeScale == 0)
             return;
 
         CheckMovement();
