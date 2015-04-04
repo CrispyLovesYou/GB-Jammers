@@ -48,20 +48,18 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 
     public void OnClick_SelectCharacter(int _id)
     {
-		Debug.Log ("Id was " + _id);
         currentSelected = _id;
-        cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.AllViaServer, PhotonNetwork.player.ID, currentSelected);
+		cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, PhotonNetwork.player.ID, currentSelected);
     }
 
     public void OnClick_LockCharacter()
     {
-        foreach (Button button in MainCanvas.GetComponentsInChildren<Button>())
-        {
-            button.interactable = false;
-        }
-
-        cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.AllViaServer, PhotonNetwork.player.ID - 1, currentSelected);
+        cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, currentSelected);
     }
+
+	public void OnClick_ReturnToMenu(){
+		Debug.Log ("Loading previous menu");
+	}
 
     #endregion
 
