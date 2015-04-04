@@ -97,7 +97,7 @@ TextureImporter:
     - name: BigButton_Over
       rect:
         serializedVersion: 2
-        x: 1287
+        x: 1238
         y: 384
         width: 745
         height: 85
@@ -147,8 +147,8 @@ TextureImporter:
     - name: Menu_Idle
       rect:
         serializedVersion: 2
-        x: 749
-        y: 345
+        x: 1343
+        y: 755
         width: 506
         height: 61
       alignment: 0
@@ -159,7 +159,7 @@ TextureImporter:
         serializedVersion: 2
         x: 628
         y: 408
-        width: 657
+        width: 608
         height: 61
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -167,8 +167,8 @@ TextureImporter:
     - name: Menu_Tabbed
       rect:
         serializedVersion: 2
-        x: 749
-        y: 282
+        x: 1343
+        y: 692
         width: 506
         height: 61
       alignment: 0
@@ -177,7 +177,7 @@ TextureImporter:
     - name: MiniHeader
       rect:
         serializedVersion: 2
-        x: 1257
+        x: 1179
         y: 298
         width: 741
         height: 84
@@ -187,8 +187,8 @@ TextureImporter:
     - name: StandaloneButtonIdle
       rect:
         serializedVersion: 2
-        x: 2
-        y: 219
+        x: 749
+        y: 345
         width: 428
         height: 61
       alignment: 0
@@ -197,8 +197,8 @@ TextureImporter:
     - name: StandaloneButtonOver
       rect:
         serializedVersion: 2
-        x: 2
-        y: 156
+        x: 749
+        y: 282
         width: 428
         height: 61
       alignment: 0
