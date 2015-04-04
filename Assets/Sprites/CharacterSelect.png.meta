@@ -28,6 +28,7 @@ TextureImporter:
     21300042: 12PSelect
     21300044: 1PSelect
     21300046: 2PSelect
+    21300048: PlayerReady
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -76,8 +77,8 @@ TextureImporter:
     - name: 12PSelect
       rect:
         serializedVersion: 2
-        x: 2
-        y: 1118
+        x: 1700
+        y: 584
         width: 328
         height: 240
       alignment: 0
@@ -96,8 +97,8 @@ TextureImporter:
     - name: 1PSelect
       rect:
         serializedVersion: 2
-        x: 332
-        y: 1118
+        x: 2
+        y: 342
         width: 328
         height: 240
       alignment: 0
@@ -116,8 +117,8 @@ TextureImporter:
     - name: 2PSelect
       rect:
         serializedVersion: 2
-        x: 2
-        y: 876
+        x: 332
+        y: 1118
         width: 328
         height: 240
       alignment: 0
@@ -157,7 +158,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1370
-        y: 1432
+        y: 1351
         width: 331
         height: 60
       alignment: 0
@@ -203,11 +204,21 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: PortraitDan
+    - name: PlayerReady
       rect:
         serializedVersion: 2
         x: 1370
-        y: 1146
+        y: 1413
+        width: 335
+        height: 79
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PortraitDan
+      rect:
+        serializedVersion: 2
+        x: 1703
+        y: 1112
         width: 328
         height: 284
       alignment: 0
@@ -216,8 +227,8 @@ TextureImporter:
     - name: PortraitScanlon
       rect:
         serializedVersion: 2
-        x: 1700
-        y: 1112
+        x: 1370
+        y: 1065
         width: 328
         height: 284
       alignment: 0
@@ -226,8 +237,8 @@ TextureImporter:
     - name: PortraitTracksuit
       rect:
         serializedVersion: 2
-        x: 1370
-        y: 860
+        x: 1700
+        y: 826
         width: 328
         height: 284
       alignment: 0
@@ -236,8 +247,8 @@ TextureImporter:
     - name: PortraitVbomb
       rect:
         serializedVersion: 2
-        x: 1700
-        y: 826
+        x: 1370
+        y: 779
         width: 328
         height: 284
       alignment: 0
