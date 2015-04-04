@@ -34,6 +34,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public Text P1ReadyStatus;
     public Text P2ReadyStatus;
     public Text CountdownField;
+	public GameObject ScrollingBackground; 
 
     private PhotonView cPhotonView;
     private string username;
@@ -68,6 +69,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         ToggleCanvasGroup(StatusGroup, false);
         ToggleCanvasGroup(LobbyGroup, true);
         ToggleCanvasGroup(RoomListGroup, true);
+		ScrollingBackground.SetActive(true);
     }
 
     private void OnJoinedRoom()

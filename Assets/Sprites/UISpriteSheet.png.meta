@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1dcd03261f3cb4848bc197a32be01a9d
-timeCreated: 1428119003
+timeCreated: 1428121544
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -22,7 +22,7 @@ TextureImporter:
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -41,11 +41,11 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 4096
   textureSettings:
-    filterMode: -1
-    aniso: -1
+    filterMode: 0
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -58,7 +58,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 150
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -153,7 +153,7 @@ TextureImporter:
         height: 61
       alignment: 0
       pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 45, y: 6, z: 60, w: 0}
     - name: Menu_Over
       rect:
         serializedVersion: 2
@@ -163,7 +163,7 @@ TextureImporter:
         height: 61
       alignment: 0
       pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 83, y: 0, z: 60, w: 0}
     - name: Menu_Tabbed
       rect:
         serializedVersion: 2
@@ -173,7 +173,7 @@ TextureImporter:
         height: 61
       alignment: 0
       pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 45, y: 6, z: 64, w: 0}
     - name: MiniHeader
       rect:
         serializedVersion: 2
