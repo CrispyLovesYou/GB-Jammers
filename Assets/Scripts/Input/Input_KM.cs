@@ -21,7 +21,7 @@ public class Input_KM : Input_Base
 
     private void Update()
     {
-        if (!isEnabled || !appHasFocus)
+        if (!isEnabled || !appHasFocus || !cPhotonView.isMine)
             return;
 
         CheckMovement();
@@ -59,6 +59,9 @@ public class Input_KM : Input_Base
     {
         if (Input.GetButtonDown(INPUT_ACTION))
             controller.Action(inputVector);
+
+        if (Input.GetButtonUp(INPUT_ACTION))
+            controller.ReleaseAction(inputVector);
     }
 
     private void CheckLob()

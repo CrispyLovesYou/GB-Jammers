@@ -29,7 +29,6 @@ public class NetworkManager : Singleton<NetworkManager>
         base.Awake();
         PhotonNetwork.automaticallySyncScene = true;
 
-        Globals.GameMode = GameModes.ONLINE_MULTIPLAYER;  // redundant set for debug/testing purposes
         DontDestroyOnLoad(this);
     }
 
@@ -59,10 +58,73 @@ public class NetworkManager : Singleton<NetworkManager>
         if (PhotonNetwork.isMasterClient)
             SpawnDisc();
 
-        SpawnLocalPlayer();
+        switch (Globals.GameMode)
+        {
+            case GameModes.LOCAL_MULTIPLAYER:
+                SpawnLocalPlayer(1); SpawnLocalPlayer(2);
+                break;
+            case GameModes.ONLINE_MULTIPLAYER: SpawnOnlinePlayer(); break;
+        }
     }
 
-    private void SpawnLocalPlayer()
+    private void SpawnLocalPlayer(int _playerNum)
+    {
+        int index = _playerNum - 1;
+        Team team = Team.UNASSIGNED;
+
+        switch (_playerNum)
+        {
+            case 1: team = Team.LEFT; break;
+            case 2: team = Team.RIGHT; break;
+        }
+
+        string prefabID = "";
+
+        switch (Globals.SelectedCharacters[index])
+        {
+            case CharacterID.DR_TRACKSUIT: prefabID = PREFAB_ID_TRACKSUIT; break;
+            case CharacterID.V_BOMB: prefabID = PREFAB_ID_VBOMB; break;
+            case CharacterID.DIRTY_DAN_RYCKERT: prefabID = PREFAB_ID_DDR; break;
+            case CharacterID.METAL_GEAR_SCANLON: prefabID = PREFAB_ID_MGS; break;
+        }
+
+        Vector3 spawnPosition = Vector3.zero;
+
+        switch (team)
+        {
+            case Team.LEFT:
+                spawnPosition = MatchManager.Instance.TeamLeftSpawn;
+                break;
+
+            case Team.RIGHT:
+                spawnPosition = MatchManager.Instance.TeamRightSpawn;
+                break;
+        }
+
+        GameObject player = PhotonNetwork.Instantiate(prefabID, spawnPosition, Quaternion.identity, 0) as GameObject;
+        Controller_Player cPlayer = player.GetComponent<Controller_Player>();
+        cPlayer.SetData(team, Globals.SelectedCharacters[index]);
+        cPlayer.Team = team;
+
+        // ========== DEBUG CODE
+        if (Globals.GameMode == GameModes.DEBUG)
+        {
+            cPlayer.Meter = 100;
+            cPlayer.MeterForEX = 0;
+            cPlayer.MeterForSuper = 0;
+        }
+
+        if (_playerNum == 2)
+        {
+            player.GetComponent<Input_Joy>().enabled = false;
+            player.AddComponent<Input_KM>();
+        }
+        // =====================
+
+        SpawnChargeBar(player, team);
+    }
+
+    private void SpawnOnlinePlayer()
     {
         int index = PhotonNetwork.player.ID - 1;
         Team team = Team.UNASSIGNED;
@@ -100,7 +162,6 @@ public class NetworkManager : Singleton<NetworkManager>
         Controller_Player cPlayer = player.GetComponent<Controller_Player>();
         cPlayer.SetData(team, Globals.SelectedCharacters[index]);
         cPlayer.Team = team;
-        player.GetComponent<Input_Joy>().enabled = true;
 
         // ========== DEBUG CODE
         if (Globals.GameMode == GameModes.DEBUG)

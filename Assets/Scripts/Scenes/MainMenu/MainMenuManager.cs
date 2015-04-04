@@ -36,6 +36,13 @@ public class MainMenuManager : Singleton<MainMenuManager>
     public void StartLocalMultiplayer()
     {
         Globals.GameMode = GameModes.LOCAL_MULTIPLAYER;
+        PhotonNetwork.offlineMode = true;
+        PhotonNetwork.CreateRoom(null);
+        Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID;
+        Globals.SelectedCharacters[1] = (CharacterID)DEBUG_CharacterID;
+        if (NetworkManager.IsNull)
+            gameObject.AddComponent<NetworkManager>();
+        PhotonNetwork.LoadLevel("map_beach");
     }
 
     public void StartOnlineMultiplayer()

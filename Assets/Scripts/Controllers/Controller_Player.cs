@@ -252,6 +252,7 @@ public class Controller_Player : MonoBehaviour
     private Rigidbody2D cRigidbody2D;
     private Collider2D cCollider2D;
     private PhotonView cPhotonView;
+    private SpriteRenderer cSpriteRenderer;
     private Animator cAnimator;
 
     private GameObject courtArea;
@@ -278,6 +279,7 @@ public class Controller_Player : MonoBehaviour
         cRigidbody2D = GetComponent<Rigidbody2D>();
         cCollider2D = GetComponent<Collider2D>();
         cPhotonView = GetComponent<PhotonView>();
+        cSpriteRenderer = GetComponent<SpriteRenderer>();
         cAnimator = GetComponent<Animator>();
 
         courtArea = GameObject.FindGameObjectWithTag(COURT_AREA_TAG);
@@ -530,6 +532,52 @@ public class Controller_Player : MonoBehaviour
         Disc.Instance.KnockbackPower = knockback;
     }
 
+    private void VFX_EX()
+    {
+        GameObject obj = new GameObject("VFX");
+        obj.transform.parent = cTransform;
+        obj.transform.position = cTransform.position;
+        obj.transform.localScale = Vector3.one;
+        Vector3 targetScale = new Vector3(1.2f, 1.2f, 1);
+        SpriteRenderer sRender = obj.AddComponent<SpriteRenderer>();
+        sRender.sortingLayerID = cSpriteRenderer.sortingLayerID;
+        sRender.sortingOrder = cSpriteRenderer.sortingOrder - 1;
+        sRender.sprite = cSpriteRenderer.sprite;
+        Color color = cSpriteRenderer.color;
+        color.a = 0.4f;
+        sRender.color = color;
+
+        float duration = 0.75f;
+
+        iTween.ScaleTo(obj, iTween.Hash(
+            "scale", targetScale,
+            "time", duration,
+            "onupdate",
+                (Action<object>)(p1 =>
+                {
+                    sRender.sprite = cSpriteRenderer.sprite;
+                }),
+            "oncomplete",
+                (Action<object>)(p1 =>
+                {
+                    iTween.ScaleTo(obj, iTween.Hash(
+                        "scale", Vector3.one,
+                        "time", duration,
+                        "onupdate",
+                            (Action<object>)(p2 =>
+                            {
+                                sRender.sprite = cSpriteRenderer.sprite;
+                            }),
+                        "oncomplete",
+                            (Action<object>)(p2 =>
+                            {
+                                Destroy(obj);
+                            })
+                        ));
+                })
+            ));
+    }
+
     #endregion
 
     #region Coroutines
@@ -590,7 +638,10 @@ public class Controller_Player : MonoBehaviour
         yield return new WaitForSeconds(THROW_AFTER_IDLE_DURATION);
 
         if (State == PlayerState.AIM)
+        {
+            State = PlayerState.CHARGE;  // keeps throw input from being read while throwing
             cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, Vector3.right, (float)0);
+        }
     }
 
     private IEnumerator CR_ThrowRecovery()
@@ -614,7 +665,8 @@ public class Controller_Player : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
         Stop();
-        cPhotonView.RPC("RPC_RemoveKnockback", PhotonTargets.All);
+        Disc.Instance.HasKnockback = false;
+        Disc.Instance.KnockbackPower = 0;
         Disc.Instance.SetPosition(cTransform.position);
         State = PlayerState.AIM;
     }
@@ -805,7 +857,7 @@ public class Controller_Player : MonoBehaviour
 
         knockbackVector = Disc.Instance.Velocity;
 
-        Disc.Instance.Catch(cTransform.position + (Vector3.right * GetDiscOffset()));
+        Disc.Instance.Catch();
 
         if (Disc.Instance.HasKnockback)
             StartCoroutine(CR_KNOCKBACK);
@@ -839,6 +891,8 @@ public class Controller_Player : MonoBehaviour
         Meter -= MeterForEX;
 
         StopCoroutine(CR_THROW_AFTER_IDLE);
+
+        VFX_EX();
 
         if (State == PlayerState.AIM)
             StartCoroutine(CR_THROW_AFTER_IDLE);
@@ -878,13 +932,6 @@ public class Controller_Player : MonoBehaviour
 
         if (book != null)
             StartCoroutine(CR_BookStun(book.GetSafeComponent<Book>()));
-    }
-
-    [RPC]
-    private void RPC_RemoveKnockback()
-    {
-        Disc.Instance.HasKnockback = false;
-        Disc.Instance.KnockbackPower = 0;
     }
 
     #endregion

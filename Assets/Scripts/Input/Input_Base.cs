@@ -8,6 +8,7 @@ public abstract class Input_Base : MonoBehaviour
 
     protected Controller_Player controller;
     protected Vector2 inputVector = Vector2.zero;
+    protected PhotonView cPhotonView;
 
     protected bool isEnabled = true;
     protected bool appHasFocus = true;
@@ -18,7 +19,9 @@ public abstract class Input_Base : MonoBehaviour
 
     protected virtual void Awake()
     {
-        controller = gameObject.GetSafeComponent<Controller_Player>();
+        controller = GetComponent<Controller_Player>();
+        cPhotonView = GetComponent<PhotonView>();
+
         MatchManager.OnBeginResetAfterScore += Disable;
         MatchManager.OnCompleteResetAfterScore += Enable;
     }

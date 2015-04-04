@@ -83,7 +83,7 @@ public class Disc : Singleton<Disc>
 
     #region Methods
 
-    public void Catch(Vector3 _snapPosition)
+    public void Catch()
     {
         StopCoroutine(CR_LOB_SCORE);
 

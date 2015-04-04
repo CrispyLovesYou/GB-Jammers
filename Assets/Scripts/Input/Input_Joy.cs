@@ -31,7 +31,7 @@ public class Input_Joy : Input_Base
 
     private void Update()
     {
-        if (!isEnabled || !appHasFocus)
+        if (!isEnabled || !appHasFocus || !cPhotonView.isMine)
             return;
 
         CheckMovement();
