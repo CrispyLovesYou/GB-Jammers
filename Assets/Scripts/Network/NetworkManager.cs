@@ -63,7 +63,11 @@ public class NetworkManager : Singleton<NetworkManager>
             case GameModes.LOCAL_MULTIPLAYER:
                 SpawnLocalPlayer(1); SpawnLocalPlayer(2);
                 break;
-            case GameModes.ONLINE_MULTIPLAYER: SpawnOnlinePlayer(); break;
+
+            case GameModes.ONLINE_MULTIPLAYER:
+            case GameModes.DEBUG:
+                SpawnOnlinePlayer();
+                break;
         }
     }
 

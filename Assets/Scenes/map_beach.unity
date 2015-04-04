@@ -783,10 +783,12 @@ MonoBehaviour:
   VolleyCountBeforeScore: 0
   Team_Left_Spawn_Tag: Team_Left_Spawn
   Team_Right_Spawn_Tag: Team_Right_Spawn
-  Disc_Spawn_Tag: Disc_Spawn
+  Disc_Spawn_Left_Tag: Disc_Spawn_Left
+  Disc_Spawn_Right_Tag: Disc_Spawn_Right
   LobPointValue: 2
   BonusPointValue: 0
   isInitialCatchComplete: 0
+  LastTeamToScore: 0
 --- !u!4 &795162138
 Transform:
   m_ObjectHideFlags: 0

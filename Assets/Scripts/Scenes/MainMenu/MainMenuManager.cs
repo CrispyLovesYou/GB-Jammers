@@ -12,7 +12,8 @@ public class MainMenuManager : Singleton<MainMenuManager>
 
     #region Fields
 
-    public int DEBUG_CharacterID = 0;
+    public int DEBUG_CharacterID_1 = 0;
+    public int DEBUG_CharacterID_2 = 0;
 
     #endregion
 
@@ -35,11 +36,12 @@ public class MainMenuManager : Singleton<MainMenuManager>
 
     public void StartLocalMultiplayer()
     {
+        // Debug
         Globals.GameMode = GameModes.LOCAL_MULTIPLAYER;
         PhotonNetwork.offlineMode = true;
         PhotonNetwork.CreateRoom(null);
-        Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID;
-        Globals.SelectedCharacters[1] = (CharacterID)DEBUG_CharacterID;
+        Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID_1;
+        Globals.SelectedCharacters[1] = (CharacterID)DEBUG_CharacterID_2;
         if (NetworkManager.IsNull)
             gameObject.AddComponent<NetworkManager>();
         PhotonNetwork.LoadLevel("map_beach");
@@ -57,10 +59,10 @@ public class MainMenuManager : Singleton<MainMenuManager>
 
     public void OnClick_Debug()
     {
+        Globals.GameMode = GameModes.DEBUG;
         PhotonNetwork.offlineMode = true;
         PhotonNetwork.CreateRoom(null);
-        Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID;
-        Globals.GameMode = GameModes.DEBUG;
+        Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID_1;
         if (NetworkManager.IsNull)
             gameObject.AddComponent<NetworkManager>();
         PhotonNetwork.LoadLevel("map_beach");
