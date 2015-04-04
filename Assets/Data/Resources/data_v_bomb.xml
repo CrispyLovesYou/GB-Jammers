@@ -10,10 +10,10 @@
   <DashSpeed>4</DashSpeed>
   <DashDuration>0.5</DashDuration>
   <LobDuration>2.2</LobDuration>
-  <AbilityPassive>ability_passive_vbomb</AbilityPassive>
+  <AbilityPassive>V-Bomb ANGRY</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
-  <AbilityEX>ability_ex_vbomb</AbilityEX>
+  <AbilityEX>V-Bomb SMASH</AbilityEX>
   <AbilityEXDesc>[EX description]</AbilityEXDesc>
-  <AbilitySuper>ability_super_vbomb</AbilitySuper>
+  <AbilitySuper>Roll For Initiative</AbilitySuper>
   <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
 </Character>

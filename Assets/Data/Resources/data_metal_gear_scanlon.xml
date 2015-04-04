@@ -10,10 +10,10 @@
   <DashSpeed>10</DashSpeed>
   <DashDuration>0.16</DashDuration>
   <LobDuration>1.5</LobDuration>
-  <AbilityPassive>ability_passive_mgs</AbilityPassive>
+  <AbilityPassive>Survivalist</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
-  <AbilityEX>ability_ex_mgs</AbilityEX>
+  <AbilityEX>"Book"</AbilityEX>
   <AbilityEXDesc>[EX description]</AbilityEXDesc>
-  <AbilitySuper>ability_super_mgs</AbilitySuper>
+  <AbilitySuper>OctoCamo</AbilitySuper>
   <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
 </Character>

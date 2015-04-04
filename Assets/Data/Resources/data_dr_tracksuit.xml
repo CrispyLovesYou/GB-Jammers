@@ -10,10 +10,10 @@
   <DashSpeed>6</DashSpeed>
   <DashDuration>0.25</DashDuration>
   <LobDuration>1.9</LobDuration>
-  <AbilityPassive>ability_passive_tracksuit</AbilityPassive>
+  <AbilityPassive>Chase That High</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
-  <AbilityEX>ability_ex_tracksuit</AbilityEX>
+  <AbilityEX>Sticky Fingaz</AbilityEX>
   <AbilityEXDesc>[EX description]</AbilityEXDesc>
-  <AbilitySuper>ability_super_tracksuit</AbilitySuper>
+  <AbilitySuper>Winter Wonderland</AbilitySuper>
   <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
 </Character>

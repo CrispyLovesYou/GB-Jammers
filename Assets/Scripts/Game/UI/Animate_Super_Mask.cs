@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Super_Mask : MonoBehaviour
+public class Animate_Super_Mask : MonoBehaviour
 {
     #region Fields
 

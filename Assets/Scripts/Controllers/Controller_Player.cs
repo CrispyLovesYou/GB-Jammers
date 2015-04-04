@@ -939,7 +939,8 @@ public class Controller_Player : MonoBehaviour
         else
             Meter -= MeterForSuper;
 
-        Instantiate(SuperMaskPrefab, Vector3.zero, Quaternion.identity);
+        GameObject obj = Instantiate(SuperMaskPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        obj.GetComponentInChildren<Animate_Super_Mask>().SetData(Character);
 
         StopCoroutine(CR_THROW_AFTER_IDLE);
 
