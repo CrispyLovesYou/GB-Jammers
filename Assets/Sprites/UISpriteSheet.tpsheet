@@ -1,0 +1,25 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: UISpriteSheet.png (2048 x 1024)
+# $TexturePacker:SmartUpdate:28bfc17526cdcd3f18b1f27bb63c2934:ccfd1b0b5b06a165aa919a1058d9b1b3:e0e06d700246682ee46b758c205f945a$
+#
+
+Arrow;1924;980;64;42;0.5;0.5
+Background_Tile;2;400;624;494;0.5;0.5
+BigButton_Idle;2;313;745;85;0.5;0.5
+BigButton_Over;1287;384;745;85;0.5;0.5
+Cursor;1990;953;42;69;0.5;0.5
+CursorOver;1924;909;42;69;0.5;0.5
+Header;2;896;1920;126;0.5;0.5
+Header_OnlineLobby;1343;818;547;76;0.5;0.5
+Menu_Idle;749;345;506;61;0.5;0.5
+Menu_Over;628;408;657;61;0.5;0.5
+Menu_Tabbed;749;282;506;61;0.5;0.5
+MiniHeader;1257;298;741;84;0.5;0.5
+StandaloneButtonIdle;2;219;428;61;0.5;0.5
+StandaloneButtonOver;2;156;428;61;0.5;0.5
+WarningWindow;628;471;713;423;0.5;0.5

@@ -1,0 +1,220 @@
+fileFormatVersion: 2
+guid: 1dcd03261f3cb4848bc197a32be01a9d
+timeCreated: 1428119003
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Arrow
+    21300002: Background_Tile
+    21300004: BigButton_Idle
+    21300006: BigButton_Over
+    21300008: Cursor
+    21300010: CursorOver
+    21300012: Header
+    21300014: Header_OnlineLobby
+    21300016: Menu_Idle
+    21300018: Menu_Over
+    21300020: Menu_Tabbed
+    21300022: MiniHeader
+    21300024: StandaloneButtonIdle
+    21300026: StandaloneButtonOver
+    21300028: WarningWindow
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Arrow
+      rect:
+        serializedVersion: 2
+        x: 1924
+        y: 980
+        width: 64
+        height: 42
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Background_Tile
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 400
+        width: 624
+        height: 494
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BigButton_Idle
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 313
+        width: 745
+        height: 85
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BigButton_Over
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 384
+        width: 745
+        height: 85
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Cursor
+      rect:
+        serializedVersion: 2
+        x: 1990
+        y: 953
+        width: 42
+        height: 69
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CursorOver
+      rect:
+        serializedVersion: 2
+        x: 1924
+        y: 909
+        width: 42
+        height: 69
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Header
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 896
+        width: 1920
+        height: 126
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Header_OnlineLobby
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 818
+        width: 547
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Menu_Idle
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 345
+        width: 506
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Menu_Over
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 408
+        width: 657
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Menu_Tabbed
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 282
+        width: 506
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MiniHeader
+      rect:
+        serializedVersion: 2
+        x: 1257
+        y: 298
+        width: 741
+        height: 84
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: StandaloneButtonIdle
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 219
+        width: 428
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: StandaloneButtonOver
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 156
+        width: 428
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: WarningWindow
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 471
+        width: 713
+        height: 423
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
