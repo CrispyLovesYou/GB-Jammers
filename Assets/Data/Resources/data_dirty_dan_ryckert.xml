@@ -7,8 +7,8 @@
   <ThrowKnockback>2.5</ThrowKnockback>
   <Stability>2.5</Stability>
   <MoveSpeed>2.4</MoveSpeed>
-  <DashSpeed>10</DashSpeed>
-  <DashDuration>0.14</DashDuration>
+  <DashSpeed>8</DashSpeed>
+  <DashDuration>0.16</DashDuration>
   <LobDuration>1.5</LobDuration>
   <AbilityPassive>ability_passive_ddr</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>

@@ -79,15 +79,18 @@ public class MatchManager : Singleton<MatchManager>
 
     public string Team_Left_Spawn_Tag = "Team_Left_Spawn";
     public string Team_Right_Spawn_Tag = "Team_Right_Spawn";
-    public string Disc_Spawn_Tag = "Disc_Spawn";
+    public string Disc_Spawn_Left_Tag = "Disc_Spawn_Left";
+    public string Disc_Spawn_Right_Tag = "Disc_Spawn_Right";
 
     public int LobPointValue = 2;
     public int BonusPointValue = 0;
 
     public Vector3 TeamLeftSpawn { get; private set; }
     public Vector3 TeamRightSpawn { get; private set; }
-    public Vector3 DiscSpawn { get; private set; }
+    public Vector3 DiscLeftSpawn { get; private set; }
+    public Vector3 DiscRightSpawn { get; private set; }
     public bool isInitialCatchComplete = false;
+    public Team LastTeamToScore = Team.UNASSIGNED;
 
     private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
@@ -113,7 +116,9 @@ public class MatchManager : Singleton<MatchManager>
 
         TeamLeftSpawn = GameObject.FindGameObjectWithTag(Team_Left_Spawn_Tag).transform.position;
         TeamRightSpawn = GameObject.FindGameObjectWithTag(Team_Right_Spawn_Tag).transform.position;
-        DiscSpawn = GameObject.FindGameObjectWithTag(Disc_Spawn_Tag).transform.position;
+
+        DiscLeftSpawn = GameObject.FindGameObjectWithTag(Disc_Spawn_Left_Tag).transform.position;
+        DiscRightSpawn = GameObject.FindGameObjectWithTag(Disc_Spawn_Right_Tag).transform.position;
 
         Controller_Player.OnCatch += Controller_Player_OnCatch;
     }
@@ -245,6 +250,8 @@ public class MatchManager : Singleton<MatchManager>
             case Team.LEFT: L_Points += _points + BonusPointValue; break;
             case Team.RIGHT: R_Points += _points + BonusPointValue; break;
         }
+
+        LastTeamToScore = (Team)_team;
 
         if (onScored != null)
             onScored(this, new ScoredEventArgs((Team)_team, _points));

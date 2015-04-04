@@ -494,8 +494,8 @@ GameObject:
   - 4: {fileID: 508517362}
   - 114: {fileID: 508517363}
   m_Layer: 0
-  m_Name: Disc
-  m_TagString: Disc_Spawn
+  m_Name: Disc (left)
+  m_TagString: Disc_Spawn_Left
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -507,7 +507,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 508517361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.00999999, y: -.5, z: 0}
+  m_LocalPosition: {x: -1.79999995, y: -.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 718963876}
@@ -553,8 +553,50 @@ Transform:
   - {fileID: 328661127}
   - {fileID: 762673153}
   - {fileID: 508517362}
+  - {fileID: 731686585}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!1 &731686584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 731686585}
+  - 114: {fileID: 731686586}
+  m_Layer: 0
+  m_Name: Disc (right)
+  m_TagString: Disc_Spawn_Right
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &731686585
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 731686584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.79999995, y: -.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 718963876}
+  m_RootOrder: 3
+--- !u!114 &731686586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 731686584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d992122438a527346bb6c08956fad69a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GizmoColor: {r: 1, g: 0, b: 0, a: .5}
+  GizmoAlpha: .5
 --- !u!1 &762673152
 GameObject:
   m_ObjectHideFlags: 0
