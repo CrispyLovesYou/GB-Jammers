@@ -16,4 +16,6 @@
   <AbilityEXDesc>[EX description]</AbilityEXDesc>
   <AbilitySuper>OctoCamo</AbilitySuper>
   <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
+  <PowerRating>2</PowerRating>
+  <SpeedRating>4</SpeedRating>
 </Character>

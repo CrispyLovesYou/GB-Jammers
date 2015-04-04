@@ -29,6 +29,9 @@ public struct Character
     public string AbilitySuper;
     public string AbilitySuperDesc;
 
+    public int PowerRating;
+    public int SpeedRating;
+
     #endregion
 
     #region Serialization

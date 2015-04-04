@@ -16,4 +16,6 @@
   <AbilityEXDesc>[EX description]</AbilityEXDesc>
   <AbilitySuper>'MURICA</AbilitySuper>
   <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
+  <PowerRating>2</PowerRating>
+  <SpeedRating>3</SpeedRating>
 </Character>

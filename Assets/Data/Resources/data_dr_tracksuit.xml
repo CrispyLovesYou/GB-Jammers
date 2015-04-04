@@ -16,4 +16,6 @@
   <AbilityEXDesc>[EX description]</AbilityEXDesc>
   <AbilitySuper>Winter Wonderland</AbilitySuper>
   <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
+  <PowerRating>4</PowerRating>
+  <SpeedRating>3</SpeedRating>
 </Character>

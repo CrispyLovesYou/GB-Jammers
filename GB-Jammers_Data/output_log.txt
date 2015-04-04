@@ -16,7 +16,7 @@ Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\U
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.063 seconds
+- Completed reload, in  0.069 seconds
 desktop: 1680x1050 60Hz; virtual: 3120x1050 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -25,34 +25,537 @@ Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\S
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.dll (this message is harmless)
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Xml.dll (this message is harmless)
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.365068 ms
+UnloadTime: 0.279342 ms
 
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 279.
-Total: 0.297420 ms (FindLiveObjects: 0.015745 ms CreateObjectMapping: 0.016037 ms MarkObjects: 0.258347 ms  DeleteObjects: 0.006123 ms)
-
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 4.091568 ms
-
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 460.
-Total: 0.459834 ms (FindLiveObjects: 0.026826 ms CreateObjectMapping: 0.016328 ms MarkObjects: 0.410556 ms  DeleteObjects: 0.005248 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 284.
+Total: 0.249600 ms (FindLiveObjects: 0.012538 ms CreateObjectMapping: 0.014579 ms MarkObjects: 0.215776 ms  DeleteObjects: 0.005831 ms)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 4.535657 ms
+UnloadTime: 4.686713 ms
 
-Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 338.
-Total: 0.770376 ms (FindLiveObjects: 0.051319 ms CreateObjectMapping: 0.023035 ms MarkObjects: 0.669778 ms  DeleteObjects: 0.024785 ms)
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 465.
+Total: 0.469167 ms (FindLiveObjects: 0.023910 ms CreateObjectMapping: 0.017786 ms MarkObjects: 0.420763 ms  DeleteObjects: 0.005831 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.772581 ms
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 657.
+Total: 1.031059 ms (FindLiveObjects: 0.047237 ms CreateObjectMapping: 0.042572 ms MarkObjects: 0.923171 ms  DeleteObjects: 0.014579 ms)
+
+Id was 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DR_TRACKSUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is METAL_GEAR_SCANLON
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is DIRTY_DAN_RYCKERT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Id was 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Char id is V_BOMB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
 Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.524567 ms
+UnloadTime: 1.108622 ms
 
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 430.
-Total: 0.507946 ms (FindLiveObjects: 0.026826 ms CreateObjectMapping: 0.016037 ms MarkObjects: 0.458668 ms  DeleteObjects: 0.005248 ms)
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 469.
+Total: 0.543522 ms (FindLiveObjects: 0.018661 ms CreateObjectMapping: 0.017495 ms MarkObjects: 0.482288 ms  DeleteObjects: 0.024493 ms)
 
-Cannot find Singleton instance of Disc.
+PhotonView with ID 1 has no method "RPC_SelectCharacter" marked with the [RPC](C#) or @RPC(JS) property! Args: Int32, Int32
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+PhotonView with ID 1 has no method "RPC_SelectCharacter" marked with the [RPC](C#) or @RPC(JS) property! Args: Int32, Int32
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
 Can not play a disabled audio source
  
 (Filename:  Line: 398)
+
+Received RPC "RPC_SetState" for viewID 2001 but this PhotonView does not exist! Was remote PV. Remote called. By: 1 Maybe GO was destroyed but RPC not cleaned up.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Rigidbody2D:INTERNAL_set_velocity (UnityEngine.Vector2&)
+  at UnityEngine.Rigidbody2D.set_velocity (Vector2 value) [0x00000] in <filename unknown>:0 
+  at Controller_Player.Stop () [0x00000] in <filename unknown>:0 
+  at Controller_Player.MatchManager_OnBeginResetAfterScore (System.Object sender, System.EventArgs e) [0x00000] in <filename unknown>:0 
+  at (wrapper delegate-invoke) System.EventHandler`1<System.EventArgs>:invoke_void__this___object_EventArgs (object,System.EventArgs)
+  at (wrapper delegate-invoke) System.EventHandler`1<System.EventArgs>:invoke_void__this___object_EventArgs (object,System.EventArgs)
+  at MatchManager+<ResetAfterScore>c__Iterator15.MoveNext () [0x00000] in <filename unknown>:0 
+UnityEngine.MonoBehaviour:StartCoroutine_Auto(IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+MatchManager:RPC_ScorePoints(Int32, Int32)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo)
+System.Reflection.MethodBase:Invoke(Object, Object[])
+NetworkingPeer:ExecuteRPC(Hashtable, PhotonPlayer)
+NetworkingPeer:OnEvent(EventData)
+ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback(Byte[])
+ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands()
+ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands()
+PhotonHandler:Update()
+ 
+(Filename:  Line: -1)
 

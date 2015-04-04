@@ -16,4 +16,6 @@
   <AbilityEXDesc>[EX description]</AbilityEXDesc>
   <AbilitySuper>Roll For Initiative</AbilitySuper>
   <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
+  <PowerRating>5</PowerRating>
+  <SpeedRating>2</SpeedRating>
 </Character>
