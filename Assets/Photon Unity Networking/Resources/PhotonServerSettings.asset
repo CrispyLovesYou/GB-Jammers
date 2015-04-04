@@ -67,4 +67,5 @@ MonoBehaviour:
   - RPC_StartThrowAnimation
   - RPC_SetState
   - RPC_SetDashState
+  - RPC_SetStateAndFlip
   DisableAutoOpenWizard: 0

@@ -624,7 +624,9 @@ public class Controller_Player : MonoBehaviour
     private IEnumerator CR_Dash(Vector2 _directionVector)
     {
         float initX = cTransform.localScale.x;
-        cPhotonView.RPC("RPC_SetDashState", PhotonTargets.All);  // specific RPC to also send Transform flip data
+        bool flip = ((Team == Team.LEFT && cRigidbody2D.velocity.x < 0) || (Team == Team.RIGHT && cRigidbody2D.velocity.x > 0));
+
+        cPhotonView.RPC("RPC_SetStateAndFlip", PhotonTargets.All, (int)PlayerState.DASH, flip);
 
         float dashSpeed = (DashSpeed + DashSpeedMod) * DashSpeedMultiplier;
 
@@ -635,8 +637,7 @@ public class Controller_Player : MonoBehaviour
         yield return new WaitForSeconds(DashDuration);
         Stop();
 
-        cTransform.localScale = new Vector3(initX, cTransform.localScale.y, 1);  // in case scale was flipped
-        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.IDLE);
+        cPhotonView.RPC("RPC_SetStateAndFlip", PhotonTargets.All, (int)PlayerState.IDLE, flip);
     }
 
     private IEnumerator CR_ThrowAfterIdle()
@@ -764,15 +765,14 @@ public class Controller_Player : MonoBehaviour
     }
 
     [RPC]
-    private void RPC_SetDashState()
+    private void RPC_SetStateAndFlip(int _state, bool _flip)
     {
-        State = PlayerState.DASH;
+        State = (PlayerState)_state;
         cAnimator.SetInteger("state", (int)State);
 
         float initX = cTransform.localScale.x;
 
-        if ((Team == Team.LEFT && cRigidbody2D.velocity.x < 0) ||
-            (Team == Team.RIGHT && cRigidbody2D.velocity.x > 0))
+        if (_flip)
             cTransform.localScale = new Vector3(-initX, cTransform.localScale.y, 1);
     }
 
