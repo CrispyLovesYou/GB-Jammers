@@ -35,6 +35,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public Text P2ReadyStatus;
     public Text CountdownField;
 	public GameObject ScrollingBackground; 
+	public Text LocalUserName;
 
     private PhotonView cPhotonView;
     private string username;
@@ -211,6 +212,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public void OnClick_Connect()
     {
         username = usernameField.text;
+		LocalUserName.text = username;
         ToggleCanvasGroup(PreconnectGroup, false);
 
         Globals.Username = username;
