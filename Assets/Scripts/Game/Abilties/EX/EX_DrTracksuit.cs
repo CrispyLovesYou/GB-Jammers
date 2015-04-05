@@ -6,6 +6,7 @@ public class EX_DrTracksuit : EX_Base
 {
     #region Fields
 
+    public int ThrowCharge = 80;
     public bool HasKnockback = false;
 
     #endregion
@@ -36,7 +37,7 @@ public class EX_DrTracksuit : EX_Base
             inputVector.y = 1.0f;
 
         Disc.Instance.IsMagnet = true;
-        player.SpecialThrow(inputVector, HasKnockback);
+        player.SpecialThrow(ThrowCharge, inputVector, HasKnockback);
     }
 
     private void Controller_Player_OnCatch(object sender, System.EventArgs e)

@@ -6,6 +6,7 @@ public class Super_MetalGearScanlon : Super_Base
 {
     #region Fields
 
+    public int ThrowCharge = 70;
     public float Duration = 0.5f;
 
     private SpriteRenderer discRenderer;
@@ -33,7 +34,19 @@ public class Super_MetalGearScanlon : Super_Base
         if ((Controller_Player)sender != player)
             return;
 
-        player.SpecialThrow(e.InputVector, true);
+        player.SpecialThrow(ThrowCharge, e.InputVector, true);
+
+        StartCoroutine(CR_WaitForAnimationDelay());
+    }
+
+    #endregion
+
+    #region Coroutines
+
+    private IEnumerator CR_WaitForAnimationDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+
         iTween.ValueTo(gameObject, iTween.Hash(
             "from", color.a,
             "to", 0,
@@ -48,10 +61,6 @@ public class Super_MetalGearScanlon : Super_Base
 
         StartCoroutine(CR_FadeIn());
     }
-
-    #endregion
-
-    #region Coroutines
 
     private IEnumerator CR_FadeIn()
     {
