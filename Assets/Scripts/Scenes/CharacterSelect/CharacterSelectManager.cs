@@ -82,6 +82,10 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 	#region UI Callbacks
 
 	public void OnClick_LockCharacter(int _id){
+		// Only activate for mouse input.
+		if(Input.GetMouseButtonUp(0) == false){
+			return;
+		}
 		switch(Globals.GameMode){
 			case GameModes.ONLINE_MULTIPLAYER:
 				switch(PhotonNetwork.player.ID){
