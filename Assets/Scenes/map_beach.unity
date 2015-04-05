@@ -821,6 +821,7 @@ MonoBehaviour:
   isInitialCatchComplete: 0
   LastTeamToScore: 0
   PauseMenu: {fileID: 1930156460}
+  IsPauseAllowed: 0
 --- !u!4 &795162138
 Transform:
   m_ObjectHideFlags: 0
