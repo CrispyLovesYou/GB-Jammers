@@ -50,6 +50,7 @@ public class Super_DrTracksuit : Super_Base
 
         targetPlayer.MoveSpeedMultiplier /= MoveSpeedMultiplier;
         targetPlayer.DashSpeedMultiplier /= DashSpeedMultiplier;
+        IsActive = false;
     }
 
     #endregion

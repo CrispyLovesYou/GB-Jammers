@@ -294,7 +294,14 @@ public class Controller_Player : MonoBehaviour
 
     private void Start()
     {
-        initLocalScale = cTransform.localScale;  // must be set in Start so that proper flip is recorded
+        // must be set in Start so that proper flip is recorded
+        float scaleX = Mathf.Abs(cTransform.localScale.x);
+
+        switch (Team)
+        {
+            case global::Team.LEFT: initLocalScale = new Vector3(scaleX, cTransform.localScale.y, 1); break;
+            case global::Team.RIGHT: initLocalScale = new Vector3(-scaleX, cTransform.localScale.y, 1); break;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
