@@ -14,7 +14,7 @@ public class CharacterPanel : MonoBehaviour {
 	public CharNameSwapper CharNameSwapper;
 
 	public void OnCharacterSelect(int id){
-		ReadyImage.enabled = false;
+
 		// Change UI to match character
 		CharacterID charID = (CharacterID) id;
 		PassiveText.text = Globals.CharacterDict[charID].AbilityPassive;
@@ -42,6 +42,10 @@ public class CharacterPanel : MonoBehaviour {
 
 	public void OnCharacterConfirm(){
 		ReadyImage.enabled = true;
+	}
+
+	public void OnCharacterCancel(){
+		ReadyImage.enabled = false;
 	}
 
 }
