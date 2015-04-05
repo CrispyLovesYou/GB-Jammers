@@ -717,9 +717,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 154250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 025f061fa6343a34ea7a2fba886fbeb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DigitPlace: 1
+  Team: 2
 --- !u!114 &11406050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -749,9 +751,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 175026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 025f061fa6343a34ea7a2fba886fbeb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DigitPlace: 1
+  Team: 1
 --- !u!114 &11410058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1010,9 +1014,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 109838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 8b31c8c90cff36a4e95a7975f4d06888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: 2
 --- !u!114 &11441210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1287,9 +1292,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 193022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 8b31c8c90cff36a4e95a7975f4d06888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: 1
 --- !u!114 &11482426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1305,8 +1311,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 1
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1340,9 +1346,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 191330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 025f061fa6343a34ea7a2fba886fbeb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DigitPlace: 0
+  Team: 1
 --- !u!114 &11488882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1372,9 +1380,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 175844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 025f061fa6343a34ea7a2fba886fbeb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DigitPlace: 0
+  Team: 2
 --- !u!114 &11496800
 MonoBehaviour:
   m_ObjectHideFlags: 1

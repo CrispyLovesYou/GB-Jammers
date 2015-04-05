@@ -21,6 +21,7 @@ public class TitleScreenManager : MonoBehaviour
     private AudioSource cAudioSource;
     private float initVolume = 1.0f;
     private bool isReadyForInput = false;
+    private bool fading = false;
 
     #endregion
 
@@ -42,7 +43,7 @@ public class TitleScreenManager : MonoBehaviour
         if (!isReadyForInput)
             return;
 
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && !fading)
         {
             cAudioSource.Play();
 
@@ -62,6 +63,8 @@ public class TitleScreenManager : MonoBehaviour
                         Application.LoadLevel(MAIN_MENU_SCENE);
                     })
                 ));
+
+            fading = true;
         }
     }
 

@@ -16,63 +16,7 @@ Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\U
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.120 seconds
+- Completed reload, in  0.066 seconds
 desktop: 1680x1050 60Hz; virtual: 3120x1050 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-<RI> Initialized touch support.
-Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.dll (this message is harmless)
-Platform assembly: C:\Users\Crispy\Projects\GB-Jammers\GB-Jammers_Data\Managed\System.Xml.dll (this message is harmless)
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.411432 ms
-
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 403.
-Total: 0.322789 ms (FindLiveObjects: 0.020994 ms CreateObjectMapping: 0.018661 ms MarkObjects: 0.275551 ms  DeleteObjects: 0.006706 ms)
-
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.647046 ms
-
-Unloading 52 unused Assets to reduce memory usage. Loaded Objects now: 293.
-Total: 0.434759 ms (FindLiveObjects: 0.040822 ms CreateObjectMapping: 0.055985 ms MarkObjects: 0.276718 ms  DeleteObjects: 0.059775 ms)
-
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.187351 ms
-
-Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 606.
-Total: 0.513488 ms (FindLiveObjects: 0.024201 ms CreateObjectMapping: 0.030325 ms MarkObjects: 0.445839 ms  DeleteObjects: 0.012538 ms)
-
-The referenced script on this Behaviour is missing!
- 
-(Filename:  Line: 1713)
-
-The referenced script on this Behaviour is missing!
- 
-(Filename:  Line: 1713)
-
-The referenced script on this Behaviour is missing!
- 
-(Filename:  Line: 1713)
-
-The referenced script on this Behaviour is missing!
- 
-(Filename:  Line: 1713)
-
-The referenced script on this Behaviour is missing!
- 
-(Filename:  Line: 1713)
-
-The referenced script on this Behaviour is missing!
- 
-(Filename:  Line: 1713)
-
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.719210 ms
-
-Unloading 31 unused Assets to reduce memory usage. Loaded Objects now: 688.
-Total: 0.509406 ms (FindLiveObjects: 0.030033 ms CreateObjectMapping: 0.036157 ms MarkObjects: 0.419888 ms  DeleteObjects: 0.022743 ms)
-
-Can not play a disabled audio source
- 
-(Filename:  Line: 398)
-

@@ -13,7 +13,7 @@ public class Meter : MonoBehaviour
     public Image EXFill;
     public Image SpecialFill;
     public int MeterToEX = 33;
-    public int MeterToSpecial = 100;
+    public int MeterToSpecial = 99;
     public float AnimationSpeed = 0.1f;
 
     private int meter;
@@ -29,7 +29,7 @@ public class Meter : MonoBehaviour
 
     private void Update()
     {
-        if (meter >= 99)
+        if (meter >= MeterToSpecial)
             MeterSpecial.fillAmount = Mathf.Lerp(MeterSpecial.fillAmount, 1, AnimationSpeed);
         else
             MeterSpecial.fillAmount = 0.0f;

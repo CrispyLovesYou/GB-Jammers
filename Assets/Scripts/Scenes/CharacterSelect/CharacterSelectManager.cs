@@ -58,7 +58,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 				LocalEventSystem.firstSelectedGameObject = CharacterButtons[0].gameObject;
 				break;
 		}
-//		Globals.HasGameStarted = true;
+		Globals.HasGameStarted = true;
         cPhotonView = GetComponent<PhotonView>();
     }
 
@@ -127,8 +127,8 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 	public void OnClick_ReturnToMenu(){
 		switch(Globals.GameMode){
 			case GameModes.ONLINE_MULTIPLAYER:
-				PhotonNetwork.LoadLevel("network_lobby");
 				PhotonNetwork.LeaveRoom();
+                Application.LoadLevel("network_lobby");
 				break;
 			default:
 				PhotonNetwork.LoadLevel("main_menu");

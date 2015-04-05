@@ -68,4 +68,5 @@ MonoBehaviour:
   - RPC_SetState
   - RPC_SetDashState
   - RPC_SetStateAndFlip
+  - RPC_SendChat
   DisableAutoOpenWizard: 0

@@ -422,6 +422,7 @@ public class Controller_Player : MonoBehaviour
         if (State != PlayerState.CHARGE)
             return;
 
+        State = PlayerState.THROWN;
         throwDirection = _inputVector;
         StopCoroutine(CR_CHARGE);
         iTween.StopByName("ChargeUp");
@@ -431,6 +432,7 @@ public class Controller_Player : MonoBehaviour
 
     public void SpecialThrow(Vector2 _inputVector, bool _hasKnockback)
     {
+        State = PlayerState.THROWN;
         throwDirection = _inputVector;
         cPhotonView.RPC("RPC_SpecialThrow", PhotonTargets.AllViaServer, (Vector3)throwDirection, _hasKnockback);
     }
@@ -454,6 +456,7 @@ public class Controller_Player : MonoBehaviour
         if (State != PlayerState.AIM)
             return;
 
+        State = PlayerState.LOB;
         cPhotonView.RPC("RPC_Lob", PhotonTargets.AllViaServer, (Vector3)_inputVector);
     }
 
@@ -468,6 +471,7 @@ public class Controller_Player : MonoBehaviour
             return;
         }
 
+        State = PlayerState.EX;
         cPhotonView.RPC("RPC_EX", PhotonTargets.AllViaServer, (Vector3)_inputVector);
     }
 

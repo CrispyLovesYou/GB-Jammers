@@ -46,7 +46,10 @@ public enum PlayerState
     KNOCKBACK = 5,
     RECOVERY = 6,
     STUN = 7,
-    RESET = 8
+    RESET = 8,
+    LOB = 9,
+    EX = 10,
+    THROWN = 11  // here for sync purposes, so that discs aren't thrown twice
 }
 
 #endregion
