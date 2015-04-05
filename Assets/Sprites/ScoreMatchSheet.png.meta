@@ -1,0 +1,352 @@
+fileFormatVersion: 2
+guid: 67e62396bcc53c1409e12bac8c8051e6
+timeCreated: 1428271588
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: EndDan
+    21300002: EndDrew
+    21300004: EndTracksuit
+    21300006: EndVbomb
+    21300008: LOSE
+    21300010: WIN
+    21300012: pointscored
+    21300014: score0
+    21300016: score1
+    21300018: score2
+    21300020: score3
+    21300022: score4
+    21300024: score5
+    21300026: score6
+    21300028: score7
+    21300030: score8
+    21300032: score9
+    21300034: scorepanel
+    21300036: set
+    21300038: set1
+    21300040: set2
+    21300042: set3
+    21300044: setcount
+    21300046: setcount2
+    21300048: setcount3
+    21300050: setcout0
+    21300052: setcout1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: EndDan
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1294
+        width: 545
+        height: 368
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EndDrew
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 1263
+        width: 545
+        height: 368
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EndTracksuit
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 1059
+        width: 545
+        height: 368
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EndVbomb
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 924
+        width: 545
+        height: 368
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LOSE
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 1529
+        width: 372
+        height: 133
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: WIN
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 1518
+        width: 375
+        height: 144
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pointscored
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 1013
+        width: 283
+        height: 130
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: score0
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 728
+        width: 172
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: score1
+      rect:
+        serializedVersion: 2
+        x: 1129
+        y: 978
+        width: 172
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: score2
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 639
+        width: 172
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: score3
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 639
+        width: 172
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: score4
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 639
+        width: 172
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: score5
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 354
+        width: 172
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: score6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 69
+        width: 172
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: score7
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 354
+        width: 172
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: score8
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 69
+        width: 172
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: score9
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 354
+        width: 172
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: scorepanel
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1664
+        width: 943
+        height: 382
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: set
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 1710
+        width: 791
+        height: 336
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: set1
+      rect:
+        serializedVersion: 2
+        x: 1740
+        y: 1664
+        width: 288
+        height: 382
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: set2
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 1145
+        width: 288
+        height: 382
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: set3
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 879
+        width: 288
+        height: 382
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: setcount
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 1633
+        width: 670
+        height: 75
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: setcount2
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 1531
+        width: 139
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: setcount3
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 1429
+        width: 139
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: setcout0
+      rect:
+        serializedVersion: 2
+        x: 1303
+        y: 1161
+        width: 139
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: setcout1
+      rect:
+        serializedVersion: 2
+        x: 1303
+        y: 1059
+        width: 139
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
