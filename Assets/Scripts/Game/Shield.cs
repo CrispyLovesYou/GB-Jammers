@@ -33,7 +33,7 @@ public class Shield : MonoBehaviour
                 "oncomplete",
                     (System.Action<object>)(p =>
                     {
-                        Destroy(this.transform.gameObject);
+                        Destroy(this.gameObject);
                     })
                 ));
         }

@@ -171,8 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23725bd7a1317247b6c43a56263c1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shield: {fileID: 176450, guid: c8ffda87d684b9242803e97cd1026ee2, type: 2}
-  xPos: 4.30000019
+  Shield: {fileID: 158424, guid: c8ffda87d684b9242803e97cd1026ee2, type: 2}
+  xPos: 4
 --- !u!114 &11460900
 MonoBehaviour:
   m_ObjectHideFlags: 1
