@@ -14,7 +14,7 @@
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
   <AbilityEX>V-Bomb SMASH</AbilityEX>
   <AbilityEXDesc>[EX description]</AbilityEXDesc>
-  <AbilitySuper>Roll For Initiative</AbilitySuper>
+  <AbilitySuper>V-Bomb BLOCK</AbilitySuper>
   <AbilitySuperDesc>[Super description]</AbilitySuperDesc>
   <PowerRating>5</PowerRating>
   <SpeedRating>2</SpeedRating>

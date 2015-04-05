@@ -19,7 +19,7 @@ TagManager:
   - Goal_Wall_Trigger
   - Player_Wall_Left
   - Player_Wall_Right
-  - Player_Wall
+  - Shield
   layers:
   - Default
   - TransparentFX
