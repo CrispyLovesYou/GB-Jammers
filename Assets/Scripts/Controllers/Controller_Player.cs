@@ -293,7 +293,14 @@ public class Controller_Player : MonoBehaviour
 
     private void Start()
     {
-        initLocalScale = cTransform.localScale;  // must be set in Start so that proper flip is recorded
+        // must be set in Start so that proper flip is recorded
+        float scaleX = Mathf.Abs(cTransform.localScale.x);
+
+        switch (Team)
+        {
+            case global::Team.LEFT: initLocalScale = new Vector3(scaleX, cTransform.localScale.y, 1); break;
+            case global::Team.RIGHT: initLocalScale = new Vector3(-scaleX, cTransform.localScale.y, 1); break;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
@@ -331,7 +338,6 @@ public class Controller_Player : MonoBehaviour
 
     public void SetData(Team _team, CharacterID _id)
     {
-        Character = _id;
         cPhotonView.RPC("RPC_SetData", PhotonTargets.AllBufferedViaServer, (int)_team, (int)_id);
     }
 
@@ -743,6 +749,7 @@ public class Controller_Player : MonoBehaviour
     [RPC]
     private void RPC_SetData(int _team, int _id)
     {
+        Character = (CharacterID)_id;
         Team = (Team)_team;
 
         if (Team == Team.RIGHT)  // Flip the player on the right

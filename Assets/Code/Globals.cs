@@ -20,6 +20,7 @@ public static class Globals
     public static CharacterID[] SelectedCharacters = new CharacterID[MAX_CONNECTED_PLAYERS];
     public static string Username = "";
 	public static InputType[] PlayerInputs = new InputType[2]{InputType.KEYBOARD, InputType.KEYBOARD};
+    public static bool HasGameStarted = false;
 
     #endregion
 }

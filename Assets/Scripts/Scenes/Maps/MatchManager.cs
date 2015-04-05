@@ -167,7 +167,9 @@ public class MatchManager : Singleton<MatchManager>
         // temporary until a Match Over menu is implemented
         if (PhotonNetwork.connectedAndReady)
             PhotonNetwork.Disconnect();
-        PhotonNetwork.LoadLevel("main_menu");
+
+        Globals.HasGameStarted = false;
+        Application.LoadLevel("main_menu");
     }
 
     private IEnumerator HandleMatchSetup()
