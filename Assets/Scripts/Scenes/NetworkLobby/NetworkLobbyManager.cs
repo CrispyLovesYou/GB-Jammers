@@ -27,6 +27,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public CanvasGroup LobbyGroup;
     public CanvasGroup PreconnectGroup;
     public CanvasGroup StatusGroup;
+	public CanvasGroup PrivateRoomCreateGroup;
+	public CanvasGroup PrivateRoomJoinGroup;
     public CanvasGroup RoomListGroup;
     public GameObject RoomListLayoutGroup;
     public GameObject RoomPanelPrefab;
@@ -46,6 +48,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public InputField ChatInput;
     public Button ChatButton;
     public Button JoinPublic;
+	public InputField PrivateRoomCreateInput;
+	public InputField PrivateRoomJoinInput;
 
     private PhotonView cPhotonView;
     private string username;
@@ -53,6 +57,11 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     private List<GameObject> roomPanelCloneList = new List<GameObject>();
     private InputField usernameField;
     private Button connectBtn;
+
+	private InputField privateRoomNameCreateField;
+	private Button privateCreateButton;
+	private InputField privateRoomNameJoinField;
+	private Button privateJoinButton;
 
     private List<string> chatLog = new List<string>();
 
@@ -66,6 +75,13 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         cPhotonView = GetComponent<PhotonView>();
         usernameField = PreconnectGroup.GetComponentInChildren<InputField>();
         connectBtn = PreconnectGroup.GetComponentInChildren<Button>();
+
+		privateRoomNameCreateField = PrivateRoomCreateGroup.GetComponentInChildren<InputField>();
+		privateCreateButton = PrivateRoomCreateGroup.GetComponentInChildren<Button>();
+
+		privateRoomNameJoinField = PrivateRoomJoinGroup.GetComponentInChildren<InputField>();
+		privateJoinButton = PrivateRoomJoinGroup.GetComponentInChildren<Button>();
+
         ScrollingBackground.SetActive(true);
 
         PhotonNetwork.offlineMode = false;
@@ -94,8 +110,6 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         ToggleCanvasGroup(LobbyGroup, true);
 		ToggleCanvasGroup(HeaderCanvasGroup, true);
         ToggleCanvasGroup(RoomListGroup, true);
-
-//        JoinPublic.Select();
     }
 
     private void OnJoinedRoom()
@@ -262,12 +276,27 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
             connectBtn.interactable = false;
     }
 
+	public void OnChange_PrivateGameNameCreate()
+	{
+		if (privateRoomNameCreateField.text != "")
+			privateCreateButton.interactable = true;
+		else
+			privateCreateButton.interactable = false;
+	}
+
+	public void OnChange_PrivateGameNameJoin()
+	{
+		if (privateRoomNameJoinField.text != "")
+			privateJoinButton.interactable = true;
+		else
+			privateJoinButton.interactable = false;
+	}
+
     public void OnClick_Connect()
     {
         username = usernameField.text;
 		LocalUserName.text = username;
         ToggleCanvasGroup(PreconnectGroup, false);
-		PreconnectGroup.gameObject.SetActive(false);
 
         Globals.Username = username;
         NetworkManager.Instance.ConnectToNetwork();
@@ -283,13 +312,33 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
     public void OnClick_CreatePrivateGame()
     {
-
+		ToggleCanvasGroup(LobbyGroup, false);
+		ToggleCanvasGroup(PrivateRoomCreateGroup, true);
+		PrivateRoomCreateInput.text = "";
+		PrivateRoomCreateInput.Select();
+		PrivateRoomCreateInput.ActivateInputField();
     }
 
     public void OnClick_JoinPrivateGame()
     {
-
+		ToggleCanvasGroup(LobbyGroup, false);
+		ToggleCanvasGroup(PrivateRoomJoinGroup, true);
+		PrivateRoomJoinInput.text = "";
+		PrivateRoomJoinInput.Select();
+		PrivateRoomJoinInput.ActivateInputField();
     }
+
+	public void OnClick_PrivateGameNameCreateInput(){
+		string roomname = privateRoomNameCreateField.text;
+		ToggleCanvasGroup(PrivateRoomCreateGroup, false);
+		NetworkManager.Instance.CreateRoom(roomname, false);
+	}
+
+	public void OnClick_PrivateGameNameJoinInput(){
+		string roomname = privateRoomNameJoinField.text;
+		ToggleCanvasGroup(PrivateRoomJoinGroup, false);
+		NetworkLobbyManager.Instance.JoinRoom(roomname);
+	}
 
 	public void OnClick_BackToLobby(){
 		PhotonNetwork.LeaveRoom();
