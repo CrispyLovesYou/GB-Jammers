@@ -72,4 +72,5 @@ MonoBehaviour:
   - RPC_SendChat
   - RPC_ClickReady
   - RPC_SetReady
+  - RPC_SetRemotePlayerReady
   DisableAutoOpenWizard: 0

@@ -912,6 +912,7 @@ MonoBehaviour:
   LastTeamToScore: 0
   PauseMenu: {fileID: 1930156460}
   IsPauseAllowed: 0
+  HasMatchStarted: 0
   WaitingForPlayer: {fileID: 755900340}
 --- !u!4 &795162138
 Transform:

@@ -103,7 +103,7 @@ public class MatchManager : Singleton<MatchManager>
     private Team winner = Team.UNASSIGNED;
     private bool hasVolleyStarted = false;
 
-    private int playersLoaded = 0;
+    private bool remotePlayerReady = false;
 
     #endregion
 
@@ -134,7 +134,11 @@ public class MatchManager : Singleton<MatchManager>
         if (Globals.GameMode == GameModes.ONLINE_MULTIPLAYER)
             WaitingForPlayer.enabled = true;
 
-        cPhotonView.RPC("RPC_SetReady", PhotonTargets.AllBufferedViaServer);
+        if (!PhotonNetwork.isMasterClient)
+            cPhotonView.RPC("RPC_SetRemotePlayerReady", PhotonTargets.AllBufferedViaServer);
+
+        if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
+            remotePlayerReady = true;
     }
 
     private void Start()
@@ -219,7 +223,7 @@ public class MatchManager : Singleton<MatchManager>
 
     private IEnumerator HandleMatchSetup()
     {
-        while (playersLoaded != 2)
+        while (!remotePlayerReady)
         {
             yield return 0;
         }
@@ -299,12 +303,9 @@ public class MatchManager : Singleton<MatchManager>
     #region RPC
 
     [RPC]
-    private void RPC_SetReady()
+    private void RPC_SetRemotePlayerReady()
     {
-        playersLoaded++;
-
-        if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
-            playersLoaded = 2;
+        remotePlayerReady = true;
     }
 
     [RPC]

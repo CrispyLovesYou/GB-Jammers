@@ -1,0 +1,37 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: ScoreMatchSheet.png (2048 x 2048)
+# $TexturePacker:SmartUpdate:f91464974470b53a94c780f4b1f15e86:8f37cbaee9ee8fe0d91fffdc1b05dd63:6ce7fcd2e16013f3ad74225ac338f871$
+#
+
+EndDan;2;1294;545;368;0.5;0.5
+EndDrew;923;1263;545;368;0.5;0.5
+EndTracksuit;1470;1059;545;368;0.5;0.5
+EndVbomb;2;924;545;368;0.5;0.5
+LOSE;549;1529;372;133;0.5;0.5
+WIN;1619;1518;375;144;0.5;0.5
+pointscored;549;1013;283;130;0.5;0.5
+score0;549;728;172;283;0.5;0.5
+score1;1129;978;172;283;0.5;0.5
+score2;2;639;172;283;0.5;0.5
+score3;176;639;172;283;0.5;0.5
+score4;350;639;172;283;0.5;0.5
+score5;2;354;172;283;0.5;0.5
+score6;2;69;172;283;0.5;0.5
+score7;176;354;172;283;0.5;0.5
+score8;176;69;172;283;0.5;0.5
+score9;350;354;172;283;0.5;0.5
+scorepanel;2;1664;943;382;0.5;0.5
+set;947;1710;791;336;0.5;0.5
+set1;1740;1664;288;382;0.5;0.5
+set2;549;1145;288;382;0.5;0.5
+set3;839;879;288;382;0.5;0.5
+setcount;947;1633;670;75;0.5;0.5
+setcount2;1470;1531;139;100;0.5;0.5
+setcount3;1470;1429;139;100;0.5;0.5
+setcout0;1303;1161;139;100;0.5;0.5
+setcout1;1303;1059;139;100;0.5;0.5
