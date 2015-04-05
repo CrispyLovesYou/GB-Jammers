@@ -70,4 +70,5 @@ MonoBehaviour:
   - RPC_SetStateAndFlip
   - RPC_CancelCharacter
   - RPC_SendChat
+  - RPC_ClickReady
   DisableAutoOpenWizard: 0
