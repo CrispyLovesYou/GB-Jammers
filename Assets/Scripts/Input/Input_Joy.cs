@@ -35,7 +35,8 @@ public class Input_Joy : Input_Base
             !appHasFocus ||
             !cPhotonView.isMine ||
             Time.timeScale == 0 ||
-            MatchManager.Instance.IsPaused)
+            MatchManager.Instance.IsPaused ||
+            !MatchManager.Instance.HasMatchStarted)
             return;
 
         CheckMovement();

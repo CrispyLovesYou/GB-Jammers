@@ -71,4 +71,5 @@ MonoBehaviour:
   - RPC_CancelCharacter
   - RPC_SendChat
   - RPC_ClickReady
+  - RPC_SetReady
   DisableAutoOpenWizard: 0

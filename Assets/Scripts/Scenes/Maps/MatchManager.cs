@@ -96,9 +96,14 @@ public class MatchManager : Singleton<MatchManager>
     public bool IsPaused { get; private set; }
     public bool IsPauseAllowed = false;
 
+    public bool HasMatchStarted = false;
+    public Canvas WaitingForPlayer;
+
     private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
     private bool hasVolleyStarted = false;
+
+    private int playersLoaded = 0;
 
     #endregion
 
@@ -125,6 +130,11 @@ public class MatchManager : Singleton<MatchManager>
         DiscRightSpawn = GameObject.FindGameObjectWithTag(Disc_Spawn_Right_Tag).transform.position;
 
         Controller_Player.OnCatch += Controller_Player_OnCatch;
+
+        if (Globals.GameMode == GameModes.ONLINE_MULTIPLAYER)
+            WaitingForPlayer.enabled = true;
+
+        cPhotonView.RPC("RPC_SetReady", PhotonTargets.AllBufferedViaServer);
     }
 
     private void Start()
@@ -209,7 +219,13 @@ public class MatchManager : Singleton<MatchManager>
 
     private IEnumerator HandleMatchSetup()
     {
-        yield return 0;
+        while (playersLoaded != 2)
+        {
+            yield return 0;
+        }
+
+        WaitingForPlayer.enabled = false;
+        HasMatchStarted = true;
 
         if (onMatchStart != null)
             onMatchStart(this, EventArgs.Empty);
@@ -281,6 +297,15 @@ public class MatchManager : Singleton<MatchManager>
     #endregion
 
     #region RPC
+
+    [RPC]
+    private void RPC_SetReady()
+    {
+        playersLoaded++;
+
+        if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
+            playersLoaded = 2;
+    }
 
     [RPC]
     private void RPC_ScorePoints(int _team, int _points)
