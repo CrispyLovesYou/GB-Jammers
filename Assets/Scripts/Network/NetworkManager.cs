@@ -45,13 +45,15 @@ public class NetworkManager : Singleton<NetworkManager>
         PhotonNetwork.playerName = Globals.Username;
     }
 
-    public bool CreateRoom()
+	public bool CreateRoom(string _roomID = "", bool _isVisible = true)
     {
-        string roomID = Globals.Username + " [" + RandomHelper.RandomString(ROOM_ID_RANDOM_SIZE) + "]";
+		if(string.IsNullOrEmpty(_roomID)) _roomID = Globals.Username + " [" + RandomHelper.RandomString(ROOM_ID_RANDOM_SIZE) + "]";
 
-        RoomOptions roomOptions = new RoomOptions() { maxPlayers = Globals.MAX_CONNECTED_PLAYERS };
-        return PhotonNetwork.CreateRoom(roomID, roomOptions, TypedLobby.Default);
+		RoomOptions roomOptions = new RoomOptions() { maxPlayers = Globals.MAX_CONNECTED_PLAYERS, isVisible = _isVisible };
+
+		return PhotonNetwork.CreateRoom(_roomID, roomOptions, TypedLobby.Default);
     }
+
 
     public void Spawn()
     {
