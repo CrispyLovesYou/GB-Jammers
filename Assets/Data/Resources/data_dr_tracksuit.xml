@@ -3,13 +3,13 @@
   <ID>dr_tracksuit</ID>
   <Name>Dr. Tracksuit</Name>
   <RealName>Jeff Gerstmann</RealName>
-  <ThrowPower>11</ThrowPower>
+  <ThrowPower>14</ThrowPower>
   <ThrowKnockback>3</ThrowKnockback>
   <Stability>3</Stability>
-  <MoveSpeed>1.8</MoveSpeed>
+  <MoveSpeed>2</MoveSpeed>
   <DashSpeed>6</DashSpeed>
-  <DashDuration>0.25</DashDuration>
-  <LobDuration>1.9</LobDuration>
+  <DashDuration>0.3</DashDuration>
+  <LobDuration>1.2</LobDuration>
   <AbilityPassive>Chase That High</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
   <AbilityEX>Sticky Fingaz</AbilityEX>

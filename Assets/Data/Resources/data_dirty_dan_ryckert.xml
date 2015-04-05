@@ -3,13 +3,13 @@
   <ID>dirty_dan_ryckert</ID>
   <Name>Dirty Dan Ryckert</Name>
   <RealName>Dan Ryckert</RealName>
-  <ThrowPower>7</ThrowPower>
+  <ThrowPower>10</ThrowPower>
   <ThrowKnockback>2.5</ThrowKnockback>
   <Stability>2.2</Stability>
   <MoveSpeed>2</MoveSpeed>
   <DashSpeed>6</DashSpeed>
-  <DashDuration>0.16</DashDuration>
-  <LobDuration>1.5</LobDuration>
+  <DashDuration>0.25</DashDuration>
+  <LobDuration>1.4</LobDuration>
   <AbilityPassive>Sore Loser</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
   <AbilityEX>High Stakes</AbilityEX>

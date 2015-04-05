@@ -22,6 +22,8 @@ public class Controller_Player : MonoBehaviour
 
     private const string COURT_AREA_TAG = "Court_Area";
     private const string BOOK_TAG = "Book";
+    private const string GOAL_WALL_TRIGGER_TAG = "Goal_Wall_Trigger";
+    private const string GOAL_WALL_LAYER = "GoalWall";
 
     #endregion
 
@@ -257,6 +259,7 @@ public class Controller_Player : MonoBehaviour
     private Animator cAnimator;
 
     private GameObject courtArea;
+    private GameObject goalWall;
 
     private float throwCharge = 0;
     public float ThrowCharge { get { return throwCharge; } }
@@ -271,6 +274,7 @@ public class Controller_Player : MonoBehaviour
     private Vector3 initLocalScale;
 
     private bool walking = false;  // for bandwidth purposes
+    private bool goalEntered = false;
 
     #endregion
 
@@ -298,8 +302,15 @@ public class Controller_Player : MonoBehaviour
 
         switch (Team)
         {
-            case global::Team.LEFT: initLocalScale = new Vector3(scaleX, cTransform.localScale.y, 1); break;
-            case global::Team.RIGHT: initLocalScale = new Vector3(-scaleX, cTransform.localScale.y, 1); break;
+            case global::Team.LEFT:
+                initLocalScale = new Vector3(scaleX, cTransform.localScale.y, 1);
+                goalWall = GameObject.FindGameObjectWithTag("Player_Wall_Left");
+                break;
+
+            case global::Team.RIGHT:
+                initLocalScale = new Vector3(-scaleX, cTransform.localScale.y, 1);
+                goalWall = GameObject.FindGameObjectWithTag("Player_Wall_Right");
+                break;
         }
     }
 
@@ -311,6 +322,9 @@ public class Controller_Player : MonoBehaviour
         if (State == PlayerState.AIM ||
             State == PlayerState.RESET)
             return;
+
+        if (_collider2D.tag == GOAL_WALL_TRIGGER_TAG)
+            goalEntered = true;
 
         if (_collider2D.tag == Disc.Instance.tag)
         {
@@ -330,6 +344,12 @@ public class Controller_Player : MonoBehaviour
                 cPhotonView.RPC("RPC_BookStun", PhotonTargets.AllViaServer, book.ID);
             }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D _collider2D)
+    {
+        if (_collider2D.tag == GOAL_WALL_TRIGGER_TAG)
+            goalWall.GetComponent<Collider2D>().enabled = true;
     }
 
     #endregion
@@ -402,6 +422,7 @@ public class Controller_Player : MonoBehaviour
         if (State != PlayerState.CHARGE)
             return;
 
+        State = PlayerState.THROWN;
         throwDirection = _inputVector;
         StopCoroutine(CR_CHARGE);
         iTween.StopByName("ChargeUp");
@@ -411,6 +432,7 @@ public class Controller_Player : MonoBehaviour
 
     public void SpecialThrow(Vector2 _inputVector, bool _hasKnockback)
     {
+        State = PlayerState.THROWN;
         throwDirection = _inputVector;
         cPhotonView.RPC("RPC_SpecialThrow", PhotonTargets.AllViaServer, (Vector3)throwDirection, _hasKnockback);
     }
@@ -434,6 +456,7 @@ public class Controller_Player : MonoBehaviour
         if (State != PlayerState.AIM)
             return;
 
+        State = PlayerState.LOB;
         cPhotonView.RPC("RPC_Lob", PhotonTargets.AllViaServer, (Vector3)_inputVector);
     }
 
@@ -448,6 +471,7 @@ public class Controller_Player : MonoBehaviour
             return;
         }
 
+        State = PlayerState.EX;
         cPhotonView.RPC("RPC_EX", PhotonTargets.AllViaServer, (Vector3)_inputVector);
     }
 
@@ -676,6 +700,9 @@ public class Controller_Player : MonoBehaviour
     private IEnumerator CR_Knockback()
     {
         State = PlayerState.KNOCKBACK;
+
+        goalWall.GetComponent<Collider2D>().enabled = false;
+
         cRigidbody2D.velocity = knockbackVector * KNOCKBACK_NORMALIZER;
 
         float stability = (Stability + StabilityMod) * StabilityMultiplier;
@@ -685,6 +712,9 @@ public class Controller_Player : MonoBehaviour
             duration = MIN_KNOCKBACK_DURATION;
 
         yield return new WaitForSeconds(duration);
+
+        if (!goalEntered)
+            goalWall.GetComponent<Collider2D>().enabled = true;
 
         Disc.Instance.HasKnockback = false;
         Disc.Instance.KnockbackPower = 0;

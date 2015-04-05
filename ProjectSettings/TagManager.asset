@@ -15,6 +15,11 @@ TagManager:
   - Disc
   - Book
   - Disc_Spawn_Right
+  - Goal_Wall
+  - Goal_Wall_Trigger
+  - Player_Wall_Left
+  - Player_Wall_Right
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -28,7 +33,7 @@ TagManager:
   - Divider
   - Player
   - Goal
-  - 
+  - GoalWall
   - 
   - 
   - 

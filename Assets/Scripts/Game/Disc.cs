@@ -13,6 +13,7 @@ public class Disc : Singleton<Disc>
     private const string WALL_RIGHT_TAG = "Wall_Right";
     private const string PLAYER_LAYER = "Player";
     private const string GOAL_LAYER = "Goal";
+    private const string SHIELD_TAG = "Shield";
 
     private const string CR_LOB_SCORE = "CR_LobScore";
     private const float LOB_CATCH_PERIOD = 0.1f;
@@ -75,6 +76,10 @@ public class Disc : Singleton<Disc>
             case WALL_RIGHT_TAG:
                 cCollider2D.enabled = false;
                 velocity = Vector3.zero;
+                break;
+
+            case SHIELD_TAG:
+                Bounce(Direction.LEFT);
                 break;
         }
     }

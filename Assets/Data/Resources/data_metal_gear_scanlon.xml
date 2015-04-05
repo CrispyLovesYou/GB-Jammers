@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Character>
-  <ID>metal_gear_scanlon</ID>
-  <Name>Metal Gear Scanlon</Name>
+  <ID>solid_scanlon</ID>
+  <Name>Solid Scanlon</Name>
   <RealName>Drew Scanlon</RealName>
-  <ThrowPower>7</ThrowPower>
+  <ThrowPower>10.5</ThrowPower>
   <ThrowKnockback>2.3</ThrowKnockback>
   <Stability>2</Stability>
   <MoveSpeed>2.8</MoveSpeed>
-  <DashSpeed>10</DashSpeed>
-  <DashDuration>0.16</DashDuration>
-  <LobDuration>1.5</LobDuration>
+  <DashSpeed>8</DashSpeed>
+  <DashDuration>0.3</DashDuration>
+  <LobDuration>1</LobDuration>
   <AbilityPassive>Survivalist</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>
   <AbilityEX>"Book"</AbilityEX>

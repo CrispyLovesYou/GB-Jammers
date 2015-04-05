@@ -23,8 +23,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
 	
 	protected virtual void Awake()
 	{
-		if (instance != null)
-			Debug.LogError("A Singleton instance of " + typeof(T) + " was already created!");
+        //if (instance != null)
+        //    Debug.LogError("A Singleton instance of " + typeof(T) + " was already created!");
 		
 		instance = (T)this;
 	}

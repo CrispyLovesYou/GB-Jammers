@@ -6,7 +6,7 @@ public class SplashScreenManager : Singleton<SplashScreenManager>
 {
     #region Constants
 
-    private const string MAIN_MENU = "main_menu";
+    private const string TITLE_SCREEN = "title_screen";
 
     #endregion
 
@@ -16,7 +16,7 @@ public class SplashScreenManager : Singleton<SplashScreenManager>
     {
         base.Awake();
         LoadCharacterData();
-        Application.LoadLevel(MAIN_MENU);
+        Application.LoadLevel(TITLE_SCREEN);
     }
 
     #endregion

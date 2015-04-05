@@ -1,0 +1,737 @@
+fileFormatVersion: 2
+guid: bc40f71859b65e841b8cdaeb012db505
+timeCreated: 1428212495
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: METER
+    21300002: METEREX_FULL
+    21300004: METERSPECIAL
+    21300006: METERSPECIAL_EMPTY
+    21300008: METERSPECIAL_FULL
+    21300010: METERTOP
+    21300012: METER_BOT
+    21300014: METER_EX_EMPTY
+    21300016: METER_P1
+    21300018: P1-00
+    21300020: P1-01
+    21300022: P1-02
+    21300024: P1-03
+    21300026: P1-04
+    21300028: P1-05
+    21300030: P1-06
+    21300032: P1-07
+    21300034: P1-08
+    21300036: P1-09
+    21300038: P1-10
+    21300040: P1-20
+    21300042: P1-30
+    21300044: P1-40
+    21300046: P1-50
+    21300048: P1-60
+    21300050: P1-70
+    21300052: P1-80
+    21300054: P1-90
+    21300056: P1-DAN
+    21300058: P1-SCANLON
+    21300060: P1-TRACKSUIT
+    21300062: P1-VBOMB
+    21300064: P1_SET
+    21300066: P2-00
+    21300068: P2-01
+    21300070: P2-02
+    21300072: P2-03
+    21300074: P2-04
+    21300076: P2-05
+    21300078: P2-06
+    21300080: P2-07
+    21300082: P2-08
+    21300084: P2-09
+    21300086: P2-10
+    21300088: P2-20
+    21300090: P2-30
+    21300092: P2-40
+    21300094: P2-50
+    21300096: P2-60
+    21300098: P2-70
+    21300100: P2-80
+    21300102: P2-90
+    21300104: P2-DAN
+    21300106: P2-SCANLON
+    21300108: P2-TRACKSUIT
+    21300110: P2-VBOMB
+    21300112: P2_METER
+    21300114: P2_SET
+    21300116: time98
+    21300118: time99
+    21300120: P1-0
+    21300122: P2-0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: METER
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 882
+        width: 459
+        height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: METEREX_FULL
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 995
+        width: 68
+        height: 27
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: METERSPECIAL
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 855
+        width: 459
+        height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: METERSPECIAL_EMPTY
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 681
+        width: 76
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: METERSPECIAL_FULL
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 966
+        width: 68
+        height: 27
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: METERTOP
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 883
+        width: 507
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: METER_BOT
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 933
+        width: 661
+        height: 89
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: METER_EX_EMPTY
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 729
+        width: 76
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: METER_P1
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 910
+        width: 37
+        height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-0
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 579
+        width: 94
+        height: 83
+      alignment: 9
+      pivot: {x: .93617022, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-00
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 797
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .0833333358, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-01
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 797
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .0833333358, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-02
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 770
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .0833333358, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-03
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 722
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .0833333358, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-04
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 722
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .0833333358, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-05
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 685
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .0833333358, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-06
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 637
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .0833333358, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-07
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 637
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .0833333358, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-08
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 749
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .0833333358, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-09
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 749
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .0833333358, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-10
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 515
+        width: 94
+        height: 83
+      alignment: 9
+      pivot: {x: .93617022, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-20
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 467
+        width: 94
+        height: 83
+      alignment: 9
+      pivot: {x: .93617022, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-30
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 467
+        width: 94
+        height: 83
+      alignment: 9
+      pivot: {x: .93617022, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-40
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 579
+        width: 94
+        height: 83
+      alignment: 9
+      pivot: {x: .93617022, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-50
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 579
+        width: 94
+        height: 83
+      alignment: 9
+      pivot: {x: .93617022, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-60
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 542
+        width: 94
+        height: 83
+      alignment: 9
+      pivot: {x: .93617022, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-70
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 542
+        width: 94
+        height: 83
+      alignment: 9
+      pivot: {x: .93617022, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-80
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 542
+        width: 94
+        height: 83
+      alignment: 9
+      pivot: {x: .93617022, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-90
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 494
+        width: 94
+        height: 83
+      alignment: 9
+      pivot: {x: .93617022, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-DAN
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 1000
+        width: 286
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-SCANLON
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 976
+        width: 286
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-TRACKSUIT
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 952
+        width: 286
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1-VBOMB
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 928
+        width: 286
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P1_SET
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 796
+        width: 71
+        height: 84
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-0
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 712
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .916666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-00
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 749
+        width: 92
+        height: 83
+      alignment: 9
+      pivot: {x: .0434782617, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-01
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 430
+        width: 92
+        height: 83
+      alignment: 9
+      pivot: {x: .0434782617, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-02
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 382
+        width: 92
+        height: 83
+      alignment: 9
+      pivot: {x: .0434782617, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-03
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 382
+        width: 92
+        height: 83
+      alignment: 9
+      pivot: {x: .0434782617, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-04
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 494
+        width: 92
+        height: 83
+      alignment: 9
+      pivot: {x: .0434782617, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-05
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 494
+        width: 92
+        height: 83
+      alignment: 9
+      pivot: {x: .0434782617, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-06
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 297
+        width: 92
+        height: 83
+      alignment: 9
+      pivot: {x: .0434782617, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-07
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 212
+        width: 92
+        height: 83
+      alignment: 9
+      pivot: {x: .0434782617, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-08
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 127
+        width: 92
+        height: 83
+      alignment: 9
+      pivot: {x: .0434782617, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-09
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 42
+        width: 92
+        height: 83
+      alignment: 9
+      pivot: {x: .0434782617, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-10
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 712
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .916666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-20
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 664
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .916666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-30
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 600
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .916666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-40
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 664
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .916666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-50
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 664
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .916666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-60
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 627
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .916666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-70
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 627
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .916666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-80
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 552
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .916666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-90
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 552
+        width: 96
+        height: 83
+      alignment: 9
+      pivot: {x: .916666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-DAN
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 858
+        width: 286
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-SCANLON
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 834
+        width: 286
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-TRACKSUIT
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 831
+        width: 286
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2-VBOMB
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 807
+        width: 286
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2_METER
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 938
+        width: 42
+        height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P2_SET
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 769
+        width: 71
+        height: 84
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: time98
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 764
+        width: 81
+        height: 41
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: time99
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 721
+        width: 81
+        height: 41
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

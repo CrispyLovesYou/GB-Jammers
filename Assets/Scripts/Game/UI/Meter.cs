@@ -2,15 +2,21 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[AddComponentMenu("Game/UI/Meter")]
 public class Meter : MonoBehaviour
 {
     #region Fields
 
     public Team Team = Team.LEFT;
-    public float Duration = 0.8f;
+    public Image MeterNormal;
+    public Image MeterSpecial;
+    public Image EXFill;
+    public Image SpecialFill;
+    public int MeterToEX = 33;
+    public int MeterToSpecial = 99;
+    public float AnimationSpeed = 0.1f;
 
-    private RectTransform cRectTransform;
-    private float initWidth;
+    private int meter;
 
     #endregion
 
@@ -18,16 +24,17 @@ public class Meter : MonoBehaviour
 
     private void Awake()
     {
-        cRectTransform = GetComponent<RectTransform>();
         Controller_Player.OnMeterChange += Controller_Player_OnMeterChange;
+    }
 
-        initWidth = cRectTransform.rect.width;
+    private void Update()
+    {
+        if (meter >= MeterToSpecial)
+            MeterSpecial.fillAmount = Mathf.Lerp(MeterSpecial.fillAmount, 1, AnimationSpeed);
+        else
+            MeterSpecial.fillAmount = 0.0f;
 
-        switch (Team)
-        {
-            case global::Team.LEFT: cRectTransform.offsetMax = new Vector2(-initWidth, 0); break;
-            case global::Team.RIGHT: cRectTransform.offsetMin = new Vector2(initWidth, 0); break;
-        }
+        MeterNormal.fillAmount = Mathf.Lerp(MeterNormal.fillAmount, (meter / 100.0f), AnimationSpeed);
     }
 
     #endregion
@@ -43,43 +50,48 @@ public class Meter : MonoBehaviour
         if (e.Team != this.Team)
             return;
 
-        float targetOffset = ((float)e.Total / 100) * initWidth;
-        targetOffset = initWidth - targetOffset;
+        meter = e.Total;
 
-        switch (Team)
+        if (meter >= MeterToEX)
         {
-            case global::Team.LEFT:
-                iTween.ValueTo(gameObject, iTween.Hash(
-                    "from", cRectTransform.offsetMax.x,
-                    "to", -targetOffset,
-                    "time", Duration,
-                    "onupdate",
-                        (System.Action<object>)(value => {
-                            switch (Team)
-                            {
-                                case global::Team.LEFT: cRectTransform.offsetMax = new Vector2((float)value, 0); break;
-                                case global::Team.RIGHT: cRectTransform.offsetMin = new Vector2((float)value, 0); break;
-                            }
-                        })
-                    ));
-                break;
+            iTween.ValueTo(gameObject, iTween.Hash(
+                "from", EXFill.color.a,
+                "to", 1.0f,
+                "onupdate",
+                    (System.Action<object>)(value =>
+                    {
+                        Color color = EXFill.color;
+                        color.a = (float)value;
+                        EXFill.color = color;
+                    })
+                ));
+        }
+        else
+        {
+            Color color = EXFill.color;
+            color.a = 0;
+            EXFill.color = color;
+        }
 
-            case global::Team.RIGHT:
-                iTween.ValueTo(gameObject, iTween.Hash(
-                    "from", cRectTransform.offsetMin.x,
-                    "to", targetOffset,
-                    "time", Duration,
-                    "onupdate",
-                        (System.Action<object>)(value =>
-                        {
-                            switch (Team)
-                            {
-                                case global::Team.LEFT: cRectTransform.offsetMax = new Vector2((float)value, 0); break;
-                                case global::Team.RIGHT: cRectTransform.offsetMin = new Vector2((float)value, 0); break;
-                            }
-                        })
-                    ));
-                break;
+        if (meter >= MeterToSpecial)
+        {
+            iTween.ValueTo(gameObject, iTween.Hash(
+                "from", SpecialFill.color.a,
+                "to", 1.0f,
+                "onupdate",
+                    (System.Action<object>)(value =>
+                    {
+                        Color color = SpecialFill.color;
+                        color.a = (float)value;
+                        SpecialFill.color = color;
+                    })
+                ));
+        }
+        else
+        {
+            Color color = SpecialFill.color;
+            color.a = 0;
+            SpecialFill.color = color;
         }
     }
 

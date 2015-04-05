@@ -36,6 +36,10 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public Text CountdownField;
 	public GameObject ScrollingBackground; 
 	public Text LocalUserName;
+    public Text ChatLog;
+    public InputField ChatInput;
+    public Button ChatButton;
+    public Button JoinPublic;
 
     private PhotonView cPhotonView;
     private string username;
@@ -43,6 +47,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     private List<GameObject> roomPanelCloneList = new List<GameObject>();
     private InputField usernameField;
     private Button connectBtn;
+
+    private List<string> chatLog = new List<string>();
 
     #endregion
 
@@ -55,6 +61,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         usernameField = PreconnectGroup.GetComponentInChildren<InputField>();
         connectBtn = PreconnectGroup.GetComponentInChildren<Button>();
         ScrollingBackground.SetActive(true);
+
+        PhotonNetwork.offlineMode = false;
 
         if (!PhotonNetwork.connectedAndReady)
             ToggleCanvasGroup(PreconnectGroup, true);
@@ -79,6 +87,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         ToggleCanvasGroup(StatusGroup, false);
         ToggleCanvasGroup(LobbyGroup, true);
         ToggleCanvasGroup(RoomListGroup, true);
+        JoinPublic.Select();
     }
 
     private void OnJoinedRoom()
@@ -86,6 +95,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable();
         properties.Add(PROP_IS_READY, false);
         PhotonNetwork.player.SetCustomProperties(properties);
+
+        chatLog.Clear();
 
         MainLobbyCanvas.enabled = false;
         GameLobbyCanvas.enabled = true;
@@ -259,6 +270,15 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         cPhotonView.RPC("RPC_ToggleReady", PhotonTargets.AllBufferedViaServer);
     }
 
+    public void OnClick_SendChat()
+    {
+        string msg = username + ": " + ChatInput.text;
+        cPhotonView.RPC("RPC_SendChat", PhotonTargets.All, msg);
+        ChatInput.text = "";
+        ChatInput.Select();
+        ChatInput.ActivateInputField();
+    }
+
     #endregion
 
     #region RPC
@@ -295,6 +315,21 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
             StopCoroutine(CR_COUNTDOWN);
             CountdownField.text = "";
         }
+    }
+
+    [RPC]
+    private void RPC_SendChat(string _msg)
+    {
+        chatLog.Add(_msg);
+
+        string log = "";
+
+        foreach (string str in chatLog)
+        {
+            log += str + "\n";
+        }
+
+        ChatLog.text = log;
     }
 
     #endregion
