@@ -22,7 +22,8 @@ public class Input_KM : Input_Base
         if (!isEnabled ||
             !appHasFocus ||
             !cPhotonView.isMine ||
-            Time.timeScale == 0)
+            Time.timeScale == 0 ||
+            MatchManager.Instance.IsPaused)
             return;
 
         CheckMovement();

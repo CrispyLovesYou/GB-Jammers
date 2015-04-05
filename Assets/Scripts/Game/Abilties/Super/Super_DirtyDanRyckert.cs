@@ -15,6 +15,7 @@ public class Super_DirtyDanRyckert : Super_Base
     public GameObject Flag;
     public GameObject Fireworks;
     public float Duration = 10.0f;
+    public static bool IsActive = false;
 
     private Vector3 spawnPosition = Vector3.zero;
 
@@ -34,6 +35,7 @@ public class Super_DirtyDanRyckert : Super_Base
 
     private IEnumerator CR_Animate()
     {
+        IsActive = true;
         GameObject flag = Instantiate(Flag, spawnPosition, Quaternion.identity) as GameObject;
 
         iTween.MoveTo(flag, Vector3.zero, Duration / 8);
@@ -49,6 +51,7 @@ public class Super_DirtyDanRyckert : Super_Base
             "oncomplete",
                 (System.Action<object>)(param =>
                 {
+                    IsActive = false;
                     Destroy(flag);
                     Destroy(fireworks);
                 })

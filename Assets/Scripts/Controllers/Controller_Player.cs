@@ -465,7 +465,7 @@ public class Controller_Player : MonoBehaviour
         if (State != PlayerState.AIM)
             return;
 
-        if (Meter < MeterForEX)
+        if (Meter < MeterForEX || Super_DirtyDanRyckert.IsActive)
         {
             AudioSource.PlayClipAtPoint(SFXError, Vector3.zero);
             return;
@@ -480,7 +480,7 @@ public class Controller_Player : MonoBehaviour
         if (State != PlayerState.AIM)
             return;
 
-        if (Meter < MeterForSuper)
+        if (Meter < MeterForSuper || Super_DirtyDanRyckert.IsActive)
         {
             AudioSource.PlayClipAtPoint(SFXError, Vector3.zero);
             return;
