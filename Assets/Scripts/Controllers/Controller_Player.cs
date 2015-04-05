@@ -339,7 +339,6 @@ public class Controller_Player : MonoBehaviour
 
     public void SetData(Team _team, CharacterID _id)
     {
-        Character = _id;
         cPhotonView.RPC("RPC_SetData", PhotonTargets.AllBufferedViaServer, (int)_team, (int)_id);
     }
 
@@ -751,6 +750,7 @@ public class Controller_Player : MonoBehaviour
     [RPC]
     private void RPC_SetData(int _team, int _id)
     {
+        Character = (CharacterID)_id;
         Team = (Team)_team;
 
         if (Team == Team.RIGHT)  // Flip the player on the right
