@@ -11,6 +11,10 @@ TextureImporter:
     21300008: Ref
     21300010: Scoreboard
     21300012: GoalUnder
+    21300014: Komuai1
+    21300016: Komuai2
+    21300018: Wal_Sucks
+    21300020: Wal_Sucks2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -106,6 +110,26 @@ TextureImporter:
       alignment: 9
       pivot: {x: .59375, y: -2.67123294}
       border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Komuai1
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 216
+        width: 86
+        height: 208
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Komuai2
+      rect:
+        serializedVersion: 2
+        x: 1432
+        y: 216
+        width: 86
+        height: 208
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Ref
       rect:
         serializedVersion: 2
@@ -123,6 +147,26 @@ TextureImporter:
         y: 167
         width: 668
         height: 257
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wal_Sucks
+      rect:
+        serializedVersion: 2
+        x: 1169
+        y: 186
+        width: 173
+        height: 238
+      alignment: 9
+      pivot: {x: .508670509, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wal_Sucks2
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 186
+        width: 176
+        height: 238
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

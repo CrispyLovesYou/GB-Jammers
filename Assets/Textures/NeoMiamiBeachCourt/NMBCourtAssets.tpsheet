@@ -5,7 +5,7 @@
 # http://www.codeandweb.com/texturepacker/unity
 #
 # Sprite sheet: NMBCourtAssets.png (4096 x 2048)
-# $TexturePacker:SmartUpdate:4f6a8ebec59ec7f3604dcd2a92d95bad:22fd661fad76a24a3206bdb7d936a8e4:029225eab6a1103cc373d4c2e01f3eec$
+# $TexturePacker:SmartUpdate:1af912a56419f2a8794985aca9ca6d3a:1c28e4dfa6339c947387f962d5fc8323:029225eab6a1103cc373d4c2e01f3eec$
 #
 
 Background;2;426;2880;1620;0.5;0.5
@@ -13,5 +13,9 @@ Divider;2884;19;30;953;0.5;0.5
 Fence;627;38;1538;127;0.5;0.5
 Goal;2884;974;361;1072;0.5;0.5
 GoalUnder;321;19;304;146;0.59375;-2.671232876712329
+Komuai1;1344;216;86;208;0.5;0.5
+Komuai2;1432;216;86;208;0.5;0.5
 Ref;2;115;317;309;0.5;0.5
 Scoreboard;321;167;668;257;0.5;0.5
+Wal_Sucks;1169;186;173;238;0.5086705202312138;0.5
+Wal_Sucks2;991;186;176;238;0.5;0.5
