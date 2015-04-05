@@ -163,7 +163,7 @@ GameObject:
   - 222: {fileID: 22289840}
   - 114: {fileID: 11450294}
   m_Layer: 0
-  m_Name: Backgroun
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
