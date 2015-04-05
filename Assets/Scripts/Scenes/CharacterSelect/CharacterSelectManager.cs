@@ -54,6 +54,12 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
         cPhotonView = GetComponent<PhotonView>();
     }
 
+	void Update(){
+		if(Input.GetButtonDown("Cancel")){
+			OnClick_ReturnToMenu();
+		}
+	}
+
     #endregion
 
     #region UI Callbacks
@@ -72,6 +78,16 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 
 	public void OnClick_ReturnToMenu(){
 		Debug.Log ("Loading previous menu");
+		switch(Globals.GameMode){
+			case GameModes.ONLINE_MULTIPLAYER:
+				Application.LoadLevel("network_lobby");
+				PhotonNetwork.LeaveRoom();
+				break;
+			default:
+				Application.LoadLevel("main_menu");
+				break;
+
+		}
 	}
 
     #endregion
