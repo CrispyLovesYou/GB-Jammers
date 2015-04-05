@@ -31,7 +31,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
     private PhotonView cPhotonView;
     private bool[] playersReady = new bool[Globals.MAX_CONNECTED_PLAYERS];
 	private int p1CurrentSelected = 0;
-	private int p2CurrentSelected = 0;
+	private int p2CurrentSelected = 1;
 	private float p1Throttle = 0;
 	private float p2Throttle = 0;
 
@@ -60,7 +60,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 				
 				break;
 		}
-//		Globals.HasGameStarted = true;
+		Globals.HasGameStarted = true;
         cPhotonView = GetComponent<PhotonView>();
 
     }
@@ -78,6 +78,33 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 		CheckInput();
 	}
     #endregion
+
+	#region UI Callbacks
+
+	public void OnClick_LockCharacter(int _id){
+		switch(Globals.GameMode){
+			case GameModes.ONLINE_MULTIPLAYER:
+				switch(PhotonNetwork.player.ID){
+					case 1:
+						p1CurrentSelected = _id;
+						cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, PhotonNetwork.player.ID, p1CurrentSelected);
+						cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, p1CurrentSelected);
+						break;
+					case 2:
+						p2CurrentSelected = _id;
+						cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, PhotonNetwork.player.ID , p2CurrentSelected);
+						cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, p2CurrentSelected);
+						break;
+				}
+				break;
+			case GameModes.LOCAL_MULTIPLAYER:
+				SelectCharacter(1, _id);
+				LockCharacter(0, _id);
+				break;
+		}
+	}
+
+	#endregion
 
     #region Input
 
