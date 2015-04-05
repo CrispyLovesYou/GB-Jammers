@@ -9,7 +9,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
     #region Constants
 
     private const string MAP_BEACH = "map_beach";
-
+	private const float THROTTLE_TIME = 0.5f;
     #endregion
 
     #region Fields
@@ -30,9 +30,10 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 
     private PhotonView cPhotonView;
     private bool[] playersReady = new bool[Globals.MAX_CONNECTED_PLAYERS];
-    private int currentSelected = 0;
 	private int p1CurrentSelected = 0;
 	private int p2CurrentSelected = 0;
+	private float p1Throttle = 0;
+	private float p2Throttle = 0;
 
     #endregion
 
@@ -56,90 +57,160 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 				break;
 			case GameModes.LOCAL_MULTIPLAYER:
 				LocalEventSystem.firstSelectedGameObject = CharacterButtons[0].gameObject;
+				
 				break;
 		}
-		Globals.HasGameStarted = true;
+//		Globals.HasGameStarted = true;
         cPhotonView = GetComponent<PhotonView>();
+
     }
 
-	private void Start(){
-		switch(Globals.GameMode){
-		case GameModes.ONLINE_MULTIPLAYER:
-			ExecuteEvents.Execute<ISelectHandler>(LocalEventSystem.firstSelectedGameObject, new BaseEventData(EventSystem.current), 
-			                                      ExecuteEvents.selectHandler);
-			break;
-		case GameModes.LOCAL_MULTIPLAYER:
-			ExecuteEvents.Execute<ISelectHandler>(CharacterButtons[0].gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.selectHandler);
-			ExecuteEvents.Execute<ISelectHandler>(CharacterButtons[1].gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.selectHandler);
-			break;
-		}
+	private IEnumerator Start(){
+		if(EventSystem.current == null) yield return null;
+		// Force Unity's EventSystem to select the starting character.
+		// Unfortunately this is necessary for any UI that requires multiple simultaneous selection...
+		SelectCharacter(1, 0);
+		SelectCharacter(2, 1);
+
 	}
 
 	private void Update(){
-		if(Input.GetButtonDown("Cancel")){
-			OnClick_ReturnToMenu();
+		CheckInput();
+	}
+    #endregion
+
+    #region Input
+
+	// Custom input read through Update loop
+	// Last resort due to the Unity's input system being incompatible with multiple selection
+	// and differentiating between different input sources.
+	private void CheckInput(){
+		// Handle Cancel button press
+		if(Globals.PlayerInputs[1] == InputType.KEYBOARD   && Input.GetButtonDown("Key_Action") || 
+		   Globals.PlayerInputs[1] == InputType.CONTROLLER && Input.GetButtonDown("Joy2_Action")){
+			OnConfirmPressed(1);
+		}else if(Input.GetButtonDown("Joy1_Action")){
+			OnConfirmPressed(0);
+		}
+
+		if(Input.GetButtonDown("Joy1_Cancel")){
+			OnCancelPressed(1);
+			return;
+		}
+		else if(Input.GetButtonDown("Key_Cancel") || Input.GetButtonDown("Joy2_Cancel")){
+			OnCancelPressed(2);
+			return;
+		}
+		
+		// Handle input throttle
+		if(p1Throttle > 0) p1Throttle -= Time.deltaTime;
+		if(p2Throttle > 0) p2Throttle -= Time.deltaTime;
+		
+		// Handle horizontal input and button selection
+		switch(Globals.GameMode){
+		case GameModes.ONLINE_MULTIPLAYER:
+			if(PhotonNetwork.player.ID <= 0) return;
+			if(playersReady[PhotonNetwork.player.ID - 1] == false &&  Input.GetAxis("Joy1_MenuHorizontal") != 0 ){
+				switch(PhotonNetwork.player.ID){
+				case 1:
+					if(p1Throttle > 0) return;
+					if(Input.GetAxis("Joy1_MenuHorizontal") > 0) {
+						p1CurrentSelected++;
+						if(p1CurrentSelected >= 4) p1CurrentSelected = 0;
+					}else{
+						p1CurrentSelected--;
+						if(p1CurrentSelected < 0) p1CurrentSelected = 3;
+					}
+					cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, PhotonNetwork.player.ID, p1CurrentSelected);
+					p1Throttle = THROTTLE_TIME;
+					break;
+				case 2:
+					if(p2Throttle > 0) return;
+					if(Input.GetAxis("Joy1_MenuHorizontal") > 0) {
+						p2CurrentSelected++;
+						if(p2CurrentSelected >= 4) p2CurrentSelected = 0;
+					}else{
+						p2CurrentSelected--;
+						if(p2CurrentSelected < 0) p2CurrentSelected = 3;
+					}
+					cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, PhotonNetwork.player.ID, p2CurrentSelected);
+					p2Throttle = THROTTLE_TIME;
+					break;
+				}
+			} 
+			break;
+		case GameModes.LOCAL_MULTIPLAYER:
+			if(playersReady[0] == false && p1Throttle <= 0 && Input.GetAxis("Joy1_MenuHorizontal") != 0 ){
+				if(Input.GetAxis("Joy1_MenuHorizontal") > 0) {
+					p1CurrentSelected++;
+					if(p1CurrentSelected >= 4) p1CurrentSelected = 0;
+				}else{
+					p1CurrentSelected--;
+					if(p1CurrentSelected < 0) p1CurrentSelected = 3;
+				}
+				SelectCharacter(1, p1CurrentSelected);
+				p1Throttle = THROTTLE_TIME;
+			} 
+			
+			// Player 2 may receive input from keyboard or joystick
+			if(playersReady[1] == false && p2Throttle <= 0 && (Input.GetAxis("Key_MenuHorizontal") != 0 || Input.GetAxis("Joy2_MenuHorizontal") != 0)){
+				float axis = Globals.PlayerInputs[1] == InputType.CONTROLLER ?  Input.GetAxis("Joy2_MenuHorizontal")  : Input.GetAxis("Key_MenuHorizontal");
+				if(axis > 0) {
+					p2CurrentSelected++;
+					if(p2CurrentSelected >= 4) p2CurrentSelected = 0;
+				}else{
+					p2CurrentSelected--;
+					if(p2CurrentSelected < 0) p2CurrentSelected = 3;
+				}
+				SelectCharacter(2, p2CurrentSelected);
+				p2Throttle = THROTTLE_TIME;
+			}
+			break;
+		}
+	}
+	public void OnConfirmPressed(int _playerId){
+		switch(Globals.GameMode){
+		case GameModes.ONLINE_MULTIPLAYER:
+			switch(PhotonNetwork.player.ID){
+			case 1:
+				cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, p1CurrentSelected);
+				break;
+			case 2:
+				cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, p2CurrentSelected);
+				break;
+			}
+			break;
+		case GameModes.LOCAL_MULTIPLAYER:
+			if(Globals.PlayerInputs[1] == InputType.KEYBOARD   && Input.GetButtonDown("Key_Action") || 
+			   Globals.PlayerInputs[1] == InputType.CONTROLLER && Input.GetButtonDown("Joy2_Action")){
+				LockCharacter(1, p1CurrentSelected);
+			}else{
+				LockCharacter(0, p2CurrentSelected);
+			}
+			break;
 		}
 	}
 
-    #endregion
 
-    #region UI Callbacks
-
-    public void OnClick_SelectCharacter(int _id)
-    {
-        currentSelected = _id;
+	public void OnCancelPressed(int _playerId){
 		switch(Globals.GameMode){
-			case GameModes.ONLINE_MULTIPLAYER:
-				cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, PhotonNetwork.player.ID, currentSelected);
-				break;
-			case GameModes.LOCAL_MULTIPLAYER:
-				// Was it a keyboard player? Or was it Joystick 1 while multiple joysticks are connected? 
-				// We can assume it was player 1 in that case. 
-				if(Globals.PlayerInputs[0] == InputType.KEYBOARD   && Input.GetAxis("Key_Horizontal") != 0 || 
-			   	   Globals.PlayerInputs[0] == InputType.CONTROLLER && Input.GetAxis("Joy1_Horizontal") != 0){
-					SelectCharacter(1, _id);
-				}else{
-					SelectCharacter(2, _id);
-				}
-				break;
-		}
-
-    }
-
-    public void OnClick_LockCharacter()
-    {
-		switch(Globals.GameMode){
-			case GameModes.ONLINE_MULTIPLAYER:
-				cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, currentSelected);
-				break;
-			case GameModes.LOCAL_MULTIPLAYER:
-				if(Globals.PlayerInputs[0] == InputType.KEYBOARD   && Input.GetButtonDown("Key_Action") || 
-				   Globals.PlayerInputs[0] == InputType.CONTROLLER && Input.GetButtonDown("Joy1_Action")){
-					LockCharacter(0, p1CurrentSelected);
-				}else{
-					LockCharacter(1, p2CurrentSelected);
-				}
-				break;
-		}
-        
-    }
-
-	public void OnClick_ReturnToMenu(){
-		switch(Globals.GameMode){
-			case GameModes.ONLINE_MULTIPLAYER:
-				PhotonNetwork.LeaveRoom();
-                Application.LoadLevel("network_lobby");
-				break;
-			default:
-				PhotonNetwork.LoadLevel("main_menu");
-				break;
+		case GameModes.ONLINE_MULTIPLAYER:
+			if(playersReady[PhotonNetwork.player.ID - 1]){
+				cPhotonView.RPC("RPC_CancelCharacter", PhotonTargets.All, PhotonNetwork.player.ID);
+			}
+			else ReturnToPrevMenu();
+			break;
+		case GameModes.LOCAL_MULTIPLAYER:
+			if(playersReady[_playerId - 1])CancelCharacter(_playerId);
+			else ReturnToPrevMenu();
+			break;
 		}
 	}
-
-    #endregion
+	
+	#endregion
 	#region Methods
+
 	private	void SelectCharacter(int _playerNum, int _id){
-		playersReady[_playerNum - 1] = false;
 		switch (_playerNum)
 		{
 		case 1:
@@ -150,11 +221,12 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 			
 		case 2:
 			p2CurrentSelected = _id;
-			P2Selector.anchoredPosition = new Vector2(CharacterButtons[_id].anchoredPosition.x, P1Selector.anchoredPosition.y) ;
+			P2Selector.anchoredPosition = new Vector2(CharacterButtons[_id].anchoredPosition.x, P2Selector.anchoredPosition.y) ;
 			P2CharacterPanel.OnCharacterSelect(_id);
 			break;
 			
 		}
+
 		if(p1CurrentSelected == p2CurrentSelected && DualSelector.GetComponent<Image>().enabled == false){
 			P1Selector.GetComponent<Image>().enabled = false;	
 			P2Selector.GetComponent<Image>().enabled = false;
@@ -168,6 +240,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 	}
 
 	private void LockCharacter(int _index, int _id){
+//		Debug.Log ("What the hell come on");
 		Globals.SelectedCharacters[_index] = (CharacterID)_id;
 		playersReady[_index] = true;
 		switch(_index){
@@ -182,6 +255,35 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 		if (playersReady[0] && playersReady[1] && PhotonNetwork.isMasterClient)
 			PhotonNetwork.LoadLevel(MAP_BEACH);
 	}
+
+	private void CancelCharacter(int _playerNum){
+		playersReady[_playerNum -1] = false;
+		switch(_playerNum){
+			case 1:
+				P1CharacterPanel.OnCharacterCancel();
+				SelectCharacter(_playerNum, p1CurrentSelected);
+				break;
+			case 2:
+				P2CharacterPanel.OnCharacterCancel();
+				SelectCharacter(_playerNum, p2CurrentSelected);
+				break;
+		}
+	}
+
+	private void ReturnToPrevMenu(){
+		switch(Globals.GameMode){
+			case GameModes.ONLINE_MULTIPLAYER:
+				Debug.Log ("Attempting to leave room");
+				
+				Application.LoadLevel("network_lobby");
+				PhotonNetwork.LeaveRoom();
+				break;
+			default:
+				Application.LoadLevel("main_menu");
+				break;
+		}
+	}
+	
 	#endregion
     #region RPC
 
@@ -197,5 +299,11 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 		LockCharacter(_index, _id);
     }
 
-    #endregion
+	[RPC]
+	private void RPC_CancelCharacter(int _playerNum)
+	{
+		CancelCharacter(_playerNum);
+	}
+	
+	#endregion
 }

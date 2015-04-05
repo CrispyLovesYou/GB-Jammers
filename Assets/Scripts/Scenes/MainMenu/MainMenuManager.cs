@@ -41,26 +41,26 @@ public class MainMenuManager : Singleton<MainMenuManager>
         PhotonNetwork.offlineMode = true;
         PhotonNetwork.CreateRoom(null);
 
-		//**TEMP
+		//Player 2 is set to controller mode by default. 
+		//If we have less than 2 controllers, set player 2 to keyboard
 		string[] controllerNames = Input.GetJoystickNames();
-		Globals.PlayerInputs[0] = InputType.CONTROLLER;
-		if(controllerNames.Length <= 1) Globals.PlayerInputs[0] = InputType.KEYBOARD;
+		if(controllerNames.Length <= 1) Globals.PlayerInputs[1] = InputType.KEYBOARD;
+
+		// Even if the controller names array length is 2 or greater, 
+		// disconnected controllers leave blank slots in the array.
+		// Check each one, and if there's a null slot, then set player 2 to keyboard.
 		else{
 			foreach(string name in controllerNames){
 				if(string.IsNullOrEmpty(name)){
-					Globals.PlayerInputs[0] = InputType.KEYBOARD;
+					Globals.PlayerInputs[1] = InputType.KEYBOARD;
 					break;
 				}
-
 			}
 		}
-
-		Globals.PlayerInputs[1] = InputType.CONTROLLER;
-
+		// Load character select level directly
 		PhotonNetwork.LoadLevel("character_select");
-        if (NetworkManager.IsNull)
-            gameObject.AddComponent<NetworkManager>();
-//        PhotonNetwork.LoadLevel("map_beach");
+        if (NetworkManager.IsNull)   gameObject.AddComponent<NetworkManager>();
+
     }
 
     public void StartOnlineMultiplayer()
