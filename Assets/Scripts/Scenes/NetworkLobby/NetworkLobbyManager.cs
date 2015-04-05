@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -92,7 +93,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 		ToggleCanvasGroup(HeaderCanvasGroup, true);
         ToggleCanvasGroup(RoomListGroup, true);
 
-        JoinPublic.Select();
+//        JoinPublic.Select();
     }
 
     private void OnJoinedRoom()
@@ -175,7 +176,22 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
                 roomPanel.GetComponentInChildren<Button>().gameObject.GetSafeComponent<JoinRoomButton>().RoomID = roomInfo.name;
             }
         }
+		if(roomInfoList.Length > 0){
+			// Trying to select a default room immediately doesn't work, as it hasn't integrated with the event system yet.
+			// Wait a split second.
+			StartCoroutine("DelayedButtonSelect");
+		}
     }
+
+	IEnumerator DelayedButtonSelect(){
+		yield return new WaitForSeconds(0.1f);
+		GameObject go = RoomListGroup.transform.Find ("Room List Layout").GetChild(0).gameObject;
+		Debug.Log ("Attempting to select " + go.name);
+
+		EventSystem.current.SetSelectedGameObject(go);
+
+//		ExecuteEvents.Execute<ISelectHandler>(go, new BaseEventData(EventSystem.current), ExecuteEvents.selectHandler);
+	}
 
 	private void UpdateReadyButtons(){
 		switch(PhotonNetwork.player.ID){
@@ -252,6 +268,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         username = usernameField.text;
 		LocalUserName.text = username;
         ToggleCanvasGroup(PreconnectGroup, false);
+		PreconnectGroup.gameObject.SetActive(false);
 
         Globals.Username = username;
         NetworkManager.Instance.ConnectToNetwork();

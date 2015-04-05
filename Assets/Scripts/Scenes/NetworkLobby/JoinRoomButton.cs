@@ -13,6 +13,7 @@ public class JoinRoomButton : MonoBehaviour
 
     public void OnClick_Join()
     {
+		Debug.Log ("Attempting to join D:");
         NetworkLobbyManager.Instance.JoinRoom(RoomID);
     }
 
