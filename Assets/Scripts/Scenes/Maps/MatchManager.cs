@@ -92,6 +92,10 @@ public class MatchManager : Singleton<MatchManager>
     public bool isInitialCatchComplete = false;
     public Team LastTeamToScore = Team.UNASSIGNED;
 
+    public CanvasGroup PauseMenu;
+    public bool IsPaused { get; private set; }
+    public bool IsPauseAllowed = false;
+
     private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
     private bool hasVolleyStarted = false;
@@ -141,6 +145,37 @@ public class MatchManager : Singleton<MatchManager>
         cPhotonView.RPC("RPC_ScorePoints", PhotonTargets.AllViaServer, (int)_team, _points);
     }
 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Pause"))
+        {
+            if (IsPaused)
+            {
+                if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
+                    Time.timeScale = 1.0f;
+
+                PauseMenu.alpha = 0;
+                PauseMenu.interactable = false;
+                PauseMenu.blocksRaycasts = false;
+                IsPaused = false;
+            }
+            else
+            {
+                if (IsPauseAllowed)
+                {
+                    if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
+                        Time.timeScale = 0;
+
+                    PauseMenu.alpha = 1.0f;
+                    PauseMenu.interactable = true;
+                    PauseMenu.blocksRaycasts = true;
+                    IsPaused = true;
+                    PauseMenu.GetComponentInChildren<UnityEngine.UI.Button>().Select();
+                }
+            }
+        }
+    }
+
     #endregion
 
     #region Coroutines
@@ -175,8 +210,11 @@ public class MatchManager : Singleton<MatchManager>
     private IEnumerator HandleMatchSetup()
     {
         yield return 0;
+
         if (onMatchStart != null)
             onMatchStart(this, EventArgs.Empty);
+
+        IsPauseAllowed = true;
     }
 
     private IEnumerator HandleSetWon()

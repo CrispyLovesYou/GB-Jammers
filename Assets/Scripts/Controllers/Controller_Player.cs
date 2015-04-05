@@ -430,11 +430,11 @@ public class Controller_Player : MonoBehaviour
         cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, (Vector3)throwDirection, throwCharge);
     }
 
-    public void SpecialThrow(Vector2 _inputVector, bool _hasKnockback)
+    public void SpecialThrow(int _throwCharge, Vector2 _inputVector, bool _hasKnockback)
     {
         State = PlayerState.THROWN;
         throwDirection = _inputVector;
-        cPhotonView.RPC("RPC_SpecialThrow", PhotonTargets.AllViaServer, (Vector3)throwDirection, _hasKnockback);
+        cPhotonView.RPC("RPC_SpecialThrow", PhotonTargets.AllViaServer, _throwCharge, (Vector3)throwDirection, _hasKnockback);
     }
 
     public void ThrowAfterAnimation()
@@ -868,12 +868,12 @@ public class Controller_Player : MonoBehaviour
     }
 
     [RPC]
-    private void RPC_SpecialThrow(Vector3 _throwDirection, bool _hasKnockback)
+    private void RPC_SpecialThrow(int _throwCharge, Vector3 _throwDirection, bool _hasKnockback)
     {
         StopCoroutine(CR_THROW_AFTER_IDLE);
 
         throwDirection = _throwDirection;
-        throwCharge = 100;
+        throwCharge = _throwCharge;
 
         if (throwDirection.x < Mathf.Abs(throwDirectionThreshhold))
             switch (Team)

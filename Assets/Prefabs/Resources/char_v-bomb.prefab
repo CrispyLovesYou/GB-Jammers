@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HasKnockback: 1
-  ThrowPowerMultiplier: 1.29999995
-  KnockbackMultiplier: 1.29999995
+  ThrowCharge: 100
+  ThrowPowerMultiplier: 1.10000002
+  KnockbackMultiplier: 1.20000005
 --- !u!114 &11427854
 MonoBehaviour:
   m_ObjectHideFlags: 1
