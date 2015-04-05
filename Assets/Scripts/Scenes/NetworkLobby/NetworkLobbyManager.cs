@@ -22,6 +22,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
     public Canvas MainLobbyCanvas;
     public Canvas GameLobbyCanvas;
+	public CanvasGroup HeaderCanvasGroup;
     public CanvasGroup LobbyGroup;
     public CanvasGroup PreconnectGroup;
     public CanvasGroup StatusGroup;
@@ -86,7 +87,9 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     {
         ToggleCanvasGroup(StatusGroup, false);
         ToggleCanvasGroup(LobbyGroup, true);
+		ToggleCanvasGroup(HeaderCanvasGroup, true);
         ToggleCanvasGroup(RoomListGroup, true);
+
         JoinPublic.Select();
     }
 
