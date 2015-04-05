@@ -391,7 +391,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 342.700073, y: -319.609955}
+  m_AnchoredPosition: {x: -177, y: -319.609955}
   m_SizeDelta: {x: 328, y: 240}
   m_Pivot: {x: .5, y: .5}
 --- !u!225 &186995801
@@ -2402,6 +2402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351512d3e007e8e49b96de4428cef915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LocalEventSystem: {fileID: 1044677621}
   MainCanvas: {fileID: 661491776}
   P1CharacterText: {fileID: 0}
   P2CharacterText: {fileID: 0}
@@ -2780,7 +2781,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1766068335}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!4 &1044677622
@@ -3340,7 +3341,7 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 342.700012, y: -319.609985}
+  m_AnchoredPosition: {x: -177, y: -319.609985}
   m_SizeDelta: {x: 328, y: 240}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1370371062

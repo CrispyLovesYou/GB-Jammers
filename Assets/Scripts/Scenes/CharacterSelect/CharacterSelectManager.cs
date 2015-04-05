@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 [AddComponentMenu("Managers/Scene/Character Select")]
@@ -13,6 +14,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 
     #region Fields
 
+	public EventSystem LocalEventSystem;
     public Canvas MainCanvas;
     public Text P1CharacterText;
     public Text P2CharacterText;
@@ -39,6 +41,16 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
     protected override void Awake()
     {
         base.Awake();
+
+		// Assign Unity UI's event system's default selection, depending on player number
+		switch(PhotonNetwork.player.ID){
+		case 1:
+			LocalEventSystem.firstSelectedGameObject = CharacterButtons[0].gameObject;
+			break;
+		case 2:
+			LocalEventSystem.firstSelectedGameObject = CharacterButtons[1].gameObject;
+			break;
+		}
         cPhotonView = GetComponent<PhotonView>();
     }
 
@@ -49,6 +61,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
     public void OnClick_SelectCharacter(int _id)
     {
         currentSelected = _id;
+		Debug.Log ("Current selected is " + currentSelected);
 		cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, PhotonNetwork.player.ID, currentSelected);
     }
 
@@ -68,6 +81,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
     [RPC]
     private void RPC_SelectCharacter(int _playerNum, int _id)
     {
+		playersReady[_playerNum - 1] = false;
         switch (_playerNum)
         {
             case 1:
