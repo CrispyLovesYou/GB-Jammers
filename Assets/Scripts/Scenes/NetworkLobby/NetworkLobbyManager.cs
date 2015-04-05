@@ -116,7 +116,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     {
         GameLobbyCanvas.enabled = false;
         MainLobbyCanvas.enabled = true;
-        ReadyToggle.isOn = false;
+		P1ReadyStatus.enabled = false;
+		P2ReadyStatus.enabled = false;
     }
 
     private void OnMasterClientSwitched()
@@ -150,8 +151,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     {
         PhotonNetwork.JoinRoom(_roomID);
     }
-
-    private void DisconnectFromNetwork()
+	
+	private void DisconnectFromNetwork()
     {
         PhotonNetwork.Disconnect();
     }
@@ -294,6 +295,10 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
     }
 
+	public void OnClick_BackToLobby(){
+		PhotonNetwork.LeaveRoom();
+	}
+
     public void OnClick_BackToMainMenu()
     {
         DisconnectFromNetwork();
@@ -331,13 +336,13 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
             if (player.ID == 1)  // if this is Player 1
             {
 				P1ReadyStatus.enabled = playersReady[player.ID-1];
-				P1ReadyButtonText.text = "CANCEL";
+				P1ReadyButtonText.text = (playersReady[player.ID-1] ? "READY" : "CANCEL");
  
             }
             else if (player.ID == 2)  // if this is Player 2
             {
 				P2ReadyStatus.enabled = playersReady[player.ID-1];
-				P2ReadyButtonText.text = "CANCEL";
+				P2ReadyButtonText.text = (playersReady[player.ID-1] ? "READY" : "CANCEL");
             }
         }
 
