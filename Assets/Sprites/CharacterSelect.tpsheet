@@ -5,31 +5,34 @@
 # http://www.codeandweb.com/texturepacker/unity
 #
 # Sprite sheet: CharacterSelect.png (2048 x 2048)
-# $TexturePacker:SmartUpdate:515e2a0f70995b674f60c4f8348e19a3:da2ac6fb95518ac6385a88161c30e048:fd1902e8e56eea7fa4f7bd233833aab1$
+# $TexturePacker:SmartUpdate:c08d2bd05257d412612dea581886ae06:b285bebb8235894a3e49b51f7c8f1ed4:fd1902e8e56eea7fa4f7bd233833aab1$
 #
 
-12PSelect;1700;584;328;240;0.5;0.5
+12PSelect;2;17;328;240;0.5;0.5
 1P;1813;1398;118;110;0.5;0.5
-1PSelect;2;342;328;240;0.5;0.5
+1PSelect;332;17;328;240;0.5;0.5
 2P;1813;1510;139;110;0.5;0.5
-2PSelect;332;1118;328;240;0.5;0.5
+2PSelect;573;700;328;240;0.5;0.5
 FighterNameLeft;941;1956;877;90;0.5;0.5
 GRAD;941;1494;870;460;0.5;0.5
-Header_CharacterSelect;2;1486;724;76;0.5;0.5
-Name_DirtyDan;1370;1351;331;60;0.5;0.5
-Name_DrTrackSuit;2;1423;474;61;0.5;0.5
-Name_SolidScanlon;2;1360;472;61;0.5;0.5
+Header_CharacterSelect;850;1416;724;76;0.5;0.5
+Name_DirtyDan;1492;1129;331;60;0.5;0.5
+Name_DrTrackSuit;1492;1335;474;61;0.5;0.5
+Name_SolidScanlon;1492;1272;472;61;0.5;0.5
 Name_Vbomb;1820;1985;211;61;0.5;0.5
 Panel;2;1564;937;482;0.5;0.5
-PlayerReady;1370;1413;335;79;0.5;0.5
-PortraitDan;1703;1112;328;284;0.5;0.5
-PortraitScanlon;1370;1065;328;284;0.5;0.5
-PortraitTracksuit;1700;826;328;284;0.5;0.5
-PortraitVbomb;1370;779;328;284;0.5;0.5
+PlayerReady;1492;1191;335;79;0.5;0.5
+PortraitDan;1492;843;328;284;0.5;0.5
+PortraitDirtyDan;2;259;561;407;0.5;0.5
+PortraitDrew;2;1095;846;467;0.5;0.5
+PortraitScanlon;565;382;328;284;0.5;0.5
+PortraitTracksuit;662;96;328;284;0.5;0.5
+PortraitVbomb;895;414;328;284;0.5;0.5
+Portrait_Vbomb;2;668;569;425;0.5;0.5
 Skills_Right;1813;1735;150;111;0.5;0.5
 Skills_left;1813;1622;148;111;0.5;0.5
 StatsStar;2006;1948;33;35;0.5;0.5
 StatsStarNot;2006;1911;33;35;0.5;0.5
 StatsTitle;1963;1664;82;69;0.5;0.5
-TracksuitTemp;728;1020;640;472;0.5;0.5
+TracksuitTemp;850;942;640;472;0.5;0.5
 VS;1820;1848;184;135;0.5;0.5
