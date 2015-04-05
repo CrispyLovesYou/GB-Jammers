@@ -110,7 +110,6 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         GameLobbyCanvas.enabled = true;
 		UpdateReadyButtons();
         UpdateUsernames();
-		EventSystem.current.SetSelectedGameObject(ChatInput.gameObject);
     }
 
     private void OnLeftRoom()
@@ -190,9 +189,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 	IEnumerator DelayedButtonSelect(){
 		yield return new WaitForSeconds(0.1f);
 		GameObject go = RoomListGroup.transform.Find ("Room List Layout").GetChild(0).gameObject;
-		EventSystem.current.SetSelectedGameObject(go);
-
-//		ExecuteEvents.Execute<ISelectHandler>(go, new BaseEventData(EventSystem.current), ExecuteEvents.selectHandler);
+		EventSystem.current.SetSelectedGameObject(go);;
 	}
 
 	private void UpdateReadyButtons(){
@@ -314,6 +311,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
     public void OnClick_SendChat()
     {
+		if(ChatInput.text == "") return;
         string msg = username + ": " + ChatInput.text;
         cPhotonView.RPC("RPC_SendChat", PhotonTargets.All, msg);
         ChatInput.text = "";
