@@ -199,9 +199,9 @@ MonoBehaviour:
   cImage: {fileID: 11442234}
   cText: {fileID: 11440088}
   DrTracksuit: {fileID: 21300038, guid: 7d91fdb1bb5e8944c8703c4ec08b2201, type: 3}
-  VBomb: {fileID: 21300038, guid: 7d91fdb1bb5e8944c8703c4ec08b2201, type: 3}
-  DirtyDanRyckert: {fileID: 21300038, guid: 7d91fdb1bb5e8944c8703c4ec08b2201, type: 3}
-  MetalGearScanlon: {fileID: 21300038, guid: 7d91fdb1bb5e8944c8703c4ec08b2201, type: 3}
+  VBomb: {fileID: 21300054, guid: 7d91fdb1bb5e8944c8703c4ec08b2201, type: 3}
+  DirtyDanRyckert: {fileID: 21300050, guid: 7d91fdb1bb5e8944c8703c4ec08b2201, type: 3}
+  MetalGearScanlon: {fileID: 21300052, guid: 7d91fdb1bb5e8944c8703c4ec08b2201, type: 3}
 --- !u!114 &11486436
 MonoBehaviour:
   m_ObjectHideFlags: 1
