@@ -690,8 +690,8 @@ public class Controller_Player : MonoBehaviour
         Disc.Instance.HasKnockback = false;
         Disc.Instance.KnockbackPower = 0;
         Disc.Instance.SetPosition(cTransform.position);
-        State = PlayerState.AIM;
-        Stop();
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.AllViaServer, (int)PlayerState.AIM);
+        cRigidbody2D.velocity = Vector2.zero;  // can't use Stop() here because we're waiting for RPC
     }
 
     private IEnumerator CR_BookStun(Book _book)
