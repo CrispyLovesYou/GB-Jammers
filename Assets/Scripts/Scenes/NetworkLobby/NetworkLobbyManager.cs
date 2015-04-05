@@ -54,6 +54,15 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         cPhotonView = GetComponent<PhotonView>();
         usernameField = PreconnectGroup.GetComponentInChildren<InputField>();
         connectBtn = PreconnectGroup.GetComponentInChildren<Button>();
+        ScrollingBackground.SetActive(true);
+
+        if (!PhotonNetwork.connectedAndReady)
+            ToggleCanvasGroup(PreconnectGroup, true);
+        else
+        {
+            ToggleCanvasGroup(LobbyGroup, true);
+            ToggleCanvasGroup(RoomListGroup, true);
+        }
     }
 
     #endregion
@@ -70,7 +79,6 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         ToggleCanvasGroup(StatusGroup, false);
         ToggleCanvasGroup(LobbyGroup, true);
         ToggleCanvasGroup(RoomListGroup, true);
-		ScrollingBackground.SetActive(true);
     }
 
     private void OnJoinedRoom()

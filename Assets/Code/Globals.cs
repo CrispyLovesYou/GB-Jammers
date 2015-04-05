@@ -19,6 +19,7 @@ public static class Globals
     public static Dictionary<CharacterID, Character> CharacterDict = new Dictionary<CharacterID, Character>();
     public static CharacterID[] SelectedCharacters = new CharacterID[MAX_CONNECTED_PLAYERS];
     public static string Username = "";
+    public static bool HasGameStarted = false;
 
     #endregion
 }
