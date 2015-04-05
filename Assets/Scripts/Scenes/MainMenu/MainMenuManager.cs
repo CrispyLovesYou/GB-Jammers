@@ -40,11 +40,22 @@ public class MainMenuManager : Singleton<MainMenuManager>
         Globals.GameMode = GameModes.LOCAL_MULTIPLAYER;
         PhotonNetwork.offlineMode = true;
         PhotonNetwork.CreateRoom(null);
-//        Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID_1;
-//        Globals.SelectedCharacters[1] = (CharacterID)DEBUG_CharacterID_2;
+
 		//**TEMP
+		string[] controllerNames = Input.GetJoystickNames();
 		Globals.PlayerInputs[0] = InputType.CONTROLLER;
-		Globals.PlayerInputs[1] = InputType.KEYBOARD;
+		if(controllerNames.Length <= 1) Globals.PlayerInputs[0] = InputType.KEYBOARD;
+		else{
+			foreach(string name in controllerNames){
+				if(string.IsNullOrEmpty(name)){
+					Globals.PlayerInputs[0] = InputType.KEYBOARD;
+					break;
+				}
+
+			}
+		}
+
+		Globals.PlayerInputs[1] = InputType.CONTROLLER;
 
 		PhotonNetwork.LoadLevel("character_select");
         if (NetworkManager.IsNull)

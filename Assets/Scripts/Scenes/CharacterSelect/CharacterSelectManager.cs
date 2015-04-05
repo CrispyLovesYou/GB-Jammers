@@ -88,13 +88,19 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
     public void OnClick_SelectCharacter(int _id)
     {
         currentSelected = _id;
-		Debug.Log ("Current selected is " + currentSelected);
 		switch(Globals.GameMode){
 			case GameModes.ONLINE_MULTIPLAYER:
 				cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, PhotonNetwork.player.ID, currentSelected);
 				break;
 			case GameModes.LOCAL_MULTIPLAYER:
-				SelectCharacter(1, currentSelected);
+				// Was it a keyboard player? Or was it Joystick 1 while multiple joysticks are connected? 
+				// We can assume it was player 1 in that case. 
+				if(Globals.PlayerInputs[0] == InputType.KEYBOARD   && Input.GetAxis("Key_Horizontal") != 0 || 
+			   	   Globals.PlayerInputs[0] == InputType.CONTROLLER && Input.GetAxis("Joy1_Horizontal") != 0){
+					SelectCharacter(1, _id);
+				}else{
+					SelectCharacter(2, _id);
+				}
 				break;
 		}
 
@@ -103,19 +109,22 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
     public void OnClick_LockCharacter()
     {
 		switch(Globals.GameMode){
-		case GameModes.ONLINE_MULTIPLAYER:
-			cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, currentSelected);
-			break;
-		case GameModes.LOCAL_MULTIPLAYER:
-			// but... who pressed it..?
-			LockCharacter(0, currentSelected);
-			break;
+			case GameModes.ONLINE_MULTIPLAYER:
+				cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, currentSelected);
+				break;
+			case GameModes.LOCAL_MULTIPLAYER:
+				if(Globals.PlayerInputs[0] == InputType.KEYBOARD   && Input.GetButtonDown("Key_Action") || 
+				   Globals.PlayerInputs[0] == InputType.CONTROLLER && Input.GetButtonDown("Joy1_Action")){
+					LockCharacter(0, p1CurrentSelected);
+				}else{
+					LockCharacter(1, p2CurrentSelected);
+				}
+				break;
 		}
         
     }
 
 	public void OnClick_ReturnToMenu(){
-		Debug.Log ("Loading previous menu");
 		switch(Globals.GameMode){
 			case GameModes.ONLINE_MULTIPLAYER:
 				PhotonNetwork.LoadLevel("network_lobby");
@@ -124,7 +133,6 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 			default:
 				PhotonNetwork.LoadLevel("main_menu");
 				break;
-
 		}
 	}
 
