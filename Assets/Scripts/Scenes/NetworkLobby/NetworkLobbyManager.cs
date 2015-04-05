@@ -30,10 +30,12 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public GameObject RoomListLayoutGroup;
     public GameObject RoomPanelPrefab;
     public Toggle ReadyToggle;
+	public Button P1ReadyButton;
+	public Button P2ReadyButton;
     public UpdateUsernameText P1Username;
     public UpdateUsernameText P2Username;
-    public Text P1ReadyStatus;
-    public Text P2ReadyStatus;
+    public Image P1ReadyStatus;
+    public Image P2ReadyStatus;
     public Text CountdownField;
 	public GameObject ScrollingBackground; 
 	public Text LocalUserName;
@@ -103,7 +105,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
         MainLobbyCanvas.enabled = false;
         GameLobbyCanvas.enabled = true;
-
+		UpdateReadyButtons();
         UpdateUsernames();
     }
 
@@ -175,6 +177,20 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         }
     }
 
+	private void UpdateReadyButtons(){
+		switch(PhotonNetwork.player.ID){
+			case 1:
+				P1ReadyButton.gameObject.SetActive(true);
+				P2ReadyButton.gameObject.SetActive(false);
+				break;
+			case 2:
+				P1ReadyButton.gameObject.SetActive(false);
+				P2ReadyButton.gameObject.SetActive(true);
+
+				break;
+		}
+	}
+
     private void UpdateUsernames()
     {
         P1Username.UpdateText(1);
@@ -208,9 +224,9 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         for (int i = 3; i > 0; i--)
         {
             if (i != 1)
-                CountdownField.text = "Game starting in " + i.ToString() + " seconds...";
+                CountdownField.text = "GAME STARTING IN " + i.ToString() + " SECONDS...";
             else
-                CountdownField.text = "Game starting in 1 second...";
+				CountdownField.text = "GAME STARTING IN 1 SECOND...";
 
             yield return new WaitForSeconds(1.0f);
         }
@@ -264,13 +280,13 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         DisconnectFromNetwork();
     }
 
-    public void OnToggle_Ready()
+    public void OnClick_Ready()
     {
         ExitGames.Client.Photon.Hashtable newProperties = new ExitGames.Client.Photon.Hashtable();
-        newProperties.Add(PROP_IS_READY, ReadyToggle.isOn);
+        newProperties.Add(PROP_IS_READY, true);
         PhotonNetwork.player.SetCustomProperties(newProperties);
 
-        cPhotonView.RPC("RPC_ToggleReady", PhotonTargets.AllBufferedViaServer);
+        cPhotonView.RPC("RPC_ClickReady", PhotonTargets.AllBufferedViaServer);
     }
 
     public void OnClick_SendChat()
@@ -287,7 +303,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     #region RPC
 
     [RPC]
-    private void RPC_ToggleReady()
+    private void RPC_ClickReady()
     {
         foreach (PhotonPlayer player in PhotonNetwork.playerList)
         {
@@ -295,19 +311,12 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
             if (player.ID == 1)  // if this is Player 1
             {
-                switch (playersReady[player.ID - 1])
-                {
-                    case true: P1ReadyStatus.text = "Player 1 is ready!"; break;
-                    case false: P1ReadyStatus.text = ""; break;
-                }
+				P1ReadyStatus.enabled = playersReady[player.ID-1];
+ 
             }
             else if (player.ID == 2)  // if this is Player 2
             {
-                switch (playersReady[player.ID - 1])
-                {
-                    case true: P2ReadyStatus.text = "Player 2 is ready!"; break;
-                    case false: P2ReadyStatus.text = ""; break;
-                }
+				P2ReadyStatus.enabled = playersReady[player.ID-1];
             }
         }
 

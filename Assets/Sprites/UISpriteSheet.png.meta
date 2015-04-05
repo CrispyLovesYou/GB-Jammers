@@ -19,6 +19,8 @@ TextureImporter:
     21300024: StandaloneButtonIdle
     21300026: StandaloneButtonOver
     21300028: WarningWindow
+    21300030: Header_MainMenu
+    21300032: Header_Options
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -134,12 +136,32 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Header_MainMenu
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 537
+        width: 420
+        height: 75
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Header_OnlineLobby
       rect:
         serializedVersion: 2
         x: 1343
         y: 818
         width: 547
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Header_Options
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 614
+        width: 313
         height: 76
       alignment: 0
       pivot: {x: .5, y: .5}
