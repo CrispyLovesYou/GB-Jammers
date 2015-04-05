@@ -29,6 +29,9 @@ TextureImporter:
     21300044: 1PSelect
     21300046: 2PSelect
     21300048: PlayerReady
+    21300050: PortraitDirtyDan
+    21300052: PortraitDrew
+    21300054: Portrait_Vbomb
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -77,8 +80,8 @@ TextureImporter:
     - name: 12PSelect
       rect:
         serializedVersion: 2
-        x: 1700
-        y: 584
+        x: 2
+        y: 17
         width: 328
         height: 240
       alignment: 0
@@ -97,8 +100,8 @@ TextureImporter:
     - name: 1PSelect
       rect:
         serializedVersion: 2
-        x: 2
-        y: 342
+        x: 332
+        y: 17
         width: 328
         height: 240
       alignment: 0
@@ -117,8 +120,8 @@ TextureImporter:
     - name: 2PSelect
       rect:
         serializedVersion: 2
-        x: 332
-        y: 1118
+        x: 573
+        y: 700
         width: 328
         height: 240
       alignment: 0
@@ -147,8 +150,8 @@ TextureImporter:
     - name: Header_CharacterSelect
       rect:
         serializedVersion: 2
-        x: 2
-        y: 1486
+        x: 850
+        y: 1416
         width: 724
         height: 76
       alignment: 0
@@ -157,8 +160,8 @@ TextureImporter:
     - name: Name_DirtyDan
       rect:
         serializedVersion: 2
-        x: 1370
-        y: 1351
+        x: 1492
+        y: 1129
         width: 331
         height: 60
       alignment: 0
@@ -167,8 +170,8 @@ TextureImporter:
     - name: Name_DrTrackSuit
       rect:
         serializedVersion: 2
-        x: 2
-        y: 1423
+        x: 1492
+        y: 1335
         width: 474
         height: 61
       alignment: 0
@@ -177,8 +180,8 @@ TextureImporter:
     - name: Name_SolidScanlon
       rect:
         serializedVersion: 2
-        x: 2
-        y: 1360
+        x: 1492
+        y: 1272
         width: 472
         height: 61
       alignment: 0
@@ -207,8 +210,8 @@ TextureImporter:
     - name: PlayerReady
       rect:
         serializedVersion: 2
-        x: 1370
-        y: 1413
+        x: 1492
+        y: 1191
         width: 335
         height: 79
       alignment: 0
@@ -217,18 +220,38 @@ TextureImporter:
     - name: PortraitDan
       rect:
         serializedVersion: 2
-        x: 1703
-        y: 1112
+        x: 1492
+        y: 843
         width: 328
         height: 284
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PortraitDirtyDan
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 259
+        width: 561
+        height: 407
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PortraitDrew
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1095
+        width: 846
+        height: 467
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PortraitScanlon
       rect:
         serializedVersion: 2
-        x: 1370
-        y: 1065
+        x: 565
+        y: 382
         width: 328
         height: 284
       alignment: 0
@@ -237,8 +260,8 @@ TextureImporter:
     - name: PortraitTracksuit
       rect:
         serializedVersion: 2
-        x: 1700
-        y: 826
+        x: 662
+        y: 96
         width: 328
         height: 284
       alignment: 0
@@ -247,10 +270,20 @@ TextureImporter:
     - name: PortraitVbomb
       rect:
         serializedVersion: 2
-        x: 1370
-        y: 779
+        x: 895
+        y: 414
         width: 328
         height: 284
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Portrait_Vbomb
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 668
+        width: 569
+        height: 425
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,8 +340,8 @@ TextureImporter:
     - name: TracksuitTemp
       rect:
         serializedVersion: 2
-        x: 728
-        y: 1020
+        x: 850
+        y: 942
         width: 640
         height: 472
       alignment: 0

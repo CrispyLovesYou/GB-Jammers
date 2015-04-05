@@ -4,6 +4,8 @@ using System.Collections;
 
 public class CharacterPanel : MonoBehaviour {
 
+	public Image PortraitImage;
+	public Sprite[] PortraitSprites;
 	public Image ReadyImage;
 	public Image[] PowerStars;
 	public Image[] SpeedStars;
@@ -17,6 +19,8 @@ public class CharacterPanel : MonoBehaviour {
 
 		// Change UI to match character
 		CharacterID charID = (CharacterID) id;
+		PortraitImage.sprite = PortraitSprites[id];
+		PortraitImage.SetNativeSize();
 		PassiveText.text = Globals.CharacterDict[charID].AbilityPassive;
 		ExText.text = Globals.CharacterDict[charID].AbilityEX;
 		SuperText.text = Globals.CharacterDict[charID].AbilitySuper;
