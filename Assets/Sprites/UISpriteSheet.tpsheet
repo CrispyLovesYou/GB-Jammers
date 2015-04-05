@@ -5,7 +5,7 @@
 # http://www.codeandweb.com/texturepacker/unity
 #
 # Sprite sheet: UISpriteSheet.png (2048 x 1024)
-# $TexturePacker:SmartUpdate:e2f36712fa156d5eab96e4a2c7dc0eb6:ef1c2d7b23d7194555415f66ca40f353:e0e06d700246682ee46b758c205f945a$
+# $TexturePacker:SmartUpdate:c2613f08e372ad10075ce4ab4683e1c5:909e7eac59ecf81e570144de68b781c6:e0e06d700246682ee46b758c205f945a$
 #
 
 Arrow;1924;980;64;42;0.5;0.5
@@ -15,7 +15,9 @@ BigButton_Over;1238;384;745;85;0.5;0.5
 Cursor;1990;953;42;69;0.5;0.5
 CursorOver;1924;909;42;69;0.5;0.5
 Header;2;896;1920;126;0.5;0.5
+Header_MainMenu;1343;537;420;75;0.5;0.5
 Header_OnlineLobby;1343;818;547;76;0.5;0.5
+Header_Options;1343;614;313;76;0.5;0.5
 Menu_Idle;1343;755;506;61;0.5;0.5
 Menu_Over;628;408;608;61;0.5;0.5
 Menu_Tabbed;1343;692;506;61;0.5;0.5
