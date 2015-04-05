@@ -214,9 +214,9 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 		case GameModes.LOCAL_MULTIPLAYER:
 			if(Globals.PlayerInputs[1] == InputType.KEYBOARD   && Input.GetButtonDown("Key_Action") || 
 			   Globals.PlayerInputs[1] == InputType.CONTROLLER && Input.GetButtonDown("Joy2_Action")){
-				LockCharacter(1, p1CurrentSelected);
+				LockCharacter(1, p2CurrentSelected);
 			}else{
-				LockCharacter(0, p2CurrentSelected);
+				LockCharacter(0, p1CurrentSelected);
 			}
 			break;
 		}
