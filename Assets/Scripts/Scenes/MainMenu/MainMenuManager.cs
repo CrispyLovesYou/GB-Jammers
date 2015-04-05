@@ -40,16 +40,27 @@ public class MainMenuManager : Singleton<MainMenuManager>
         Globals.GameMode = GameModes.LOCAL_MULTIPLAYER;
         PhotonNetwork.offlineMode = true;
         PhotonNetwork.CreateRoom(null);
-        Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID_1;
-        Globals.SelectedCharacters[1] = (CharacterID)DEBUG_CharacterID_2;
+//        Globals.SelectedCharacters[0] = (CharacterID)DEBUG_CharacterID_1;
+//        Globals.SelectedCharacters[1] = (CharacterID)DEBUG_CharacterID_2;
+		//**TEMP
+		Globals.PlayerInputs[0] = InputType.CONTROLLER;
+		Globals.PlayerInputs[1] = InputType.KEYBOARD;
+
+		PhotonNetwork.LoadLevel("character_select");
         if (NetworkManager.IsNull)
             gameObject.AddComponent<NetworkManager>();
-        PhotonNetwork.LoadLevel("map_beach");
+//        PhotonNetwork.LoadLevel("map_beach");
     }
 
     public void StartOnlineMultiplayer()
     {
         Globals.GameMode = GameModes.ONLINE_MULTIPLAYER;
+		if(Input.GetJoystickNames().Length > 0 && string.IsNullOrEmpty(Input.GetJoystickNames()[0]) == false){
+			Globals.PlayerInputs[0] = InputType.CONTROLLER;
+		}else{
+			Globals.PlayerInputs[0] = InputType.KEYBOARD;
+		}
+
         Application.LoadLevel(NETWORK_LOBBY_ID);
     }
 

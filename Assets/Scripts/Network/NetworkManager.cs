@@ -110,6 +110,13 @@ public class NetworkManager : Singleton<NetworkManager>
         cPlayer.SetData(team, Globals.SelectedCharacters[index]);
         cPlayer.Team = team;
 
+		switch(Globals.PlayerInputs[_playerNum -1]){
+			case InputType.KEYBOARD:
+				player.GetComponent<Input_Joy>().enabled = false;
+				player.AddComponent<Input_KM>();
+				break;
+		}
+
         // ========== DEBUG CODE
         if (Globals.GameMode == GameModes.DEBUG)
         {
@@ -118,11 +125,6 @@ public class NetworkManager : Singleton<NetworkManager>
             cPlayer.MeterForSuper = 0;
         }
 
-        if (_playerNum == 2)
-        {
-            player.GetComponent<Input_Joy>().enabled = false;
-            player.AddComponent<Input_KM>();
-        }
         // =====================
 
         SpawnChargeBar(player, team);
@@ -166,6 +168,13 @@ public class NetworkManager : Singleton<NetworkManager>
         Controller_Player cPlayer = player.GetComponent<Controller_Player>();
         cPlayer.SetData(team, Globals.SelectedCharacters[index]);
         cPlayer.Team = team;
+
+		switch(Globals.PlayerInputs[0]){
+		case InputType.KEYBOARD:
+			player.GetComponent<Input_Joy>().enabled = false;
+			player.AddComponent<Input_KM>();
+			break;
+		}
 
         // ========== DEBUG CODE
         if (Globals.GameMode == GameModes.DEBUG)
