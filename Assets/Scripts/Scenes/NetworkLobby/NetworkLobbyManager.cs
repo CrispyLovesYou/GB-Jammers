@@ -110,6 +110,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         GameLobbyCanvas.enabled = true;
 		UpdateReadyButtons();
         UpdateUsernames();
+		EventSystem.current.SetSelectedGameObject(ChatInput.gameObject);
     }
 
     private void OnLeftRoom()
@@ -189,8 +190,6 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 	IEnumerator DelayedButtonSelect(){
 		yield return new WaitForSeconds(0.1f);
 		GameObject go = RoomListGroup.transform.Find ("Room List Layout").GetChild(0).gameObject;
-		Debug.Log ("Attempting to select " + go.name);
-
 		EventSystem.current.SetSelectedGameObject(go);
 
 //		ExecuteEvents.Execute<ISelectHandler>(go, new BaseEventData(EventSystem.current), ExecuteEvents.selectHandler);
