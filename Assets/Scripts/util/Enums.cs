@@ -8,6 +8,11 @@ public enum GameModes
     ONLINE_MULTIPLAYER
 }
 
+public enum InputType{
+	KEYBOARD,
+	CONTROLLER
+}
+
 public enum Direction
 {
     LEFT,

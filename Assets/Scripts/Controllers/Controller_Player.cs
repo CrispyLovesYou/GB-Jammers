@@ -195,7 +195,6 @@ public class Controller_Player : MonoBehaviour
     #endregion
 
     #region Fields
-
     public CharacterID Character;
     public string ID = "";
     public string Name = "";
