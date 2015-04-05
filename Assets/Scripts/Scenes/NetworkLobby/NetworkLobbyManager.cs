@@ -33,6 +33,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public Toggle ReadyToggle;
 	public Button P1ReadyButton;
 	public Button P2ReadyButton;
+	public Text P1ReadyButtonText;
+	public Text P2ReadyButtonText;
     public UpdateUsernameText P1Username;
     public UpdateUsernameText P2Username;
     public Image P1ReadyStatus;
@@ -300,11 +302,11 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public void OnClick_Ready()
     {
         ExitGames.Client.Photon.Hashtable newProperties = new ExitGames.Client.Photon.Hashtable();
-        newProperties.Add(PROP_IS_READY, true);
+        newProperties.Add(PROP_IS_READY, !playersReady[PhotonNetwork.player.ID - 1]);
         PhotonNetwork.player.SetCustomProperties(newProperties);
 
-        cPhotonView.RPC("RPC_ClickReady", PhotonTargets.AllBufferedViaServer);
-    }
+		cPhotonView.RPC("RPC_ClickReady", PhotonTargets.AllBufferedViaServer);
+	}
 
     public void OnClick_SendChat()
     {
@@ -329,11 +331,13 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
             if (player.ID == 1)  // if this is Player 1
             {
 				P1ReadyStatus.enabled = playersReady[player.ID-1];
+				P1ReadyButtonText.text = "CANCEL";
  
             }
             else if (player.ID == 2)  // if this is Player 2
             {
 				P2ReadyStatus.enabled = playersReady[player.ID-1];
+				P2ReadyButtonText.text = "CANCEL";
             }
         }
 

@@ -127,6 +127,8 @@ MonoBehaviour:
   ReadyToggle: {fileID: 0}
   P1ReadyButton: {fileID: 757425861}
   P2ReadyButton: {fileID: 167734929}
+  P1ReadyButtonText: {fileID: 131152943}
+  P2ReadyButtonText: {fileID: 964539578}
   P1Username: {fileID: 439799815}
   P2Username: {fileID: 830661278}
   P1ReadyStatus: {fileID: 223629301}
