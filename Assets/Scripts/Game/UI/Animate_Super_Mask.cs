@@ -21,7 +21,6 @@ public class Animate_Super_Mask : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 0;
-        MatchManager.Instance.IsPauseAllowed = false;
     }
 
     #endregion
@@ -44,7 +43,6 @@ public class Animate_Super_Mask : MonoBehaviour
     public void DestroyAfterAnimation()
     {
         Time.timeScale = 1.0f;
-        MatchManager.Instance.IsPauseAllowed = true;
         Destroy(this.gameObject);
     }
 

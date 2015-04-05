@@ -29,7 +29,6 @@ public class EX_MetalGearScanlon : EX_Base
 
         GameObject gObj = Instantiate(Book, player.transform.position, Quaternion.identity) as GameObject;
         gObj.GetSafeComponent<Book>().TargetPosition = player.GetLobTargetPosition(e.InputVector);
-        player.State = PlayerState.AIM;
     }
 
     #endregion

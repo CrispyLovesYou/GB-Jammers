@@ -351,7 +351,7 @@ InputManager:
     altPositiveButton: 
     gravity: 1000
     dead: .00100000005
-    sensitivity: 1000
+    sensitivity: 1
     snap: 1
     invert: 0
     type: 2
@@ -399,7 +399,7 @@ InputManager:
     altPositiveButton: 
     gravity: 1000
     dead: .00100000005
-    sensitivity: 1000
+    sensitivity: 1
     snap: 1
     invert: 0
     type: 2
@@ -517,6 +517,7 @@ InputManager:
     type: 0
     axis: 1
     joyNum: 2
+<<<<<<< HEAD
   - serializedVersion: 3
 <<<<<<< HEAD
     m_Name: Pause
@@ -614,3 +615,5 @@ InputManager:
     axis: 0
     joyNum: 2
 >>>>>>> origin/master
+=======
+>>>>>>> parent of be008cc... Added Pause menu. Fixed bugs. A little balance.

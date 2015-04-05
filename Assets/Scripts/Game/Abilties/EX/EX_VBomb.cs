@@ -7,9 +7,8 @@ public class EX_VBomb : EX_Base
     #region Fields
 
     public bool HasKnockback = true;
-    public int ThrowCharge = 100;
-    public float ThrowPowerMultiplier = 1.1f;
-    public float KnockbackMultiplier = 1.2f;
+    public float ThrowPowerMultiplier = 1.3f;
+    public float KnockbackMultiplier = 1.3f;
 
     #endregion
 
@@ -33,7 +32,7 @@ public class EX_VBomb : EX_Base
         player.ThrowPowerMultiplier *= ThrowPowerMultiplier;
         player.KnockbackMultiplier *= KnockbackMultiplier;
 
-        player.SpecialThrow(ThrowCharge, e.InputVector, HasKnockback);
+        player.SpecialThrow(e.InputVector, HasKnockback);
 
         player.ThrowPowerMultiplier /= ThrowPowerMultiplier;
         player.KnockbackMultiplier /= KnockbackMultiplier;

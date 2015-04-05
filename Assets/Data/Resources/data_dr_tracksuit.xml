@@ -8,7 +8,7 @@
   <Stability>3</Stability>
   <MoveSpeed>2</MoveSpeed>
   <DashSpeed>6</DashSpeed>
-  <DashDuration>0.35</DashDuration>
+  <DashDuration>0.3</DashDuration>
   <LobDuration>1.2</LobDuration>
   <AbilityPassive>Chase That High</AbilityPassive>
   <AbilityPassiveDesc>[Passive description]</AbilityPassiveDesc>

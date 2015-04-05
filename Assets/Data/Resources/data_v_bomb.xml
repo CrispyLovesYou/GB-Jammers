@@ -7,7 +7,7 @@
   <ThrowKnockback>3.6</ThrowKnockback>
   <Stability>3</Stability>
   <MoveSpeed>1.8</MoveSpeed>
-  <DashSpeed>4.2</DashSpeed>
+  <DashSpeed>4</DashSpeed>
   <DashDuration>0.5</DashDuration>
   <LobDuration>1.6</LobDuration>
   <AbilityPassive>V-Bomb ANGRY</AbilityPassive>
