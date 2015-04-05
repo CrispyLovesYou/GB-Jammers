@@ -56,7 +56,7 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -2
   maxTextureSize: 4096
   textureSettings:
     filterMode: -1
@@ -84,300 +84,300 @@ TextureImporter:
         serializedVersion: 2
         x: 2
         y: 3798
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00265
       rect:
         serializedVersion: 2
-        x: 1219
+        x: 1229
         y: 3798
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00266
       rect:
         serializedVersion: 2
-        x: 2436
+        x: 2456
         y: 3798
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00267
       rect:
         serializedVersion: 2
         x: 2
         y: 3500
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00268
       rect:
         serializedVersion: 2
-        x: 1219
+        x: 1229
         y: 3500
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00269
       rect:
         serializedVersion: 2
-        x: 2436
+        x: 2456
         y: 3500
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00270
       rect:
         serializedVersion: 2
         x: 2
         y: 3202
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00271
       rect:
         serializedVersion: 2
-        x: 1219
+        x: 1229
         y: 3202
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00272
       rect:
         serializedVersion: 2
-        x: 2436
+        x: 2456
         y: 3202
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00273
       rect:
         serializedVersion: 2
         x: 2
         y: 2904
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00274
       rect:
         serializedVersion: 2
-        x: 1219
+        x: 1229
         y: 2904
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00275
       rect:
         serializedVersion: 2
-        x: 2436
+        x: 2456
         y: 2904
-        width: 1215
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00276
       rect:
         serializedVersion: 2
         x: 2
-        y: 1117
-        width: 1214
-        height: 295
-      alignment: 9
-      pivot: {x: .504530489, y: .498305082}
+        y: 2606
+        width: 1225
+        height: 296
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00277
       rect:
         serializedVersion: 2
-        x: 2
-        y: 524
-        width: 1214
-        height: 294
-      alignment: 9
-      pivot: {x: .504530489, y: .5}
+        x: 1229
+        y: 2606
+        width: 1225
+        height: 296
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00278
       rect:
         serializedVersion: 2
-        x: 1218
-        y: 1120
-        width: 1212
-        height: 292
-      alignment: 9
-      pivot: {x: .505363047, y: .5}
+        x: 2456
+        y: 2606
+        width: 1225
+        height: 296
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00279
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 1443
-        width: 1193
-        height: 271
-      alignment: 9
-      pivot: {x: .506705761, y: .498154968}
+        x: 2
+        y: 2308
+        width: 1225
+        height: 296
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00280
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2606
-        width: 1215
+        x: 1229
+        y: 2308
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00281
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 2606
-        width: 1215
+        x: 2456
+        y: 2308
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00282
       rect:
         serializedVersion: 2
-        x: 2436
-        y: 2606
-        width: 1215
+        x: 2
+        y: 2010
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00283
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2308
-        width: 1215
+        x: 1229
+        y: 2010
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00284
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 2308
-        width: 1215
+        x: 2456
+        y: 2010
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00285
       rect:
         serializedVersion: 2
-        x: 2436
-        y: 2308
-        width: 1215
+        x: 2
+        y: 1712
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00286
       rect:
         serializedVersion: 2
         x: 2
-        y: 2010
-        width: 1215
+        y: 1414
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00287
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 2010
-        width: 1215
+        x: 2
+        y: 1116
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00288
       rect:
         serializedVersion: 2
-        x: 2436
-        y: 2010
-        width: 1215
+        x: 2
+        y: 818
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00289
       rect:
         serializedVersion: 2
         x: 2
-        y: 1712
-        width: 1215
+        y: 520
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00290
       rect:
         serializedVersion: 2
         x: 2
-        y: 1414
-        width: 1215
+        y: 222
+        width: 1225
         height: 296
-      alignment: 9
-      pivot: {x: .504115224, y: .5}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00291
       rect:
         serializedVersion: 2
-        x: 2
-        y: 820
-        width: 1214
-        height: 295
-      alignment: 9
-      pivot: {x: .504530489, y: .498305082}
+        x: 1229
+        y: 1712
+        width: 1225
+        height: 296
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00292
       rect:
         serializedVersion: 2
-        x: 2
-        y: 228
-        width: 1214
-        height: 294
-      alignment: 9
-      pivot: {x: .504530489, y: .5}
+        x: 2456
+        y: 1712
+        width: 1225
+        height: 296
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: workspace_00293
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 1716
-        width: 1212
-        height: 292
-      alignment: 9
-      pivot: {x: .505363047, y: .5}
+        x: 1229
+        y: 1414
+        width: 1225
+        height: 296
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
