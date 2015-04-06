@@ -134,8 +134,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         GameLobbyCanvas.enabled = true;
 		CountdownField.text = "";
 		UpdateReadyButtons();
-        UpdateUsernames();
-
+        StartCoroutine("UpdateUsernames");
 
     }
 
@@ -160,7 +159,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     private void OnPhotonPlayerConnected()
     {
 		Debug.Log ("Player reconnected");
-        UpdateUsernames();
+		StartCoroutine("UpdateUsernames");
 		UpdateReadyButtons();
 		P2ReadyStatus.enabled = false;
 		CountdownField.text = "";
@@ -169,7 +168,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     private void OnPhotonPlayerDisconnected()
     {
         playersReady[1] = false;
-        UpdateUsernames();
+		StartCoroutine("UpdateUsernames");
 		UpdateReadyButtons();
 		P2ReadyStatus.enabled = false;
 		CountdownField.text = "";
@@ -247,10 +246,36 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 		P2ReadyButtonText.text = (playersReady[1] ?  "CANCEL" : "READY");
 	}
 
-    private void UpdateUsernames()
+    private IEnumerator UpdateUsernames()
     {
-        P1Username.UpdateText(1);
-        P2Username.UpdateText(2);
+		P1Username.ClearText();
+		P2Username.ClearText();
+		Debug.Log ("Attempting to assign names");
+		yield return new WaitForSeconds(0.2f);
+		if(PhotonNetwork.playerList.Length == 1){
+			P1Username.UpdateText(1);
+			P2Username.ClearText();
+		}else{
+			for (int i = 0; i <  PhotonNetwork.playerList.Length; i++)
+			{
+				int id = (int)PhotonNetwork.playerList[i].customProperties[PROP_PLAYER_ID];
+				if (PhotonNetwork.playerList[i].customProperties[PROP_PLAYER_ID] == null) P2Username.UpdateText(id);
+				else{
+					if (i == 0)  // if this is Player 1
+					{
+						P1Username.UpdateText(id);
+					}
+					else 
+					{
+						P2Username.UpdateText(id);
+					}
+				}
+				
+			}
+		}
+
+        
+       
     }
 
     private void ToggleCanvasGroup(CanvasGroup _group, bool _enabled)
