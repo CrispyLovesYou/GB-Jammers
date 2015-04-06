@@ -9,8 +9,11 @@ public class Super_DrTracksuit : Super_Base
     public float MoveSpeedMultiplier = 0.5f;
     public float DashSpeedMultiplier = 0.5f;
     public bool IsActive { get; private set; }
+    public GameObject Snow;
+    public float PosX = 2.6f;
 
     private Controller_Player targetPlayer;
+    private GameObject snow;
 
     #endregion
 
@@ -40,6 +43,18 @@ public class Super_DrTracksuit : Super_Base
 
         targetPlayer.MoveSpeedMultiplier *= MoveSpeedMultiplier;
         targetPlayer.DashSpeedMultiplier *= DashSpeedMultiplier;
+
+        Vector3 position = Vector3.zero;
+        position.y = -0.5f;
+
+        switch (player.Team)
+        {
+            case Team.LEFT: position.x = PosX; break;
+            case Team.RIGHT: position.x = -PosX; break;
+        }
+
+        snow = Instantiate(Snow, position, Quaternion.identity) as GameObject;
+
         IsActive = true;
     }
 
@@ -51,6 +66,8 @@ public class Super_DrTracksuit : Super_Base
         targetPlayer.MoveSpeedMultiplier /= MoveSpeedMultiplier;
         targetPlayer.DashSpeedMultiplier /= DashSpeedMultiplier;
         IsActive = false;
+
+        (snow.GetComponent<SnowFade>() as SnowFade).FadeOut();
     }
 
     #endregion

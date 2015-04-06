@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f455dab84936a4cb918516dc04c937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowCharge: 80
   HasKnockback: 0
 --- !u!114 &11434436
 MonoBehaviour:
@@ -223,6 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeedMultiplier: .5
   DashSpeedMultiplier: .5
+  Snow: {fileID: 107922, guid: e5824b8f73bc013438623cd0bdff3726, type: 2}
+  PosX: 2.5999999
 --- !u!114 &11479464
 MonoBehaviour:
   m_ObjectHideFlags: 1
