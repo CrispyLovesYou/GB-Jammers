@@ -11,6 +11,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     #region Constants
 
     public const string PROP_IS_READY = "isReady";
+	public const string PROP_PLAYER_ID = "playerID";
 
     private const string MSG_CONNECTING = "Connecting...";
     private const string MAIN_MENU_ID = "main_menu";
@@ -116,6 +117,14 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     {
         ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable();
         properties.Add(PROP_IS_READY, false);
+		if(PhotonNetwork.isMasterClient){
+			properties.Add(PROP_PLAYER_ID, 1);
+			Globals.PlayerID = 1;
+		}else{
+			properties.Add(PROP_PLAYER_ID, 2);
+			Globals.PlayerID = 2;
+		}
+		
         PhotonNetwork.player.SetCustomProperties(properties);
 
         chatLog.Clear();
@@ -124,6 +133,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         GameLobbyCanvas.enabled = true;
 		UpdateReadyButtons();
         UpdateUsernames();
+
+
     }
 
     private void OnLeftRoom()
@@ -139,17 +150,28 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         PhotonNetwork.LeaveRoom();
         playersReady[0] = false;
         playersReady[1] = false;
+		P1ReadyStatus.enabled = false;
+		P2ReadyStatus.enabled = false;
+		
     }
 
     private void OnPhotonPlayerConnected()
     {
+		Debug.Log ("Player reconnected");
         UpdateUsernames();
+		UpdateReadyButtons();
+		P2ReadyStatus.enabled = false;
+		CountdownField.text = "";
     }
 
     private void OnPhotonPlayerDisconnected()
     {
         playersReady[1] = false;
         UpdateUsernames();
+		UpdateReadyButtons();
+		P2ReadyStatus.enabled = false;
+		CountdownField.text = "";
+		StopCoroutine(CR_COUNTDOWN);
     }
 
     private void OnDisconnectedFromPhoton()
@@ -207,7 +229,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 	}
 
 	private void UpdateReadyButtons(){
-		switch(PhotonNetwork.player.ID){
+		switch(Globals.PlayerID){
 			case 1:
 				P1ReadyButton.gameObject.SetActive(true);
 				P2ReadyButton.gameObject.SetActive(false);
@@ -342,6 +364,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
 	public void OnClick_BackToLobby(){
 		PhotonNetwork.LeaveRoom();
+		playersReady[0] = false;
+		playersReady[1] = false;
 	}
 
     public void OnClick_BackToMainMenu()
@@ -352,7 +376,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public void OnClick_Ready()
     {
         ExitGames.Client.Photon.Hashtable newProperties = new ExitGames.Client.Photon.Hashtable();
-        newProperties.Add(PROP_IS_READY, !playersReady[PhotonNetwork.player.ID - 1]);
+		if(PhotonNetwork.player.ID == 1) newProperties.Add(PROP_IS_READY,!playersReady[0]);
+		else newProperties.Add(PROP_IS_READY,!playersReady[1]);
         PhotonNetwork.player.SetCustomProperties(newProperties);
 
 		cPhotonView.RPC("RPC_ClickReady", PhotonTargets.AllBufferedViaServer);
@@ -375,20 +400,21 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     [RPC]
     private void RPC_ClickReady()
     {
+		Debug.Log ("Photon player count: " + PhotonNetwork.playerList.Length);
         foreach (PhotonPlayer player in PhotonNetwork.playerList)
         {
-            playersReady[player.ID - 1] = (bool)player.customProperties[PROP_IS_READY];
+			int id = (int)player.customProperties[PROP_PLAYER_ID];
+			playersReady[id - 1] = (bool)player.customProperties[PROP_IS_READY];
 
-            if (player.ID == 1)  // if this is Player 1
+            if (id == 1)  // if this is Player 1
             {
 				P1ReadyStatus.enabled = playersReady[player.ID-1];
-				P1ReadyButtonText.text = (playersReady[player.ID-1] ? "READY" : "CANCEL");
- 
+				P1ReadyButtonText.text = (playersReady[player.ID-1] ?  "CANCEL" : "READY");
             }
-            else if (player.ID == 2)  // if this is Player 2
+            else if (id == 2)  // if this is Player 2
             {
-				P2ReadyStatus.enabled = playersReady[player.ID-1];
-				P2ReadyButtonText.text = (playersReady[player.ID-1] ? "READY" : "CANCEL");
+				P2ReadyStatus.enabled = playersReady[1];
+				P2ReadyButtonText.text = (playersReady[1] ? "CANCEL" : "READY");
             }
         }
 

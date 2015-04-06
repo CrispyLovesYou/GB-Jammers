@@ -10,6 +10,7 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 
     private const string MAP_BEACH = "map_beach";
 	private const float THROTTLE_TIME = 0.5f;
+	public const string PROP_PLAYER_ID = "playerID";
     #endregion
 
     #region Fields
@@ -35,6 +36,8 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 	private float p1Throttle = 0;
 	private float p2Throttle = 0;
 
+	private int playerID = 1;
+
     #endregion
 
     #region Unity Callbacks
@@ -46,7 +49,8 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 		// Assign Unity UI's event system's default selection, depending on player number
 		switch(Globals.GameMode){
 			case GameModes.ONLINE_MULTIPLAYER:
-				switch(PhotonNetwork.player.ID){
+				playerID = (int)PhotonNetwork.player.customProperties[PROP_PLAYER_ID];
+				switch(playerID){
 				case 1:
 					LocalEventSystem.firstSelectedGameObject = CharacterButtons[0].gameObject;
 					break;
@@ -88,16 +92,16 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 		}
 		switch(Globals.GameMode){
 			case GameModes.ONLINE_MULTIPLAYER:
-				switch(PhotonNetwork.player.ID){
+				switch(playerID){
 					case 1:
 						p1CurrentSelected = _id;
-						cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, PhotonNetwork.player.ID, p1CurrentSelected);
-						cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, p1CurrentSelected);
+						cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, 1, p1CurrentSelected);
+						cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, 0, p1CurrentSelected);
 						break;
-					case 2:
+					default:
 						p2CurrentSelected = _id;
-						cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, PhotonNetwork.player.ID , p2CurrentSelected);
-						cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, p2CurrentSelected);
+						cPhotonView.RPC("RPC_SelectCharacter", PhotonTargets.All, 2, p2CurrentSelected);
+						cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, 1, p2CurrentSelected);
 						break;
 				}
 				break;
@@ -140,9 +144,8 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 		// Handle horizontal input and button selection
 		switch(Globals.GameMode){
 		case GameModes.ONLINE_MULTIPLAYER:
-			if(PhotonNetwork.player.ID <= 0) return;
-			if(playersReady[PhotonNetwork.player.ID - 1] == false &&  Input.GetAxis("Joy1_MenuHorizontal") != 0 ){
-				switch(PhotonNetwork.player.ID){
+			if(playersReady[playerID - 1] == false &&  Input.GetAxis("Joy1_MenuHorizontal") != 0 ){
+				switch(playerID){
 				case 1:
 					if(p1Throttle > 0) return;
 					if(Input.GetAxis("Joy1_MenuHorizontal") > 0) {
@@ -202,12 +205,12 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 	public void OnConfirmPressed(int _playerId){
 		switch(Globals.GameMode){
 		case GameModes.ONLINE_MULTIPLAYER:
-			switch(PhotonNetwork.player.ID){
+			switch(playerID){
 			case 1:
-				cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, p1CurrentSelected);
+				cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, 0, p1CurrentSelected);
 				break;
 			case 2:
-				cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, PhotonNetwork.player.ID - 1, p2CurrentSelected);
+				cPhotonView.RPC("RPC_LockCharacter", PhotonTargets.All, 1, p2CurrentSelected);
 				break;
 			}
 			break;
@@ -226,10 +229,14 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 	public void OnCancelPressed(int _playerId){
 		switch(Globals.GameMode){
 		case GameModes.ONLINE_MULTIPLAYER:
-			if(playersReady[PhotonNetwork.player.ID - 1]){
-				cPhotonView.RPC("RPC_CancelCharacter", PhotonTargets.All, PhotonNetwork.player.ID);
+			switch(playerID){
+				case 1:
+					if(playersReady[playerID - 1]) cPhotonView.RPC("RPC_CancelCharacter", PhotonTargets.All, playerID);
+					break;
+				case 2:
+					 ReturnToPrevMenu();
+					break;
 			}
-			else ReturnToPrevMenu();
 			break;
 		case GameModes.LOCAL_MULTIPLAYER:
 			if(playersReady[_playerId - 1])CancelCharacter(_playerId);
@@ -305,9 +312,9 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 		switch(Globals.GameMode){
 			case GameModes.ONLINE_MULTIPLAYER:
 				Debug.Log ("Attempting to leave room");
-				
-				Application.LoadLevel("network_lobby");
 				PhotonNetwork.LeaveRoom();
+				Application.LoadLevel("network_lobby");
+				
 				break;
 			default:
 				Application.LoadLevel("main_menu");
