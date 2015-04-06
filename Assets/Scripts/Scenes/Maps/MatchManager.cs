@@ -99,9 +99,12 @@ public class MatchManager : Singleton<MatchManager>
     public bool HasMatchStarted = false;
     public Canvas WaitingForPlayer;
 
-    public CanvasGroup TransitionCanvasGroup;
+    public CanvasGroup SetStartCG;
+    public CanvasGroup SetEndCG;
     public Animator SetStart;
     public bool SetStartComplete = false;
+    public Animator SetEnd;
+    public bool SetEndComplete = false;
 
     private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
@@ -205,10 +208,12 @@ public class MatchManager : Singleton<MatchManager>
         // Main match loop
         while (winner == Team.UNASSIGNED)
         {
+            yield return StartCoroutine(HandleSetStart());
+
             if (L_Points >= Rules.PointsToWinSet ||
                 R_Points >= Rules.PointsToWinSet)
             {
-                yield return StartCoroutine(HandleSetWon());
+                yield return StartCoroutine(HandleSetEnd());
             }
 
             yield return 0;
@@ -232,15 +237,6 @@ public class MatchManager : Singleton<MatchManager>
 
         WaitingForPlayer.enabled = false;
 
-        TransitionCanvasGroup.alpha = 1.0f;
-        SetStart.enabled = true;
-
-        while (!SetStartComplete)
-            yield return 0;
-
-        TransitionCanvasGroup.alpha = 0;
-        SetStart.enabled = false;
-
         HasMatchStarted = true;
 
         if (onMatchStart != null)
@@ -249,14 +245,33 @@ public class MatchManager : Singleton<MatchManager>
         IsPauseAllowed = true;
     }
 
-    private IEnumerator HandleSetWon()
+    private IEnumerator HandleSetStart()
+    {
+        SetStartCG.alpha = 1.0f;
+        SetStart.enabled = true;
+
+        while (!SetStartComplete)
+            yield return 0;
+
+        SetStartCG.alpha = 0;
+        SetStart.enabled = false;
+    }
+
+    private IEnumerator HandleSetEnd()
     {
         if (L_Points >= Rules.PointsToWinSet)
             L_Sets++;
         else if (R_Points >= Rules.PointsToWinSet)
             R_Sets++;
 
-        yield return 0;
+        SetEndCG.alpha = 1.0f;
+        SetEnd.enabled = true;
+
+        while (!SetEndComplete)
+            yield return 0;
+
+        SetEndCG.alpha = 0;
+        SetEnd.enabled = false;
 
         L_Points = 0;
         R_Points = 0;
@@ -281,7 +296,7 @@ public class MatchManager : Singleton<MatchManager>
         if (onBeginResetAfterScore != null)
             onBeginResetAfterScore(this, EventArgs.Empty);
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
 
         if (onCompleteResetAfterScore != null)
             onCompleteResetAfterScore(this, EventArgs.Empty);
