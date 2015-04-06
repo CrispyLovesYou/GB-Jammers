@@ -55,6 +55,12 @@ public class Disc : Singleton<Disc>
         Controller_Player.OnPerfectThrow += Controller_Player_OnPerfectThrow;
     }
 
+	private void OnDestroy(){
+		MatchManager.OnBeginResetAfterScore -= MatchManager_OnBeginResetAfterScore;
+		MatchManager.OnCompleteResetAfterScore -= MatchManager_OnCompleteResetAfterScore;
+		Controller_Player.OnPerfectThrow -= Controller_Player_OnPerfectThrow;
+	}
+
     private void Update()
     {
         cTransform.position += velocity * Time.deltaTime;

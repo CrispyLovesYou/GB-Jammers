@@ -27,6 +27,10 @@ public class Meter : MonoBehaviour
         Controller_Player.OnMeterChange += Controller_Player_OnMeterChange;
     }
 
+	void OnDestroy(){
+		Controller_Player.OnMeterChange -= Controller_Player_OnMeterChange;
+	}
+
     private void Update()
     {
         if (meter >= MeterToSpecial)

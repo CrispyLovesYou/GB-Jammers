@@ -18,6 +18,10 @@ public class Passive_MetalGearScanlon : Passive_Base
         Controller_Player.OnCatch += Controller_Player_OnCatch;
     }
 
+	private void OnDestroy(){
+		Controller_Player.OnCatch -= Controller_Player_OnCatch;
+	}
+
     #endregion
 
     #region Callbacks

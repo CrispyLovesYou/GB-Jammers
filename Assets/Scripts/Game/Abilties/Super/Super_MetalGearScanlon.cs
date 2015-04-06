@@ -25,6 +25,10 @@ public class Super_MetalGearScanlon : Super_Base
         Controller_Player.OnSuper += Controller_Player_OnSuper;
     }
 
+	private void OnDestroy(){
+		Controller_Player.OnSuper -= Controller_Player_OnSuper;
+	}
+
     #endregion
 
     #region Callbacks

@@ -22,6 +22,11 @@ public class FenceShake : MonoBehaviour
         Controller_Player.OnCatch += Controller_Player_OnCatch;
     }
 
+	private void OnDestroy(){
+		MatchManager.OnScored -= MatchManager_OnScored;
+		Controller_Player.OnCatch -= Controller_Player_OnCatch;
+	}
+
     private void OnTriggerEnter2D(Collider2D _collider2D)
     {
         if (_collider2D.tag == Disc.Instance.tag && !disableFromMagnet)

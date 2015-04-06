@@ -22,6 +22,10 @@ public class Passive_DirtyDanRyckert : Passive_Base
         MatchManager.OnScored += MatchManager_OnScored;
     }
 
+	private void OnDestroy(){
+		MatchManager.OnScored -= MatchManager_OnScored;
+	}
+
     #endregion
 
     #region Callbacks

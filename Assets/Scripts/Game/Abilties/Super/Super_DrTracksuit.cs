@@ -26,6 +26,11 @@ public class Super_DrTracksuit : Super_Base
         MatchManager.OnScored += MatchManager_OnScored;
     }
 
+	private void OnDestroy(){
+		Controller_Player.OnSuper -= Controller_Player_OnSuper;
+		MatchManager.OnScored -= MatchManager_OnScored;
+	}
+
     #endregion
 
     #region Callbacks
@@ -67,7 +72,7 @@ public class Super_DrTracksuit : Super_Base
         targetPlayer.DashSpeedMultiplier /= DashSpeedMultiplier;
         IsActive = false;
 
-        (snow.GetComponent<SnowFade>() as SnowFade).FadeOut();
+        snow.GetComponent<SnowFade>().FadeOut();
     }
 
     #endregion

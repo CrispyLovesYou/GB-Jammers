@@ -18,7 +18,12 @@ public class GoalArea : MonoBehaviour
     private void Awake()
     {
         MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
+		hasScored = false;
     }
+
+	private void OnDestroy(){
+		MatchManager.OnCompleteResetAfterScore -= MatchManager_OnCompleteResetAfterScore;
+	}
 
     private void OnTriggerEnter2D(Collider2D _collider)
     {

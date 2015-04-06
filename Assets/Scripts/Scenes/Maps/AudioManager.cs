@@ -19,6 +19,10 @@ public class AudioManager : MonoBehaviour
         MatchManager.OnMatchStart += MatchManager_OnMatchStart;
     }
 
+	private void OnDestroy(){
+		MatchManager.OnMatchStart -= MatchManager_OnMatchStart;
+	}
+
     #endregion
 
     #region Callbacks

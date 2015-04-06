@@ -20,6 +20,10 @@ public class Passive_DrTracksuit : Passive_Base
         MatchManager.OnScored += MatchManager_OnScored;
     }
 
+	private void OnDestroy(){
+		MatchManager.OnScored -= MatchManager_OnScored;
+	}
+
     #endregion
 
     #region Coroutines
