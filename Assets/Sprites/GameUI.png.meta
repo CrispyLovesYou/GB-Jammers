@@ -66,6 +66,7 @@ TextureImporter:
     21300118: time99
     21300120: P1-0
     21300122: P2-0
+    21300124: Scorboardpulse
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -445,7 +446,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 947
-        y: 796
+        y: 788
         width: 71
         height: 84
       alignment: 0
@@ -708,6 +709,16 @@ TextureImporter:
         y: 769
         width: 71
         height: 84
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Scorboardpulse
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 874
+        width: 36
+        height: 34
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
