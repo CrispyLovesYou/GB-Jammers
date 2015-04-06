@@ -92,6 +92,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         else
         {
             ToggleCanvasGroup(LobbyGroup, true);
+			ToggleCanvasGroup(HeaderCanvasGroup, true);
             ToggleCanvasGroup(RoomListGroup, true);
         }
     }

@@ -186,34 +186,60 @@ public class MatchManager : Singleton<MatchManager>
         cPhotonView.RPC("RPC_ScorePoints", PhotonTargets.AllViaServer, (int)_team, _points);
     }
 
+	public void Pause(){
+		if (IsPaused)
+		{
+			if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
+				Time.timeScale = 1.0f;
+			
+			PauseMenu.alpha = 0;
+			PauseMenu.interactable = false;
+			PauseMenu.blocksRaycasts = false;
+			IsPaused = false;
+		}
+		else
+		{
+			if (IsPauseAllowed)
+			{
+				if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
+					Time.timeScale = 0;
+				
+				PauseMenu.alpha = 1.0f;
+				PauseMenu.interactable = true;
+				PauseMenu.blocksRaycasts = true;
+				IsPaused = true;
+				PauseMenu.GetComponentInChildren<UnityEngine.UI.Button>().Select();
+			}
+		}
+	}
+
+	public void BackToLobby(){
+		Time.timeScale = 1;
+		switch(Globals.GameMode){
+			case GameModes.ONLINE_MULTIPLAYER:
+				PhotonNetwork.LeaveRoom();
+				Application.LoadLevel("network_lobby");
+				break;
+			case GameModes.LOCAL_MULTIPLAYER:
+				Application.LoadLevel("main_menu");
+				break;
+		}
+
+
+	}
+
+	public void BackToMainMenu(){
+		Time.timeScale = 1;
+		PhotonNetwork.Disconnect();
+		Application.LoadLevel("main_menu");
+
+	}
+
     private void Update()
     {
         if (Input.GetButtonDown("Pause"))
         {
-            if (IsPaused)
-            {
-                if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
-                    Time.timeScale = 1.0f;
-
-                PauseMenu.alpha = 0;
-                PauseMenu.interactable = false;
-                PauseMenu.blocksRaycasts = false;
-                IsPaused = false;
-            }
-            else
-            {
-                if (IsPauseAllowed)
-                {
-                    if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
-                        Time.timeScale = 0;
-
-                    PauseMenu.alpha = 1.0f;
-                    PauseMenu.interactable = true;
-                    PauseMenu.blocksRaycasts = true;
-                    IsPaused = true;
-                    PauseMenu.GetComponentInChildren<UnityEngine.UI.Button>().Select();
-                }
-            }
+			Pause ();   
         }
     }
 
