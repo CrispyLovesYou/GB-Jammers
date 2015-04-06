@@ -81,7 +81,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2
-        y: 17
+        y: 13
         width: 328
         height: 240
       alignment: 0
@@ -90,8 +90,8 @@ TextureImporter:
     - name: 1P
       rect:
         serializedVersion: 2
-        x: 1813
-        y: 1398
+        x: 1878
+        y: 1598
         width: 118
         height: 110
       alignment: 0
@@ -101,7 +101,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 332
-        y: 17
+        y: 13
         width: 328
         height: 240
       alignment: 0
@@ -110,8 +110,8 @@ TextureImporter:
     - name: 2P
       rect:
         serializedVersion: 2
-        x: 1813
-        y: 1510
+        x: 1878
+        y: 1710
         width: 139
         height: 110
       alignment: 0
@@ -120,8 +120,8 @@ TextureImporter:
     - name: 2PSelect
       rect:
         serializedVersion: 2
-        x: 573
-        y: 700
+        x: 662
+        y: 13
         width: 328
         height: 240
       alignment: 0
@@ -130,8 +130,8 @@ TextureImporter:
     - name: FighterNameLeft
       rect:
         serializedVersion: 2
-        x: 941
-        y: 1956
+        x: 2
+        y: 1003
         width: 877
         height: 90
       alignment: 0
@@ -140,8 +140,8 @@ TextureImporter:
     - name: GRAD
       rect:
         serializedVersion: 2
-        x: 941
-        y: 1494
+        x: 2
+        y: 541
         width: 870
         height: 460
       alignment: 0
@@ -150,8 +150,8 @@ TextureImporter:
     - name: Header_CharacterSelect
       rect:
         serializedVersion: 2
-        x: 850
-        y: 1416
+        x: 1211
+        y: 563
         width: 724
         height: 76
       alignment: 0
@@ -160,8 +160,8 @@ TextureImporter:
     - name: Name_DirtyDan
       rect:
         serializedVersion: 2
-        x: 1492
-        y: 1129
+        x: 1679
+        y: 501
         width: 331
         height: 60
       alignment: 0
@@ -170,8 +170,8 @@ TextureImporter:
     - name: Name_DrTrackSuit
       rect:
         serializedVersion: 2
-        x: 1492
-        y: 1335
+        x: 992
+        y: 74
         width: 474
         height: 61
       alignment: 0
@@ -180,8 +180,8 @@ TextureImporter:
     - name: Name_SolidScanlon
       rect:
         serializedVersion: 2
-        x: 1492
-        y: 1272
+        x: 992
+        y: 11
         width: 472
         height: 61
       alignment: 0
@@ -190,8 +190,8 @@ TextureImporter:
     - name: Name_Vbomb
       rect:
         serializedVersion: 2
-        x: 1820
-        y: 1985
+        x: 1466
+        y: 11
         width: 211
         height: 61
       alignment: 0
@@ -210,8 +210,8 @@ TextureImporter:
     - name: PlayerReady
       rect:
         serializedVersion: 2
-        x: 1492
-        y: 1191
+        x: 874
+        y: 560
         width: 335
         height: 79
       alignment: 0
@@ -220,8 +220,8 @@ TextureImporter:
     - name: PortraitDan
       rect:
         serializedVersion: 2
-        x: 1492
-        y: 843
+        x: 2
+        y: 255
         width: 328
         height: 284
       alignment: 0
@@ -230,19 +230,19 @@ TextureImporter:
     - name: PortraitDirtyDan
       rect:
         serializedVersion: 2
-        x: 2
-        y: 259
-        width: 561
-        height: 407
+        x: 941
+        y: 1579
+        width: 935
+        height: 467
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PortraitDrew
       rect:
         serializedVersion: 2
-        x: 2
-        y: 1095
-        width: 846
+        x: 941
+        y: 1110
+        width: 935
         height: 467
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -250,8 +250,8 @@ TextureImporter:
     - name: PortraitScanlon
       rect:
         serializedVersion: 2
-        x: 565
-        y: 382
+        x: 332
+        y: 255
         width: 328
         height: 284
       alignment: 0
@@ -261,7 +261,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 662
-        y: 96
+        y: 255
         width: 328
         height: 284
       alignment: 0
@@ -270,8 +270,8 @@ TextureImporter:
     - name: PortraitVbomb
       rect:
         serializedVersion: 2
-        x: 895
-        y: 414
+        x: 992
+        y: 274
         width: 328
         height: 284
       alignment: 0
@@ -281,17 +281,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2
-        y: 668
-        width: 569
-        height: 425
+        y: 1095
+        width: 935
+        height: 467
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Skills_Right
       rect:
         serializedVersion: 2
-        x: 1813
-        y: 1735
+        x: 1878
+        y: 1935
         width: 150
         height: 111
       alignment: 0
@@ -300,8 +300,8 @@ TextureImporter:
     - name: Skills_left
       rect:
         serializedVersion: 2
-        x: 1813
-        y: 1622
+        x: 1878
+        y: 1822
         width: 148
         height: 111
       alignment: 0
@@ -310,8 +310,8 @@ TextureImporter:
     - name: StatsStar
       rect:
         serializedVersion: 2
-        x: 2006
-        y: 1948
+        x: 1998
+        y: 1673
         width: 33
         height: 35
       alignment: 0
@@ -320,8 +320,8 @@ TextureImporter:
     - name: StatsStarNot
       rect:
         serializedVersion: 2
-        x: 2006
-        y: 1911
+        x: 1998
+        y: 1636
         width: 33
         height: 35
       alignment: 0
@@ -330,8 +330,8 @@ TextureImporter:
     - name: StatsTitle
       rect:
         serializedVersion: 2
-        x: 1963
-        y: 1664
+        x: 1878
+        y: 1527
         width: 82
         height: 69
       alignment: 0
@@ -340,18 +340,18 @@ TextureImporter:
     - name: TracksuitTemp
       rect:
         serializedVersion: 2
-        x: 850
-        y: 942
-        width: 640
-        height: 472
+        x: 939
+        y: 641
+        width: 935
+        height: 467
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: VS
       rect:
         serializedVersion: 2
-        x: 1820
-        y: 1848
+        x: 992
+        y: 137
         width: 184
         height: 135
       alignment: 0

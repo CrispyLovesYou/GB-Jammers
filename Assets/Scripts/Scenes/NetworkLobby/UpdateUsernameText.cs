@@ -23,14 +23,8 @@ public class UpdateUsernameText : MonoBehaviour
 
     public void UpdateText(int _playerNum)
     {
-        foreach (PhotonPlayer player in PhotonNetwork.playerList)
-        {
-            if (player.ID == _playerNum)
-                cText.text = player.name;
-        }
-
-        if (_playerNum == 2 && PhotonNetwork.playerList.Length == 1)
-            cText.text = "";
+		if(PhotonNetwork.playerList.Length > 1)	cText.text = PhotonNetwork.playerList[_playerNum - 1].name;
+		else if (_playerNum == 2 ) cText.text = "";
     }
 
     #endregion

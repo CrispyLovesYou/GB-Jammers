@@ -144,13 +144,13 @@ public class NetworkManager : Singleton<NetworkManager>
 
     private void SpawnOnlinePlayer()
     {
-        int index = PhotonNetwork.player.ID - 1;
+		int index = Globals.PlayerID - 1;
         Team team = Team.UNASSIGNED;
         
-        switch (PhotonNetwork.player.ID)
+		switch (index)
         {
-            case 1: team = Team.LEFT; PhotonNetwork.player.SetTeam(PunTeams.Team.blue); break;
-            case 2: team = Team.RIGHT; PhotonNetwork.player.SetTeam(PunTeams.Team.red); break;
+            case 0: team = Team.LEFT; PhotonNetwork.player.SetTeam(PunTeams.Team.blue); break;
+            case 1: team = Team.RIGHT; PhotonNetwork.player.SetTeam(PunTeams.Team.red); break;
         }
 
         string prefabID = "";
