@@ -108,6 +108,20 @@ public class MatchManager : Singleton<MatchManager>
     public bool SetEndComplete = false;
     public Animator MatchEnd;
 
+    public AudioSource AudioMatchStart;
+    public AudioSource AudioSetEnd;
+    public AudioSource AudioMatchEnd;
+    public AudioSource AP1;
+    public AudioSource AP2;
+    public AudioSource AP3;
+    public AudioSource AP4;
+    public AudioSource AP5;
+    public AudioSource AP6;
+    public AudioSource AP7;
+    public AudioSource AP8;
+    public AudioSource AP9;
+    public AudioSource AP10;
+
     private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
     private bool hasVolleyStarted = false;
@@ -246,6 +260,8 @@ public class MatchManager : Singleton<MatchManager>
 
         HasMatchStarted = true;
 
+        AudioMatchStart.Play();
+
         if (onMatchStart != null)
             onMatchStart(this, EventArgs.Empty);
 
@@ -274,6 +290,9 @@ public class MatchManager : Singleton<MatchManager>
         SetEndCG.alpha = 1.0f;
         SetEnd.enabled = true;
 
+        if (L_Sets < Rules.SetsToWinMatch && R_Sets < Rules.SetsToWinMatch)
+            AudioSetEnd.Play();
+
         while (!SetEndComplete)
             yield return 0;
 
@@ -293,6 +312,7 @@ public class MatchManager : Singleton<MatchManager>
     {
         MatchEndCG.alpha = 1.0f;
         MatchEnd.enabled = true;
+        AudioMatchEnd.Play();
         yield return new WaitForSeconds(4.0f);
         
     }
@@ -355,6 +375,23 @@ public class MatchManager : Singleton<MatchManager>
         }
 
         LastTeamToScore = (Team)_team;
+
+        if (L_Points < Rules.PointsToWinSet && R_Points < Rules.PointsToWinSet)
+        {
+            switch (_points + BonusPointValue)
+            {
+                case 1: AP1.Play(); break;
+                case 2: AP2.Play(); break;
+                case 3: AP3.Play(); break;
+                case 4: AP4.Play(); break;
+                case 5: AP5.Play(); break;
+                case 6: AP6.Play(); break;
+                case 7: AP7.Play(); break;
+                case 8: AP8.Play(); break;
+                case 9: AP9.Play(); break;
+                case 10: AP10.Play(); break;
+            }
+        }
 
         if (onScored != null)
             onScored(this, new ScoredEventArgs((Team)_team, _points));
