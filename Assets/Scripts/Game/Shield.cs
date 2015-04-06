@@ -11,6 +11,11 @@ public class Shield : MonoBehaviour
         MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
     }
 
+	private void OnDestroy(){
+		MatchManager.OnScored -= MatchManager_OnScored;
+		MatchManager.OnCompleteResetAfterScore -= MatchManager_OnCompleteResetAfterScore;
+	}
+
     private void OnTriggerEnter2D(Collider2D _collider2D)
     {
         if (_collider2D.tag == Disc.Instance.tag)
@@ -33,7 +38,8 @@ public class Shield : MonoBehaviour
                 "oncomplete",
                     (System.Action<object>)(p =>
                     {
-                        Destroy(this.gameObject);
+						Destroy(gameObject);
+                        Destroy(transform.parent.gameObject);
                     })
                 ));
         }
@@ -45,12 +51,12 @@ public class Shield : MonoBehaviour
 
     private void MatchManager_OnScored(object sender, ScoredEventArgs e)
     {
-        gameObject.GetComponent<Collider2D>().enabled = false;
+        gameObject.transform.GetComponent<Collider2D>().enabled = false;
     }
 
     private void MatchManager_OnCompleteResetAfterScore(object sender, System.EventArgs e)
     {
-        gameObject.GetComponent<Collider2D>().enabled = true;
+		gameObject.transform.GetComponent<Collider2D>().enabled = true;
     }
 
     #endregion
