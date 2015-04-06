@@ -289,9 +289,12 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 			P2CharacterPanel.OnCharacterConfirm();
 			break;
 		}
-		
-		if (playersReady[0] && playersReady[1] && PhotonNetwork.isMasterClient)
-			PhotonNetwork.LoadLevel(MAP_BEACH);
+
+        if (playersReady[0] && playersReady[1] && PhotonNetwork.isMasterClient)
+        {
+            Destroy(MusicDestroy.Instance.gameObject);
+            PhotonNetwork.LoadLevel(MAP_BEACH);
+        }
 	}
 
 	private void CancelCharacter(int _playerNum){

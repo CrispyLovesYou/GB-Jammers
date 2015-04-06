@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MusicDestroy : MonoBehaviour
 {
-    private static MusicDestroy Instance;
+    public static MusicDestroy Instance;
 
     private void Awake()
     {
