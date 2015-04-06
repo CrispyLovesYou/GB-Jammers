@@ -29,6 +29,7 @@ public class EX_DirtyDanRyckert : EX_Base
             return;
 
         MatchManager.Instance.BonusPointValue += BonusPoints;
+        player.State = PlayerState.AIM;
     }
 
     private void MatchManager_OnScored(object sender, ScoredEventArgs e)
