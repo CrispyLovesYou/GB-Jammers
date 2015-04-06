@@ -792,7 +792,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_PrivateGameNameInput
+        m_MethodName: OnClick_PrivateGameNameCreateInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -809,7 +809,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnChange_Roomname
+        m_MethodName: OnChange_PrivateGameNameCreate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6201,7 +6201,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_PrivateGameNameInput
+        m_MethodName: OnClick_PrivateGameNameJoinInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6218,7 +6218,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnChange_Roomname
+        m_MethodName: OnChange_PrivateGameNameJoin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
