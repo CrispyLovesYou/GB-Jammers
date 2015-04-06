@@ -7,7 +7,10 @@ public class MusicDestroy : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+            Destroy(this.gameObject);
+        else
+            Instance = this;
     }
 
     public static void DestroyObject()
