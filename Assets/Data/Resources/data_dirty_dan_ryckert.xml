@@ -5,7 +5,7 @@
   <RealName>Dan Ryckert</RealName>
   <ThrowPower>10</ThrowPower>
   <ThrowKnockback>2.5</ThrowKnockback>
-  <Stability>2.2</Stability>
+  <Stability>2.3</Stability>
   <MoveSpeed>2</MoveSpeed>
   <DashSpeed>6</DashSpeed>
   <DashDuration>0.25</DashDuration>

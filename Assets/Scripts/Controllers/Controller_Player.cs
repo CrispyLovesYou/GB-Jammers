@@ -241,13 +241,15 @@ public class Controller_Player : MonoBehaviour
     public Team Team = Team.UNASSIGNED;
     public PlayerState State = PlayerState.WALK;
     public Direction CurrentDirection = Direction.DOWN;
-    public float GreatThrowThreshhold = 80;
-    public float PerfectThrowThreshhold = 90;
+    public float GreatThrowThreshhold = 85;
+    public float PerfectThrowThreshhold = 95;
     public int MeterForEX = 33;
     public int MeterForSuper = 99;
 
     public GameObject SuperMaskPrefab;
     public AudioClip SFXError;
+    public AudioClip Perfect;
+    public AudioClip Great;
 
     public static bool isPingCompensating = false;
 
@@ -264,7 +266,7 @@ public class Controller_Player : MonoBehaviour
     private float throwCharge = 0;
     public float ThrowCharge { get { return throwCharge; } }
 
-    private float maxChargeDuration = 1.0f;
+    private float maxChargeDuration = 0.8f;
     private Vector2 throwDirection = Vector2.zero;
     private float throwDirectionThreshhold = 0.7f;
     private Vector2 throwVector = Vector2.zero;
@@ -573,6 +575,9 @@ public class Controller_Player : MonoBehaviour
         if (onGreatThrow != null)
             onGreatThrow(this, EventArgs.Empty);
 
+        if (cPhotonView.isMine)
+            AudioSource.PlayClipAtPoint(Great, cTransform.position);
+
         Meter += MeterGainOnGreat;
     }
 
@@ -580,6 +585,9 @@ public class Controller_Player : MonoBehaviour
     {
         if (onPerfectThrow != null)
             onPerfectThrow(this, EventArgs.Empty);
+
+        if (cPhotonView.isMine)
+            AudioSource.PlayClipAtPoint(Perfect, cTransform.position);
 
         Meter += MeterGainOnPerfect;    
         Disc.Instance.HasKnockback = true;
