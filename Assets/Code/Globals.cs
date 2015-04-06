@@ -5,7 +5,7 @@ public static class Globals
 {
     #region Constants
 
-    public const string GAME_VERSION = "0.1";
+    public const string GAME_VERSION = "1.0.0.1";
     public const int MAX_CONNECTED_PLAYERS = 2;
 
     public const int DEFAULT_SETS_TO_WIN_MATCH = 2;
