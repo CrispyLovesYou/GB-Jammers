@@ -31,6 +31,16 @@ public class PopupHandler : MonoBehaviour
         Controller_Player.OnBookStun += Controller_Player_OnBookStun;
     }
 
+	private void OnDestroy(){
+		Controller_Player.OnSpeedBuff -= Controller_Player_OnSpeedBuff;
+		Controller_Player.OnSpeedDebuff -= Controller_Player_OnSpeedDebuff;
+		Controller_Player.OnPowerBuff -= Controller_Player_OnPowerBuff;
+		Controller_Player.OnPowerDebuff -= Controller_Player_OnPowerDebuff;
+		Controller_Player.OnGreatThrow -= Controller_Player_OnGreatThrow;
+		Controller_Player.OnPerfectThrow -= Controller_Player_OnPerfectThrow;
+		Controller_Player.OnBookStun -= Controller_Player_OnBookStun;
+	}
+
     #endregion
 
     #region Callbacks

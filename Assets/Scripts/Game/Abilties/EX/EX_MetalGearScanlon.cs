@@ -18,6 +18,10 @@ public class EX_MetalGearScanlon : EX_Base
         Controller_Player.OnEX += Controller_Player_OnEX;
     }
 
+	private void OnDestroy(){
+		Controller_Player.OnEX -= Controller_Player_OnEX;
+	}
+
     #endregion
 
     #region Callbacks

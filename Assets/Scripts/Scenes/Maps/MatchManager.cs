@@ -119,6 +119,7 @@ public class MatchManager : Singleton<MatchManager>
     protected override void Awake()
     {
         base.Awake();
+		iTween.tweens.Clear();
         cPhotonView = GetComponent<PhotonView>();
 
         if (Rules.SetsToWinMatch == 0)
@@ -154,6 +155,9 @@ public class MatchManager : Singleton<MatchManager>
         StartCoroutine(MatchDirector());
     }
 
+	private void OnDestroy(){
+		Controller_Player.OnCatch -= Controller_Player_OnCatch;
+	}
     #endregion
 
     #region Methods
