@@ -100,5 +100,9 @@ public class MainMenuManager : Singleton<MainMenuManager>
         StartOnlineMultiplayer();
     }
 
+	public void OnClick_Quit(){
+		Application.Quit();
+	}
+
     #endregion
 }
