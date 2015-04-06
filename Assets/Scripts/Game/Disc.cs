@@ -52,13 +52,11 @@ public class Disc : Singleton<Disc>
 
         MatchManager.OnBeginResetAfterScore += MatchManager_OnBeginResetAfterScore;
         MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
-        Controller_Player.OnPerfectThrow += Controller_Player_OnPerfectThrow;
     }
 
 	private void OnDestroy(){
 		MatchManager.OnBeginResetAfterScore -= MatchManager_OnBeginResetAfterScore;
 		MatchManager.OnCompleteResetAfterScore -= MatchManager_OnCompleteResetAfterScore;
-		Controller_Player.OnPerfectThrow -= Controller_Player_OnPerfectThrow;
 	}
 
     private void Update()
@@ -244,11 +242,6 @@ public class Disc : Singleton<Disc>
         velocity = Vector3.zero;
         cCollider2D.enabled = true;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
-    }
-
-    private void Controller_Player_OnPerfectThrow(object sender, EventArgs e)
-    {
-        HasKnockback = true;
     }
 
     #endregion
