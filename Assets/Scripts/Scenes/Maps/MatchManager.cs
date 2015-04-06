@@ -99,6 +99,10 @@ public class MatchManager : Singleton<MatchManager>
     public bool HasMatchStarted = false;
     public Canvas WaitingForPlayer;
 
+    public CanvasGroup TransitionCanvasGroup;
+    public Animator SetStart;
+    public bool SetStartComplete = false;
+
     private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
     private bool hasVolleyStarted = false;
@@ -224,11 +228,19 @@ public class MatchManager : Singleton<MatchManager>
     private IEnumerator HandleMatchSetup()
     {
         while (!remotePlayerReady)
-        {
             yield return 0;
-        }
 
         WaitingForPlayer.enabled = false;
+
+        TransitionCanvasGroup.alpha = 1.0f;
+        SetStart.enabled = true;
+
+        while (!SetStartComplete)
+            yield return 0;
+
+        TransitionCanvasGroup.alpha = 0;
+        SetStart.enabled = false;
+
         HasMatchStarted = true;
 
         if (onMatchStart != null)

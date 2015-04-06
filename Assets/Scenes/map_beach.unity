@@ -351,6 +351,16 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0bc8930e0675ecd44a6485e42f99015a, type: 2}
   m_IsPrefabParent: 0
+--- !u!225 &282788900
+CanvasGroup:
+  m_PrefabParentObject: {fileID: 22566084, guid: 0bc8930e0675ecd44a6485e42f99015a,
+    type: 2}
+  m_PrefabInternal: {fileID: 282788899}
+--- !u!95 &282788901
+Animator:
+  m_PrefabParentObject: {fileID: 9513712, guid: 0bc8930e0675ecd44a6485e42f99015a,
+    type: 2}
+  m_PrefabInternal: {fileID: 282788899}
 --- !u!1 &328661126
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +924,9 @@ MonoBehaviour:
   IsPauseAllowed: 0
   HasMatchStarted: 0
   WaitingForPlayer: {fileID: 755900340}
+  TransitionCanvasGroup: {fileID: 282788900}
+  SetStart: {fileID: 282788901}
+  SetStartComplete: 0
 --- !u!4 &795162138
 Transform:
   m_ObjectHideFlags: 0
