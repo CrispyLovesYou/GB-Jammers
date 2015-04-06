@@ -705,7 +705,7 @@ public class Controller_Player : MonoBehaviour
 
         if (State == PlayerState.AIM)
         {
-            State = PlayerState.CHARGE;  // keeps throw input from being read while throwing
+            State = PlayerState.THROWN;  // keeps throw input from being read while throwing
             cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, Vector3.right, (float)0);
         }
     }

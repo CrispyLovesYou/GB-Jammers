@@ -305,6 +305,7 @@ public class MatchManager : Singleton<MatchManager>
 
         SetStartCG.alpha = 0;
         SetStart.enabled = false;
+        SetStartComplete = false;
     }
 
     private IEnumerator HandleSetEnd()
@@ -325,6 +326,7 @@ public class MatchManager : Singleton<MatchManager>
 
         SetEndCG.alpha = 0;
         SetEnd.enabled = false;
+        SetEndComplete = false;
 
         L_Points = 0;
         R_Points = 0;
