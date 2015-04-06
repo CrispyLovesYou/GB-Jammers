@@ -4,7 +4,7 @@
   <Name>V-Bomb</Name>
   <RealName>Vinny Caravella</RealName>
   <ThrowPower>15.5</ThrowPower>
-  <ThrowKnockback>3.6</ThrowKnockback>
+  <ThrowKnockback>3.4</ThrowKnockback>
   <Stability>3</Stability>
   <MoveSpeed>1.8</MoveSpeed>
   <DashSpeed>4.2</DashSpeed>
