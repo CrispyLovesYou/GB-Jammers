@@ -1876,7 +1876,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: AERASDFGUY
+  m_Text: 
 --- !u!222 &439799817
 CanvasRenderer:
   m_ObjectHideFlags: 0
