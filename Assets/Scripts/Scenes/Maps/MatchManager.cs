@@ -256,14 +256,8 @@ public class MatchManager : Singleton<MatchManager>
         while (winner == Team.UNASSIGNED)
         {
             yield return StartCoroutine(HandleSetStart());
-
-            if (L_Points >= Rules.PointsToWinSet ||
-                R_Points >= Rules.PointsToWinSet)
-            {
-                yield return StartCoroutine(HandleSetEnd());
-            }
-
-            yield return 0;
+            yield return StartCoroutine(HandleSet());
+            yield return StartCoroutine(HandleSetEnd());
         }
 
         // Match over
@@ -297,8 +291,11 @@ public class MatchManager : Singleton<MatchManager>
 
     private IEnumerator HandleSetStart()
     {
+        CurrentSet++;
+
         SetStartCG.alpha = 1.0f;
         SetStart.enabled = true;
+        SetStart.Play("SetStart", 0, 0);
 
         while (!SetStartComplete)
             yield return 0;
@@ -306,6 +303,12 @@ public class MatchManager : Singleton<MatchManager>
         SetStartCG.alpha = 0;
         SetStart.enabled = false;
         SetStartComplete = false;
+    }
+
+    private IEnumerator HandleSet()
+    {
+        while (L_Points < Rules.PointsToWinSet && R_Points < Rules.PointsToWinSet)
+            yield return 0;
     }
 
     private IEnumerator HandleSetEnd()
@@ -317,9 +320,9 @@ public class MatchManager : Singleton<MatchManager>
 
         SetEndCG.alpha = 1.0f;
         SetEnd.enabled = true;
+        SetEnd.Play("ScoreCounter", 0, 0);
 
-        if (L_Sets < Rules.SetsToWinMatch && R_Sets < Rules.SetsToWinMatch)
-            AudioSetEnd.Play();
+        AudioSetEnd.Play();
 
         while (!SetEndComplete)
             yield return 0;
@@ -342,7 +345,7 @@ public class MatchManager : Singleton<MatchManager>
         MatchEndCG.alpha = 1.0f;
         MatchEnd.enabled = true;
         AudioMatchEnd.Play();
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(5.0f);
         
     }
 
