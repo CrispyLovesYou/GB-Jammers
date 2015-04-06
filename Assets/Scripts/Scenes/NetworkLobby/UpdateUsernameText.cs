@@ -20,10 +20,12 @@ public class UpdateUsernameText : MonoBehaviour
     #endregion
 
     #region Methods
-
+	public void ClearText(){
+		cText.text = "";
+	}
     public void UpdateText(int _playerNum)
     {
-		if(PhotonNetwork.playerList.Length > 1)	cText.text = PhotonNetwork.playerList[_playerNum - 1].name;
+		if(PhotonNetwork.playerList.Length > 1 || _playerNum == 1)	cText.text = PhotonNetwork.playerList[_playerNum - 1].name;
 		else if (_playerNum == 2 ) cText.text = "";
     }
 
