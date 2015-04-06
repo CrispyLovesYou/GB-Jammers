@@ -133,6 +133,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         MainLobbyCanvas.enabled = false;
         GameLobbyCanvas.enabled = true;
 		CountdownField.text = "";
+		ChatLog.text = "";
 		UpdateReadyButtons();
         StartCoroutine("UpdateUsernames");
 
