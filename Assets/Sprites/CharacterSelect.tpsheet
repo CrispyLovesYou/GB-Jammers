@@ -5,34 +5,34 @@
 # http://www.codeandweb.com/texturepacker/unity
 #
 # Sprite sheet: CharacterSelect.png (2048 x 2048)
-# $TexturePacker:SmartUpdate:c08d2bd05257d412612dea581886ae06:b285bebb8235894a3e49b51f7c8f1ed4:fd1902e8e56eea7fa4f7bd233833aab1$
+# $TexturePacker:SmartUpdate:2ebf13ef044b385c5cc68775f68ae954:b3f84bb08c5e7c9ca29764845a709f94:fd1902e8e56eea7fa4f7bd233833aab1$
 #
 
-12PSelect;2;17;328;240;0.5;0.5
-1P;1813;1398;118;110;0.5;0.5
-1PSelect;332;17;328;240;0.5;0.5
-2P;1813;1510;139;110;0.5;0.5
-2PSelect;573;700;328;240;0.5;0.5
-FighterNameLeft;941;1956;877;90;0.5;0.5
-GRAD;941;1494;870;460;0.5;0.5
-Header_CharacterSelect;850;1416;724;76;0.5;0.5
-Name_DirtyDan;1492;1129;331;60;0.5;0.5
-Name_DrTrackSuit;1492;1335;474;61;0.5;0.5
-Name_SolidScanlon;1492;1272;472;61;0.5;0.5
-Name_Vbomb;1820;1985;211;61;0.5;0.5
+12PSelect;2;13;328;240;0.5;0.5
+1P;1878;1598;118;110;0.5;0.5
+1PSelect;332;13;328;240;0.5;0.5
+2P;1878;1710;139;110;0.5;0.5
+2PSelect;662;13;328;240;0.5;0.5
+FighterNameLeft;2;1003;877;90;0.5;0.5
+GRAD;2;541;870;460;0.5;0.5
+Header_CharacterSelect;1211;563;724;76;0.5;0.5
+Name_DirtyDan;1679;501;331;60;0.5;0.5
+Name_DrTrackSuit;992;74;474;61;0.5;0.5
+Name_SolidScanlon;992;11;472;61;0.5;0.5
+Name_Vbomb;1466;11;211;61;0.5;0.5
 Panel;2;1564;937;482;0.5;0.5
-PlayerReady;1492;1191;335;79;0.5;0.5
-PortraitDan;1492;843;328;284;0.5;0.5
-PortraitDirtyDan;2;259;561;407;0.5;0.5
-PortraitDrew;2;1095;846;467;0.5;0.5
-PortraitScanlon;565;382;328;284;0.5;0.5
-PortraitTracksuit;662;96;328;284;0.5;0.5
-PortraitVbomb;895;414;328;284;0.5;0.5
-Portrait_Vbomb;2;668;569;425;0.5;0.5
-Skills_Right;1813;1735;150;111;0.5;0.5
-Skills_left;1813;1622;148;111;0.5;0.5
-StatsStar;2006;1948;33;35;0.5;0.5
-StatsStarNot;2006;1911;33;35;0.5;0.5
-StatsTitle;1963;1664;82;69;0.5;0.5
-TracksuitTemp;850;942;640;472;0.5;0.5
-VS;1820;1848;184;135;0.5;0.5
+PlayerReady;874;560;335;79;0.5;0.5
+PortraitDan;2;255;328;284;0.5;0.5
+PortraitDirtyDan;941;1579;935;467;0.5;0.5
+PortraitDrew;941;1110;935;467;0.5;0.5
+PortraitScanlon;332;255;328;284;0.5;0.5
+PortraitTracksuit;662;255;328;284;0.5;0.5
+PortraitVbomb;992;274;328;284;0.5;0.5
+Portrait_Vbomb;2;1095;935;467;0.5;0.5
+Skills_Right;1878;1935;150;111;0.5;0.5
+Skills_left;1878;1822;148;111;0.5;0.5
+StatsStar;1998;1673;33;35;0.5;0.5
+StatsStarNot;1998;1636;33;35;0.5;0.5
+StatsTitle;1878;1527;82;69;0.5;0.5
+TracksuitTemp;939;641;935;467;0.5;0.5
+VS;992;137;184;135;0.5;0.5
