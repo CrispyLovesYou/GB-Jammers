@@ -131,6 +131,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
         MainLobbyCanvas.enabled = false;
         GameLobbyCanvas.enabled = true;
+		CountdownField.text = "";
 		UpdateReadyButtons();
         UpdateUsernames();
 
@@ -233,13 +234,16 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 			case 1:
 				P1ReadyButton.gameObject.SetActive(true);
 				P2ReadyButton.gameObject.SetActive(false);
+				
 				break;
 			case 2:
 				P1ReadyButton.gameObject.SetActive(false);
 				P2ReadyButton.gameObject.SetActive(true);
-
+				
 				break;
 		}
+		P1ReadyButtonText.text = (playersReady[0] ?  "CANCEL" : "READY");
+		P2ReadyButtonText.text = (playersReady[1] ?  "CANCEL" : "READY");
 	}
 
     private void UpdateUsernames()
@@ -400,7 +404,6 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     [RPC]
     private void RPC_ClickReady()
     {
-		Debug.Log ("Photon player count: " + PhotonNetwork.playerList.Length);
         foreach (PhotonPlayer player in PhotonNetwork.playerList)
         {
 			int id = (int)player.customProperties[PROP_PLAYER_ID];
