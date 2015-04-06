@@ -21,6 +21,10 @@ public class EX_VBomb : EX_Base
         Controller_Player.OnEX += Controller_Player_OnEX;
     }
 
+	protected void OnDestroy(){
+		Controller_Player.OnEX -= Controller_Player_OnEX;
+	}
+
     #endregion
 
     #region Callbacks

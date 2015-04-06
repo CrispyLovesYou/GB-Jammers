@@ -19,6 +19,10 @@ public class Super_VBomb : Super_Base
         Controller_Player.OnSuper += Controller_Player_OnSuper;
     }
 
+	private void OnDestroy(){
+		Controller_Player.OnSuper -= Controller_Player_OnSuper;
+	}
+
     #endregion
 
     #region Callbacks

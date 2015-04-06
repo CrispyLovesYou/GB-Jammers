@@ -295,6 +295,11 @@ public class Controller_Player : MonoBehaviour
         MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
     }
 
+	private void OnDestroy(){
+		MatchManager.OnBeginResetAfterScore -= MatchManager_OnBeginResetAfterScore;
+		MatchManager.OnCompleteResetAfterScore -= MatchManager_OnCompleteResetAfterScore;
+	}
+
     private void Start()
     {
         // must be set in Start so that proper flip is recorded

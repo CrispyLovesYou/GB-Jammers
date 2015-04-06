@@ -19,6 +19,11 @@ public class EX_DirtyDanRyckert : EX_Base
         MatchManager.OnScored += MatchManager_OnScored;
     }
 
+	private void OnDestroy(){
+		Controller_Player.OnEX -= Controller_Player_OnEX;
+		MatchManager.OnScored -= MatchManager_OnScored;
+	}
+
     #endregion
 
     #region Callbacks
@@ -29,6 +34,7 @@ public class EX_DirtyDanRyckert : EX_Base
             return;
 
         MatchManager.Instance.BonusPointValue += BonusPoints;
+        player.State = PlayerState.AIM;
     }
 
     private void MatchManager_OnScored(object sender, ScoredEventArgs e)

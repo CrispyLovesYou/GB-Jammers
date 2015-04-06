@@ -28,6 +28,11 @@ public class Passive_VBomb : Passive_Base
         MatchManager.OnScored += MatchManager_OnScored;
     }
 
+	private void OnDestroy(){
+		MatchManager.OnVolley -= MatchManager_OnVolley;
+		MatchManager.OnScored -= MatchManager_OnScored;
+	}
+
     #endregion
 
     #region Callbacks

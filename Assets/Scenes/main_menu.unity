@@ -546,7 +546,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_SelectOnUp: {fileID: 618610068}
-    m_SelectOnDown: {fileID: 1889397556}
+    m_SelectOnDown: {fileID: 1409438488}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 2
@@ -794,7 +794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 1889397556}
+    m_SelectOnUp: {fileID: 834570752}
     m_SelectOnDown: {fileID: 618610068}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -821,8 +821,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnClick_CreateGame
+      - m_Target: {fileID: 2074825234}
+        m_MethodName: OnClick_Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -934,6 +934,7 @@ GameObject:
   - 4: {fileID: 1463723207}
   - 82: {fileID: 1463723206}
   - 114: {fileID: 1463723208}
+  - 114: {fileID: 1463723209}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -951,7 +952,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 24625548e8df21c419ffec881b25fa09, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -1031,6 +1032,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adb62c70c2c65f34b927769bbc776210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1463723209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1463723205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d7f3d3822ff29545946913f2c7b73c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1570155223
@@ -1135,7 +1147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1889397555
 RectTransform:
   m_ObjectHideFlags: 0
