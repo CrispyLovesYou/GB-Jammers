@@ -135,6 +135,7 @@ public class MatchManager : Singleton<MatchManager>
     protected override void Awake()
     {
         base.Awake();
+        Destroy(MusicDestroy.Instance.gameObject);
 		iTween.tweens.Clear();
         cPhotonView = GetComponent<PhotonView>();
 

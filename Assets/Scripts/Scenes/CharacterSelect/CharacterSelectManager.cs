@@ -292,7 +292,6 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 
         if (playersReady[0] && playersReady[1] && PhotonNetwork.isMasterClient)
         {
-            Destroy(MusicDestroy.Instance.gameObject);
             PhotonNetwork.LoadLevel(MAP_BEACH);
         }
 	}
