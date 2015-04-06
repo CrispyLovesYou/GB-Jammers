@@ -480,7 +480,15 @@ public class Controller_Player : MonoBehaviour
         if (State != PlayerState.AIM)
             return;
 
-        if (Meter < MeterForSuper || Super_DirtyDanRyckert.IsActive)
+        bool snowCheck = false;
+
+        if (Character == CharacterID.DR_TRACKSUIT)
+        {
+            var super = gameObject.GetComponent<Super_DrTracksuit>() as Super_DrTracksuit;
+            snowCheck = super.IsActive;
+        }
+
+        if (Meter < MeterForSuper || Super_DirtyDanRyckert.IsActive || snowCheck)
         {
             AudioSource.PlayClipAtPoint(SFXError, Vector3.zero);
             return;
