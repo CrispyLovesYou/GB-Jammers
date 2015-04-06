@@ -101,10 +101,12 @@ public class MatchManager : Singleton<MatchManager>
 
     public CanvasGroup SetStartCG;
     public CanvasGroup SetEndCG;
+    public CanvasGroup MatchEndCG;
     public Animator SetStart;
     public bool SetStartComplete = false;
     public Animator SetEnd;
     public bool SetEndComplete = false;
+    public Animator MatchEnd;
 
     private PhotonView cPhotonView;
     private Team winner = Team.UNASSIGNED;
@@ -226,11 +228,12 @@ public class MatchManager : Singleton<MatchManager>
         // Match over
         yield return StartCoroutine(HandleMatchOver());
 
-        // temporary until a Match Over menu is implemented
+        HasMatchStarted = false;
+        Globals.HasGameStarted = false;
+
         if (PhotonNetwork.connectedAndReady)
             PhotonNetwork.Disconnect();
 
-        Globals.HasGameStarted = false;
         Application.LoadLevel("main_menu");
     }
 
@@ -288,7 +291,10 @@ public class MatchManager : Singleton<MatchManager>
 
     private IEnumerator HandleMatchOver()
     {
-        yield return 0;
+        MatchEndCG.alpha = 1.0f;
+        MatchEnd.enabled = true;
+        yield return new WaitForSeconds(4.0f);
+        
     }
 
     private IEnumerator ResetAfterScore()
