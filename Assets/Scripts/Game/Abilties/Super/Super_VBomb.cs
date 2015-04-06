@@ -7,7 +7,7 @@ public class Super_VBomb : Super_Base
     #region Fields
 
     public GameObject Shield;
-    public float xPos = 4.3f;
+    public float xPos = 4.0f;
 
     #endregion
 
@@ -29,14 +29,16 @@ public class Super_VBomb : Super_Base
             return;
 
         Vector3 position = Vector3.zero;
+        float scaleX = 0;
 
         switch (player.Team)
         {
-            case Team.LEFT: position.x = -xPos; break;
-            case Team.RIGHT: position.x = xPos; break;
+            case Team.LEFT: position.x = -xPos; scaleX = 1; break;
+            case Team.RIGHT: position.x = xPos; scaleX = -1;  break;
         }
 
-        Instantiate(Shield, position, Quaternion.identity);
+        GameObject obj = Instantiate(Shield, position, Quaternion.identity) as GameObject;
+        obj.transform.localScale = new Vector3(obj.transform.localScale.x * scaleX, obj.transform.localScale.y, 1);
     }
 
     #endregion
