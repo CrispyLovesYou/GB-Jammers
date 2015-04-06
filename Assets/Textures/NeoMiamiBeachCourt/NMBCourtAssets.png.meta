@@ -15,6 +15,8 @@ TextureImporter:
     21300016: Komuai2
     21300018: Wal_Sucks
     21300020: Wal_Sucks2
+    21300022: Brad1
+    21300024: Brad2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -70,6 +72,26 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Brad1
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 180
+        width: 129
+        height: 244
+      alignment: 9
+      pivot: {x: .445736438, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Brad2
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 180
+        width: 159
+        height: 244
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Divider
       rect:
         serializedVersion: 2
@@ -113,7 +135,7 @@ TextureImporter:
     - name: Komuai1
       rect:
         serializedVersion: 2
-        x: 1344
+        x: 1636
         y: 216
         width: 86
         height: 208
@@ -123,7 +145,7 @@ TextureImporter:
     - name: Komuai2
       rect:
         serializedVersion: 2
-        x: 1432
+        x: 1724
         y: 216
         width: 86
         height: 208
@@ -153,7 +175,7 @@ TextureImporter:
     - name: Wal_Sucks
       rect:
         serializedVersion: 2
-        x: 1169
+        x: 1461
         y: 186
         width: 173
         height: 238
@@ -163,7 +185,7 @@ TextureImporter:
     - name: Wal_Sucks2
       rect:
         serializedVersion: 2
-        x: 991
+        x: 1283
         y: 186
         width: 176
         height: 238
