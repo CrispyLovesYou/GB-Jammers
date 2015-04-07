@@ -19,6 +19,17 @@ public class MatchManager : Singleton<MatchManager>
         remove { onMatchStart -= value; }
     }
 
+    private static EventHandler<MatchEndEventArgs> onMatchEnd;
+    public static event EventHandler<MatchEndEventArgs> OnMatchEnd
+    {
+        add
+        {
+            if (onMatchEnd == null || !onMatchEnd.GetInvocationList().Contains(value))
+                onMatchEnd += value;
+        }
+        remove { onMatchEnd -= value; }
+    }
+
     private static EventHandler<EventArgs> onVolley;
     public static event EventHandler<EventArgs> OnVolley
     {
@@ -107,6 +118,7 @@ public class MatchManager : Singleton<MatchManager>
     public Animator SetEnd;
     public bool SetEndComplete = false;
     public Animator MatchEnd;
+    public bool IsTransitioning = false;
 
     public AudioSource AudioMatchStart;
     public AudioSource AudioSetEnd;
@@ -135,7 +147,7 @@ public class MatchManager : Singleton<MatchManager>
     protected override void Awake()
     {
         base.Awake();
-        Destroy(MusicDestroy.Instance.gameObject);
+        Destroy(MainMenuMusic.Instance.gameObject);
 		iTween.tweens.Clear();
         cPhotonView = GetComponent<PhotonView>();
 
@@ -274,6 +286,8 @@ public class MatchManager : Singleton<MatchManager>
 
     private IEnumerator HandleMatchSetup()
     {
+        IsTransitioning = true;
+
         while (!remotePlayerReady)
             yield return 0;
 
@@ -287,10 +301,14 @@ public class MatchManager : Singleton<MatchManager>
             onMatchStart(this, EventArgs.Empty);
 
         IsPauseAllowed = true;
+
+        IsTransitioning = false;
     }
 
     private IEnumerator HandleSetStart()
     {
+        IsTransitioning = true;
+
         CurrentSet++;
 
         SetStartCG.alpha = 1.0f;
@@ -303,6 +321,8 @@ public class MatchManager : Singleton<MatchManager>
         SetStartCG.alpha = 0;
         SetStart.enabled = false;
         SetStartComplete = false;
+
+        IsTransitioning = false;
     }
 
     private IEnumerator HandleSet()
@@ -313,6 +333,8 @@ public class MatchManager : Singleton<MatchManager>
 
     private IEnumerator HandleSetEnd()
     {
+        IsTransitioning = true;
+
         if (L_Points >= Rules.PointsToWinSet)
             L_Sets++;
         else if (R_Points >= Rules.PointsToWinSet)
@@ -338,15 +360,24 @@ public class MatchManager : Singleton<MatchManager>
             winner = Team.LEFT;
         else if (R_Sets == Rules.SetsToWinMatch)
             winner = Team.RIGHT;
+
+        IsTransitioning = false;
     }
 
     private IEnumerator HandleMatchOver()
     {
+        IsTransitioning = true;
+
         MatchEndCG.alpha = 1.0f;
         MatchEnd.enabled = true;
         AudioMatchEnd.Play();
+
+        if (onMatchEnd != null)
+            onMatchEnd(this, new MatchEndEventArgs(winner, L_Sets, R_Sets));
+
         yield return new WaitForSeconds(5.0f);
-        
+
+        IsTransitioning = false;
     }
 
     private IEnumerator ResetAfterScore()

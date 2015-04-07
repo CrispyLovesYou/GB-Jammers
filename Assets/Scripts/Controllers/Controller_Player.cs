@@ -295,11 +295,13 @@ public class Controller_Player : MonoBehaviour
 
         MatchManager.OnBeginResetAfterScore += MatchManager_OnBeginResetAfterScore;
         MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
+        MatchManager.OnMatchEnd += MatchManager_OnMatchEnd;
     }
 
 	private void OnDestroy(){
 		MatchManager.OnBeginResetAfterScore -= MatchManager_OnBeginResetAfterScore;
 		MatchManager.OnCompleteResetAfterScore -= MatchManager_OnCompleteResetAfterScore;
+        MatchManager.OnMatchEnd -= MatchManager_OnMatchEnd;
 	}
 
     private void Start()
@@ -336,12 +338,10 @@ public class Controller_Player : MonoBehaviour
         if (_collider2D.tag == Disc.Instance.tag)
         {
             if (cPhotonView.isMine)
-                cPhotonView.RPC("RPC_Catch", PhotonTargets.All);
-            else
-            {
-                isPingCompensating = true;
-                StartCoroutine(CR_PingCompensation());
-            }
+                cPhotonView.RPC("RPC_Catch", PhotonTargets.AllViaServer);
+
+            isPingCompensating = true;
+            StartCoroutine(CR_PingCompensation());
         }
         else if (_collider2D.tag == BOOK_TAG)
         {
@@ -791,6 +791,17 @@ public class Controller_Player : MonoBehaviour
     private void MatchManager_OnCompleteResetAfterScore(object sender, EventArgs e)
     {
         cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.IDLE);
+    }
+
+    private void MatchManager_OnMatchEnd(object sender, MatchEndEventArgs e)
+    {
+        if (!cPhotonView.isMine || Globals.GameMode != GameModes.ONLINE_MULTIPLAYER)
+            return;
+
+        if (e.Winner == Team)
+            PlayerPrefs.SetInt("totalWins", PlayerPrefs.GetInt("totalWins") + 1);
+        else
+            PlayerPrefs.SetInt("totalLosses", PlayerPrefs.GetInt("totalLosses") + 1);
     }
 
     #endregion

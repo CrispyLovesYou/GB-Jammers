@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
 public class MainMenuMusic : MonoBehaviour
 {
     #region Fields
@@ -13,7 +14,14 @@ public class MainMenuMusic : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+            Destroy(this.gameObject);
+        else
+        {
+            Instance = this;
+            GetComponent<AudioSource>().Play();
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 

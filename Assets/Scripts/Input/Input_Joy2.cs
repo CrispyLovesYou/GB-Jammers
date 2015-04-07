@@ -36,7 +36,8 @@ public class Input_Joy2 : Input_Base
             !cPhotonView.isMine ||
             Time.timeScale == 0 ||
             MatchManager.Instance.IsPaused ||
-            !MatchManager.Instance.HasMatchStarted)
+            !MatchManager.Instance.HasMatchStarted ||
+            MatchManager.Instance.IsTransitioning)
             return;
 
         CheckMovement();

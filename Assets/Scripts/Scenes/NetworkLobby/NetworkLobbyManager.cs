@@ -33,7 +33,6 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public CanvasGroup RoomListGroup;
     public GameObject RoomListLayoutGroup;
     public GameObject RoomPanelPrefab;
-    public Toggle ReadyToggle;
 	public Button P1ReadyButton;
 	public Button P2ReadyButton;
 	public Text P1ReadyButtonText;
@@ -45,6 +44,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
     public Text CountdownField;
 	public GameObject ScrollingBackground; 
 	public Text LocalUserName;
+    public Text Wins;
+    public Text Losses;
     public Text ChatLog;
     public InputField ChatInput;
     public Button ChatButton;
@@ -95,6 +96,9 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 			ToggleCanvasGroup(HeaderCanvasGroup, true);
             ToggleCanvasGroup(RoomListGroup, true);
         }
+
+        Wins.text = "WINS: " + PlayerPrefs.GetInt("totalWins", 0).ToString();
+        Losses.text = "LOSSES: " + PlayerPrefs.GetInt("totalLosses", 0).ToString();
     }
 
     #endregion

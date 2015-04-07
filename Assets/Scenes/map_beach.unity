@@ -1336,6 +1336,7 @@ MonoBehaviour:
   SetEnd: {fileID: 1533890861}
   SetEndComplete: 0
   MatchEnd: {fileID: 52422891}
+  IsTransitioning: 0
   AudioMatchStart: {fileID: 1889124651}
   AudioSetEnd: {fileID: 1789065582}
   AudioMatchEnd: {fileID: 628278300}

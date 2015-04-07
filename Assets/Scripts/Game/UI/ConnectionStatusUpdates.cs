@@ -57,6 +57,9 @@ public class ConnectionStatusUpdates : MonoBehaviour
 
     private void OnDisconnectedFromPhoton()
     {
+        if (!Globals.HasGameStarted)
+            return;
+
         cCanvasGroup.alpha = 1.0f;
         currentStatus = ConnectStatus.DISCONNECTED;
         cText.text = "You have been disconnected";

@@ -24,7 +24,8 @@ public class Input_KM : Input_Base
             !cPhotonView.isMine ||
             Time.timeScale == 0 ||
             MatchManager.Instance.IsPaused ||
-            !MatchManager.Instance.HasMatchStarted)
+            !MatchManager.Instance.HasMatchStarted ||
+            MatchManager.Instance.IsTransitioning)
             return;
 
         CheckMovement();
