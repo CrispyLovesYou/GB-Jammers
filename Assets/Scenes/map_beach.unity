@@ -176,11 +176,7 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 22381058, guid: 0bc8930e0675ecd44a6485e42f99015a, type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1069428233}
-    - target: {fileID: 11467874, guid: 0bc8930e0675ecd44a6485e42f99015a, type: 2}
+    - target: {fileID: 11457458, guid: 0bc8930e0675ecd44a6485e42f99015a, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 795162137}
@@ -188,10 +184,14 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 795162137}
-    - target: {fileID: 11457458, guid: 0bc8930e0675ecd44a6485e42f99015a, type: 2}
+    - target: {fileID: 11467874, guid: 0bc8930e0675ecd44a6485e42f99015a, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 795162137}
+    - target: {fileID: 22381058, guid: 0bc8930e0675ecd44a6485e42f99015a, type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1069428233}
     - target: {fileID: 22464368, guid: 0bc8930e0675ecd44a6485e42f99015a, type: 2}
       propertyPath: m_AnchorMin.y
       value: 1
@@ -1318,6 +1318,7 @@ MonoBehaviour:
   VolleyCountBeforeScore: 0
   Team_Left_Spawn_Tag: Team_Left_Spawn
   Team_Right_Spawn_Tag: Team_Right_Spawn
+  DiscPrefabID: Disc
   Disc_Spawn_Left_Tag: Disc_Spawn_Left
   Disc_Spawn_Right_Tag: Disc_Spawn_Right
   LobPointValue: 2

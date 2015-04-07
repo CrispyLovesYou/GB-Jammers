@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[AddComponentMenu("Game/UI/Ping Text")]
 public class PingText : MonoBehaviour
 {
     #region Fields
@@ -28,7 +29,7 @@ public class PingText : MonoBehaviour
         {
             cText.text = PhotonNetwork.GetPing().ToString() + "ms";
 
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(3.0f);
         }
 
         cText.text = "";

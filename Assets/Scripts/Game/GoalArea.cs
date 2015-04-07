@@ -28,11 +28,26 @@ public class GoalArea : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D _collider)
     {
         if (_collider.tag == "Disc" &&
-            !Controller_Player.isPingCompensating &&
             !hasScored)
         {
-            hasScored = true;
-            MatchManager.Instance.ScorePoints(TeamToScore, Points);
+            if (Globals.GameMode == GameModes.ONLINE_MULTIPLAYER)
+            {
+                if (TeamToScore == Team.RIGHT && PhotonNetwork.isMasterClient)
+                {
+                    hasScored = true;
+                    MatchManager.Instance.ScorePoints(TeamToScore, Points);
+                }
+                else if (TeamToScore == Team.LEFT && !PhotonNetwork.isMasterClient)
+                {
+                    hasScored = true;
+                    MatchManager.Instance.ScorePoints(TeamToScore, Points);
+                }
+            }
+            else if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
+            {
+                hasScored = true;
+                MatchManager.Instance.ScorePoints(TeamToScore, Points);
+            }
         }
     }
 

@@ -18,7 +18,6 @@ public class NetworkManager : Singleton<NetworkManager>
     #region Fields
 
     public string Player_Prefab_ID = "Player";
-    public string Disc_Prefab_ID = "Disc";
 
     #endregion
 
@@ -57,9 +56,6 @@ public class NetworkManager : Singleton<NetworkManager>
 
     public void Spawn()
     {
-        if (PhotonNetwork.isMasterClient)
-            SpawnDisc();
-
         switch (Globals.GameMode)
         {
             case GameModes.LOCAL_MULTIPLAYER:
@@ -198,18 +194,6 @@ public class NetworkManager : Singleton<NetworkManager>
         // =====================
 
         SpawnChargeBar(player, team);
-    }
-
-    private void SpawnDisc()
-    {
-        Vector3 spawnPosition = Vector3.zero;
-
-        if (UnityEngine.Random.Range(1, 3) == 1)
-            spawnPosition = MatchManager.Instance.DiscLeftSpawn;
-        else
-            spawnPosition = MatchManager.Instance.DiscRightSpawn;
-
-        PhotonNetwork.Instantiate(Disc_Prefab_ID, spawnPosition, Quaternion.identity, 0);
     }
 
     private void SpawnChargeBar(GameObject _player, Team _team)

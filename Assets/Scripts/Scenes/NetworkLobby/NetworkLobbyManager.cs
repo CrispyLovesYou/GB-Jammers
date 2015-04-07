@@ -39,6 +39,8 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 	public Text P2ReadyButtonText;
     public UpdateUsernameText P1Username;
     public UpdateUsernameText P2Username;
+    public Text P1Name;
+    public Text P2Name;
     public Image P1ReadyStatus;
     public Image P2ReadyStatus;
     public Text CountdownField;
@@ -55,6 +57,7 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 
     private PhotonView cPhotonView;
     private string username;
+    private string otherUsername;
     private bool[] playersReady = new bool[Globals.MAX_CONNECTED_PLAYERS];
     private List<GameObject> roomPanelCloneList = new List<GameObject>();
     private InputField usernameField;
@@ -125,9 +128,11 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 		if(PhotonNetwork.isMasterClient){
 			properties.Add(PROP_PLAYER_ID, 1);
 			Globals.PlayerID = 1;
+
 		}else{
 			properties.Add(PROP_PLAYER_ID, 2);
 			Globals.PlayerID = 2;
+            otherUsername = PhotonNetwork.masterClient.name;
 		}
 		
         PhotonNetwork.player.SetCustomProperties(properties);
@@ -139,8 +144,32 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 		CountdownField.text = "";
 		ChatLog.text = "";
 		UpdateReadyButtons();
-        StartCoroutine("UpdateUsernames");
+        UpdateUsernames();
+    }
 
+    private void OnPhotonJoinRoomFailed()
+    {
+        ToggleCanvasGroup(LobbyGroup, true);
+    }
+
+    private void OnPhotonPlayerConnected(PhotonPlayer _player)
+    {
+        otherUsername = _player.name;
+        UpdateReadyButtons();
+        P2ReadyStatus.enabled = false;
+        CountdownField.text = "";
+        UpdateUsernames();
+    }
+
+    private void OnPhotonPlayerDisconnected(PhotonPlayer _player)
+    {
+        playersReady[1] = false;
+        UpdateReadyButtons();
+        P2ReadyStatus.enabled = false;
+        CountdownField.text = "";
+        StopCoroutine(CR_COUNTDOWN);
+        otherUsername = "";
+        UpdateUsernames();
     }
 
     private void OnLeftRoom()
@@ -149,9 +178,10 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
         MainLobbyCanvas.enabled = true;
 		P1ReadyStatus.enabled = false;
 		P2ReadyStatus.enabled = false;
+        otherUsername = "";
     }
 
-    private void OnMasterClientSwitched()
+    private void OnMasterClientSwitched(PhotonPlayer _player)
     {
         PhotonNetwork.LeaveRoom();
         playersReady[0] = false;
@@ -159,25 +189,6 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 		P1ReadyStatus.enabled = false;
 		P2ReadyStatus.enabled = false;
 		
-    }
-
-    private void OnPhotonPlayerConnected()
-    {
-		Debug.Log ("Player reconnected");
-		StartCoroutine("UpdateUsernames");
-		UpdateReadyButtons();
-		P2ReadyStatus.enabled = false;
-		CountdownField.text = "";
-    }
-
-    private void OnPhotonPlayerDisconnected()
-    {
-        playersReady[1] = false;
-		StartCoroutine("UpdateUsernames");
-		UpdateReadyButtons();
-		P2ReadyStatus.enabled = false;
-		CountdownField.text = "";
-		StopCoroutine(CR_COUNTDOWN);
     }
 
     private void OnDisconnectedFromPhoton()
@@ -251,37 +262,54 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 		P2ReadyButtonText.text = (playersReady[1] ?  "CANCEL" : "READY");
 	}
 
-    private IEnumerator UpdateUsernames()
+    private void UpdateUsernames()
     {
-		P1Username.ClearText();
-		P2Username.ClearText();
-		Debug.Log ("Attempting to assign names");
-		yield return new WaitForSeconds(0.2f);
-		if(PhotonNetwork.playerList.Length == 1){
-			P1Username.UpdateText(1);
-			P2Username.ClearText();
-		}else{
-			for (int i = 0; i <  PhotonNetwork.playerList.Length; i++)
-			{
-				int id = (int)PhotonNetwork.playerList[i].customProperties[PROP_PLAYER_ID];
-				if (PhotonNetwork.playerList[i].customProperties[PROP_PLAYER_ID] == null) P2Username.UpdateText(id);
-				else{
-					if (i == 0)  // if this is Player 1
-					{
-						P1Username.UpdateText(id);
-					}
-					else 
-					{
-						P2Username.UpdateText(id);
-					}
-				}
+        P1Name.text = "";
+        P2Name.text = "";
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            P1Name.text = PhotonNetwork.player.name;
+            P2Name.text = otherUsername;
+        }
+        else
+        {
+            P2Name.text = PhotonNetwork.player.name;
+            P1Name.text = otherUsername;
+        }
+    }
+
+    //private IEnumerator UpdateUsernames()
+    //{
+    //    P1Username.ClearText();
+    //    P2Username.ClearText();
+    //    Debug.Log ("Attempting to assign names");
+    //    yield return new WaitForSeconds(0.2f);
+    //    if(PhotonNetwork.playerList.Length == 1){
+    //        P1Username.UpdateText(1);
+    //        P2Username.ClearText();
+    //    }else{
+    //        for (int i = 0; i <  PhotonNetwork.playerList.Length; i++)
+    //        {
+    //            int id = (int)PhotonNetwork.playerList[i].customProperties[PROP_PLAYER_ID];
+    //            if (PhotonNetwork.playerList[i].customProperties[PROP_PLAYER_ID] == null) P2Username.UpdateText(id);
+    //            else{
+    //                if (i == 0)  // if this is Player 1
+    //                {
+    //                    P1Username.UpdateText(id);
+    //                }
+    //                else 
+    //                {
+    //                    P2Username.UpdateText(id);
+    //                }
+    //            }
 				
-			}
-		}
+    //        }
+    //    }
 
         
        
-    }
+    //}
 
     private void ToggleCanvasGroup(CanvasGroup _group, bool _enabled)
     {
@@ -402,6 +430,13 @@ public class NetworkLobbyManager : Singleton<NetworkLobbyManager>
 		playersReady[0] = false;
 		playersReady[1] = false;
 	}
+
+    public void OnClick_BackToLobbyFromPrivateRoomMenu()
+    {
+        ToggleCanvasGroup(PrivateRoomCreateGroup, false);
+        ToggleCanvasGroup(PrivateRoomJoinGroup, false);
+        ToggleCanvasGroup(LobbyGroup, true);
+    }
 
     public void OnClick_BackToMainMenu()
     {

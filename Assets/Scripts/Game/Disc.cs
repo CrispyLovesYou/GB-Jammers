@@ -27,6 +27,7 @@ public class Disc : Singleton<Disc>
     public bool HasKnockback = false;
     public float KnockbackPower = 0;
     public bool IsMagnet = false;
+    public bool LocalPlayerLastToThrow = false;
 
     private Transform cTransform;
     private Rigidbody2D cRigidbody2D;
@@ -52,6 +53,10 @@ public class Disc : Singleton<Disc>
 
         MatchManager.OnBeginResetAfterScore += MatchManager_OnBeginResetAfterScore;
         MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
+
+        Color color = cSpriteRenderer.color;
+        color.a = 0;
+        cSpriteRenderer.color = color;
     }
 
 	private void OnDestroy(){
@@ -92,19 +97,37 @@ public class Disc : Singleton<Disc>
 
     #region Methods
 
-    public void Catch()
+    public void StartFadeIn()
+    {
+        iTween.ValueTo(gameObject, iTween.Hash(
+            "from", cSpriteRenderer.color.a,
+            "to", 1.0f,
+            "time", 1.0f,
+            "onupdate",
+                (Action<object>)(value =>
+                {
+                    Color color = cSpriteRenderer.color;
+                    color.a = (float)value;
+                    cSpriteRenderer.color = color;
+                })
+            ));
+    }
+
+    public void Catch(Vector3 _snapPosition)
     {
         StopCoroutine(CR_LOB_SCORE);
 
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), true);
+        cTransform.position = _snapPosition;
         cRigidbody2D.velocity = velocity = Vector3.zero;
         cRigidbody2D.fixedAngle = true;
 
         cPhotonView.RPC("RPC_Catch", PhotonTargets.All);
     }
 
-    public void Throw(Vector3 _snapPosition, Vector2 _throwVector)
+    public void Throw(Vector3 _snapPosition, Vector2 _throwVector, bool _lastToThrow)
     {
+        LocalPlayerLastToThrow = _lastToThrow;
         cSpriteRenderer.enabled = true;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
         cTransform.position = _snapPosition;
@@ -113,8 +136,9 @@ public class Disc : Singleton<Disc>
         cRigidbody2D.angularVelocity = AngularVelocity;
     }
 
-    public void Lob(Team _team, Vector2 _targetPosition, float _duration)
+    public void Lob(Team _team, Vector2 _targetPosition, float _duration, bool _lastToThrow)
     {
+        LocalPlayerLastToThrow = _lastToThrow;
         cSpriteRenderer.enabled = true;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
         cRigidbody2D.fixedAngle = false;
@@ -155,6 +179,9 @@ public class Disc : Singleton<Disc>
         Crosshair.Instance.transform.position = _targetPosition;
         Crosshair.Instance.GetComponent<SpriteRenderer>().enabled = true;
         cCollider2D.enabled = false;
+        cSpriteRenderer.sortingLayerName = "UI";
+        int initSortingOrder = cSpriteRenderer.sortingOrder;
+        cSpriteRenderer.sortingOrder = 1000;
 
         iTween.MoveTo(gameObject, iTween.Hash(
             "position", (Vector3)_targetPosition,
@@ -179,8 +206,14 @@ public class Disc : Singleton<Disc>
 
         Crosshair.Instance.GetComponent<SpriteRenderer>().enabled = false;
         cCollider2D.enabled = true;
+        cSpriteRenderer.sortingLayerName = "Default";
+        cSpriteRenderer.sortingOrder = initSortingOrder;
 
-        StartCoroutine(CR_LOB_SCORE, _team);
+        if (Globals.GameMode == GameModes.LOCAL_MULTIPLAYER)
+            StartCoroutine(CR_LOB_SCORE, _team);
+        else if (Globals.GameMode == GameModes.ONLINE_MULTIPLAYER)
+            if (!LocalPlayerLastToThrow)
+                StartCoroutine(CR_LOB_SCORE, _team);
     }
 
     private IEnumerator CR_LobScore(Team _team)

@@ -132,6 +132,8 @@ MonoBehaviour:
   P2ReadyButtonText: {fileID: 964539578}
   P1Username: {fileID: 439799815}
   P2Username: {fileID: 830661278}
+  P1Name: {fileID: 439799816}
+  P2Name: {fileID: 830661279}
   P1ReadyStatus: {fileID: 223629301}
   P2ReadyStatus: {fileID: 1627534732}
   CountdownField: {fileID: 1510375852}
@@ -156,7 +158,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &11826255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,7 +479,7 @@ GameObject:
   - 114: {fileID: 58107301}
   - 114: {fileID: 58107300}
   m_Layer: 5
-  m_Name: Back to Main Menu
+  m_Name: Back to Lobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,7 +544,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_BackToMainMenu
+        m_MethodName: OnClick_BackToLobbyFromPrivateRoomMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -889,19 +891,7 @@ MonoBehaviour:
   m_CharacterLimit: 32
   m_EndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_PrivateGameNameCreateInput
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnValueChange:
@@ -1709,7 +1699,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BACK TO MENU
+  m_Text: BACK TO LOBBY
 --- !u!222 &310543985
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2822,7 +2812,7 @@ GameObject:
   - 114: {fileID: 750263602}
   - 114: {fileID: 750263601}
   m_Layer: 5
-  m_Name: Back to Main Menu
+  m_Name: Back to Lobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2887,7 +2877,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_BackToMainMenu
+        m_MethodName: OnClick_BackToLobbyFromPrivateRoomMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3297,7 +3287,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BACK TO MENU
+  m_Text: BACK TO LOBBY
 --- !u!222 &762910792
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3842,19 +3832,7 @@ MonoBehaviour:
   m_CharacterLimit: 32
   m_EndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_Connect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnValueChange:
@@ -4305,7 +4283,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_JoinPrivateGame
+        m_MethodName: OnClick_PrivateGameNameJoinInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6162,6 +6140,45 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1646136371}
+--- !u!1 &1707479674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1707479676}
+  - 114: {fileID: 1707479675}
+  m_Layer: 0
+  m_Name: Global Inputs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1707479675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1707479674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c2a3f3278f37942a890fd2ab5805c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1707479676
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1707479674}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 433.462463, y: 289.966431, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!1 &1713909380
 GameObject:
   m_ObjectHideFlags: 0
@@ -6241,7 +6258,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_CreatePrivateGame
+        m_MethodName: OnClick_PrivateGameNameCreateInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7301,19 +7318,7 @@ MonoBehaviour:
   m_CharacterLimit: 32
   m_EndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11826253}
-        m_MethodName: OnClick_PrivateGameNameJoinInput
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnValueChange:

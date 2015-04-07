@@ -251,8 +251,6 @@ public class Controller_Player : MonoBehaviour
     public AudioClip Perfect;
     public AudioClip Great;
 
-    public static bool isPingCompensating = false;
-
     private Transform cTransform;
     private Rigidbody2D cRigidbody2D;
     private Collider2D cCollider2D;
@@ -338,17 +336,14 @@ public class Controller_Player : MonoBehaviour
         if (_collider2D.tag == Disc.Instance.tag)
         {
             if (cPhotonView.isMine)
-                cPhotonView.RPC("RPC_Catch", PhotonTargets.AllViaServer);
-
-            isPingCompensating = true;
-            StartCoroutine(CR_PingCompensation());
+                cPhotonView.RPC("RPC_Catch", PhotonTargets.All);
         }
         else if (_collider2D.tag == BOOK_TAG)
         {
             if (cPhotonView.isMine)
             {
                 Book book = _collider2D.gameObject.GetSafeComponent<Book>();
-                cPhotonView.RPC("RPC_BookStun", PhotonTargets.AllViaServer, book.ID);
+                cPhotonView.RPC("RPC_BookStun", PhotonTargets.All, book.ID);
             }
         }
     }
@@ -446,7 +441,7 @@ public class Controller_Player : MonoBehaviour
 
     public void ThrowAfterAnimation()
     {
-        Disc.Instance.Throw(cTransform.position + (Vector3.right * GetDiscOffset()), (Vector3)throwVector);
+        Disc.Instance.Throw(cTransform.position + (Vector3.right * GetDiscOffset()), (Vector3)throwVector, cPhotonView.isMine);
 
         StartCoroutine(CR_THROW_RECOVERY);
     }
@@ -454,7 +449,7 @@ public class Controller_Player : MonoBehaviour
     public void LobAfterAnimation()
     {
         float lobDuration = (LobDuration + LobDurationMod) * LobDurationMultiplier;
-        Disc.Instance.Lob(Team, lobTarget, lobDuration);
+        Disc.Instance.Lob(Team, lobTarget, lobDuration, cPhotonView.isMine);
         StartCoroutine(CR_THROW_RECOVERY);
     }
 
@@ -747,6 +742,7 @@ public class Controller_Player : MonoBehaviour
     private IEnumerator CR_BookStun(Book _book)
     {
         cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.STUN);
+        StopCoroutine(CR_DASH);
         Stop();
         cCollider2D.enabled = false;
         _book.DestroySelf();
@@ -755,13 +751,6 @@ public class Controller_Player : MonoBehaviour
 
         cCollider2D.enabled = true;
         cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.IDLE);
-    }
-
-    private IEnumerator CR_PingCompensation()
-    {
-        float delay = (float)PhotonNetwork.GetPing() / 1000;
-        yield return new WaitForSeconds(delay * 3);
-        isPingCompensating = false;
     }
 
     #endregion
@@ -773,8 +762,8 @@ public class Controller_Player : MonoBehaviour
         if (!cPhotonView.isMine)
             return;
 
+        StopCoroutine(CR_DASH);
         cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.RESET);
-
         Stop();
         Vector3 targetPos = Vector3.zero;
         float duration = 2.0f;
@@ -839,6 +828,9 @@ public class Controller_Player : MonoBehaviour
     {
         State = (PlayerState)_state;
         cAnimator.SetInteger("state", _state);
+
+        if (cTransform.localScale != initLocalScale)  // if flipped, flip back
+            cTransform.localScale = initLocalScale;
     }
 
     [RPC]
@@ -955,7 +947,7 @@ public class Controller_Player : MonoBehaviour
 
         knockbackVector = Disc.Instance.Velocity;
 
-        Disc.Instance.Catch();
+        Disc.Instance.Catch(cTransform.position + (Vector3.right * GetDiscOffset()));
 
         if (Disc.Instance.HasKnockback)
             StartCoroutine(CR_KNOCKBACK);

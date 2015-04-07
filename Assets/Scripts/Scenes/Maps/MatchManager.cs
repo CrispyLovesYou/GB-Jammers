@@ -90,6 +90,7 @@ public class MatchManager : Singleton<MatchManager>
 
     public string Team_Left_Spawn_Tag = "Team_Left_Spawn";
     public string Team_Right_Spawn_Tag = "Team_Right_Spawn";
+    public string DiscPrefabID = "Disc";
     public string Disc_Spawn_Left_Tag = "Disc_Spawn_Left";
     public string Disc_Spawn_Right_Tag = "Disc_Spawn_Right";
 
@@ -193,9 +194,6 @@ public class MatchManager : Singleton<MatchManager>
 
     public void ScorePoints(Team _team, int _points)
     {
-        if (!PhotonNetwork.isMasterClient)
-            return;
-
         cPhotonView.RPC("RPC_ScorePoints", PhotonTargets.AllViaServer, (int)_team, _points);
     }
 
@@ -248,6 +246,21 @@ public class MatchManager : Singleton<MatchManager>
 
 	}
 
+    private void SpawnDisc()
+    {
+        if (!PhotonNetwork.isMasterClient)
+            return;
+
+        Vector3 spawnPosition = Vector3.zero;
+
+        if (UnityEngine.Random.Range(1, 3) == 1)
+            spawnPosition = MatchManager.Instance.DiscLeftSpawn;
+        else
+            spawnPosition = MatchManager.Instance.DiscRightSpawn;
+
+        PhotonNetwork.Instantiate(DiscPrefabID, spawnPosition, Quaternion.identity, 0);
+    }
+
     private void Update()
     {
         if (Input.GetButtonDown("Pause"))
@@ -297,6 +310,8 @@ public class MatchManager : Singleton<MatchManager>
 
         AudioMatchStart.Play();
 
+        SpawnDisc();
+
         if (onMatchStart != null)
             onMatchStart(this, EventArgs.Empty);
 
@@ -321,6 +336,9 @@ public class MatchManager : Singleton<MatchManager>
         SetStartCG.alpha = 0;
         SetStart.enabled = false;
         SetStartComplete = false;
+
+        if (CurrentSet == 1)
+            Disc.Instance.StartFadeIn();
 
         IsTransitioning = false;
     }
