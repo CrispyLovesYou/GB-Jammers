@@ -7,7 +7,7 @@ public class Book : MonoBehaviour
     #region Fields
 
     public static float StunDuration = 1.5f;
-    public float Duration = 20.0f;
+    public float Duration = 10.0f;
     public float LobDuration = 1.2f;
     public float LobScale = 5.0f;
     public float AngularVelocity = 180.0f;
