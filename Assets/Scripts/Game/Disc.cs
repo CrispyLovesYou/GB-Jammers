@@ -118,11 +118,10 @@ public class Disc : Singleton<Disc>
         StopCoroutine(CR_LOB_SCORE);
 
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), true);
-        cTransform.position = _snapPosition;
         cRigidbody2D.velocity = velocity = Vector3.zero;
         cRigidbody2D.fixedAngle = true;
-
-        cPhotonView.RPC("RPC_Catch", PhotonTargets.All);
+        cSpriteRenderer.enabled = false;
+        cTransform.position = new Vector3(100, 100, 0);
     }
 
     public void Throw(Vector3 _snapPosition, Vector2 _throwVector, bool _lastToThrow)
@@ -280,12 +279,6 @@ public class Disc : Singleton<Disc>
     #endregion
 
     #region RPC
-
-    [RPC]
-    private void RPC_Catch()
-    {
-        cSpriteRenderer.enabled = false;
-    }
 
     [RPC]
     private void RPC_SetPosition(Vector3 _position)

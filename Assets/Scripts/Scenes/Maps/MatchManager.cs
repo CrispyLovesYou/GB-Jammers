@@ -181,7 +181,6 @@ public class MatchManager : Singleton<MatchManager>
 
     private void Start()
     {
-        NetworkManager.Instance.Spawn();
         StartCoroutine(MatchDirector());
     }
 
@@ -246,21 +245,6 @@ public class MatchManager : Singleton<MatchManager>
 
 	}
 
-    private void SpawnDisc()
-    {
-        if (!PhotonNetwork.isMasterClient)
-            return;
-
-        Vector3 spawnPosition = Vector3.zero;
-
-        if (UnityEngine.Random.Range(1, 3) == 1)
-            spawnPosition = MatchManager.Instance.DiscLeftSpawn;
-        else
-            spawnPosition = MatchManager.Instance.DiscRightSpawn;
-
-        PhotonNetwork.Instantiate(DiscPrefabID, spawnPosition, Quaternion.identity, 0);
-    }
-
     private void Update()
     {
         if (Input.GetButtonDown("Pause"))
@@ -305,18 +289,14 @@ public class MatchManager : Singleton<MatchManager>
             yield return 0;
 
         WaitingForPlayer.enabled = false;
-
         HasMatchStarted = true;
-
         AudioMatchStart.Play();
-
-        SpawnDisc();
+        NetworkManager.Instance.Spawn();
 
         if (onMatchStart != null)
             onMatchStart(this, EventArgs.Empty);
 
         IsPauseAllowed = true;
-
         IsTransitioning = false;
     }
 

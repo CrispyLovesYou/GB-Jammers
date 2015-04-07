@@ -56,6 +56,8 @@ public class NetworkManager : Singleton<NetworkManager>
 
     public void Spawn()
     {
+        SpawnDisc();
+
         switch (Globals.GameMode)
         {
             case GameModes.LOCAL_MULTIPLAYER:
@@ -67,6 +69,21 @@ public class NetworkManager : Singleton<NetworkManager>
                 SpawnOnlinePlayer();
                 break;
         }
+    }
+
+    private void SpawnDisc()
+    {
+        if (!PhotonNetwork.isMasterClient)
+            return;
+
+        Vector3 spawnPosition = Vector3.zero;
+
+        if (UnityEngine.Random.Range(1, 3) == 1)
+            spawnPosition = MatchManager.Instance.DiscLeftSpawn;
+        else
+            spawnPosition = MatchManager.Instance.DiscRightSpawn;
+
+        PhotonNetwork.Instantiate(MatchManager.Instance.DiscPrefabID, spawnPosition, Quaternion.identity, 0);
     }
 
     private void SpawnLocalPlayer(int _playerNum)

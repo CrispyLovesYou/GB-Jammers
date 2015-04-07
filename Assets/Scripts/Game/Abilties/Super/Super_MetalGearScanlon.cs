@@ -19,6 +19,7 @@ public class Super_MetalGearScanlon : Super_Base
     protected override void Awake()
     {
         base.Awake();
+        discRenderer = Disc.Instance.GetComponent<SpriteRenderer>();
 
         Controller_Player.OnSuper += Controller_Player_OnSuper;
     }
@@ -37,9 +38,6 @@ public class Super_MetalGearScanlon : Super_Base
             return;
 
         player.SpecialThrow(ThrowCharge, e.InputVector, true);
-
-        if (discRenderer == null)
-            discRenderer = Disc.Instance.GetComponent<SpriteRenderer>();
 
         color = discRenderer.color;
 

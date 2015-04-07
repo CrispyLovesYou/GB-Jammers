@@ -294,6 +294,10 @@ public class Controller_Player : MonoBehaviour
         MatchManager.OnBeginResetAfterScore += MatchManager_OnBeginResetAfterScore;
         MatchManager.OnCompleteResetAfterScore += MatchManager_OnCompleteResetAfterScore;
         MatchManager.OnMatchEnd += MatchManager_OnMatchEnd;
+
+        Color color = cSpriteRenderer.color;
+        color.a = 0;
+        cSpriteRenderer.color = color;
     }
 
 	private void OnDestroy(){
@@ -319,6 +323,19 @@ public class Controller_Player : MonoBehaviour
                 goalWall = GameObject.FindGameObjectWithTag("Player_Wall_Right");
                 break;
         }
+
+        iTween.ValueTo(gameObject, iTween.Hash(
+            "from", cSpriteRenderer.color.a,
+            "to", 1.0f,
+            "time", 1.0f,
+            "onupdate",
+                (Action<object>)(value =>
+                {
+                    Color color = cSpriteRenderer.color;
+                    color.a = (float)value;
+                    cSpriteRenderer.color = color;
+                })
+            ));
     }
 
     private void OnTriggerEnter2D(Collider2D _collider2D)
@@ -730,7 +747,10 @@ public class Controller_Player : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         if (!goalEntered)
+        {
             goalWall.GetComponent<Collider2D>().enabled = true;
+            StartCoroutine(CR_THROW_AFTER_IDLE);
+        }
 
         Disc.Instance.HasKnockback = false;
         Disc.Instance.KnockbackPower = 0;
@@ -949,16 +969,19 @@ public class Controller_Player : MonoBehaviour
 
         Disc.Instance.Catch(cTransform.position + (Vector3.right * GetDiscOffset()));
 
-        if (Disc.Instance.HasKnockback)
-            StartCoroutine(CR_KNOCKBACK);
-
         if (onCatch != null)
             onCatch(this, EventArgs.Empty);
 
-        StartCoroutine(CR_THROW_AFTER_IDLE);
-
         if (!MatchManager.Instance.isInitialCatchComplete)
             MatchManager.Instance.isInitialCatchComplete = true;
+
+        if (cPhotonView.isMine)
+        {
+            if (Disc.Instance.HasKnockback)
+                StartCoroutine(CR_KNOCKBACK);
+            else
+                StartCoroutine(CR_THROW_AFTER_IDLE);
+        }
     }
 
     [RPC]
