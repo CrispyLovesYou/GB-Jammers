@@ -32,7 +32,6 @@ public class Input_Joy : Input_Base
     private void Update()
     {
         if (!isEnabled ||
-            !appHasFocus ||
             !cPhotonView.isMine ||
             Time.timeScale == 0 ||
             MatchManager.Instance.IsPaused ||

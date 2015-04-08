@@ -204,7 +204,7 @@ public class NetworkManager : Singleton<NetworkManager>
     private void SpawnChargeBar(GameObject _player, Team _team)
     {
         GameObject chargeBar = PhotonNetwork.Instantiate("Charge Bar", Vector3.zero, Quaternion.identity, 0);
-        chargeBar.GetComponent<ChargeBar>().SetPlayer(_player);
+        chargeBar.GetComponentInChildren<ChargeBar>().SetPlayer(_player);
     }
 
     #endregion

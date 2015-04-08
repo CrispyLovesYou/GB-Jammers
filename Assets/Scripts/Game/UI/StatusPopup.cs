@@ -17,6 +17,8 @@ public class StatusPopup : MonoBehaviour
     #region Fields
 
     public PopupDirection Direction = PopupDirection.UP;
+    public Transform ParentTransform;
+    public Vector3 RelativePosition = Vector3.zero;
     public float Distance = 0.25f;
     public float Duration = 2.0f;
 
@@ -32,6 +34,8 @@ public class StatusPopup : MonoBehaviour
     {
         cTransform = GetComponent<Transform>();
         cSpriteRenderer = GetComponent<SpriteRenderer>();
+
+        RelativePosition = cTransform.position;
 
         color = cSpriteRenderer.color;
         color.a = 0;
@@ -77,9 +81,11 @@ public class StatusPopup : MonoBehaviour
     {
         switch (Direction)
         {
-            case PopupDirection.UP: cTransform.position += Vector3.up * Distance * Time.deltaTime; break;
-            case PopupDirection.DOWN: cTransform.position += Vector3.down * Distance * Time.deltaTime; break;
+            case PopupDirection.UP: RelativePosition += Vector3.up * Distance * Time.deltaTime; break;
+            case PopupDirection.DOWN: RelativePosition += Vector3.down * Distance * Time.deltaTime; break;
         }
+
+        cTransform.position = ParentTransform.position + RelativePosition;
     }
 
     #endregion

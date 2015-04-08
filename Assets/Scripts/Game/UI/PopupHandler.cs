@@ -49,57 +49,57 @@ public class PopupHandler : MonoBehaviour
     {
         Controller_Player player = (Controller_Player)sender;
 
-        Vector3 position = player.transform.position + (Vector3.left * LeftRightOffset);
+        Vector3 position = Vector3.left * LeftRightOffset;
         GameObject gObj = Instantiate(SpeedBuffPopup, position, Quaternion.identity) as GameObject;
-        gObj.transform.SetParent(player.transform);
+        gObj.GetComponent<StatusPopup>().ParentTransform = player.transform;
     }
 
     private void Controller_Player_OnSpeedDebuff(object sender, System.EventArgs e)
     {
         Controller_Player player = (Controller_Player)sender;
 
-        Vector3 position = player.transform.position + (Vector3.left * LeftRightOffset);
+        Vector3 position = Vector3.left * LeftRightOffset;
         GameObject gObj = Instantiate(SpeedDebuffPopup, position, Quaternion.identity) as GameObject;
-        gObj.transform.SetParent(player.transform);
+        gObj.GetComponent<StatusPopup>().ParentTransform = player.transform;
     }
 
     private void Controller_Player_OnPowerBuff(object sender, System.EventArgs e)
     {
         Controller_Player player = (Controller_Player)sender;
 
-        Vector3 position = player.transform.position + (Vector3.right * LeftRightOffset);
+        Vector3 position = Vector3.right * LeftRightOffset;
         GameObject gObj = Instantiate(PowerBuffPopup, position, Quaternion.identity) as GameObject;
-        gObj.transform.SetParent(player.transform);
+        gObj.GetComponent<StatusPopup>().ParentTransform = player.transform;
     }
 
     private void Controller_Player_OnPowerDebuff(object sender, System.EventArgs e)
     {
         Controller_Player player = (Controller_Player)sender;
 
-        Vector3 position = player.transform.position + (Vector3.right * LeftRightOffset);
+        Vector3 position = Vector3.right * LeftRightOffset;
         GameObject gObj = Instantiate(PowerDebuffPopup, position, Quaternion.identity) as GameObject;
-        gObj.transform.SetParent(player.transform);
+        gObj.GetComponent<StatusPopup>().ParentTransform = player.transform;
     }
 
     private void Controller_Player_OnGreatThrow(object sender, System.EventArgs e)
     {
         Controller_Player player = (Controller_Player)sender;
-        GameObject gObj = Instantiate(GreatPopup, player.transform.position, Quaternion.identity) as GameObject;
-        gObj.transform.SetParent(player.transform);
+        GameObject gObj = Instantiate(GreatPopup, Vector3.zero, Quaternion.identity) as GameObject;
+        gObj.GetComponent<StatusPopup>().ParentTransform = player.transform;
     }
 
     private void Controller_Player_OnPerfectThrow(object sender, System.EventArgs e)
     {
         Controller_Player player = (Controller_Player)sender;
-        GameObject gObj = Instantiate(PerfectPopup, player.transform.position, Quaternion.identity) as GameObject;
-        gObj.transform.SetParent(player.transform);
+        GameObject gObj = Instantiate(PerfectPopup, Vector3.zero, Quaternion.identity) as GameObject;
+        gObj.GetComponent<StatusPopup>().ParentTransform = player.transform;
     }
 
     private void Controller_Player_OnBookStun(object sender, System.EventArgs e)
     {
         Controller_Player player = (Controller_Player)sender;
-        GameObject gObj = Instantiate(HeartsPopup, player.transform.position + (Vector3.up * 0.5f), Quaternion.identity) as GameObject;
-        gObj.transform.SetParent(player.transform);
+        GameObject gObj = Instantiate(HeartsPopup, Vector3.up * 0.5f, Quaternion.identity) as GameObject;
+        gObj.GetComponent<StatusPopup>().ParentTransform = player.transform;
     }
 
     #endregion
