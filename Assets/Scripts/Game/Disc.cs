@@ -37,6 +37,7 @@ public class Disc : Singleton<Disc>
 
     private Vector3 velocity = Vector3.zero;
     public Vector3 Velocity { get { return velocity; } }
+    private Vector3 snapPosition = Vector3.zero;
 
     #endregion
 
@@ -115,6 +116,8 @@ public class Disc : Singleton<Disc>
 
     public void Catch(Vector3 _snapPosition)
     {
+        snapPosition = _snapPosition;
+        cTransform.position = snapPosition;
         StopCoroutine(CR_LOB_SCORE);
 
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), true);
@@ -124,12 +127,12 @@ public class Disc : Singleton<Disc>
         cTransform.position = new Vector3(100, 100, 0);
     }
 
-    public void Throw(Vector3 _snapPosition, Vector2 _throwVector, bool _lastToThrow)
+    public void Throw(Vector2 _throwVector, bool _lastToThrow)
     {
         LocalPlayerLastToThrow = _lastToThrow;
         cSpriteRenderer.enabled = true;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
-        cTransform.position = _snapPosition;
+        cTransform.position = snapPosition;
         velocity = _throwVector;
         cRigidbody2D.fixedAngle = false;
         cRigidbody2D.angularVelocity = AngularVelocity;
@@ -137,6 +140,7 @@ public class Disc : Singleton<Disc>
 
     public void Lob(Team _team, Vector2 _targetPosition, float _duration, bool _lastToThrow)
     {
+        cTransform.position = snapPosition;
         LocalPlayerLastToThrow = _lastToThrow;
         cSpriteRenderer.enabled = true;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer(PLAYER_LAYER), false);
@@ -283,6 +287,7 @@ public class Disc : Singleton<Disc>
     [RPC]
     private void RPC_SetPosition(Vector3 _position)
     {
+        snapPosition = _position;
         cTransform.position = _position;
     }
 

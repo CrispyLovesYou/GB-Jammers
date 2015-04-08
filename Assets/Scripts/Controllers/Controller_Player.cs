@@ -478,13 +478,15 @@ public class Controller_Player : MonoBehaviour
 
     public void ThrowAfterAnimation()
     {
-        Disc.Instance.Throw(cTransform.position + (Vector3.right * GetDiscOffset()), (Vector3)throwVector, cPhotonView.isMine);
+        Disc.Instance.Throw((Vector3)throwVector, cPhotonView.isMine);
 
         StartCoroutine(CR_THROW_RECOVERY);
     }
 
     public void LobAfterAnimation()
     {
+        Disc.Instance.HasKnockback = false;
+        Disc.Instance.KnockbackPower = 0;
         float lobDuration = (LobDuration + LobDurationMod) * LobDurationMultiplier;
         Disc.Instance.Lob(Team, lobTarget, lobDuration, cPhotonView.isMine);
         StartCoroutine(CR_THROW_RECOVERY);
@@ -726,16 +728,16 @@ public class Controller_Player : MonoBehaviour
         cPhotonView.RPC("RPC_SetStateAndFlip", PhotonTargets.All, (int)PlayerState.IDLE, flip);
     }
 
-    private IEnumerator CR_ThrowAfterIdle()
-    {
-        yield return new WaitForSeconds(THROW_AFTER_IDLE_DURATION);
+    //private IEnumerator CR_ThrowAfterIdle()
+    //{
+    //    yield return new WaitForSeconds(THROW_AFTER_IDLE_DURATION);
 
-        if (State == PlayerState.AIM)
-        {
-            State = PlayerState.THROWN;  // keeps throw input from being read while throwing
-            cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, Vector3.right, (float)0);
-        }
-    }
+    //    if (State == PlayerState.AIM)
+    //    {
+    //        State = PlayerState.THROWN;  // keeps throw input from being read while throwing
+    //        cPhotonView.RPC("RPC_Throw", PhotonTargets.AllViaServer, Vector3.right, (float)0);
+    //    }
+    //}
 
     private IEnumerator CR_ThrowRecovery()
     {
@@ -764,12 +766,12 @@ public class Controller_Player : MonoBehaviour
         if (!goalEntered)
         {
             goalWall.GetComponent<Collider2D>().enabled = true;
-            StartCoroutine(CR_THROW_AFTER_IDLE);
+            //StartCoroutine(CR_THROW_AFTER_IDLE);
         }
 
         Disc.Instance.HasKnockback = false;
         Disc.Instance.KnockbackPower = 0;
-        Disc.Instance.SetPosition(cTransform.position);
+        Disc.Instance.SetPosition(cTransform.position + (Vector3.right * GetDiscOffset()));
         cPhotonView.RPC("RPC_SetState", PhotonTargets.AllViaServer, (int)PlayerState.AIM);
         cRigidbody2D.velocity = Vector2.zero;  // can't use Stop() here because we're waiting for RPC
     }
@@ -891,7 +893,7 @@ public class Controller_Player : MonoBehaviour
     [RPC]
     private void RPC_Throw(Vector3 _throwDirection, float _throwCharge)
     {
-        StopCoroutine(CR_THROW_AFTER_IDLE);
+        //StopCoroutine(CR_THROW_AFTER_IDLE);
 
         throwDirection = _throwDirection;
         throwCharge = _throwCharge;
@@ -925,6 +927,11 @@ public class Controller_Player : MonoBehaviour
         {
             PerfectThrow();
         }
+        else  // explicitly resets Knockback so both players' Disc instance knows this
+        {
+            Disc.Instance.HasKnockback = false;
+            Disc.Instance.KnockbackPower = 0;
+        }
 
         throwCharge = 0;
 
@@ -937,7 +944,7 @@ public class Controller_Player : MonoBehaviour
     [RPC]
     private void RPC_SpecialThrow(int _throwCharge, Vector3 _throwDirection, bool _hasKnockback)
     {
-        StopCoroutine(CR_THROW_AFTER_IDLE);
+        //StopCoroutine(CR_THROW_AFTER_IDLE);
 
         throwDirection = _throwDirection;
         throwCharge = _throwCharge;
@@ -967,6 +974,11 @@ public class Controller_Player : MonoBehaviour
             Disc.Instance.HasKnockback = true;
             float knockback = (Knockback + KnockbackMod) * KnockbackMultiplier;
             Disc.Instance.KnockbackPower = knockback;
+        }
+        else  // explicitly resets Knockback so both players' Disc instance knows this
+        {
+            Disc.Instance.HasKnockback = false;
+            Disc.Instance.KnockbackPower = 0;
         }
 
         throwCharge = 0;
@@ -1002,8 +1014,8 @@ public class Controller_Player : MonoBehaviour
         {
             if (Disc.Instance.HasKnockback)
                 StartCoroutine(CR_KNOCKBACK);
-            else
-                StartCoroutine(CR_THROW_AFTER_IDLE);
+            //else
+            //    StartCoroutine(CR_THROW_AFTER_IDLE);
         }
     }
 
@@ -1026,12 +1038,12 @@ public class Controller_Player : MonoBehaviour
 
         Meter -= MeterForEX;
 
-        StopCoroutine(CR_THROW_AFTER_IDLE);
+        //StopCoroutine(CR_THROW_AFTER_IDLE);
 
         VFX_EX();
 
-        if (State == PlayerState.AIM)
-            StartCoroutine(CR_THROW_AFTER_IDLE);
+        //if (State == PlayerState.AIM)
+        //    StartCoroutine(CR_THROW_AFTER_IDLE);
     }
 
     [RPC]
@@ -1048,10 +1060,10 @@ public class Controller_Player : MonoBehaviour
         GameObject obj = Instantiate(SuperMaskPrefab, Vector3.zero, Quaternion.identity) as GameObject;
         obj.GetComponentInChildren<Animate_Super_Mask>().SetData(Character);
 
-        StopCoroutine(CR_THROW_AFTER_IDLE);
+        //StopCoroutine(CR_THROW_AFTER_IDLE);
 
-        if (State == PlayerState.AIM)
-            StartCoroutine(CR_THROW_AFTER_IDLE);
+        //if (State == PlayerState.AIM)
+        //    StartCoroutine(CR_THROW_AFTER_IDLE);
     }
 
     [RPC]

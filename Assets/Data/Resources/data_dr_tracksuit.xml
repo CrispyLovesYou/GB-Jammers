@@ -3,7 +3,7 @@
   <ID>dr_tracksuit</ID>
   <Name>Dr. Tracksuit</Name>
   <RealName>Jeff Gerstmann</RealName>
-  <ThrowPower>10.5</ThrowPower>
+  <ThrowPower>11.5</ThrowPower>
   <ThrowKnockback>3</ThrowKnockback>
   <Stability>3</Stability>
   <MoveSpeed>2</MoveSpeed>

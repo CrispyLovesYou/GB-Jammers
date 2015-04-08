@@ -73,4 +73,5 @@ MonoBehaviour:
   - RPC_ClickReady
   - RPC_SetReady
   - RPC_SetRemotePlayerReady
+  - RPC_Spawn
   DisableAutoOpenWizard: 0

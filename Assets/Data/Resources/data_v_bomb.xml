@@ -3,7 +3,7 @@
   <ID>v_bomb</ID>
   <Name>V-Bomb</Name>
   <RealName>Vinny Caravella</RealName>
-  <ThrowPower>12</ThrowPower>
+  <ThrowPower>13</ThrowPower>
   <ThrowKnockback>3.4</ThrowKnockback>
   <Stability>3</Stability>
   <MoveSpeed>1.8</MoveSpeed>

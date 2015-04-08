@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f2d88b8ebb67c4eb83ddc248491604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Duration: 20
+  Duration: 10
   LobDuration: 1.20000005
   LobScale: 5
   AngularVelocity: 180

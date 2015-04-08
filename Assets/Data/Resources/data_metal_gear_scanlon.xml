@@ -3,7 +3,7 @@
   <ID>solid_scanlon</ID>
   <Name>Solid Scanlon</Name>
   <RealName>Drew Scanlon</RealName>
-  <ThrowPower>9</ThrowPower>
+  <ThrowPower>10.5</ThrowPower>
   <ThrowKnockback>2.3</ThrowKnockback>
   <Stability>2.2</Stability>
   <MoveSpeed>2.8</MoveSpeed>

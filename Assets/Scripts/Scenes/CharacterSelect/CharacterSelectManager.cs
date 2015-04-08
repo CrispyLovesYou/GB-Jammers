@@ -316,7 +316,10 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
     private IEnumerator WaitForAudio()
     {
         gameLocked = true;
-        yield return new WaitForSeconds(SelectAudio.clip.length);
+
+        if (SelectAudio.clip != null)
+            yield return new WaitForSeconds(SelectAudio.clip.length);
+
         PhotonNetwork.LoadLevel(MAP_BEACH);
     }
 

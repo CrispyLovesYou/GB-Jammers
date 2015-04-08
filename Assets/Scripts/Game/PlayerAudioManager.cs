@@ -20,6 +20,7 @@ public class PlayerAudioManager : MonoBehaviour
 
     private Controller_Player player;
     private AudioSource cAudioSource;
+    private static bool firstMatchStartVoicePlayed = false;
 
     #endregion
 
@@ -183,17 +184,22 @@ public class PlayerAudioManager : MonoBehaviour
 
     private IEnumerator CR_WaitForMatchStartClip(Team _team)
     {
-        if (cAudioSource.clip != null &&
-            Globals.SelectedCharacters[0] != Globals.SelectedCharacters[1])
+        if (cAudioSource.clip != null)
         {
-            cAudioSource.Play();
-            yield return new WaitForSeconds(cAudioSource.clip.length);
+            if (Globals.SelectedCharacters[0] != Globals.SelectedCharacters[1] ||
+                !firstMatchStartVoicePlayed)
+            {
+                cAudioSource.Play();
+                yield return new WaitForSeconds(cAudioSource.clip.length);
+            }
         }
 
         int team = 0;
 
         if (_team == Team.RIGHT)
             team = 1;
+
+        firstMatchStartVoicePlayed = true;
 
         MatchManager.Instance.MatchStartVoiceComplete[team] = true;
     }

@@ -101,7 +101,6 @@ public class MatchManager : Singleton<MatchManager>
 
     public string Team_Left_Spawn_Tag = "Team_Left_Spawn";
     public string Team_Right_Spawn_Tag = "Team_Right_Spawn";
-    public string DiscPrefabID = "Disc";
     public string Disc_Spawn_Left_Tag = "Disc_Spawn_Left";
     public string Disc_Spawn_Right_Tag = "Disc_Spawn_Right";
 
@@ -313,9 +312,14 @@ public class MatchManager : Singleton<MatchManager>
         while (!remotePlayerReady)
             yield return 0;
 
-        NetworkManager.Instance.Spawn();
-
         WaitingForPlayer.enabled = false;
+
+        if (PhotonNetwork.isMasterClient)
+            SpawnDisc();
+
+        yield return new WaitForSeconds(1.0f);
+
+        NetworkManager.Instance.Spawn();
 
         MatchStartCG.alpha = 1.0f;
         MatchStart.enabled = true;
@@ -460,6 +464,19 @@ public class MatchManager : Singleton<MatchManager>
     }
 
     #endregion
+
+    private void SpawnDisc()
+    {
+        Vector3 spawnPosition = Vector3.zero;
+
+        switch (UnityEngine.Random.Range(1, 3))
+        {
+            case 1: spawnPosition = MatchManager.Instance.DiscLeftSpawn; break;
+            case 2: spawnPosition = MatchManager.Instance.DiscRightSpawn; break;
+        }
+
+        PhotonNetwork.Instantiate("Disc", spawnPosition, Quaternion.identity, 0);
+    }
 
     #region Callbacks
 
