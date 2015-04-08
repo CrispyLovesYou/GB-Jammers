@@ -29,8 +29,15 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 
 	public RectTransform[] CharacterButtons;
 
+    public AudioSource SelectAudio;
+    public AudioClip AudioTracksuit;
+    public AudioClip AudioVBomb;
+    public AudioClip AudioDirtyDan;
+    public AudioClip AudioScanlon;
+
     private PhotonView cPhotonView;
     private bool[] playersReady = new bool[Globals.MAX_CONNECTED_PLAYERS];
+    private bool gameLocked = false;
 	private int p1CurrentSelected = 0;
 	private int p2CurrentSelected = 1;
 	private float p1Throttle = 0;
@@ -79,7 +86,8 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 	}
 
 	private void Update(){
-		CheckInput();
+        if (!gameLocked)
+		    CheckInput();
 	}
     #endregion
 
@@ -290,11 +298,27 @@ public class CharacterSelectManager : Singleton<CharacterSelectManager>
 			break;
 		}
 
-        if (playersReady[0] && playersReady[1] && PhotonNetwork.isMasterClient)
+        if (!SelectAudio.isPlaying)
         {
-            PhotonNetwork.LoadLevel(MAP_BEACH);
+            switch ((CharacterID)_id)
+            {
+                case CharacterID.DR_TRACKSUIT: SelectAudio.clip = AudioTracksuit; SelectAudio.Play(); break;
+                case CharacterID.V_BOMB: SelectAudio.clip = AudioVBomb; SelectAudio.Play(); break;
+                case CharacterID.DIRTY_DAN_RYCKERT: SelectAudio.clip = AudioDirtyDan; SelectAudio.Play(); break;
+                case CharacterID.METAL_GEAR_SCANLON: SelectAudio.clip = AudioScanlon; SelectAudio.Play(); break;
+            }
         }
+
+        if (playersReady[0] && playersReady[1] && PhotonNetwork.isMasterClient)
+            StartCoroutine(WaitForAudio());
 	}
+
+    private IEnumerator WaitForAudio()
+    {
+        gameLocked = true;
+        yield return new WaitForSeconds(SelectAudio.clip.length);
+        PhotonNetwork.LoadLevel(MAP_BEACH);
+    }
 
 	private void CancelCharacter(int _playerNum){
 		playersReady[_playerNum -1] = false;

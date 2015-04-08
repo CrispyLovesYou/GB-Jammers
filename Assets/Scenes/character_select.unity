@@ -2378,6 +2378,7 @@ GameObject:
   - 4: {fileID: 854684966}
   - 114: {fileID: 854684965}
   - 114: {fileID: 854684967}
+  - 82: {fileID: 854684968}
   m_Layer: 0
   m_Name: Character Select Manager
   m_TagString: Untagged
@@ -2410,6 +2411,11 @@ MonoBehaviour:
   - {fileID: 429486251}
   - {fileID: 778619219}
   - {fileID: 1388753935}
+  SelectAudio: {fileID: 854684968}
+  AudioTracksuit: {fileID: 0}
+  AudioVBomb: {fileID: 0}
+  AudioDirtyDan: {fileID: 8300000, guid: 2a8b982d9efc3a84198d4b2f4fb29e9d, type: 3}
+  AudioScanlon: {fileID: 8300000, guid: a3bd6a3b2f739a84eab56352d08d80c9, type: 3}
 --- !u!4 &854684966
 Transform:
   m_ObjectHideFlags: 0
@@ -2447,6 +2453,76 @@ MonoBehaviour:
   viewIdField: 1
   instantiationId: 1
   isRuntimeInstantiated: 0
+--- !u!82 &854684968
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 854684964}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24362410, guid: 2f27e7306bb83924f9f0cdbcf7751606,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &877694976
 GameObject:
   m_ObjectHideFlags: 0

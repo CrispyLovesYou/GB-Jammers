@@ -104,6 +104,28 @@ public class Controller_Player : MonoBehaviour
         remove { onCatch -= value; }
     }
 
+    private static EventHandler<EventArgs> onKnockback;
+    public static event EventHandler<EventArgs> OnKnockback
+    {
+        add
+        {
+            if (onKnockback == null || !onKnockback.GetInvocationList().Contains(value))
+                onKnockback += value;
+        }
+        remove { onKnockback -= value; }
+    }
+
+    private static EventHandler<EventArgs> onDash;
+    public static event EventHandler<EventArgs> OnDash
+    {
+        add
+        {
+            if (onDash == null || !onDash.GetInvocationList().Contains(value))
+                onDash += value;
+        }
+        remove { onDash -= value; }
+    }
+
     private static EventHandler<EventArgs> onThrow;
     public static event EventHandler<EventArgs> OnThrow
     {
@@ -241,15 +263,13 @@ public class Controller_Player : MonoBehaviour
     public Team Team = Team.UNASSIGNED;
     public PlayerState State = PlayerState.WALK;
     public Direction CurrentDirection = Direction.DOWN;
-    public float GreatThrowThreshhold = 85;
+    public float GreatThrowThreshhold = 80;
     public float PerfectThrowThreshhold = 95;
     public int MeterForEX = 33;
     public int MeterForSuper = 99;
 
     public GameObject SuperMaskPrefab;
     public AudioClip SFXError;
-    public AudioClip Perfect;
-    public AudioClip Great;
 
     private Transform cTransform;
     private Rigidbody2D cRigidbody2D;
@@ -587,9 +607,6 @@ public class Controller_Player : MonoBehaviour
         if (onGreatThrow != null)
             onGreatThrow(this, EventArgs.Empty);
 
-        if (cPhotonView.isMine)
-            AudioSource.PlayClipAtPoint(Great, cTransform.position);
-
         Meter += MeterGainOnGreat;
     }
 
@@ -597,9 +614,6 @@ public class Controller_Player : MonoBehaviour
     {
         if (onPerfectThrow != null)
             onPerfectThrow(this, EventArgs.Empty);
-
-        if (cPhotonView.isMine)
-            AudioSource.PlayClipAtPoint(Perfect, cTransform.position);
 
         Meter += MeterGainOnPerfect;    
         Disc.Instance.HasKnockback = true;
@@ -705,6 +719,7 @@ public class Controller_Player : MonoBehaviour
             dashSpeed = MIN_DASH_SPEED;
 
         cRigidbody2D.velocity = _directionVector * dashSpeed;
+
         yield return new WaitForSeconds(DashDuration);
         Stop();
 
@@ -732,7 +747,7 @@ public class Controller_Player : MonoBehaviour
 
     private IEnumerator CR_Knockback()
     {
-        State = PlayerState.KNOCKBACK;
+        cPhotonView.RPC("RPC_SetState", PhotonTargets.All, (int)PlayerState.KNOCKBACK);
 
         goalWall.GetComponent<Collider2D>().enabled = false;
 
@@ -851,6 +866,10 @@ public class Controller_Player : MonoBehaviour
 
         if (cTransform.localScale != initLocalScale)  // if flipped, flip back
             cTransform.localScale = initLocalScale;
+
+        if (State == PlayerState.KNOCKBACK)
+            if (onKnockback != null)
+                onKnockback(this, EventArgs.Empty);
     }
 
     [RPC]
@@ -863,6 +882,10 @@ public class Controller_Player : MonoBehaviour
 
         if (_flip)
             cTransform.localScale = new Vector3(-initX, cTransform.localScale.y, 1);
+
+        if (State == PlayerState.DASH)
+            if (onDash != null)
+                onDash(this, EventArgs.Empty);
     }
 
     [RPC]
@@ -948,8 +971,8 @@ public class Controller_Player : MonoBehaviour
 
         throwCharge = 0;
 
-        if (onThrow != null)
-            onThrow(this, EventArgs.Empty);
+        //if (onThrow != null)
+        //    onThrow(this, EventArgs.Empty);
 
         cAnimator.SetTrigger("throw");
     }

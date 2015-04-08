@@ -25,9 +25,15 @@ public class NetworkManager : Singleton<NetworkManager>
 
     protected override void Awake()
     {
-        base.Awake();
-        PhotonNetwork.automaticallySyncScene = true;
+        if (NetworkManager.Instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
 
+        base.Awake();
+
+        PhotonNetwork.automaticallySyncScene = true;
         DontDestroyOnLoad(this);
     }
 

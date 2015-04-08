@@ -74,6 +74,17 @@ public class MatchManager : Singleton<MatchManager>
         remove { onCompleteResetAfterScore -= value; }
     }
 
+    private static EventHandler<MatchStartVoiceEventArgs> onMatchStartVoice;
+    public static event EventHandler<MatchStartVoiceEventArgs> OnMatchStartVoice
+    {
+        add
+        {
+            if (onMatchStartVoice == null || !onMatchStartVoice.GetInvocationList().Contains(value))
+                onMatchStartVoice += value;
+        }
+        remove { onMatchStartVoice -= value; }
+    }
+
     #endregion
 
     #region Fields
@@ -113,29 +124,38 @@ public class MatchManager : Singleton<MatchManager>
 
     public CanvasGroup SetStartCG;
     public CanvasGroup SetEndCG;
+    public CanvasGroup MatchStartCG;
     public CanvasGroup MatchEndCG;
     public Animator SetStart;
     public bool SetStartComplete = false;
     public Animator SetEnd;
     public bool SetEndComplete = false;
+    public Animator MatchStart;
+    public bool MatchStartTransitionComplete = false;
+    public bool[] MatchStartVoiceComplete = new bool[2];
+    public bool MatchStartComplete = false;
     public Animator MatchEnd;
+    public bool MatchEndVoiceComplete = false;
     public bool IsTransitioning = false;
 
-    public AudioSource AudioMatchStart;
-    public AudioSource AudioSetEnd;
-    public AudioSource AudioMatchEnd;
-    public AudioSource AP1;
-    public AudioSource AP2;
-    public AudioSource AP3;
-    public AudioSource AP4;
-    public AudioSource AP5;
-    public AudioSource AP6;
-    public AudioSource AP7;
-    public AudioSource AP8;
-    public AudioSource AP9;
-    public AudioSource AP10;
+    public AudioClip AudioMatchStart;
+    public AudioClip AudioSetEnd;
+    public AudioClip AudioMatchEnd;
+    public AudioClip AP1;
+    public AudioClip AP2;
+    public AudioClip AP3;
+    public AudioClip AP4;
+    public AudioClip AP5;
+    public AudioClip AP6;
+    public AudioClip AP7;
+    public AudioClip AP8;
+    public AudioClip AP9;
+    public AudioClip AP10;
+    public AudioClip[] AudioGreat;
+    public AudioClip[] AudioPerfect;
 
     private PhotonView cPhotonView;
+    private AudioSource cAudioSource;
     private Team winner = Team.UNASSIGNED;
     private bool hasVolleyStarted = false;
 
@@ -151,6 +171,7 @@ public class MatchManager : Singleton<MatchManager>
         Destroy(MainMenuMusic.Instance.gameObject);
 		iTween.tweens.Clear();
         cPhotonView = GetComponent<PhotonView>();
+        cAudioSource = GetComponent<AudioSource>();
 
         if (Rules.SetsToWinMatch == 0)
         {
@@ -168,6 +189,8 @@ public class MatchManager : Singleton<MatchManager>
         DiscRightSpawn = GameObject.FindGameObjectWithTag(Disc_Spawn_Right_Tag).transform.position;
 
         Controller_Player.OnCatch += Controller_Player_OnCatch;
+        Controller_Player.OnGreatThrow += Controller_Player_OnGreatThrow;
+        Controller_Player.OnPerfectThrow += Controller_Player_OnPerfectThrow;
 
         if (Globals.GameMode == GameModes.ONLINE_MULTIPLAYER)
             WaitingForPlayer.enabled = true;
@@ -186,6 +209,8 @@ public class MatchManager : Singleton<MatchManager>
 
 	private void OnDestroy(){
 		Controller_Player.OnCatch -= Controller_Player_OnCatch;
+        Controller_Player.OnGreatThrow -= Controller_Player_OnGreatThrow;
+        Controller_Player.OnPerfectThrow -= Controller_Player_OnPerfectThrow;
 	}
     #endregion
 
@@ -288,14 +313,46 @@ public class MatchManager : Singleton<MatchManager>
         while (!remotePlayerReady)
             yield return 0;
 
-        WaitingForPlayer.enabled = false;
-        HasMatchStarted = true;
-        AudioMatchStart.Play();
         NetworkManager.Instance.Spawn();
+
+        WaitingForPlayer.enabled = false;
+
+        MatchStartCG.alpha = 1.0f;
+        MatchStart.enabled = true;
+        MatchStart.Play("MatchStart", 0, 0);
+
+        while (!MatchStartTransitionComplete)
+            yield return 0;
+
+        MatchStart.speed = 0;
+
+        if (onMatchStartVoice != null)
+        {
+            onMatchStartVoice(this, new MatchStartVoiceEventArgs(Team.LEFT));
+            while (!MatchStartVoiceComplete[0])
+                yield return 0;
+
+            onMatchStartVoice(this, new MatchStartVoiceEventArgs(Team.RIGHT));
+            while (!MatchStartVoiceComplete[1])
+                yield return 0;
+        }
+
+        MatchStart.speed = 1;
+
+        while (!MatchStartComplete)
+            yield return 0;
+
+        MatchStartCG.alpha = 0;
+        MatchStart.enabled = false;
+        MatchStartComplete = false;
+
+        cAudioSource.clip = AudioMatchStart;
+        cAudioSource.Play();
 
         if (onMatchStart != null)
             onMatchStart(this, EventArgs.Empty);
 
+        HasMatchStarted = true;
         IsPauseAllowed = true;
         IsTransitioning = false;
     }
@@ -342,7 +399,8 @@ public class MatchManager : Singleton<MatchManager>
         SetEnd.enabled = true;
         SetEnd.Play("ScoreCounter", 0, 0);
 
-        AudioSetEnd.Play();
+        cAudioSource.clip = AudioSetEnd;
+        cAudioSource.Play();
 
         while (!SetEndComplete)
             yield return 0;
@@ -368,10 +426,18 @@ public class MatchManager : Singleton<MatchManager>
 
         MatchEndCG.alpha = 1.0f;
         MatchEnd.enabled = true;
-        AudioMatchEnd.Play();
 
         if (onMatchEnd != null)
+        {
             onMatchEnd(this, new MatchEndEventArgs(winner, L_Sets, R_Sets));
+            while (!MatchEndVoiceComplete)
+                yield return 0;
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        cAudioSource.clip = AudioMatchEnd;
+        cAudioSource.Play();
 
         yield return new WaitForSeconds(5.0f);
 
@@ -416,6 +482,24 @@ public class MatchManager : Singleton<MatchManager>
             onVolley(this, EventArgs.Empty);
     }
 
+    void Controller_Player_OnGreatThrow(object sender, EventArgs e)
+    {
+        if (AudioGreat.Length != 0)
+        {
+            cAudioSource.clip = AudioGreat[UnityEngine.Random.Range(0, AudioGreat.Length)];
+            cAudioSource.Play();
+        }
+    }
+
+    void Controller_Player_OnPerfectThrow(object sender, EventArgs e)
+    {
+        if (AudioPerfect.Length != 0)
+        {
+            cAudioSource.clip = AudioPerfect[UnityEngine.Random.Range(0, AudioPerfect.Length)];
+            cAudioSource.Play();
+        }
+    }
+
     #endregion
 
     #region RPC
@@ -441,17 +525,20 @@ public class MatchManager : Singleton<MatchManager>
         {
             switch (_points + BonusPointValue)
             {
-                case 1: AP1.Play(); break;
-                case 2: AP2.Play(); break;
-                case 3: AP3.Play(); break;
-                case 4: AP4.Play(); break;
-                case 5: AP5.Play(); break;
-                case 6: AP6.Play(); break;
-                case 7: AP7.Play(); break;
-                case 8: AP8.Play(); break;
-                case 9: AP9.Play(); break;
-                case 10: AP10.Play(); break;
+                default: cAudioSource.clip = null; break;
+                case 1: cAudioSource.clip = AP1; break;
+                case 2: cAudioSource.clip = AP2; break;
+                case 3: cAudioSource.clip = AP3; break;
+                case 4: cAudioSource.clip = AP4; break;
+                case 5: cAudioSource.clip = AP5; break;
+                case 6: cAudioSource.clip = AP6; break;
+                case 7: cAudioSource.clip = AP7; break;
+                case 8: cAudioSource.clip = AP8; break;
+                case 9: cAudioSource.clip = AP9; break;
+                case 10: cAudioSource.clip = AP10; break;
             }
+
+            cAudioSource.Play();
         }
 
         if (onScored != null)

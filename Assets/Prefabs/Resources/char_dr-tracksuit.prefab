@@ -21,6 +21,9 @@ GameObject:
   - 114: {fileID: 11422018}
   - 114: {fileID: 11454294}
   - 95: {fileID: 9576212}
+  - 114: {fileID: 11401960}
+  - 82: {fileID: 8239708}
+  - 114: {fileID: 11448602}
   m_Layer: 10
   m_Name: char_dr-tracksuit
   m_TagString: Player
@@ -68,6 +71,76 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.5, y: 2}
+--- !u!82 &8239708
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186570}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24362410, guid: 2f27e7306bb83924f9f0cdbcf7751606,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9576212
 Animator:
   serializedVersion: 3
@@ -85,6 +158,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11401960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dcb53fe65af6a74382a8991785c5846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dust: {fileID: 132526, guid: cd015a51bc574cf4398685576826d7f5, type: 2}
+  DustSpawnDelay: .119999997
+  DustVerticalOffset: -.449999988
 --- !u!114 &11415866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,6 +298,28 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &11448602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc9b4a5ad0975049b40468d020f4a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  General: []
+  VsTracksuit: []
+  VsVBomb: []
+  VsDirtyDan: []
+  VsScanlon: []
+  EX: []
+  Special: []
+  Score: []
+  Win: []
+  Throw: []
+  Knockback: []
 --- !u!114 &11454294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,14 +406,12 @@ MonoBehaviour:
   Team: 0
   State: 0
   CurrentDirection: 3
-  GreatThrowThreshhold: 85
+  GreatThrowThreshhold: 80
   PerfectThrowThreshhold: 95
   MeterForEX: 33
   MeterForSuper: 99
   SuperMaskPrefab: {fileID: 196278, guid: 7651f74a787ce634996f31f6fbcbde0a, type: 2}
   SFXError: {fileID: 8300000, guid: ee909d9c07bb8ad4e8db7f113bc823ff, type: 3}
-  Perfect: {fileID: 8300000, guid: 8b55ca89f8a96424f9230ccecaa0d914, type: 3}
-  Great: {fileID: 8300000, guid: e0e1362bb04dc94429899a0abca2a786, type: 3}
 --- !u!212 &21286570
 SpriteRenderer:
   m_ObjectHideFlags: 1
